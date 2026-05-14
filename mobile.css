@@ -23,11 +23,16 @@
   html {
     -webkit-text-size-adjust: 100%;
     overscroll-behavior-y: none;
+    /* v4: every page ends with a dark footer; matching the html bg prevents
+       iOS from showing a cream gap when the address bar collapses or on overscroll. */
+    background: #1B2A1B;
   }
   body {
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     overflow-x: hidden;
+    /* allow page bg to still show through where it's set on body */
+    background-color: var(--bg, #F2EBDA);
   }
 
   /* ── App bar (replaces topnav layout, keeps element) ── */
@@ -542,11 +547,17 @@
 
   /* index.html (Door) */
   .cards-area { padding: 18px !important; gap: 22px !important; }
-  .door-wrap { height: 60vw; min-height: 240px; }
+  /* v4: taller mobile photo frame so faces fit fully (was 60vw → cropped chin) */
+  .door-wrap { height: 95vw; min-height: 360px; }
   .door-wrap--pro::before { transform: translate(8px, 8px); }
   .door-wrap--creator::before { transform: translate(-8px, 8px); }
-  .site-footer { grid-template-columns: 1fr !important; gap: 8px !important; text-align: center; }
+  /* v4: re-center face crops for mobile frame aspect — show full face top-to-chin */
+  .door--pro .door-photo img { object-position: center 35% !important; }
+  .door--creator .door-photo img { object-position: center 25% !important; }
+  .site-footer { grid-template-columns: 1fr !important; gap: 8px !important; text-align: center; justify-items: center !important; }
   .footer-email, .footer-location { text-align: center !important; }
+  /* v4: footer LinkedIn pill is inline-flex; force-center inside the grid cell */
+  .footer-linkedin { justify-self: center !important; }
 
   /* portfolio.html — Credentials section mobile redesign (matches screenshot) */
   .credentials .section-header-row { display: block !important; margin-bottom: 18px !important; }
