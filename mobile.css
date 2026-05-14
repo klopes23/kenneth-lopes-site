@@ -553,7 +553,7 @@
   .door-wrap--creator::before { transform: translate(-8px, 8px); }
   /* v4: re-center face crops for mobile frame aspect — show full face top-to-chin */
   .door--pro .door-photo img { object-position: center 35% !important; }
-  .door--creator .door-photo img { object-position: center 25% !important; }
+  .door--creator .door-photo img { object-position: center 10% !important; }
   .site-footer { grid-template-columns: 1fr !important; gap: 8px !important; text-align: center; justify-items: center !important; }
   .footer-email, .footer-location { text-align: center !important; }
   /* v4: footer LinkedIn pill is inline-flex; force-center inside the grid cell */
