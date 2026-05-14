@@ -1,0 +1,14 @@
+.git
+.git/**
+.gitignore
+.DS_Store
+**/.DS_Store
+.claude
+.claude/**
+*.bak
+**/*.bak
+HANDOFF.md
+wrangler.jsonc
+.assetsignore
+node_modules
+node_modules/**
