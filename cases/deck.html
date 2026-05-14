@@ -1,0 +1,2662 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <title>Case Study Deck — Kenneth Lopes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#F2EBDA" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="K · L Deck" />
+  <meta name="description" content="Kenneth Lopes — case study presentation deck. 7 slides covering profile, GenAI enablement, RAG + HITL ($1M+ savings opportunities), creator metrics, customer experience center, Mexico launch, and multi-site governance." />
+  <meta property="og:title" content="Case Study Deck — Kenneth Lopes" />
+  <meta property="og:description" content="7-slide PM presentation deck. Real metrics, real charts." />
+  <meta property="og:image" content="https://kennethlopes.com/assets/og-portfolio.jpg" />
+  <link rel="icon" href="/assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../mobile.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans:    ['Inter Tight','Inter','system-ui','sans-serif'],
+            display: ['Fraunces','Georgia','serif'],
+            italic:  ['Instrument Serif','Georgia','serif'],
+            mono:    ['JetBrains Mono','ui-monospace','monospace'],
+          },
+          colors: {
+            cream:   '#F2EBDA',
+            paper:   '#FAF6EA',
+            'cream-2': '#E8E0CC',
+            ink:     '#1B2A1B',
+            'ink-2': '#3A4A3A',
+            forest:  '#2D4A2B',
+            olive:   '#5E7030',
+            pop:     '#C76F3D',
+            mutedfg: '#7A8A7A',
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js" crossorigin></script>
+  <script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+  <script>
+    /* Force classic JSX runtime so JSX compiles to React.createElement
+       (works with UMD React global; the default 'automatic' runtime
+       tries to import 'react/jsx-runtime' which fails in UMD mode). */
+    Babel.registerPreset('react-classic', {
+      presets: [[Babel.availablePresets['react'], { runtime: 'classic' }]],
+    });
+  </script>
+  <style>
+    html, body { background: #F2EBDA; font-family: 'Inter Tight', 'Inter', system-ui, sans-serif; }
+    body { margin: 0; }
+    .deck-stage { aspect-ratio: 16 / 9; }
+    @keyframes pulse-pin {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(45,74,43,0.55); }
+      50%      { box-shadow: 0 0 0 14px rgba(45,74,43,0); }
+    }
+    .pin-pulse { animation: pulse-pin 2s ease-out infinite; }
+    /* ─── MOBILE (v3 fallback only — v4 mobile uses deck-mobile.jsx + mobile.css)
+       Kept for tablets between 769–900px. Below 768px, DeckMobile renders instead. ─── */
+    @media (min-width: 769px) and (max-width: 900px) {
+      body { background: #F2EBDA; }
+      .mobile-deck { min-height: 100vh; padding: 0 !important; }
+      html { scroll-padding-top: 96px; }
+      /* v4: deck-track gets explicit auto behavior so JS smooth-scroll works without html-level interference */
+      .deck-track { scroll-behavior: auto; }
+      .mobile-slide {
+        position: relative;
+        width: 100%;
+        background: #FAF6EA;
+        border-bottom: none;
+        overflow: hidden;
+      }
+      /* Section divider between slides (chevron-down) */
+      .mobile-slide:not(:last-child)::after {
+        content: '';
+        position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%) rotate(45deg);
+        width: 10px; height: 10px;
+        border-right: 2px solid rgba(199,111,61,0.55);
+        border-bottom: 2px solid rgba(199,111,61,0.55);
+        opacity: 0.7;
+      }
+      .mobile-slide:last-child {
+        padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+      }
+      .mobile-slide > div {
+        position: relative !important;
+        inset: auto !important;
+        padding: 24px 18px 56px !important;
+        display: flex;
+        flex-direction: column;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      /* Cap inflated clamp() display sizes from desktop layout */
+      .mobile-slide h1, .mobile-slide [class*="font-display"][class*="text-["] {
+        font-size: clamp(22px, 6vw, 32px) !important;
+        line-height: 1.12 !important;
+      }
+      .mobile-slide h3 { font-size: 16px !important; }
+      /* Pin chip sizes so they don't overflow */
+      .mobile-slide .max-w-\[34ch\], .mobile-slide .max-w-\[44ch\], .mobile-slide .max-w-\[28ch\], .mobile-slide .max-w-\[68ch\] {
+        max-width: 100% !important;
+      }
+      /* Force in-slide title rows to wrap (was nowrap to fit on one line on desktop) */
+      .mobile-slide [style*="white-space:nowrap"], .mobile-slide [style*="whiteSpace:nowrap"] { white-space: normal !important; }
+      /* Force the deck stage off; let sections expand naturally */
+      .mobile-slide .deck-stage { aspect-ratio: auto !important; height: auto !important; }
+      /* Remove fixed heights on internal containers */
+      .mobile-slide [class*="min-h-screen"] { min-height: 0 !important; }
+      .mobile-slide [class*="absolute"][class*="inset-0"]:not(img):not([style*="background"]) { position: relative !important; inset: auto !important; }
+      /* ── Top progress bar ── */
+      .mobile-progress-track {
+        position: sticky; top: var(--m-bar-h, 52px); left: 0; right: 0; z-index: 60;
+        height: 3px; background: rgba(27,42,27,0.08);
+        margin-top: -1px;
+      }
+      .mobile-progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #2D4A2B 0%, #C76F3D 100%);
+        transition: width 0.35s cubic-bezier(.2,.7,.2,1);
+      }
+      /* ── Dynamic title bar (tappable to open TOC) ── */
+      .mobile-title-bar {
+        position: sticky; top: calc(var(--m-bar-h, 52px) + 3px); z-index: 55;
+        width: 100%; appearance: none; -webkit-appearance: none;
+        display: grid; grid-template-columns: auto 1fr auto;
+        align-items: center; gap: 10px;
+        padding: 10px 18px;
+        background: rgba(250,246,234,0.96);
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+        border: none; border-bottom: 1px solid rgba(27,42,27,0.08);
+        cursor: pointer; text-align: left;
+        -webkit-tap-highlight-color: transparent;
+        transition: background 0.15s;
+      }
+      .mobile-title-bar:active { background: rgba(232,224,204,0.96); }
+      .mobile-title-chevron { display: inline-block; vertical-align: -2px; margin-left: 6px; color: #7A8A7A; }
+      .mobile-title-kicker {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+        color: #C76F3D; font-weight: 600;
+        padding: 4px 8px; background: rgba(199,111,61,0.08);
+        border-radius: 6px;
+      }
+      .mobile-title-name {
+        font-family: 'Fraunces', Georgia, serif;
+        font-size: 15px; font-weight: 600;
+        color: #1B2A1B; letter-spacing: -0.01em;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .mobile-title-count {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px; color: #1B2A1B; font-weight: 600;
+        tabular-nums: 1; font-feature-settings: 'tnum';
+      }
+      .mobile-title-count span { color: #7A8A7A; font-weight: 400; }
+      /* Loosen rigid grids so they wrap on narrow viewports */
+      .mobile-slide [class*="grid-cols-"] { display: flex !important; flex-direction: column !important; gap: 16px !important; }
+      .mobile-slide [class*="grid-cols-2"][class*="grid-rows-2"] { display: grid !important; grid-template-columns: 1fr 1fr !important; grid-template-rows: auto auto !important; gap: 8px !important; }
+      .mobile-slide [class*="grid-cols-[260px"] { display: flex !important; flex-direction: column !important; }
+      .mobile-slide [class*="grid-cols-[1fr_360px"], .mobile-slide [class*="grid-cols-[1fr_340px"], .mobile-slide [class*="grid-cols-[1fr_320px"], .mobile-slide [class*="grid-cols-[1fr_300px"] { display: flex !important; flex-direction: column !important; }
+      .mobile-slide [class*="grid-cols-[280px"] { display: flex !important; flex-direction: column !important; }
+      .mobile-slide [class*="grid-cols-[260px_1fr"] { display: flex !important; flex-direction: column !important; }
+      /* Embedded dashboard iframe — give it a real height */
+      .mobile-slide iframe { min-height: 70vh; height: 70vh !important; }
+      /* Aspect-locked photos in CEC need a real height */
+      .mobile-slide .grid.grid-cols-2.grid-rows-2 > div { min-height: 160px; }
+      /* ── Cover slide (Slide0): cap headshot, 2-col contact grid, wrap creds ── */
+      .mobile-slide [class*="rounded-full"][class*="aspect-square"] { max-width: 180px !important; margin: 0 auto !important; }
+      .mobile-slide [class*="rounded-full"][class*="ring-"][class*="overflow-hidden"] { width: 180px !important; height: 180px !important; margin: 0 auto !important; }
+      .mobile-slide .grid.grid-cols-3 { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+      .mobile-slide .grid.grid-cols-3 > div:last-child:nth-child(odd) { grid-column: span 2; }
+      .mobile-slide [class*="grid-cols-4"] { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+      .mobile-slide [class*="grid-cols-5"] { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+      /* Cover: shrink huge "TPM, Product & Strategy" hero from 72px to fit phone */
+      .mobile-slide [class*="text-[clamp(44px"], .mobile-slide [class*="text-[clamp(56px"] {
+        font-size: clamp(34px, 9vw, 48px) !important;
+      }
+      /* Subtitles / mono lines stay legible */
+      .mobile-slide [class*="font-mono"] { font-size: 10.5px !important; }
+      /* Stats / tile grids inside slides */
+      .mobile-slide .text-\[26px\], .mobile-slide [class*="text-[26px]"] { font-size: 22px !important; }
+      .mobile-slide .text-\[32px\], .mobile-slide [class*="text-[32px]"] { font-size: 26px !important; }
+      .mobile-slide .text-\[48px\], .mobile-slide [class*="text-[48px]"] { font-size: 34px !important; }
+      .mobile-slide .text-\[52px\], .mobile-slide [class*="text-[52px]"] { font-size: 38px !important; }
+      /* Cover stat chips wrap */
+      .mobile-slide .flex.flex-wrap > * { font-size: 11px !important; padding: 6px 10px !important; }
+      /* Sticky mobile slide jumper — pill with bigger tap targets */
+      .mobile-jumper {
+        position: fixed; bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        left: 50%; transform: translateX(-50%);
+        z-index: 100; display: flex; align-items: center; gap: 4px;
+        padding: 6px; background: rgba(27,42,27,0.95); border-radius: 999px;
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 10px 28px rgba(27,42,27,0.3);
+      }
+      .mobile-jumper a {
+        font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+        color: rgba(242,235,218,0.6);
+        width: 32px; height: 32px;
+        display: inline-flex; align-items: center; justify-content: center;
+        border-radius: 999px;
+        text-decoration: none;
+        transition: background 0.18s, color 0.18s, transform 0.12s;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mobile-jumper a:active { transform: scale(0.92); }
+      .mobile-jumper a.is-active {
+        background: linear-gradient(135deg,#C76F3D 0%,#A8523A 100%);
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(199,111,61,0.4);
+      }
+      /* ── TOC sheet ── */
+      .mobile-toc-backdrop {
+        position: fixed; inset: 0; z-index: 200;
+        background: rgba(27,42,27,0.55);
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .mobile-toc-backdrop.is-open { opacity: 1; pointer-events: auto; }
+      .mobile-toc-sheet {
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 210;
+        background: #FAF6EA;
+        border-radius: 22px 22px 0 0;
+        padding: 12px 18px calc(28px + env(safe-area-inset-bottom, 0px));
+        box-shadow: 0 -16px 48px rgba(27,42,27,0.28);
+        transform: translateY(100%);
+        transition: transform 0.32s cubic-bezier(.2,.7,.2,1);
+        max-height: 82vh; overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .mobile-toc-sheet.is-open { transform: translateY(0); }
+      .mobile-toc-handle {
+        width: 44px; height: 4px; border-radius: 2px;
+        background: rgba(27,42,27,0.18);
+        margin: 0 auto 16px;
+      }
+      .mobile-toc-title {
+        font-family: 'JetBrains Mono', monospace; font-size: 10px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: rgba(27,42,27,0.55);
+        padding: 0 4px 12px;
+        border-bottom: 1px solid rgba(27,42,27,0.08);
+        margin-bottom: 6px;
+      }
+      .mobile-toc-list { list-style: none; padding: 0; margin: 0; }
+      .mobile-toc-list li { border-bottom: 1px solid rgba(27,42,27,0.06); }
+      .mobile-toc-list li:last-child { border-bottom: none; }
+      .mobile-toc-item {
+        appearance: none; -webkit-appearance: none;
+        width: 100%; background: none; border: none; text-align: left;
+        display: grid; grid-template-columns: 28px 1fr auto;
+        align-items: center; gap: 14px;
+        padding: 16px 4px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: background 0.15s;
+      }
+      .mobile-toc-item:active { background: rgba(27,42,27,0.04); }
+      .mobile-toc-item.is-current { background: rgba(199,111,61,0.06); }
+      .mobile-toc-num {
+        font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+        color: rgba(27,42,27,0.4); letter-spacing: 0.06em;
+      }
+      .mobile-toc-item.is-current .mobile-toc-num { color: #C76F3D; }
+      .mobile-toc-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+      .mobile-toc-kicker {
+        font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+        letter-spacing: 0.22em; text-transform: uppercase;
+        color: #7A8A7A; font-weight: 600;
+      }
+      .mobile-toc-label {
+        font-family: 'Fraunces', Georgia, serif; font-size: 16px; font-weight: 500;
+        color: #1B2A1B; letter-spacing: -0.01em;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      }
+      .mobile-toc-item.is-current .mobile-toc-label { color: #C76F3D; font-weight: 600; }
+      .mobile-toc-current {
+        font-size: 10px; color: #C76F3D;
+      }
+      .mobile-toc-close {
+        appearance: none; -webkit-appearance: none;
+        display: block; width: 100%;
+        margin-top: 16px; padding: 14px 16px;
+        background: #1B2A1B; color: #FAF6EA;
+        border: none; border-radius: 999px;
+        font-family: 'JetBrains Mono', monospace; font-size: 11px;
+        letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mobile-toc-close:active { background: #2D4A2B; }
+    }
+  </style>
+</head>
+<body data-deck="true">
+  <div id="root"></div>
+  <!-- v4 mobile branch — canonical handoff inlined (deck-mobile-shared.jsx + deck-mobile.jsx)
+       Wrapped in IIFE so internal SLIDE_COMPONENTS / DECK_SLIDES don't collide with the desktop deck.
+       Exports window.MS_C, MS_FONT, DeckMobile, DECK_SLIDES, DeckSlideStatic. -->
+  <script type="text/babel" data-presets="react-classic">
+(function(){
+// proto/mobile-shared.jsx — tokens, Kicker, Sparkline, Rail, Sheet, Toast, ImageSlot, useDeckNav
+
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+// ─────────────────────────────────────────────────────────────
+// Tokens — mirror the site's CSS vars (cream + forest editorial)
+// ─────────────────────────────────────────────────────────────
+const C = {
+  bg: '#F2EBDA',
+  bg2: '#E8E0CC',
+  cream: '#FAF6EA',
+  ink: '#1B2A1B',
+  ink2: '#2D4A2B',
+  muted: '#7A8A7A',
+  line: 'rgba(27,42,27,0.14)',
+  accent: '#C76F3D',          // terracotta
+  olive: '#5E7030',
+  forest: '#2D4A2B',
+  pop: '#D9B65A',             // mustard (deck-em italic)
+  card: '#FFFFFF',
+};
+
+const FONT = {
+  display: "'Fraunces', Georgia, serif",
+  italic: "'Instrument Serif', Georgia, serif",
+  body: "'Inter Tight', system-ui, sans-serif",
+  mono: "'JetBrains Mono', ui-monospace, monospace",
+};
+
+// ─────────────────────────────────────────────────────────────
+// Kicker — sticky mono uppercase top strip (CS / 0N · Title · N/T)
+// ─────────────────────────────────────────────────────────────
+function Kicker({ code, name, idx, total, dark = false }) {
+  const fg = dark ? 'rgba(242,235,218,0.78)' : 'rgba(27,42,27,0.62)';
+  return (
+    <header style={{
+      position: 'absolute', top: 'max(54px, env(safe-area-inset-top))',
+      left: 20, right: 20, display: 'flex', justifyContent: 'space-between',
+      fontFamily: FONT.mono, fontWeight: 600, fontSize: 10,
+      letterSpacing: '0.22em', textTransform: 'uppercase', color: fg,
+      zIndex: 5, pointerEvents: 'none',
+    }}>
+      <span style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        {code} · {name}
+      </span>
+      <span style={{ flexShrink: 0, marginLeft: 12 }}>
+        {String(idx + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+      </span>
+    </header>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Sparkline — replaces Recharts on mobile (inline SVG, ~40 lines)
+// ─────────────────────────────────────────────────────────────
+function Sparkline({ data, color = C.accent, height = 44, fill = true }) {
+  const max = Math.max(...data), min = Math.min(...data);
+  const range = max - min || 1;
+  const pts = data.map((v, i) => {
+    const x = (i / (data.length - 1)) * 200;
+    const y = height - ((v - min) / range) * (height - 6) - 3;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' L ');
+  const gid = `g-${color.replace('#', '')}-${Math.round(Math.random() * 999)}`;
+  return (
+    <svg viewBox={`0 0 200 ${height}`} preserveAspectRatio="none"
+         style={{ width: '100%', height, display: 'block' }}>
+      {fill && (
+        <defs>
+          <linearGradient id={gid} x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stopColor={color} stopOpacity="0.24" />
+            <stop offset="100%" stopColor={color} stopOpacity="0" />
+          </linearGradient>
+        </defs>
+      )}
+      {fill && <path d={`M 0,${height} L ${pts} L 200,${height} Z`} fill={`url(#${gid})`} />}
+      <path d={`M ${pts}`} fill="none" stroke={color} strokeWidth="1.8"
+            strokeLinejoin="round" strokeLinecap="round" />
+      <circle cx="200" r="3" fill={color}
+              cy={height - ((data[data.length - 1] - min) / range) * (height - 6) - 3} />
+    </svg>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// ImageSlot — placeholder for assets Claude Code will wire later
+// ─────────────────────────────────────────────────────────────
+function ImageSlot({ src, label, ratio = '4 / 5', dark = false, tint = C.bg2 }) {
+  if (src) {
+    return (
+      <div style={{ position: 'relative', aspectRatio: ratio, overflow: 'hidden', borderRadius: 14 }}>
+        <img src={src} alt="" style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          objectFit: 'cover',
+        }} />
+      </div>
+    );
+  }
+  return (
+    <div style={{
+      position: 'relative', aspectRatio: ratio, borderRadius: 14,
+      background: `repeating-linear-gradient(135deg, ${tint} 0 8px, ${dark ? 'rgba(0,0,0,0.18)' : 'rgba(0,0,0,0.04)'} 8px 16px)`,
+      border: `1px dashed ${dark ? 'rgba(242,235,218,0.32)' : 'rgba(27,42,27,0.18)'}`,
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: 12, textAlign: 'center',
+    }}>
+      <span style={{
+        fontFamily: FONT.mono, fontSize: 9, fontWeight: 600,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: dark ? 'rgba(242,235,218,0.6)' : C.muted,
+      }}>{label || 'asset'}</span>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Rail — single bottom chrome (replaces banner + jumper + progress)
+// ─────────────────────────────────────────────────────────────
+function Rail({ current, total, onPrev, onNext, onMenu, onShare }) {
+  const btn = {
+    width: 38, height: 38, borderRadius: 999, border: 'none',
+    background: 'transparent', color: C.ink, cursor: 'pointer', padding: 0,
+    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+  };
+  return (
+    <div style={{
+      position: 'absolute', left: 12, right: 12,
+      bottom: 'calc(14px + env(safe-area-inset-bottom))',
+      height: 54, zIndex: 100,
+      display: 'grid', gridTemplateColumns: 'auto auto 1fr auto auto',
+      gap: 4, alignItems: 'center', padding: '0 8px',
+      background: 'rgba(250,246,234,0.86)',
+      backdropFilter: 'blur(18px) saturate(170%)',
+      WebkitBackdropFilter: 'blur(18px) saturate(170%)',
+      border: `1px solid ${C.line}`, borderRadius: 999,
+      boxShadow: '0 10px 32px rgba(27,42,27,0.12), 0 1px 0 rgba(255,255,255,0.6) inset',
+    }}>
+      <button style={btn} onClick={onPrev} aria-label="Previous">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M10 3l-5 5 5 5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      <button style={btn} onClick={onNext} aria-label="Next">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+      </button>
+      <div style={{ display: 'flex', gap: 6, justifyContent: 'center' }}>
+        {Array.from({ length: total }).map((_, i) => (
+          <span key={i} style={{
+            width: i === current ? 22 : 6, height: 6, borderRadius: 999,
+            background: i === current ? C.accent : 'rgba(27,42,27,0.22)',
+            transition: 'all 0.22s cubic-bezier(.2,.7,.2,1)',
+          }} />
+        ))}
+      </div>
+      <button style={btn} onClick={onShare} aria-label="Share this slide">
+        <svg width="16" height="16" viewBox="0 0 16 16">
+          <path d="M8 2v8M8 2L5 5M8 2l3 3M3 9v3a1 1 0 001 1h8a1 1 0 001-1V9" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
+      <button style={btn} onClick={onMenu} aria-label="Slide list">
+        <svg width="18" height="18" viewBox="0 0 18 18">
+          <rect x="2.5" y="3.5" width="13" height="2" rx="1" fill="currentColor"/>
+          <rect x="2.5" y="8" width="13" height="2" rx="1" fill="currentColor"/>
+          <rect x="2.5" y="12.5" width="13" height="2" rx="1" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Sheet — reuses site's m-sheet pattern (text list, Fraunces 19px + →)
+// ─────────────────────────────────────────────────────────────
+function Sheet({ open, onClose, items, current, onPick, title = 'Slides' }) {
+  return (
+    <React.Fragment>
+      <div onClick={onClose} style={{
+        position: 'absolute', inset: 0, zIndex: 200,
+        background: 'rgba(27,42,27,0.45)',
+        opacity: open ? 1 : 0, pointerEvents: open ? 'auto' : 'none',
+        transition: 'opacity 0.25s ease',
+      }} />
+      <div style={{
+        position: 'absolute', left: 0, right: 0, bottom: 0, zIndex: 210,
+        background: C.cream, borderRadius: '18px 18px 0 0',
+        padding: '14px 22px calc(34px + env(safe-area-inset-bottom))',
+        boxShadow: '0 -12px 40px rgba(27,42,27,0.18)',
+        transform: open ? 'translateY(0)' : 'translateY(100%)',
+        transition: 'transform 0.32s cubic-bezier(.2,.7,.2,1)',
+        maxHeight: '82%', overflowY: 'auto',
+      }}>
+        <div style={{
+          width: 40, height: 4, borderRadius: 2,
+          background: 'rgba(27,42,27,0.18)', margin: '0 auto 18px',
+        }} />
+        <p style={{
+          fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.2em',
+          textTransform: 'uppercase', color: 'rgba(27,42,27,0.5)',
+          margin: '0 0 14px',
+        }}>{title}</p>
+        {items.map((s, i) => (
+          <a key={s.id || i} href="#" onClick={(e) => { e.preventDefault(); onPick(i); onClose(); }} style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '16px 4px',
+            fontFamily: FONT.display, fontSize: 19, fontWeight: 500,
+            letterSpacing: '-0.01em', color: C.ink,
+            borderBottom: i === items.length - 1 ? 'none' : '1px solid rgba(27,42,27,0.08)',
+            textDecoration: 'none',
+            background: i === current ? 'rgba(199,111,61,0.06)' : 'transparent',
+          }}>
+            <span style={{ display: 'flex', alignItems: 'baseline', gap: 12 }}>
+              <span style={{
+                fontFamily: FONT.mono, fontSize: 10, letterSpacing: '0.2em',
+                textTransform: 'uppercase', width: 22,
+                color: i === current ? C.accent : 'rgba(27,42,27,0.45)',
+              }}>{String(i + 1).padStart(2, '0')}</span>
+              {s.name}
+            </span>
+            <span style={{ fontFamily: FONT.body, fontSize: 16, color: 'rgba(27,42,27,0.35)' }}>→</span>
+          </a>
+        ))}
+      </div>
+    </React.Fragment>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Toast — share confirm
+// ─────────────────────────────────────────────────────────────
+function Toast({ msg }) {
+  if (!msg) return null;
+  return (
+    <div style={{
+      position: 'absolute', left: '50%', top: 100,
+      transform: 'translateX(-50%)', zIndex: 300,
+      background: C.ink, color: C.bg,
+      padding: '10px 16px', borderRadius: 999,
+      fontFamily: FONT.mono, fontSize: 10,
+      letterSpacing: '0.18em', textTransform: 'uppercase',
+      boxShadow: '0 10px 24px rgba(0,0,0,0.25)',
+      animation: 'toastIn 0.25s ease',
+    }}>{msg}</div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Editorial italic em — matches site's deck-em pattern
+// ─────────────────────────────────────────────────────────────
+function Em({ children, color = C.accent }) {
+  return (
+    <em style={{ fontFamily: FONT.italic, fontStyle: 'italic', color, fontWeight: 400 }}>
+      {children}
+    </em>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// PSBlock — Problem / Shipped dot-bullets
+// ─────────────────────────────────────────────────────────────
+function PSBlock({ label, color, items, labelColor = C.muted, textColor = C.ink }) {
+  return (
+    <div>
+      <p style={{
+        fontFamily: FONT.mono, fontWeight: 600, fontSize: 9.5,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: labelColor, margin: '0 0 10px',
+      }}>{label}</p>
+      <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+        {items.map((it, i) => (
+          <li key={i} style={{
+            position: 'relative', paddingLeft: 18, marginBottom: 8,
+            fontFamily: FONT.body, fontSize: 14, lineHeight: 1.42,
+            color: textColor,
+          }}>
+            <span style={{
+              position: 'absolute', left: 0, top: 8,
+              width: 7, height: 7, borderRadius: '50%', background: color,
+            }} />
+            {it}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Detail reveal — "↓ Detail" inline expander
+// ─────────────────────────────────────────────────────────────
+function DetailReveal({ label = '↓ See detail', children, accent = C.ink }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{ marginTop: 20 }}>
+      <button onClick={() => setOpen(!open)} style={{
+        display: 'inline-flex', alignItems: 'center', gap: 8,
+        fontFamily: FONT.mono, fontWeight: 600, fontSize: 11,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: accent, background: 'transparent', border: 'none',
+        borderBottom: `1.5px solid ${accent}`, padding: '0 0 4px',
+        cursor: 'pointer',
+      }}>
+        <span style={{ display: 'inline-block', transition: 'transform 0.2s', transform: open ? 'rotate(180deg)' : 'none' }}>↓</span>
+        {open ? 'Hide detail' : label}
+      </button>
+      <div style={{
+        maxHeight: open ? 1200 : 0, overflow: 'hidden',
+        transition: 'max-height 0.4s cubic-bezier(.2,.7,.2,1)',
+      }}>
+        <div style={{ paddingTop: open ? 18 : 0 }}>{children}</div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// useDeckNav — horizontal scroll-snap + index tracking + solo mode
+// ─────────────────────────────────────────────────────────────
+function useDeckNav(slideCount) {
+  // v4 fix: read the initial #/N hash so deep-linking from portfolio cards lands on the right slide
+  const parseInitial = () => {
+    const m = (typeof window !== 'undefined' ? window.location.hash : '').match(/^#\/(\d+)/);
+    if (!m) return 0;
+    return Math.min(Math.max(parseInt(m[1], 10), 0), slideCount - 1);
+  };
+  const [current, setCurrent] = useState(parseInitial);
+  const [solo, setSolo] = useState(false);
+  const trackRef = useRef(null);
+
+  // After mount, jump the track to the initial slide (scroll-snap won't auto-position there)
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    if (current > 0) {
+      track.scrollTo({ left: current * track.clientWidth, behavior: 'auto' });
+    }
+    // Also honor subsequent hashchange events (e.g., from in-page anchors)
+    const onHash = () => {
+      const m = window.location.hash.match(/^#\/(\d+)/);
+      if (!m) return;
+      const idx = Math.min(Math.max(parseInt(m[1], 10), 0), slideCount - 1);
+      track.scrollTo({ left: idx * track.clientWidth, behavior: 'auto' });
+      setCurrent(idx);
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const onScroll = () => {
+      const w = track.clientWidth;
+      const idx = Math.round(track.scrollLeft / w);
+      if (idx !== current) setCurrent(idx);
+    };
+    track.addEventListener('scroll', onScroll, { passive: true });
+    return () => track.removeEventListener('scroll', onScroll);
+  }, [current]);
+
+  const go = useCallback((i) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const target = Math.max(0, Math.min(slideCount - 1, i));
+    /* v4 fix: Chromium silently ignores behavior:'smooth' when scroll-snap-type: x mandatory.
+       'auto' is instant — fine for a single-viewport jump and reliable everywhere. */
+    track.scrollTo({ left: target * track.clientWidth, behavior: 'auto' });
+    /* v4 fix #2: Chrome doesn't always fire scroll events for instant programmatic scrolls,
+       so the onScroll listener may not pick up the new index. Set state directly too. */
+    setCurrent(target);
+  }, [slideCount]);
+
+  return { current, setCurrent, solo, setSolo, trackRef, go };
+}
+
+// Export
+Object.assign(window, {
+  MS_C: C, MS_FONT: FONT,
+  Kicker, Sparkline, ImageSlot, Rail, Sheet, Toast, Em, PSBlock, DetailReveal,
+  useDeckNav,
+});
+// proto/deck-mobile.jsx — full 7-slide mobile deck
+// Reads: window.MS_C, MS_FONT, Kicker, Sparkline, ImageSlot, Rail, Sheet, Toast, Em, PSBlock, DetailReveal, useDeckNav
+
+const { useState: dUseState, useEffect: dUseEffect, useRef: dUseRef } = React;
+
+// ─────────────────────────────────────────────────────────────
+// SLIDES — slot 1..7 mirrors the desktop deck order
+// ─────────────────────────────────────────────────────────────
+const DECK_SLIDES = [
+  { id: 0, code: 'CS / 00', name: 'Profile', accent: MS_C.pop, dark: true },
+  { id: 1, code: 'CS / 01', name: 'Multi-Site Governance', accent: MS_C.accent },
+  { id: 2, code: 'CS / 02', name: 'RAG + HITL', accent: MS_C.olive },
+  { id: 3, code: 'CS / 03', name: 'GenAI Enablement', accent: MS_C.accent },
+  { id: 4, code: 'CS / 04', name: 'Customer Experience Center', accent: MS_C.olive },
+  { id: 5, code: 'CS / 05', name: 'Mexico Launch', accent: MS_C.accent },
+  { id: 6, code: 'Creator', name: 'The Nesi Family', accent: MS_C.accent },
+];
+
+// ─────────────────────────────────────────────────────────────
+// Slide wrapper — gives every slide identical sizing, scroll, padding
+// ─────────────────────────────────────────────────────────────
+function SlideShell({ slide, total, dark, bg, children, contentPad = '90px 22px 110px' }) {
+  return (
+    <article data-screen-label={`${String(slide.id + 1).padStart(2, '0')} ${slide.name}`} style={{
+      position: 'relative', flex: '0 0 100%', height: '100%',
+      scrollSnapAlign: 'start', scrollSnapStop: 'always',
+      overflowY: 'auto', overflowX: 'hidden',
+      WebkitOverflowScrolling: 'touch',
+      background: bg || MS_C.bg, color: dark ? MS_C.bg : MS_C.ink,
+      padding: contentPad,
+    }}>
+      <Kicker code={slide.code} name={slide.name} idx={slide.id} total={total} dark={!!dark} />
+      {children}
+    </article>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// SLIDE 1 / 7 — Profile (cover)
+// ─────────────────────────────────────────────────────────────
+function S1_Profile({ slide, total }) {
+  return (
+    <article data-screen-label="01 Profile" style={{
+      position: 'relative', flex: '0 0 100%', height: '100%',
+      scrollSnapAlign: 'start', scrollSnapStop: 'always',
+      overflow: 'hidden', color: MS_C.bg, background: MS_C.ink,
+    }}>
+      <img src="../assets/headshot.jpg" alt="" style={{
+        position: 'absolute', inset: 0, width: '100%', height: '100%',
+        objectFit: 'cover', objectPosition: '50% 28%',
+        filter: 'saturate(0.85) contrast(1.04)',
+      }} />
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: `linear-gradient(180deg, rgba(27,42,27,0.08) 0%, rgba(27,42,27,0.55) 52%, rgba(27,42,27,0.94) 100%),
+                     radial-gradient(120% 80% at 80% 8%, rgba(199,111,61,0.32), transparent 58%)`,
+      }} />
+      <Kicker code={slide.code} name="Case Study Deck · 2026" idx={0} total={total} dark />
+
+      <div style={{ position: 'absolute', left: 22, right: 22, bottom: 250, zIndex: 4 }}>
+        <p style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10.5,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: MS_C.pop, marginBottom: 16,
+        }}>Kenneth Lopes · He/Him</p>
+        <h1 style={{
+          fontFamily: MS_FONT.display, fontWeight: 600,
+          fontSize: 'clamp(48px, 13.5vw, 64px)', lineHeight: 0.92,
+          letterSpacing: '-0.025em', margin: 0, color: MS_C.bg,
+        }}>
+          TPM, Product<br />
+          & <Em color={MS_C.pop}>Strategy.</Em>
+        </h1>
+        <p style={{
+          marginTop: 18, fontFamily: MS_FONT.body, fontWeight: 400,
+          fontSize: 14.5, lineHeight: 1.42, maxWidth: '32ch',
+          color: 'rgba(242,235,218,0.85)',
+        }}>
+          Cross-functional PM at Canoga Perkins. Hardware, software, cloud, ops.
+          Turns ambiguous requests into <Em color={MS_C.pop}>shippable</Em> plans.
+        </p>
+      </div>
+
+      {/* v4 fix: stat strip is a 2×2 grid so all 4 fit on one screen (no horizontal scroll) */}
+      <div style={{
+        position: 'absolute', left: 22, right: 22, bottom: 92,
+        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8,
+      }}>
+        {[
+          ['4,700+', 'issues governed'],
+          ['$15M+', 'shipped'],
+          ['800K+', 'creator audience'],
+          ['$1M+', 'RAG savings'],
+        ].map(([n, l]) => (
+          <div key={l} style={{
+            padding: '10px 12px',
+            background: 'rgba(250,246,234,0.10)',
+            backdropFilter: 'blur(14px) saturate(160%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(160%)',
+            border: '1px solid rgba(242,235,218,0.18)', borderRadius: 12,
+          }}>
+            <b style={{
+              display: 'block', fontFamily: MS_FONT.display, fontWeight: 500,
+              fontSize: 21, lineHeight: 1, fontVariantNumeric: 'tabular-nums',
+              letterSpacing: '-0.015em', color: MS_C.bg,
+            }}>{n}</b>
+            <span style={{
+              display: 'block', marginTop: 4, fontFamily: MS_FONT.mono,
+              fontWeight: 600, fontSize: 8.5, letterSpacing: '0.18em',
+              textTransform: 'uppercase', color: 'rgba(242,235,218,0.7)',
+            }}>{l}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* swipe hint */}
+      <div style={{
+        position: 'absolute', bottom: 60, right: 22,
+        fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: 'rgba(242,235,218,0.6)',
+        animation: 'swipePulse 1.8s ease-in-out infinite',
+      }}>Swipe →</div>
+    </article>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// SLIDE 2 / 7 — Multi-Site Governance (CS01)
+// ─────────────────────────────────────────────────────────────
+function S2_MultiSite({ slide, total }) {
+  return (
+    <SlideShell slide={slide} total={total}>
+      <p style={{
+        fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: MS_C.accent, margin: '0 0 14px',
+      }}>— The challenge</p>
+      <h2 style={{
+        fontFamily: MS_FONT.display, fontWeight: 400,
+        fontSize: 'clamp(28px, 7.6vw, 34px)', lineHeight: 1.02,
+        letterSpacing: '-0.015em', margin: 0, textWrap: 'balance',
+      }}>
+        Operating <Em>system</Em> for 5 sites.
+      </h2>
+
+      {/* v4: globe panel moved to the top (was at bottom) */}
+      <div style={{
+        marginTop: 24, padding: '20px 18px',
+        background: MS_C.ink, color: MS_C.bg,
+        borderRadius: 18, position: 'relative', overflow: 'hidden',
+      }}>
+        <p style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: 'rgba(242,235,218,0.65)', margin: '0 0 12px',
+        }}>5 sites · 1 backlog</p>
+
+        <svg viewBox="0 0 320 160" style={{ width: '100%', height: 'auto', display: 'block' }} aria-label="World map showing 5 manufacturing sites">
+          <defs>
+            <radialGradient id="globeGlowTop" cx="50%" cy="35%" r="65%">
+              <stop offset="0%" stopColor="#5E7030" stopOpacity="0.18"/>
+              <stop offset="100%" stopColor="#5E7030" stopOpacity="0"/>
+            </radialGradient>
+            <radialGradient id="pinPulseTop" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor={MS_C.accent} stopOpacity="0.55"/>
+              <stop offset="100%" stopColor={MS_C.accent} stopOpacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect x="0" y="0" width="320" height="160" fill="url(#globeGlowTop)"/>
+          {[40, 60, 80, 100, 120].map(y => (
+            <line key={y} x1="10" y1={y} x2="310" y2={y} stroke="rgba(242,235,218,0.06)" strokeWidth="0.5"/>
+          ))}
+          {[60, 110, 160, 210, 260].map(x => (
+            <path key={x} d={`M ${x} 30 Q ${x + (x > 160 ? -8 : 8)} 80, ${x} 130`} fill="none" stroke="rgba(242,235,218,0.06)" strokeWidth="0.5"/>
+          ))}
+          <g fill="rgba(94,112,48,0.32)" stroke="rgba(242,235,218,0.18)" strokeWidth="0.4">
+            <path d="M30 56 L52 44 L78 50 L88 60 L92 76 L80 92 L62 96 L48 88 L34 76 Z"/>
+            <path d="M76 100 L88 98 L94 110 L92 130 L82 140 L74 132 L72 116 Z"/>
+            <path d="M150 50 L168 44 L182 50 L188 62 L178 70 L160 70 L148 60 Z"/>
+            <path d="M158 78 L180 74 L188 88 L184 110 L170 124 L158 116 L152 94 Z"/>
+            <path d="M192 46 L228 40 L262 48 L274 60 L268 76 L246 84 L218 80 L196 72 L188 60 Z"/>
+            <path d="M222 82 L236 80 L240 96 L230 108 L220 100 Z"/>
+            <path d="M252 88 L266 92 L272 104 L262 110 L252 102 Z"/>
+            <path d="M256 116 L284 112 L290 124 L280 132 L262 130 Z"/>
+          </g>
+          {[
+            { x: 70,  y: 76,  label: 'United States' },
+            { x: 178, y: 56,  label: 'Ukraine' },
+            { x: 220, y: 76,  label: 'Pakistan' },
+            { x: 230, y: 92,  label: 'India' },
+            { x: 263, y: 102, label: 'Singapore' },
+          ].map(p => (
+            <g key={p.label}>
+              <circle cx={p.x} cy={p.y} r="9" fill="url(#pinPulseTop)"/>
+              <circle cx={p.x} cy={p.y} r="3.2" fill={MS_C.accent} stroke={MS_C.bg} strokeWidth="1.2"/>
+            </g>
+          ))}
+        </svg>
+
+        <p style={{
+          marginTop: 10, fontFamily: MS_FONT.body, fontSize: 12.5,
+          color: 'rgba(242,235,218,0.78)', lineHeight: 1.42,
+        }}>
+          <span style={{ color: MS_C.bg, fontWeight: 500 }}>United States · Ukraine · Pakistan · India · Singapore.</span>{' '}
+          Unified intake routed to a named owner per gate. <span style={{ color: MS_C.pop }}>4,700 issues</span> closed in 6 months.
+        </p>
+      </div>
+
+      <div style={{
+        display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8,
+        margin: '16px 0 22px',
+      }}>
+        {[['$15M+', 'shipped'], ['5', 'sites'], ['$0.9M/yr', 'avoided']].map(([n, l]) => (
+          <ChipStat key={l} n={n} l={l} />
+        ))}
+      </div>
+
+      <PSBlock label="Problem" color={MS_C.accent} items={[
+        '5 sites, 5 trackers, no shared definition of "done"',
+        'Exec reviews built from spreadsheets at 2am',
+      ]} />
+      <div style={{ height: 16 }} />
+      <PSBlock label="Shipped" color={MS_C.olive} items={[
+        'Unified intake + status taxonomy, 5 sites in 6 weeks',
+        'Single auto-generated weekly exec view',
+      ]} />
+
+      {/* v4: burndown panel moved to the bottom (was at top) */}
+      <div style={{
+        marginTop: 22, padding: '20px 18px 16px',
+        background: MS_C.card, borderRadius: 18,
+        border: `1px solid ${MS_C.line}`,
+        boxShadow: '0 1px 0 rgba(27,42,27,0.04)',
+      }}>
+        <div style={{
+          fontFamily: MS_FONT.display, fontWeight: 500, fontSize: 54,
+          lineHeight: 1, fontVariantNumeric: 'tabular-nums',
+          letterSpacing: '-0.03em',
+        }}>4,712</div>
+        <div style={{ marginTop: 4, fontFamily: MS_FONT.body, fontSize: 13, color: MS_C.muted }}>
+          issues governed across 5 sites
+        </div>
+        <div style={{ marginTop: 14 }}>
+          <Sparkline data={[12, 18, 24, 31, 42, 58, 78, 105, 142, 190, 248, 312]} color={MS_C.accent} />
+        </div>
+        <p style={{
+          marginTop: 8, fontFamily: MS_FONT.mono, fontWeight: 600,
+          fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase',
+          color: MS_C.muted,
+        }}>Cumulative · 2023 → 2025</p>
+      </div>
+    </SlideShell>
+  );
+}
+
+function ChipStat({ n, l }) {
+  return (
+    <div style={{
+      padding: '12px 8px', background: MS_C.cream,
+      border: `1px solid rgba(27,42,27,0.08)`,
+      borderRadius: 12, textAlign: 'center',
+    }}>
+      <b style={{
+        display: 'block', fontFamily: MS_FONT.display, fontWeight: 500,
+        fontSize: 19, lineHeight: 1, fontVariantNumeric: 'tabular-nums',
+        color: MS_C.ink,
+      }}>{n}</b>
+      <span style={{
+        display: 'block', marginTop: 4, fontFamily: MS_FONT.mono,
+        fontWeight: 600, fontSize: 8.5, letterSpacing: '0.18em',
+        textTransform: 'uppercase', color: MS_C.muted,
+      }}>{l}</span>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// SLIDE 3 / 7 — RAG + HITL (CS02)
+// ─────────────────────────────────────────────────────────────
+function S3_RAG({ slide, total }) {
+  const dept = [['Engineering', 213], ['Manufacturing', 70], ['Product', 52], ['Operations', 34], ['Marketing', 12]];
+  const max = 213;
+  return (
+    <SlideShell slide={slide} total={total}>
+      <p style={{
+        fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: MS_C.olive, margin: '0 0 14px',
+      }}>— Procurement intelligence</p>
+      <h2 style={{
+        fontFamily: MS_FONT.display, fontWeight: 400,
+        fontSize: 'clamp(26px, 7.4vw, 32px)', lineHeight: 1.04,
+        letterSpacing: '-0.015em', margin: 0, textWrap: 'balance',
+      }}>
+        Procurement <Em color={MS_C.olive}>intelligence</Em> via RAG + HITL.
+      </h2>
+
+      <div style={{
+        marginTop: 24, padding: '22px 20px',
+        background: MS_C.forest, color: MS_C.bg, borderRadius: 20,
+      }}>
+        <div style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: 'rgba(242,235,218,0.6)', marginBottom: 8,
+        }}>Expedite fees</div>
+        <div style={{
+          fontFamily: MS_FONT.display, fontWeight: 600,
+          fontSize: 64, lineHeight: 1,
+          fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.04em',
+        }}>−80%</div>
+        <div style={{ marginTop: 6, fontFamily: MS_FONT.body, fontSize: 13, color: 'rgba(242,235,218,0.78)' }}>
+          435+ queries · 13 departments · ~$1M annual savings
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, margin: '14px 0 22px' }}>
+        <ChipStat n="435+" l="Queries" />
+        <ChipStat n="13" l="Departments" />
+      </div>
+
+      <p style={{
+        fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: MS_C.muted, margin: '0 0 12px',
+      }}>By department</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {dept.map(([name, q]) => (
+          <div key={name}>
+            <div style={{
+              display: 'flex', justifyContent: 'space-between', marginBottom: 5,
+              fontFamily: MS_FONT.body, fontSize: 12.5, color: MS_C.ink,
+            }}>
+              <span>{name}</span>
+              <span style={{ fontVariantNumeric: 'tabular-nums', fontWeight: 500 }}>{q}</span>
+            </div>
+            <div style={{ height: 4, borderRadius: 999, background: MS_C.bg2, overflow: 'hidden' }}>
+              <div style={{ width: `${(q / max) * 100}%`, height: '100%', background: MS_C.olive, borderRadius: 999 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* v4: deployed-tool image always visible (no DetailReveal wrapper) */}
+      <div style={{ marginTop: 22 }}>
+        <p style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: MS_C.muted, margin: '0 0 12px',
+        }}>Deployed Internal Tool</p>
+        <div style={{
+          position: 'relative', aspectRatio: '16 / 10',
+          borderRadius: 14, overflow: 'hidden', background: MS_C.ink,
+          border: `1px solid ${MS_C.line}`,
+        }}>
+          <img src="../assets/image.png" alt="CM Copilot — deployed internal tool" loading="lazy" style={{
+            position: 'absolute', inset: 0, width: '100%', height: '100%',
+            objectFit: 'cover', objectPosition: '80% center',
+          }}/>
+          <div style={{
+            position: 'absolute', top: 10, right: 10,
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '6px 12px', borderRadius: 999,
+            background: 'linear-gradient(135deg,#2D4A2B,#1B2A1B)',
+            color: '#fff', boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
+          }}>
+            <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#D9B65A" strokeWidth="2"><path d="M12 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+            <span style={{ fontFamily: MS_FONT.mono, fontSize: 9.5, letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 600 }}>Deployed Internal Tool</span>
+          </div>
+        </div>
+        <p style={{ marginTop: 12, fontFamily: MS_FONT.body, fontSize: 13, color: MS_C.muted, lineHeight: 1.45 }}>
+          Retrieval-augmented LLM with Human-in-the-Loop approval. Buyer drafts go through
+          policy guardrails before send. Adoption ramped Sep '25 → Feb '26 from 1 user / week to 12.
+        </p>
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// SLIDE 4 / 7 — GenAI Enablement (CS03)
+// ─────────────────────────────────────────────────────────────
+function S4_GenAI({ slide, total }) {
+  return (
+    <SlideShell slide={slide} total={total}>
+      <p style={{
+        fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: MS_C.accent, margin: '0 0 14px',
+      }}>— Adoption program</p>
+      <h2 style={{
+        fontFamily: MS_FONT.display, fontWeight: 400,
+        fontSize: 'clamp(26px, 7.4vw, 32px)', lineHeight: 1.04,
+        letterSpacing: '-0.015em', margin: 0, textWrap: 'balance',
+      }}>
+        Operationalized <Em>intake-to-execution</Em> with a live adoption dashboard.
+      </h2>
+
+      <div style={{
+        marginTop: 24, padding: '22px 20px', background: MS_C.ink, color: MS_C.bg,
+        borderRadius: 20,
+      }}>
+        <div style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: MS_C.accent, marginBottom: 8,
+        }}>WAU lift</div>
+        <div style={{
+          fontFamily: MS_FONT.display, fontWeight: 500, fontSize: 44,
+          lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.025em',
+        }}>193% WAU</div>
+        <div style={{
+          marginTop: 6, fontFamily: MS_FONT.body, fontSize: 13,
+          color: 'rgba(242,235,218,0.78)',
+        }}>in 2 months</div>
+        <div style={{ marginTop: 8 }}>
+          <Sparkline data={[1, 1, 2, 3, 5, 8, 12, 16, 20, 28, 34, 41]} color={MS_C.accent} height={36} />
+        </div>
+        <div style={{
+          marginTop: 8, fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: 'rgba(242,235,218,0.65)',
+        }}>84% CSAT · 435 Q · 13 depts</div>
+      </div>
+
+      <p style={{
+        marginTop: 22, fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: MS_C.muted, marginBottom: 12,
+      }}>Enablement assets</p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <AssetCard color={MS_C.olive} eyebrow="Comms cadence" title="85% open rate" />
+        <AssetCard color={MS_C.forest} eyebrow="Gamification" title="Leaderboard + badges" />
+        <AssetCard color={MS_C.accent} eyebrow="Prompt engineering" title="Role-based templates" mono="{ }" />
+      </div>
+
+      <a href="cs03-dashboard.html" target="_blank" rel="noopener" style={{
+        marginTop: 22, display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '16px 20px', background: MS_C.accent, color: '#fff',
+        borderRadius: 18, textDecoration: 'none',
+      }}>
+        <div>
+          <div style={{
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.78)', marginBottom: 4,
+          }}>Live dashboard</div>
+          <div style={{
+            fontFamily: MS_FONT.display, fontWeight: 500, fontSize: 18,
+            letterSpacing: '-0.01em',
+          }}>Open full report</div>
+        </div>
+        <span style={{ fontFamily: MS_FONT.body, fontSize: 22 }}>↗</span>
+      </a>
+
+      <p style={{
+        marginTop: 8, fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9,
+        letterSpacing: '0.18em', textTransform: 'uppercase', color: MS_C.muted,
+      }}>Best viewed on desktop</p>
+    </SlideShell>
+  );
+}
+
+function AssetCard({ color, eyebrow, title, mono }) {
+  return (
+    <div style={{
+      display: 'grid', gridTemplateColumns: '56px 1fr', alignItems: 'center',
+      background: MS_C.cream, borderRadius: 14,
+      border: `1px solid ${MS_C.line}`, overflow: 'hidden',
+    }}>
+      <div style={{
+        height: '100%', background: color, color: '#fff',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontFamily: MS_FONT.display, fontSize: 20, fontWeight: 500,
+        minHeight: 64,
+      }}>{mono || '•'}</div>
+      <div style={{ padding: '12px 14px' }}>
+        <div style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 8.5,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: color, marginBottom: 3,
+        }}>{eyebrow}</div>
+        <div style={{
+          fontFamily: MS_FONT.display, fontSize: 16, fontWeight: 500,
+          letterSpacing: '-0.01em', color: MS_C.ink, lineHeight: 1.2,
+        }}>{title}</div>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// SLIDE 5 / 7 — Customer Experience Center (CS04) — carousel
+// ─────────────────────────────────────────────────────────────
+function S5_CEC({ slide, total }) {
+  const tiles = [
+    { src: '../assets/cs04-experience-center.jpg', label: 'CEC graphic · 5G hero wall' },
+    { src: '../assets/cs04-racing-sim.jpg',        label: 'Driver experience · why latency matters' },
+    { src: '../assets/cs04-syncmetra.jpg',         label: 'Edge compute rack · live latency' },
+    { src: '../assets/media_photo-img6344.jpg',    label: 'AR robotics · future-state PoC' },
+  ];
+  return (
+    <SlideShell slide={slide} total={total} contentPad="90px 0 110px">
+      <div style={{ padding: '0 22px' }}>
+        <p style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: MS_C.olive, margin: '0 0 14px',
+        }}>— The bet</p>
+        <h2 style={{
+          fontFamily: MS_FONT.display, fontWeight: 400,
+          fontSize: 'clamp(26px, 7vw, 32px)', lineHeight: 1.04,
+          letterSpacing: '-0.015em', margin: 0, textWrap: 'balance',
+        }}>
+          Replaced slideshows with <Em color={MS_C.olive}>hands-on PoCs.</Em>
+        </h2>
+      </div>
+
+      <div style={{
+        marginTop: 22, display: 'flex', gap: 10,
+        padding: '0 22px 4px',
+        overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none',
+      }}>
+        {tiles.map((t, i) => (
+          <div key={i} style={{
+            scrollSnapAlign: 'start', flex: '0 0 78%',
+            position: 'relative', aspectRatio: '4 / 5',
+            borderRadius: 18, overflow: 'hidden',
+            border: `1px solid ${MS_C.line}`,
+          }}>
+            <img src={t.src} alt="" style={{
+              position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+            }} />
+            <div style={{
+              position: 'absolute', inset: 0,
+              background: 'linear-gradient(to top, rgba(15,25,15,0.86) 0%, rgba(15,25,15,0.05) 55%, transparent 100%)',
+            }} />
+            <div style={{
+              position: 'absolute', left: 0, right: 0, top: 12,
+              display: 'flex', justifyContent: 'space-between', padding: '0 14px',
+              fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9,
+              letterSpacing: '0.22em', textTransform: 'uppercase',
+              color: 'rgba(255,255,255,0.78)',
+            }}>
+              <span>{String(i + 1).padStart(2, '0')} / 04</span>
+              <span>PoC</span>
+            </div>
+            <div style={{
+              position: 'absolute', left: 16, right: 16, bottom: 14,
+              color: '#fff', fontFamily: MS_FONT.display, fontSize: 17,
+              fontWeight: 500, lineHeight: 1.15, letterSpacing: '-0.01em',
+            }}>{t.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <p style={{
+        margin: '12px 22px 0', fontFamily: MS_FONT.mono,
+        fontWeight: 600, fontSize: 9.5, letterSpacing: '0.22em',
+        textTransform: 'uppercase', color: MS_C.muted,
+      }}>Swipe through PoCs ↔</p>
+
+      <div style={{ padding: '22px 22px 0' }}>
+        <div style={{
+          padding: '20px', background: MS_C.ink, color: MS_C.bg, borderRadius: 18,
+        }}>
+          <div style={{
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: 'rgba(242,235,218,0.6)', marginBottom: 8,
+          }}>Qualified pipeline · 2024</div>
+          <div style={{
+            fontFamily: MS_FONT.display, fontWeight: 500, fontSize: 44,
+            lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.03em',
+          }}>
+            <Em color={MS_C.pop}>$1.2M+</Em>
+          </div>
+          <p style={{
+            marginTop: 10, fontFamily: MS_FONT.body, fontSize: 13,
+            lineHeight: 1.45, color: 'rgba(242,235,218,0.78)',
+          }}>
+            Tagged from CEC visits. Multi-stakeholder demos choreographed exec brief → pipeline tag.
+          </p>
+        </div>
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// SLIDE 6 / 7 — Mexico Launch (CS05)
+// ─────────────────────────────────────────────────────────────
+function S6_Mexico({ slide, total }) {
+  return (
+    <SlideShell slide={slide} total={total}>
+      <p style={{
+        fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: MS_C.accent, margin: '0 0 14px',
+      }}>— Regional launch</p>
+      <h2 style={{
+        fontFamily: MS_FONT.display, fontWeight: 400,
+        fontSize: 'clamp(26px, 7.4vw, 32px)', lineHeight: 1.04,
+        letterSpacing: '-0.015em', margin: 0, textWrap: 'balance',
+      }}>
+        High-stakes <Em>end-to-end</Em> launch in 4 weeks.
+      </h2>
+
+      {/* v4: Mexico launch carousel — same horizontal scroll-snap pattern as CEC slide */}
+      {(() => {
+        const launchTiles = [
+          { src: '../assets/media_photo-img6340.jpg',        label: 'Large-scale projection' },
+          { src: '../assets/media_photo-img6337.jpg',        label: 'Localized curved video' },
+          { src: '../assets/cs05-mexico-launch.jpg',         label: 'SyncMetra LAAM Launch · Onstage demo' },
+          { src: '../assets/media_photo-1769122738563.jpeg', label: 'Localized welcome video' },
+          { src: '../assets/media_photo-img6336.jpg',        label: 'Custom screen dimensions' },
+        ];
+        return (
+          <div style={{
+            marginTop: 22, display: 'flex', gap: 10,
+            paddingBottom: 4,
+            marginLeft: -22, marginRight: -22, paddingLeft: 22, paddingRight: 22,
+            overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none',
+          }}>
+            {launchTiles.map((t, i) => (
+              <div key={i} style={{
+                scrollSnapAlign: 'start', flex: '0 0 78%',
+                position: 'relative', aspectRatio: '4 / 5',
+                borderRadius: 18, overflow: 'hidden',
+                border: `1px solid ${MS_C.line}`, background: MS_C.ink,
+              }}>
+                <img src={t.src} alt={t.label} loading="lazy" style={{
+                  position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+                }} />
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: 'linear-gradient(to top, rgba(15,25,15,0.86) 0%, rgba(15,25,15,0.05) 55%, transparent 100%)',
+                }} />
+                <div style={{
+                  position: 'absolute', left: 0, right: 0, top: 12,
+                  display: 'flex', justifyContent: 'space-between', padding: '0 14px',
+                  fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9,
+                  letterSpacing: '0.22em', textTransform: 'uppercase',
+                  color: 'rgba(255,255,255,0.78)',
+                }}>
+                  <span>{String(i + 1).padStart(2, '0')} / {String(launchTiles.length).padStart(2, '0')}</span>
+                  <span>Launch</span>
+                </div>
+                <div style={{
+                  position: 'absolute', left: 16, right: 16, bottom: 14,
+                  color: '#fff', fontFamily: MS_FONT.display, fontSize: 17,
+                  fontWeight: 500, lineHeight: 1.15, letterSpacing: '-0.01em',
+                }}>{t.label}</div>
+              </div>
+            ))}
+          </div>
+        );
+      })()}
+      <p style={{
+        margin: '12px 0 0', fontFamily: MS_FONT.mono,
+        fontWeight: 600, fontSize: 9.5, letterSpacing: '0.22em',
+        textTransform: 'uppercase', color: MS_C.muted,
+      }}>Swipe through launch ↔</p>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 14 }}>
+        <div style={{
+          padding: '16px 14px', background: MS_C.ink, color: MS_C.bg, borderRadius: 14,
+        }}>
+          <div style={{
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: 'rgba(242,235,218,0.6)', marginBottom: 6,
+          }}>Region</div>
+          <div style={{ fontFamily: MS_FONT.display, fontSize: 19, fontWeight: 500, letterSpacing: '-0.015em' }}>LATAM · MX</div>
+        </div>
+        <div style={{
+          padding: '16px 14px', background: MS_C.accent, color: '#fff', borderRadius: 14,
+        }}>
+          <div style={{
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.78)', marginBottom: 6,
+          }}>Window</div>
+          <div style={{ fontFamily: MS_FONT.display, fontSize: 19, fontWeight: 500, letterSpacing: '-0.015em' }}>4 weeks</div>
+        </div>
+      </div>
+
+      <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <MetricRow eyebrow="Registrations" v="75" sub="Localized acquisition flow" />
+        <MetricRow eyebrow="Attendees" v="~90" sub="20% walk-up over registration" />
+        <MetricRow eyebrow="Sales conversion" v="11%" sub="Attendees → next-step meetings" highlight />
+      </div>
+    </SlideShell>
+  );
+}
+
+function MetricRow({ eyebrow, v, sub, highlight }) {
+  return (
+    <div style={{
+      display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'center', gap: 14,
+      padding: '14px 16px',
+      background: highlight ? MS_C.accent : MS_C.card, color: highlight ? '#fff' : MS_C.ink,
+      borderRadius: 14, border: highlight ? 'none' : `1px solid ${MS_C.line}`,
+    }}>
+      <div>
+        <div style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: highlight ? 'rgba(255,255,255,0.78)' : MS_C.muted, marginBottom: 4,
+        }}>{eyebrow}</div>
+        <div style={{ fontFamily: MS_FONT.body, fontSize: 12.5, color: highlight ? 'rgba(255,255,255,0.85)' : MS_C.muted, lineHeight: 1.4 }}>{sub}</div>
+      </div>
+      <div style={{
+        fontFamily: MS_FONT.display, fontWeight: 500, fontSize: 34,
+        lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.03em',
+      }}>{v}</div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// SLIDE 7 / 7 — Creator Community (Slide3) — angle toggle
+// ─────────────────────────────────────────────────────────────
+const CREATOR_ANGLES = {
+  pm: {
+    label: 'PM lens',
+    kicker: '— Creator operations',
+    h: <>Creator <Em>operations</Em> at PM scale.</>,
+    bullets: [
+      'Weekly release cadence · post → measure → iterate',
+      '70M+ views, 3M+ engagements',
+      '100% organic · $0 paid acquisition',
+    ],
+  },
+  platform: {
+    label: 'Platform mechanics',
+    kicker: '— Platform + algorithm fluency',
+    h: <>Learned every platform's <Em>algorithm + creator stack</Em> first-hand.</>,
+    bullets: [
+      'TikTok 650K · IG 65K · Snap 55K · YT 32K · FB 20K',
+      'Format A/B testing across 5 platforms simultaneously',
+      'Built creator-tooling instincts no product team can fake',
+    ],
+  },
+  data: {
+    label: 'Data-driven',
+    kicker: '— Experimentation at scale',
+    h: <>Treated content like a <Em>product backlog.</Em></>,
+    bullets: [
+      'Weekly hypotheses, ranked by reach × retention × engagement',
+      '50+ format experiments shipped, 70M+ views attributed',
+      'Audience cohorts segmented by platform × pillar × hook type',
+    ],
+  },
+};
+
+function S7_Creator({ slide, total }) {
+  const [angle, setAngle] = dUseState('pm');
+  const A = CREATOR_ANGLES[angle];
+  const platforms = [
+    // v4: per-platform caption box uses fg (text/border) + tint (fill) for an opaque branded card
+    { name:'TikTok',    count:'650K', accent:'#FF0050', fg:'#FFFFFF', tint:'#FF0050', img:'../assets/TT.jpg' },
+    { name:'Instagram', count:'65K',  accent:'#E1306C', fg:'#FFFFFF', tint:'#E1306C', img:'../assets/IG.jpg' },
+    { name:'Snapchat',  count:'55K',  accent:'#FFFC00', fg:'#1B2A1B', tint:'#FFFC00', img:'../assets/Snap.jpg' },
+    { name:'YouTube',   count:'32K',  accent:'#FF0000', fg:'#FFFFFF', tint:'#FF0000', img:'../assets/YT.jpg' },
+    { name:'Facebook',  count:'20K',  accent:'#1877F2', fg:'#FFFFFF', tint:'#1877F2', img:'../assets/Facebook.jpg' },
+  ];
+  return (
+    <SlideShell slide={slide} total={total}>
+      <p style={{
+        fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 10,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: MS_C.accent, margin: '0 0 14px',
+      }}>{A.kicker}</p>
+      <h2 style={{
+        fontFamily: MS_FONT.display, fontWeight: 400,
+        fontSize: 'clamp(26px, 7.4vw, 32px)', lineHeight: 1.04,
+        letterSpacing: '-0.015em', margin: 0, textWrap: 'balance',
+      }}>{A.h}</h2>
+
+      {/* Angle toggle */}
+      <div style={{
+        display: 'flex', gap: 6, marginTop: 18,
+        padding: 4, background: MS_C.bg2, borderRadius: 999,
+      }}>
+        {Object.entries(CREATOR_ANGLES).map(([key, val]) => (
+          <button key={key} onClick={() => setAngle(key)} style={{
+            flex: 1, padding: '8px 4px', borderRadius: 999,
+            border: 'none', cursor: 'pointer',
+            background: angle === key ? MS_C.ink : 'transparent',
+            color: angle === key ? MS_C.bg : MS_C.ink,
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9,
+            letterSpacing: '0.16em', textTransform: 'uppercase',
+            transition: 'background 0.2s, color 0.2s',
+          }}>{val.label}</button>
+        ))}
+      </div>
+
+      {/* Hero combined number */}
+      <div style={{
+        marginTop: 20, padding: '22px 20px',
+        background: MS_C.ink, color: MS_C.bg, borderRadius: 20,
+      }}>
+        <div style={{
+          fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+          letterSpacing: '0.22em', textTransform: 'uppercase',
+          color: 'rgba(242,235,218,0.6)', marginBottom: 8,
+        }}>Combined audience · 5 platforms</div>
+        <div style={{
+          fontFamily: MS_FONT.display, fontWeight: 500, fontSize: 64,
+          lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.035em',
+        }}>800K+</div>
+        <div style={{ marginTop: 4, fontFamily: MS_FONT.body, fontSize: 13, color: 'rgba(242,235,218,0.7)' }}>
+          70M+ views · 3M+ engagements · 100% organic
+        </div>
+      </div>
+
+      {/* Bullets per angle */}
+      <ul style={{ marginTop: 18, listStyle: 'none', padding: 0 }}>
+        {A.bullets.map((b, i) => (
+          <li key={i} style={{
+            position: 'relative', paddingLeft: 18, marginBottom: 10,
+            fontFamily: MS_FONT.body, fontSize: 14, lineHeight: 1.42, color: MS_C.ink,
+          }}>
+            <span style={{
+              position: 'absolute', left: 0, top: 8,
+              width: 7, height: 7, borderRadius: '50%', background: MS_C.accent,
+            }} />
+            {b}
+          </li>
+        ))}
+      </ul>
+
+      {/* Platform horizontal swipe */}
+      <p style={{
+        marginTop: 18, fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+        letterSpacing: '0.22em', textTransform: 'uppercase',
+        color: MS_C.muted, marginBottom: 10,
+      }}>By platform</p>
+      {/* v4: per-platform iPhone-style frames showing actual app screenshots */}
+      <div style={{
+        display: 'flex', gap: 16, overflowX: 'auto',
+        scrollSnapType: 'x mandatory', scrollbarWidth: 'none',
+        marginLeft: -22, marginRight: -22, padding: '8px 22px 4px',
+      }}>
+        {platforms.map((p) => (
+          <div key={p.name} style={{
+            scrollSnapAlign: 'start', flex: '0 0 auto',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+          }}>
+            {/* iPhone frame */}
+            <div style={{
+              position: 'relative',
+              width: 144, aspectRatio: '9 / 19',
+              background: '#1B2A1B',
+              borderRadius: 22,
+              padding: 5,
+              boxShadow: '0 8px 24px rgba(27,42,27,0.22), 0 0 0 1px rgba(27,42,27,0.10)',
+            }}>
+              {/* Notch */}
+              <div style={{
+                position: 'absolute', top: 6, left: '50%', transform: 'translateX(-50%)',
+                width: 42, height: 11, background: '#1B2A1B', borderRadius: '0 0 10px 10px',
+                zIndex: 2,
+              }} />
+              {/* Screen */}
+              <div style={{
+                position: 'relative',
+                width: '100%', height: '100%',
+                borderRadius: 18,
+                overflow: 'hidden',
+                background: '#000',
+              }}>
+                <img src={p.img} alt={`${p.name} profile screenshot`} loading="lazy" style={{
+                  width: '100%', height: '100%', objectFit: 'cover', display: 'block',
+                }}/>
+              </div>
+            </div>
+            {/* v4: branded caption card — opaque platform color, name + count inside one bordered box */}
+            <div style={{
+              width: 144, marginTop: 2,
+              background: p.tint,
+              border: `1.5px solid ${p.accent}`,
+              borderRadius: 10,
+              padding: '8px 10px',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
+              boxShadow: '0 4px 12px rgba(27,42,27,0.08)',
+            }}>
+              <div style={{
+                fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9,
+                letterSpacing: '0.22em', textTransform: 'uppercase',
+                color: p.fg, opacity: 0.85,
+              }}>{p.name}</div>
+              <div style={{
+                fontFamily: MS_FONT.display, fontWeight: 600, fontSize: 18,
+                fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.01em',
+                color: p.fg, lineHeight: 1,
+              }}>{p.count}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Deck shell
+// ─────────────────────────────────────────────────────────────
+const SLIDE_COMPONENTS = [S1_Profile, S2_MultiSite, S3_RAG, S4_GenAI, S5_CEC, S6_Mexico, S7_Creator];
+
+function DeckMobile() {
+  const { current, trackRef, go } = useDeckNav(DECK_SLIDES.length);
+  const [sheet, setSheet] = dUseState(false);
+  const [toast, setToast] = dUseState('');
+
+  // sync slide change with parent (postMessage)
+  dUseEffect(() => {
+    try { window.parent.postMessage({ slideIndexChanged: current }, '*'); } catch {}
+  }, [current]);
+
+  const share = () => {
+    setToast(`Slide ${current + 1} link copied`);
+    setTimeout(() => setToast(''), 1600);
+  };
+
+  return (
+    <div data-screen-label="Deck (mobile)" style={{
+      position: 'relative', height: '100%', background: MS_C.bg,
+      display: 'flex', flexDirection: 'column',
+    }}>
+      {/* v4: persistent topnav above the deck — K·L brand + Home/Portfolio/Creator links + slide counter + menu */}
+      <header style={{
+        flex: '0 0 auto', position: 'relative', zIndex: 50,
+        padding: 'calc(8px + env(safe-area-inset-top, 0px)) 16px 8px',
+        background: 'rgba(242,235,218,0.92)',
+        backdropFilter: 'blur(14px) saturate(160%)',
+        WebkitBackdropFilter: 'blur(14px) saturate(160%)',
+        borderBottom: `1px solid ${MS_C.line}`,
+      }}>
+        {/* Row 1: brand + counter + menu */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <a href="../portfolio.html" style={{
+            fontFamily: MS_FONT.mono, fontSize: 11, fontWeight: 600,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: MS_C.ink, textDecoration: 'none',
+          }}>K · L</a>
+          <button type="button" onClick={() => setSheet(true)} aria-label="Open slides menu" style={{
+            appearance: 'none', WebkitAppearance: 'none', border: 'none',
+            background: 'transparent', cursor: 'pointer', padding: 6, margin: -6,
+            color: MS_C.ink, display: 'inline-flex', alignItems: 'center', gap: 8,
+            WebkitTapHighlightColor: 'transparent',
+          }}>
+            <span style={{
+              fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
+              letterSpacing: '0.22em', textTransform: 'uppercase', color: MS_C.muted,
+            }}>{`${String(current + 1).padStart(2, '0')} / ${String(DECK_SLIDES.length).padStart(2, '0')}`}</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+        </div>
+        {/* Row 2: site nav links */}
+        <nav aria-label="Site" style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          gap: 18, marginTop: 8,
+        }}>
+          <a href="../index.html" style={{
+            fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: MS_C.muted, textDecoration: 'none',
+          }}>Home</a>
+          <span style={{ width: 3, height: 3, borderRadius: 999, background: 'rgba(27,42,27,0.18)' }}/>
+          <a href="../portfolio.html" style={{
+            fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: MS_C.ink, textDecoration: 'none',
+            borderBottom: `1.5px solid ${MS_C.accent}`, paddingBottom: 2,
+          }}>Portfolio</a>
+          <span style={{ width: 3, height: 3, borderRadius: 999, background: 'rgba(27,42,27,0.18)' }}/>
+          <a href="../media-kit.html" style={{
+            fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
+            letterSpacing: '0.22em', textTransform: 'uppercase',
+            color: MS_C.muted, textDecoration: 'none',
+          }}>Creator</a>
+        </nav>
+      </header>
+
+      <div ref={trackRef} style={{
+        flex: 1, minHeight: 0, display: 'flex',
+        overflowX: 'auto', overflowY: 'hidden',
+        scrollSnapType: 'x mandatory', scrollbarWidth: 'none',
+      }}>
+        {SLIDE_COMPONENTS.map((Slide, i) => (
+          <Slide key={i} slide={DECK_SLIDES[i]} total={DECK_SLIDES.length} />
+        ))}
+      </div>
+
+      <Rail
+        current={current} total={DECK_SLIDES.length}
+        onPrev={() => go(current - 1)}
+        onNext={() => go(current + 1)}
+        onMenu={() => setSheet(true)}
+        onShare={share}
+      />
+      <Sheet
+        open={sheet} onClose={() => setSheet(false)}
+        items={DECK_SLIDES} current={current}
+        onPick={(i) => go(i)} title="Slides · 7 total"
+      />
+      <Toast msg={toast} />
+    </div>
+  );
+}
+
+window.DeckMobile = DeckMobile;
+window.DECK_SLIDES = DECK_SLIDES;
+
+// ─────────────────────────────────────────────────────────────
+// DeckSlideStatic — show ONE slide (for canvas comparison view)
+// ─────────────────────────────────────────────────────────────
+function DeckSlideStatic({ index }) {
+  const Slide = SLIDE_COMPONENTS[index];
+  const slide = DECK_SLIDES[index];
+  if (!Slide) return null;
+  return (
+    <div style={{ position: 'relative', height: '100%', background: MS_C.bg, overflow: 'hidden' }}>
+      <div style={{ height: '100%', overflowY: 'auto', overflowX: 'hidden' }}>
+        <div style={{ display: 'flex', height: '100%' }}>
+          <Slide slide={slide} total={DECK_SLIDES.length} />
+        </div>
+      </div>
+      {/* static rail showing this slide's dot */}
+      <Rail
+        current={index} total={DECK_SLIDES.length}
+        onPrev={() => {}} onNext={() => {}} onMenu={() => {}} onShare={() => {}}
+      />
+    </div>
+  );
+}
+
+window.DeckSlideStatic = DeckSlideStatic;
+
+})();
+  </script>
+  <script type="text/babel" data-presets="react-classic">
+    /* UMD globals: React, ReactDOM, ReactRouterDOM (v6), Recharts */
+    const { useState, useEffect, useCallback, useRef } = React;
+    const { createRoot } = ReactDOM;
+    const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceArea } = Recharts;
+
+    /* ──────────────────────────────────────────────────────────────────
+       NAVIGATION HOOK (keyboard + swipe + hash-based slide param)
+       Hash format: #/0 .. #/6  (matches the React-Router pattern we ship to)
+       ────────────────────────────────────────────────────────────────── */
+    const TOTAL = 7;
+    function parseHash() {
+      const m = String(window.location.hash || '').match(/^#\/(\d+)/);
+      return m ? Math.max(0, Math.min(TOTAL - 1, parseInt(m[1], 10) || 0)) : 0;
+    }
+    function useSlideNav() {
+      const [current, setCurrent] = useState(parseHash);
+      useEffect(() => {
+        const onHash = () => setCurrent(parseHash());
+        window.addEventListener('hashchange', onHash);
+        return () => window.removeEventListener('hashchange', onHash);
+      }, []);
+      const go = useCallback((n) => {
+        const next = Math.max(0, Math.min(TOTAL - 1, n));
+        if (next !== current) window.location.hash = `#/${next}`;
+      }, [current]);
+      useEffect(() => {
+        const onKey = (e) => {
+          if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+          else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+          else if (e.key === 'Home') { e.preventDefault(); go(0); }
+          else if (e.key === 'End')  { e.preventDefault(); go(TOTAL - 1); }
+        };
+        window.addEventListener('keydown', onKey);
+        return () => window.removeEventListener('keydown', onKey);
+      }, [current, go]);
+      const tx = useRef(null);
+      const onTouchStart = (e) => { tx.current = e.touches[0].clientX; };
+      const onTouchEnd = (e) => {
+        const dx = e.changedTouches[0].clientX - (tx.current ?? 0);
+        if (Math.abs(dx) > 60) go(current + (dx < 0 ? 1 : -1));
+        tx.current = null;
+      };
+      return { current, go, onTouchStart, onTouchEnd };
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       DECK SHELL  (16:9 stage + nav controls + page indicator)
+       ────────────────────────────────────────────────────────────────── */
+    /* Site top navigation — mirrors portfolio.html .topnav layout/styles */
+    function SiteTopNav() {
+      return (
+        <nav className="sticky top-0 z-50 bg-[#F2EBDA]/92 backdrop-blur-md border-b border-[rgba(27,42,27,0.14)] w-full" aria-label="Main navigation">
+          <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-6">
+            <a href="../index.html" className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#1B2A1B] justify-self-start">K · L</a>
+            <div className="flex gap-8 justify-center">
+              <a href="../index.html"     className="font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-[#7A8A7A] hover:text-[#1B2A1B]">Home</a>
+              <a href="../portfolio.html#work" className="font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-[#1B2A1B]">Portfolio</a>
+              <a href="../media-kit.html" className="font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-[#7A8A7A] hover:text-[#1B2A1B]">Creator</a>
+            </div>
+            <a href="mailto:klopes23@gmail.com?subject=Let's connect" className="font-mono text-[10px] tracking-[0.18em] uppercase px-[18px] py-[10px] border-[1.5px] border-[#1B2A1B] text-[#1B2A1B] hover:bg-[#1B2A1B] hover:text-[#F2EBDA] transition-colors justify-self-end">Contact</a>
+          </div>
+        </nav>
+      );
+    }
+
+    function useIsMobile() {
+      const [m, setM] = useState(() => typeof window !== 'undefined' && window.matchMedia('(max-width: 900px)').matches);
+      useEffect(() => {
+        const mq = window.matchMedia('(max-width: 900px)');
+        const onChange = () => setM(mq.matches);
+        try { mq.addEventListener('change', onChange); } catch (e) { mq.addListener(onChange); }
+        return () => { try { mq.removeEventListener('change', onChange); } catch (e) { mq.removeListener(onChange); } };
+      }, []);
+      return m;
+    }
+
+    function DeckShell() {
+      const { current, go, onTouchStart, onTouchEnd } = useSlideNav();
+      const isMobile = useIsMobile();
+
+      // ── Mobile: vertical scroll of all 7 slides, sticky banner + jumper ──
+      if (isMobile) {
+        const [visible, setVisible] = useState(current);
+        const [tocOpen, setTocOpen] = useState(false);
+        useEffect(() => {
+          const io = new IntersectionObserver((entries) => {
+            let top = null;
+            entries.forEach(e => {
+              if (e.isIntersecting && (!top || e.intersectionRatio > top.intersectionRatio)) top = e;
+            });
+            if (top) {
+              const idx = parseInt(top.target.getAttribute('data-idx'), 10);
+              setVisible(idx);
+              if (window.location.hash !== `#/${idx}`) {
+                history.replaceState(null, '', `#/${idx}`);
+              }
+            }
+          }, { threshold: [0.3, 0.5, 0.7] });
+          SLIDE_COMPONENTS.forEach((_, i) => {
+            const el = document.getElementById(`mslide-${i}`);
+            if (el) io.observe(el);
+          });
+          return () => io.disconnect();
+        }, []);
+        useEffect(() => {
+          if (tocOpen) document.body.style.overflow = 'hidden';
+          else document.body.style.overflow = '';
+          return () => { document.body.style.overflow = ''; };
+        }, [tocOpen]);
+        const onJump = (i, e) => {
+          if (e) e.preventDefault();
+          const el = document.getElementById(`mslide-${i}`);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setVisible(i);
+          setTocOpen(false);
+          window.location.hash = `#/${i}`;
+        };
+        const meta = SLIDE_META[visible] || SLIDE_META[0];
+        const progress = ((visible + 1) / SLIDE_COMPONENTS.length) * 100;
+        return (
+          <div className="mobile-deck">
+            <SiteTopNav />
+            <div className="mobile-progress-track">
+              <div className="mobile-progress-bar" style={{ width: `${progress}%` }} />
+            </div>
+            <button type="button" className="mobile-title-bar" onClick={() => setTocOpen(true)} aria-label="Open table of contents" aria-expanded={tocOpen}>
+              <div className="mobile-title-kicker">{meta.kicker}</div>
+              <div className="mobile-title-name">{meta.label}</div>
+              <div className="mobile-title-count">{visible + 1} <span>/ {SLIDE_COMPONENTS.length}</span><svg className="mobile-title-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></div>
+            </button>
+            {SLIDE_COMPONENTS.map((Slide, i) => (
+              <section key={i} id={`mslide-${i}`} data-idx={i} className="mobile-slide">
+                <Slide />
+              </section>
+            ))}
+            <nav className="mobile-jumper" aria-label="Slide jumper">
+              {SLIDE_COMPONENTS.map((_, i) => (
+                <a key={i} href={`#/${i}`} onClick={(e) => onJump(i, e)} className={i === visible ? 'is-active' : ''} aria-label={`Slide ${i+1}: ${SLIDE_META[i].label}`}>{i+1}</a>
+              ))}
+            </nav>
+            {/* TOC sheet */}
+            <div className={`mobile-toc-backdrop ${tocOpen ? 'is-open' : ''}`} onClick={() => setTocOpen(false)} aria-hidden="true" />
+            <div className={`mobile-toc-sheet ${tocOpen ? 'is-open' : ''}`} role="dialog" aria-modal="true" aria-label="Slide table of contents">
+              <div className="mobile-toc-handle" />
+              <div className="mobile-toc-title">Slides</div>
+              <ol className="mobile-toc-list">
+                {SLIDE_META.map((m, i) => (
+                  <li key={i}>
+                    <button type="button" onClick={() => onJump(i)} className={`mobile-toc-item ${i === visible ? 'is-current' : ''}`}>
+                      <span className="mobile-toc-num">{(i + 1).toString().padStart(2, '0')}</span>
+                      <span className="mobile-toc-meta">
+                        <span className="mobile-toc-kicker">{m.kicker}</span>
+                        <span className="mobile-toc-label">{m.label}</span>
+                      </span>
+                      {i === visible && <span className="mobile-toc-current">●</span>}
+                    </button>
+                  </li>
+                ))}
+              </ol>
+              <button type="button" className="mobile-toc-close" onClick={() => setTocOpen(false)}>Close</button>
+            </div>
+          </div>
+        );
+      }
+
+      // ── Desktop: 16:9 stage + nav controls ──
+      const Slide = SLIDE_COMPONENTS[current];
+      return (
+        <div className="min-h-screen flex flex-col select-none" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+          <SiteTopNav />
+          <div className="flex-1 flex flex-col items-center justify-center p-4 lg:p-8">
+          <div className="w-full max-w-[1280px] deck-stage bg-[#FAF6EA] shadow-2xl rounded-2xl ring-1 ring-[rgba(27,42,27,0.18)] relative overflow-hidden">
+            <Slide />
+          </div>
+          <div className="mt-5 flex items-center gap-4">
+            <button onClick={() => go(current - 1)} disabled={current === 0} className="h-9 w-9 rounded-full bg-[#FAF6EA] shadow ring-1 ring-[rgba(27,42,27,0.14)] hover:bg-[#FAF6EA] disabled:opacity-30 disabled:cursor-not-allowed text-[#1B2A1B] text-sm">←</button>
+            <div className="flex items-center gap-1.5">
+              {Array.from({ length: TOTAL }).map((_, i) => (
+                <button key={i} onClick={() => go(i)} className={`h-1.5 rounded-full transition-all ${i === current ? 'w-9 bg-[#1B2A1B]' : 'w-1.5 bg-[#E8E0CC] hover:bg-[#7A8A7A]'}`} aria-label={`Slide ${i+1}`} />
+              ))}
+            </div>
+            <span className="text-[11px] font-medium tabular-nums text-[#7A8A7A] tracking-wider">{(current+1).toString().padStart(2,'0')} / {TOTAL.toString().padStart(2,'0')}</span>
+            <button onClick={() => go(current + 1)} disabled={current === TOTAL - 1} className="h-9 w-9 rounded-full bg-[#FAF6EA] shadow ring-1 ring-[rgba(27,42,27,0.14)] hover:bg-[#FAF6EA] disabled:opacity-30 disabled:cursor-not-allowed text-[#1B2A1B] text-sm">→</button>
+            <a href="../portfolio.html#work" className="ml-3 text-[11px] font-medium text-[#7A8A7A] hover:text-[#1B2A1B] tracking-wider uppercase">Portfolio ↗</a>
+          </div>
+          </div>
+        </div>
+      );
+    }
+
+    function SlideFrame({ kicker, title, gradient = 'from-white via-white to-[#F2EBDA]', children }) {
+      return (
+        <div className={`absolute inset-0 bg-gradient-to-br ${gradient} px-10 py-9 lg:px-14 lg:py-11 flex flex-col`}>
+          {kicker && <div className="font-mono text-[11px] font-medium tracking-[0.22em] uppercase text-[#7A8A7A] mb-3">{kicker}</div>}
+          {title && <h1 className="font-display text-[clamp(28px,3.8vw,46px)] font-semibold tracking-tight text-[#1B2A1B] leading-tight mb-6 max-w-[34ch]">{title}</h1>}
+          <div className="flex-1 min-h-0">{children}</div>
+        </div>
+      );
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       SLIDE 0 — PROFILE
+       ────────────────────────────────────────────────────────────────── */
+    function Slide0() {
+      const creds = [
+        'University of Rhode Island',
+        'AWS Cloud Practitioner',
+        'AWS AI Practitioner',
+        'Certified ScrumMaster',
+        'Certified Product Owner',
+        'PMP Candidate · Q3 2026',
+        'Responsive Web Design · freeCodeCamp',
+      ];
+      return (
+        <SlideFrame kicker="Case Study Deck · 2026" gradient="from-[#F2EBDA] via-white to-[rgba(45,74,43,0.08)]">
+          <div className="grid grid-cols-[260px_1fr] gap-12 items-center h-full">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#5E7030] via-[#2D4A2B] to-[#C76F3D] blur-3xl opacity-40 scale-110" />
+              <div className="relative w-full aspect-square rounded-full overflow-hidden ring-[10px] ring-white shadow-2xl">
+                <img src="../assets/headshot.jpg?v=4" alt="Kenneth Lopes" className="w-full h-full object-cover" />
+              </div>
+            </div>
+            <div>
+              <div className="font-mono text-xs font-medium tracking-[0.22em] uppercase text-[#2D4A2B] mb-3">Kenneth Lopes · He/Him</div>
+              <h1 className="font-display text-[clamp(44px,5.4vw,72px)] font-semibold tracking-tight text-[#1B2A1B] leading-[1.02]">
+                TPM, Product<br/>& <span className="font-italic italic text-[#2D4A2B]" style={{ backgroundImage:'linear-gradient(transparent 65%, rgba(94,112,48,0.45) 65%, rgba(94,112,48,0.45) 92%, transparent 92%)', backgroundRepeat:'no-repeat', padding:'0 0.06em' }}>Strategy.</span>
+              </h1>
+              <p className="mt-5 text-[15px] text-[#3A4A3A] leading-relaxed max-w-[60ch]">
+                Cross-functional Program Manager at Canoga Perkins delivering hardware, software, cloud, and ops programs.
+                Known for turning ambiguous requests into clear plans. Led product development for mission-critical
+                networking / private 5G and built GenAI-enabled ops products.
+              </p>
+              <div className="mt-6 grid grid-cols-3 gap-3 text-sm">
+                <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] px-4 py-3"><div className="text-[10px] tracking-[0.18em] uppercase text-[#7A8A7A] mb-1">Email</div><div className="text-[#1B2A1B] font-medium text-[13px]">klopes23@gmail.com</div></div>
+                <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] px-4 py-3"><div className="text-[10px] tracking-[0.18em] uppercase text-[#7A8A7A] mb-1">Phone</div><div className="text-[#1B2A1B] font-medium text-[13px]">(401) 580-7850</div></div>
+                <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] px-4 py-3"><div className="text-[10px] tracking-[0.18em] uppercase text-[#7A8A7A] mb-1">Location</div><div className="text-[#1B2A1B] font-medium text-[13px]">Los Angeles Metro</div></div>
+              </div>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {creds.map(c => <span key={c} className="text-xs font-medium px-3 py-1.5 rounded-full bg-[#E8E0CC] text-[#1B2A1B] ring-1 ring-[rgba(27,42,27,0.14)]">{c}</span>)}
+              </div>
+            </div>
+          </div>
+        </SlideFrame>
+      );
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       SLIDE 1 — GENAI ENABLEMENT
+       ────────────────────────────────────────────────────────────────── */
+    function Slide1() {
+      return (
+        <SlideFrame kicker="03 · GenAI Enablement" gradient="from-white via-[rgba(94,112,48,0.06)] to-[rgba(45,74,43,0.06)]">
+          <div className="flex flex-col h-full gap-3">
+            {/* Header: title left · WAU lift + view full report right */}
+            <div className="flex items-start justify-between gap-6 -mt-1">
+              <div>
+                <h1 className="font-display text-[clamp(26px,3.2vw,38px)] font-semibold tracking-tight text-[#1B2A1B] leading-[1.05]">GenAI Enablement Assets</h1>
+                <div className="mt-1 text-[12.5px] text-[#7A8A7A] font-mono tracking-[0.04em]">Zero-context design · Role-based templates · Social proof &amp; gamification</div>
+              </div>
+              <div className="flex-shrink-0 flex items-stretch gap-2">
+                <div className="rounded-xl bg-[#1B2A1B] text-[#F2EBDA] px-3.5 py-2 flex flex-col justify-center">
+                  <div className="font-mono text-[8.5px] tracking-[0.22em] uppercase text-[#C76F3D] leading-tight">WAU Lift</div>
+                  <div className="font-display text-[22px] font-semibold leading-none mt-0.5">+193%</div>
+                  <div className="font-mono text-[8.5px] tracking-wider text-[rgba(242,235,218,0.6)] mt-0.5">2.6 → 7.5 users / wk</div>
+                </div>
+                <a href="cs03-dashboard.html" target="_blank" rel="noopener" className="group rounded-xl text-white px-3.5 py-2 transition-all shadow-md hover:shadow-lg ring-2 ring-[#D9B65A] flex flex-col justify-center no-underline" style={{ background:'linear-gradient(135deg,#C76F3D 0%,#A8523A 100%)' }}>
+                  <div className="font-mono text-[8.5px] tracking-[0.22em] uppercase text-[#FFE9B8]">Live Dashboard</div>
+                  <div className="flex items-end justify-between gap-2 mt-0.5">
+                    <div className="font-display text-[15px] font-semibold leading-tight whitespace-nowrap">View full report</div>
+                    <span className="font-display text-[15px] font-semibold leading-none group-hover:translate-x-0.5 transition-transform">↗</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Problem / Solution split — single card, 2 columns */}
+            <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] p-3.5 grid grid-cols-2 gap-x-6 gap-y-1.5">
+              <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Access to GenAI tools does <strong className="text-[#1B2A1B]">not</strong> guarantee meaningful organizational usage.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Teams lacked <strong className="text-[#1B2A1B]">role-based context</strong>, structure, and habit-forming templates.</span></li>
+              </ul>
+              <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Operationalized an <strong className="text-[#1B2A1B]">intake-to-execution workflow</strong> with zero-context training assets.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Sustained an <strong className="text-[#1B2A1B]">85% open rate</strong> on curriculum and gamified adoption.</span></li>
+              </ul>
+            </div>
+
+            {/* 3 enablement cards with colored headers */}
+            <div className="grid grid-cols-3 gap-3 flex-1 min-h-0">
+              {/* Comms Cadence — forest header */}
+              <article className="rounded-2xl bg-white ring-1 ring-[rgba(27,42,27,0.14)] overflow-hidden flex flex-col">
+                <div className="px-4 py-2.5 flex items-center gap-2 text-white" style={{ background:'linear-gradient(135deg,#2D4A2B 0%,#5E7030 100%)' }}>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FAF6EA" strokeWidth="1.8" aria-hidden="true"><path d="M2 5a2 2 0 0 1 2-2h7v18H4a2 2 0 0 1-2-2zM22 5a2 2 0 0 0-2-2h-7v18h7a2 2 0 0 0 2-2z"/></svg>
+                  <h3 className="font-display text-[15px] font-semibold leading-tight">Comms Cadence</h3>
+                </div>
+                <div className="relative flex-1 min-h-0 bg-[#F2EBDA]">
+                  <img src="../assets/cs03-copilot-vs.jpg?v=4" alt="" className="absolute inset-0 w-full h-full object-cover"/>
+                </div>
+                <div className="px-4 py-2 border-t border-[rgba(27,42,27,0.10)] bg-[#FAF6EA]">
+                  <div className="font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#5E7030]">✦ Created with Canva AI · Training deck</div>
+                </div>
+              </article>
+
+              {/* Gamification — mustard header */}
+              <article className="rounded-2xl bg-white ring-1 ring-[rgba(27,42,27,0.14)] overflow-hidden flex flex-col">
+                <div className="px-4 py-2.5 flex items-center gap-2" style={{ background:'linear-gradient(135deg,#D9B65A 0%,#B8932F 100%)', color:'#1B2A1B' }}>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#1B2A1B" strokeWidth="1.8" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v6a5 5 0 0 1-10 0zM7 5H4a2 2 0 0 0 0 4h3.3M17 5h3a2 2 0 0 1 0 4h-3.3"/></svg>
+                  <h3 className="font-display text-[15px] font-semibold leading-tight">Gamification</h3>
+                </div>
+                <div className="relative flex-1 min-h-0 bg-[#F2EBDA]">
+                  <img src="../assets/2026-03_winner_720.png?v=4" alt="" className="absolute inset-0 w-full h-full object-cover"/>
+                  <div className="absolute left-[36%] right-[36%] top-[47.5%] aspect-square backdrop-blur-md bg-[#1B2A1B]/15 rounded" aria-hidden />
+                  {/* Blur over winner-name banner (ERIC BURGOS, ENGINEERING DEPT) */}
+                  <div className="absolute left-[16%] right-[58%] top-[80%] h-[6.3%] backdrop-blur-lg bg-[#1B2A1B]/25 rounded" aria-hidden />
+                </div>
+                <div className="px-4 py-2 border-t border-[rgba(27,42,27,0.10)] bg-[#FAF6EA]">
+                  <div className="font-mono text-[9.5px] tracking-[0.18em] uppercase text-[#B8932F]">★ Best CM Copilot Story · Monthly winner</div>
+                </div>
+              </article>
+
+              {/* Prompt Engineering — terracotta header */}
+              <article className="rounded-2xl bg-white ring-1 ring-[rgba(27,42,27,0.14)] overflow-hidden flex flex-col">
+                <div className="px-4 py-2.5 flex items-center gap-2 text-white" style={{ background:'linear-gradient(135deg,#C76F3D 0%,#A8523A 100%)' }}>
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#FAF6EA" strokeWidth="1.8" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>
+                  <h3 className="font-display text-[15px] font-semibold leading-tight">Prompt Engineering</h3>
+                </div>
+                <div className="p-3.5 flex-1 min-h-0 flex flex-col gap-2.5">
+                  <div className="rounded-lg bg-[rgba(199,111,61,0.08)] ring-1 ring-[rgba(199,111,61,0.20)] p-3">
+                    <div className="font-mono text-[9px] tracking-[0.22em] uppercase font-semibold text-[#C76F3D] mb-1.5">Role-based Template</div>
+                    <div className="space-y-1 text-[11.5px]">
+                      <div className="rounded bg-white ring-1 ring-[rgba(27,42,27,0.10)] px-2.5 py-1.5"><span className="font-mono text-[10px] text-[#C76F3D]">Context:</span> <span className="text-[#1B2A1B]">Set scene</span></div>
+                      <div className="rounded bg-white ring-1 ring-[rgba(27,42,27,0.10)] px-2.5 py-1.5"><span className="font-mono text-[10px] text-[#C76F3D]">Format:</span> <span className="text-[#1B2A1B]">Specify structure</span></div>
+                      <div className="rounded bg-white ring-1 ring-[rgba(27,42,27,0.10)] px-2.5 py-1.5"><span className="font-mono text-[10px] text-[#C76F3D]">Constraints:</span> <span className="text-[#1B2A1B]">Negative prompting</span></div>
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.10)] p-3 flex-1">
+                    <div className="font-mono text-[9px] tracking-[0.22em] uppercase font-semibold text-[#2D4A2B] mb-1.5">Scale & Gamification</div>
+                    <ul className="space-y-1 text-[11.5px] text-[#3A4A3A] leading-snug">
+                      <li className="flex gap-2"><span className="w-1 h-1 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span><strong className="text-[#1B2A1B]">Virtual Enablement:</strong> Scenario-based emails per role</span></li>
+                      <li className="flex gap-2"><span className="w-1 h-1 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span><strong className="text-[#1B2A1B]">Best Workflow Story:</strong> Competition &amp; leaderboard</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </SlideFrame>
+      );
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       SLIDE 2 — RAG + HITL
+       ────────────────────────────────────────────────────────────────── */
+    function Slide2() {
+      const data = [
+        { wk:'Sep 01', users:1,  q:19 }, { wk:'Sep 08', users:8,  q:52 }, { wk:'Sep 15', users:4, q:42 }, { wk:'Sep 22', users:5, q:44 },
+        { wk:'Sep 29', users:1,  q:10 }, { wk:'Oct 06', users:2,  q:2  }, { wk:'Oct 13', users:3, q:13 }, { wk:'Oct 20', users:1, q:1  },
+        { wk:'Oct 27', users:1,  q:1  }, { wk:'Nov 10', users:1,  q:12 }, { wk:'Nov 17', users:1, q:1  }, { wk:'Dec 01', users:2, q:20 },
+        { wk:'Dec 08', users:3,  q:13 }, { wk:'Dec 15', users:4,  q:12 }, { wk:'Dec 22', users:1, q:1  }, { wk:'Dec 29', users:3, q:3  },
+        { wk:'Jan 05', users:3,  q:8  }, { wk:'Jan 12', users:5,  q:17 }, { wk:'Jan 19', users:12,q:48 }, { wk:'Jan 26', users:11,q:39 },
+        { wk:'Feb 02', users:7,  q:24 }, { wk:'Feb 09', users:7,  q:18 }, { wk:'Feb 16', users:12,q:33 }, { wk:'Feb 23', users:3, q:3  },
+      ];
+      const stats = [
+        { v:'$1M+',  l:'Opportunities Uncovered', c:'#2D4A2B' },
+        { v:'$85K',  l:'Savings Generated',       c:'#5E7030' },
+        { v:'−60%',  l:'Manual Work Cut',         c:'#B8932F' },
+        { v:'435+',  l:'Queries Processed',       c:'#C76F3D' },
+      ];
+      const deptColors = ['#2D4A2B','#5E7030','#B8932F','#C76F3D','#A8523A'];
+      const dept = [['Engineering',16,213],['Manufacturing',6,70],['Product',2,52],['Operations',3,34],['Marketing',2,12]];
+      return (
+        <SlideFrame kicker="02 · RAG + HITL Workflow" gradient="from-white via-[rgba(94,112,48,0.06)] to-[rgba(45,74,43,0.06)]">
+          <div className="flex flex-col h-full gap-3">
+            {/* Header: title + subtitle + pill top-right */}
+            <div className="flex items-start justify-between gap-6 -mt-1">
+              <div className="max-w-[68ch]">
+                <h1 className="font-display text-[clamp(26px,3.2vw,38px)] font-semibold tracking-tight text-[#1B2A1B] leading-[1.05]">Procurement intelligence <span className="font-italic italic text-[#2D4A2B]">(RAG + HITL).</span></h1>
+                <div className="mt-1 text-[12.5px] text-[#7A8A7A] font-mono tracking-[0.04em]">Teramind workflow-capture · SharePoint-backed RAG + HITL · ERP-adjacent purchasing</div>
+              </div>
+              <div className="flex-shrink-0 flex items-center gap-2 rounded-full bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] px-4 py-1.5">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2D4A2B" strokeWidth="1.8" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="2.5"/><path d="M4 5v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5V5M4 11v6c0 1.4 3.6 2.5 8 2.5s8-1.1 8-2.5v-6"/></svg>
+                <span className="text-[12px] font-semibold text-[#1B2A1B]">Built AI Internal Tooling</span>
+              </div>
+            </div>
+
+            {/* Problem / Solution split — single card, 2 columns */}
+            <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] p-3.5 grid grid-cols-2 gap-x-6 gap-y-1.5">
+              <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Supported an <strong className="text-[#1B2A1B]">AI workflow-capture assessment</strong> using Teramind to uncover <strong className="text-[#1B2A1B]">$1M+ in procurement savings opportunities</strong> across ERP-adjacent purchasing processes.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Prioritized use cases needed a scalable home — without over-engineering a heavy custom platform.</span></li>
+              </ul>
+              <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Operationalized prioritized use cases into a <strong className="text-[#1B2A1B]">SharePoint-backed RAG + HITL workflow</strong>.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Reduced manual work <strong className="text-[#1B2A1B]">60%</strong> and generated <strong className="text-[#1B2A1B]">$85K in savings</strong>.</span></li>
+              </ul>
+            </div>
+
+            {/* 4-stat strip */}
+            <div className="grid grid-cols-4 gap-3">
+              {stats.map((s,i) => (
+                <div key={i} className="rounded-xl bg-white ring-1 ring-[rgba(27,42,27,0.14)] px-4 py-3 text-center">
+                  <div className="text-[26px] font-bold tabular-nums leading-none text-[#1B2A1B]">{s.v}</div>
+                  <div className="mt-1.5 text-[9.5px] tracking-[0.22em] uppercase font-semibold" style={{ color: s.c }}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* Body: left chart+dept stack (narrower), right large screenshot */}
+            <div className="grid grid-cols-[1fr_1.35fr] gap-3 flex-1 min-h-0">
+              <div className="flex flex-col gap-3 min-h-0">
+                {/* Weekly Active Users chart */}
+                <div className="flex-1 min-h-0 rounded-xl bg-white ring-1 ring-[rgba(27,42,27,0.14)] p-3.5">
+                  <div className="flex items-center gap-2 mb-0.5">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#2D4A2B" strokeWidth="1.8" aria-hidden="true"><path d="M3 13l4-6 3 4 3-2 4 5 4-8"/></svg>
+                    <h3 className="text-[13px] font-semibold text-[#1B2A1B]">Weekly Active Users</h3>
+                  </div>
+                  <div className="text-[9.5px] font-mono tracking-[0.18em] uppercase text-[#7A8A7A] mb-1">Sep 2025 — Feb 2026</div>
+                  <div className="h-[calc(100%-2.5rem)]">
+                    <ResponsiveContainer>
+                      <AreaChart data={data} margin={{ top:24, right:8, left:-12, bottom:0 }}>
+                        <defs>
+                          <linearGradient id="gU2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2D4A2B" stopOpacity={0.45}/><stop offset="100%" stopColor="#2D4A2B" stopOpacity={0}/></linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(27,42,27,0.10)" vertical={false}/>
+                        <XAxis dataKey="wk" stroke="#7A8A7A" tick={{ fontSize:10 }} interval={3} tickLine={false} axisLine={false}/>
+                        <YAxis stroke="#7A8A7A" tick={{ fontSize:10 }} tickLine={false} axisLine={false}/>
+                        <Tooltip contentStyle={{ borderRadius:8, border:'1px solid rgba(27,42,27,0.14)', background:'#FAF6EA', fontSize:12 }}/>
+                        {/* Highlighted adoption period */}
+                        <ReferenceArea x1="Jan 12" x2="Feb 23" fill="#C76F3D" fillOpacity={0.10} stroke="#C76F3D" strokeOpacity={0.35} strokeDasharray="3 3" label={{ value:'Adoption period', position:'insideTop', fill:'#C76F3D', fontSize:10, fontWeight:600, dy:-14 }}/>
+                        <Area type="monotone" dataKey="users" stroke="#2D4A2B" strokeWidth={2.2} fill="url(#gU2)" name="Users"/>
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
+                {/* Adoption by department */}
+                <div className="rounded-xl bg-white ring-1 ring-[rgba(27,42,27,0.14)] p-3.5">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="text-[10px] font-semibold tracking-[0.22em] uppercase text-[#7A8A7A]">Adoption by Department</div>
+                    <div className="text-[10px] text-[#7A8A7A]">All-time Queries</div>
+                  </div>
+                  <div className="space-y-1.5">
+                    {dept.map(([name,u,q],i) => {
+                      const w = (q/213)*100;
+                      return (
+                        <div key={name} className="grid grid-cols-[88px_1fr_36px] items-center gap-2.5">
+                          <span className="text-[11.5px] text-[#3A4A3A]">{name}</span>
+                          <div className="h-1.5 rounded-full bg-[#F2EBDA] overflow-hidden">
+                            <div className="h-full rounded-full" style={{ width:`${w}%`, background: deptColors[i] }}/>
+                          </div>
+                          <span className="text-[11.5px] tabular-nums text-[#1B2A1B] font-semibold text-right">{q}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: large screenshot panel */}
+              <div className="relative rounded-xl bg-[#1B2A1B] ring-1 ring-[rgba(27,42,27,0.14)] overflow-hidden min-h-0">
+                <img src="../assets/image.png?v=4" alt="RAG platform — CM Copilot" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition:'80% center' }}/>
+                <div className="absolute top-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-br from-[#2D4A2B] to-[#1B2A1B] text-white px-3 py-1.5 shadow-md ring-1 ring-[rgba(255,255,255,0.12)]">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#D9B65A" strokeWidth="2" aria-hidden="true"><path d="M12 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+                  <span className="text-[11px] font-semibold">Deployed Internal Tool</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </SlideFrame>
+      );
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       SLIDE 3 — CREATOR COMMUNITY
+       ────────────────────────────────────────────────────────────────── */
+    /* Platform logo SVGs — official-ish marks, monochrome white for use over brand colors */
+    const Logo = {
+      tiktok: ({size=44}) => (
+        <svg viewBox="0 0 256 290" width={size} height={size} aria-hidden="true">
+          <path fill="#69C9D0" d="M189.7 104.4v32.5c-21.3 0-41-6.8-57-18.4v83.5c0 41.7-33.9 75.6-75.6 75.6S-18.6 244 -18.6 202.3c0-41.7 33.9-75.6 75.6-75.6 3.5 0 6.9.2 10.3.7v33.7a42 42 0 1 0 31.4 40.7V0h32.5c0 28.2 22.7 51 50.5 51v34.6"/>
+          <path fill="#EE1D52" d="M199.7 94.4v32.5c-21.3 0-41-6.8-57-18.4v83.5c0 41.7-33.9 75.6-75.6 75.6S-8.6 234 -8.6 192.3c0-41.7 33.9-75.6 75.6-75.6 3.5 0 6.9.2 10.3.7v33.7a42 42 0 1 0 31.4 40.7V-10h32.5c0 28.2 22.7 51 50.5 51v34.6"/>
+          <path fill="#fff" d="M194.7 99.4v32.5c-21.3 0-41-6.8-57-18.4v83.5c0 41.7-33.9 75.6-75.6 75.6S-13.6 239 -13.6 197.3c0-41.7 33.9-75.6 75.6-75.6 3.5 0 6.9.2 10.3.7v33.7a42 42 0 1 0 31.4 40.7V-5h32.5c0 28.2 22.7 51 50.5 51v34.6"/>
+        </svg>
+      ),
+      instagram: ({size=44}) => (
+        <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="#fff" strokeWidth="1.6" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="1.1" fill="#fff" stroke="none"/>
+        </svg>
+      ),
+      snapchat: ({size=44}) => (
+        <svg viewBox="0 0 24 24" width={size} height={size} fill="#1B2A1B" aria-hidden="true">
+          <path d="M12 1.6c3.5 0 6.4 2.5 6.7 6 0 .6.1 1.4.1 2.1 0 1.6 0 1.7.4 2.5.4.7 1.4 1.4 2.4 1.7.6.2.6.5.4 1-.3.5-.9.8-1.6 1-.4.1-.5.4-.5.7 0 .4-.4.6-1 .6-.4 0-1 0-1.5.2-.5.2-.7.6-1 1.2-.4.6-.9 1-1.7 1.3-.7.2-1.3.1-2-.2-.7-.3-1.3-.4-2-.4s-1.3.1-2 .4c-.7.3-1.3.4-2 .2-.8-.3-1.3-.7-1.7-1.3-.3-.6-.5-1-1-1.2-.5-.2-1.1-.2-1.5-.2-.6 0-1-.2-1-.6 0-.3-.1-.6-.5-.7-.7-.2-1.3-.5-1.6-1-.2-.5-.2-.8.4-1 1-.3 2-1 2.4-1.7.4-.8.4-.9.4-2.5 0-.7 0-1.5.1-2.1.3-3.5 3.2-6 6.7-6z"/>
+        </svg>
+      ),
+      youtube: ({size=44}) => (
+        <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true">
+          <path fill="#fff" d="M9.5 8.7v6.6L15.4 12z"/>
+        </svg>
+      ),
+      facebook: ({size=44}) => (
+        <svg viewBox="0 0 24 24" width={size} height={size} fill="#fff" aria-hidden="true">
+          <path d="M14 9h2.5V6H14c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6.5h3V14h2.5l.5-3h-3V9.5c0-.3.2-.5.5-.5z"/>
+        </svg>
+      ),
+    };
+
+    function Slide3() {
+      const platforms = [
+        { name:'TikTok',    handle:'650K Followers', img:'../assets/TT.jpg?v=4',       accent:'#1B2A1B', tint:'rgba(27,42,27,0.06)',   stats:[['Views','44M'],['Likes','2.3M'],['Shares','42K']] },
+        { name:'Instagram', handle:'65K Followers',  img:'../assets/IG.jpg?v=4',       accent:'#C76F3D', tint:'rgba(199,111,61,0.10)', stats:[['Views','9.3M'],['Engag','585K'],['Saves','42K']] },
+        { name:'Snapchat',  handle:'55K Followers',  img:'../assets/Snap.jpg?v=4',     accent:'#B8932F', tint:'rgba(217,182,90,0.18)', stats:[['Views','9.1M'],['Faves','33.6K'],['Shares','2.7K']] },
+        { name:'YouTube',   handle:'32K Subs',       img:'../assets/YT.jpg?v=4',       accent:'#C25A2E', tint:'rgba(194,90,46,0.10)',  stats:[['Views','397K'],['Watch','54%'],['New Aud','89%']] },
+        { name:'Facebook',  handle:'20K Followers',  img:'../assets/Facebook.jpg?v=4', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',   stats:[['Views','3.1M'],['1-min','785K'],['Reach','1.4M']] },
+      ];
+      const strategies = [
+        { title:'Engagement Loops', body:'Active commenting, replies, participation rituals to build community', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',
+          icon:(<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#2D4A2B" strokeWidth="1.8"><path d="M21 12a8 8 0 0 1-8 8H5l3-3a8 8 0 1 1 13-5z"/></svg>) },
+        { title:'A/B Hook Testing', body:'Tested 5 hooks/video, tuned pacing from retention waterfalls', accent:'#C76F3D', tint:'rgba(199,111,61,0.10)',
+          icon:(<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#C76F3D" strokeWidth="1.8"><path d="M8 3v6a4 4 0 0 0 8 0V3M8 21v-6M16 21v-6M8 15a4 4 0 0 0 8 0"/></svg>) },
+        { title:'Early Validation', body:'IG Trial Reels + Snap Story pre-tests before full rollout', accent:'#B8932F', tint:'rgba(217,182,90,0.18)',
+          icon:(<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#B8932F" strokeWidth="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>) },
+      ];
+      const hero = [
+        { l:'Followers',  v:'800K+',  bg:'linear-gradient(135deg,#2D4A2B,#1B2A1B)',          textTint:'#FAF6EA', glyph:(<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FAF6EA" strokeWidth="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/><circle cx="17" cy="7" r="2.5"/><path d="M22 18c0-2.5-2.1-4.5-5-4.5"/></svg>) },
+        { l:'Views',      v:'70M+',   bg:'linear-gradient(135deg,#C76F3D,#A8523A)',          textTint:'#FAF6EA', glyph:(<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FAF6EA" strokeWidth="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>) },
+        { l:'Engagement', v:'3M+',    bg:'linear-gradient(135deg,#D9B65A,#B8932F)',          textTint:'#1B2A1B', glyph:(<svg viewBox="0 0 24 24" width="18" height="18" fill="#1B2A1B" stroke="none"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg>) },
+      ];
+      return (
+        <SlideFrame kicker="06 · Creator Community Metrics" gradient="from-[#FAF6EA] via-[rgba(199,111,61,0.04)] to-[rgba(94,112,48,0.05)]">
+          <div className="flex flex-col h-full gap-3">
+            {/* Header: title + date pill + 3 hero stat pills */}
+            <div className="flex items-start justify-between gap-6">
+              <div>
+                <h1 className="font-display text-[clamp(26px,3.2vw,38px)] font-semibold tracking-tight text-[#1B2A1B] leading-[1.05]">Creator Community Metrics</h1>
+                <div className="mt-1 flex items-center gap-3">
+                  <span className="text-[12.5px] text-[#7A8A7A]">Built <span className="font-italic italic text-[#2D4A2B]">0 → 800K+</span> following via data-driven experimentation</span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white ring-1 ring-[rgba(27,42,27,0.14)] px-2.5 py-1 text-[10.5px] font-mono tracking-[0.06em] text-[#3A4A3A]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D]"/>Mar '25 — Mar '26
+                  </span>
+                </div>
+              </div>
+              <div className="flex gap-2.5 flex-shrink-0">
+                {hero.map((h,i) => (
+                  <div key={i} className="rounded-xl px-3.5 py-2 shadow-sm flex items-center gap-2.5 min-w-[140px]" style={{ background: h.bg, color: h.textTint }}>
+                    {h.glyph}
+                    <div className="leading-tight">
+                      <div className="text-[18px] font-bold tabular-nums">{h.v}</div>
+                      <div className="text-[8.5px] tracking-[0.22em] uppercase opacity-90 font-semibold">{h.l}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Phone row */}
+            <div className="grid grid-cols-5 gap-3 flex-1 min-h-0">
+              {platforms.map((p,i) => (
+                <div key={p.name} className="flex flex-col items-center min-h-0">
+                  {/* Phone frame */}
+                  <div className="relative bg-[#1B2A1B] rounded-[1.8rem] p-1.5 shadow-xl flex-1 min-h-0 max-h-full flex items-center">
+                    <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-3 bg-[#1B2A1B] rounded-b-2xl z-10"/>
+                    <div className="rounded-[1.4rem] overflow-hidden bg-black h-full aspect-[9/19] flex items-center justify-center">
+                      <img src={p.img} alt={p.name + ' profile'} className="w-full h-full object-cover"/>
+                    </div>
+                  </div>
+                  {/* Caption */}
+                  <div className="mt-2.5 text-center">
+                    <div className="font-display text-[15px] font-semibold text-[#1B2A1B] leading-tight">{p.name}</div>
+                    <div className="text-[11.5px] font-semibold tabular-nums" style={{ color: p.accent }}>{p.handle}</div>
+                  </div>
+                  {/* Brand-tinted stat card */}
+                  <div className="mt-2 w-full rounded-lg px-3 py-2 ring-1" style={{ background: p.tint, borderColor: p.accent, boxShadow:'none' }}>
+                    {p.stats.map(([k,v]) => (
+                      <div key={k} className="flex justify-between text-[10.5px] py-0.5">
+                        <span className="text-[#3A4A3A]">{k}</span>
+                        <span className="text-[#1B2A1B] font-semibold tabular-nums">{v}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Data-Driven Growth Strategy rail */}
+            <div className="rounded-xl bg-white ring-1 ring-[rgba(27,42,27,0.14)] p-3.5">
+              <div className="flex items-center gap-2 mb-2.5">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#7C3AED" strokeWidth="1.8" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+                <div className="text-[13px] font-semibold text-[#1B2A1B]">Data-Driven Growth Strategy</div>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                {strategies.map((s,i) => (
+                  <div key={i} className="rounded-lg px-3 py-2.5" style={{ background: s.tint }}>
+                    <div className="flex items-center gap-1.5 mb-1">
+                      {s.icon}
+                      <div className="text-[12px] font-semibold" style={{ color: s.accent }}>{s.title}</div>
+                    </div>
+                    <div className="text-[11.5px] text-[#3A4A3A] leading-snug">{s.body}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </SlideFrame>
+      );
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       SLIDE 4 — CUSTOMER EXPERIENCE CENTER
+       ────────────────────────────────────────────────────────────────── */
+    function Slide4() {
+      const tiles = [
+        { src:'../assets/cs04-experience-center.jpg?v=4', label:'CEC Graphic' },
+        { src:'../assets/cs04-syncmetra.jpg?v=4',         label:'Edge Compute' },
+        { src:'../assets/cs04-racing-sim.jpg?v=4',        label:'Emotional "Why"' },
+        { src:'../assets/media_photo-img6344.jpg?v=4',    label:'AR Robotics' },
+      ];
+      return (
+        <SlideFrame kicker="04 · Customer Experience Center" gradient="from-white via-[rgba(94,112,48,0.06)] to-[#F2EBDA]">
+          <div className="flex flex-col h-full gap-4">
+            {/* Header: title + qualified pipeline pill */}
+            <div className="flex items-start justify-between gap-6 -mt-1">
+              <div className="max-w-[44ch]" style={{ whiteSpace:'nowrap' }}>
+                <h1 className="font-display text-[clamp(22px,2.8vw,34px)] font-semibold tracking-tight text-[#1B2A1B] leading-[1.05]">
+                  Replaced slideshows with<br/><span className="font-italic italic text-[#2D4A2B]">hands-on PoCs.</span>
+                </h1>
+                <div className="mt-2 text-[12.5px] text-[#7A8A7A] font-mono tracking-[0.06em] whitespace-normal">Hands-on demos &amp; PoCs · GTM Evangelism</div>
+              </div>
+              <div className="flex-shrink-0 flex items-center gap-3 rounded-full bg-[#2D4A2B] text-white pl-5 pr-6 py-2.5 shadow-sm">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FAF6EA" strokeWidth="1.8" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>
+                <div className="leading-tight">
+                  <div className="text-[9px] tracking-[0.22em] uppercase text-[#FAF6EA] opacity-80">Qualified Pipeline</div>
+                  <div className="text-[18px] font-bold leading-none">$1.2M+</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Body: 2-col, narrow text left / large 2x2 image grid right */}
+            <div className="grid grid-cols-[370px_1fr] gap-4 flex-1 min-h-0">
+              <div className="flex flex-col gap-2.5 min-h-0">
+                {/* Problem / Solution stacked */}
+                <div className="grid grid-cols-1 gap-2.5">
+                  <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] p-3.5">
+                    <div className="text-[10px] tracking-[0.22em] uppercase text-[#C76F3D] mb-2 font-semibold">Problem</div>
+                    <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                      <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Slideshows couldn't sell <strong className="text-[#1B2A1B]">private 5G latency</strong>.</span></li>
+                      <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Buyers needed proof, not promises.</span></li>
+                    </ul>
+                  </div>
+                  <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] p-3.5">
+                    <div className="text-[10px] tracking-[0.22em] uppercase text-[#2D4A2B] mb-2 font-semibold">Solution</div>
+                    <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                      <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Immersive CEC with <strong className="text-[#1B2A1B]">repeatable demos</strong>.</span></li>
+                      <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Choreographed exec brief → pipeline tag.</span></li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Demo mechanisms — slimmer */}
+                <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] px-3.5 py-2.5">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="text-[10px] tracking-[0.22em] uppercase text-[#7A8A7A] font-semibold">Demo Mechanisms</div>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#5E7030" strokeWidth="1.6" aria-hidden="true">
+                      <path d="M7 10h2M8 9v2"/><circle cx="15.5" cy="10" r="0.8" fill="#5E7030" stroke="none"/><circle cx="17" cy="11.5" r="0.8" fill="#5E7030" stroke="none"/>
+                      <path d="M6 7h12a4 4 0 0 1 4 4v2a4 4 0 0 1-7 2.6L13 14h-2l-2 1.6A4 4 0 0 1 2 13v-2a4 4 0 0 1 4-4z"/>
+                    </svg>
+                  </div>
+                  <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                    <li className="flex gap-2.5"><span className="font-mono text-[10px] text-[#7A8A7A] mt-0.5 flex-shrink-0">01</span><span><strong className="text-[#1B2A1B]">Edge compute racks</strong> showing live latency under load.</span></li>
+                    <li className="flex gap-2.5"><span className="font-mono text-[10px] text-[#7A8A7A] mt-0.5 flex-shrink-0">02</span><span><strong className="text-[#1B2A1B]">Driver experience seat</strong> — physical proof of why latency matters.</span></li>
+                    <li className="flex gap-2.5"><span className="font-mono text-[10px] text-[#7A8A7A] mt-0.5 flex-shrink-0">03</span><span><strong className="text-[#1B2A1B]">AR robotics + VR</strong> for future-state customer co-creation.</span></li>
+                  </ul>
+                </div>
+
+                {/* Takeaway — larger */}
+                <div className="rounded-xl bg-gradient-to-br from-[#2D4A2B] to-[#1B2A1B] text-white p-5 flex-1 flex flex-col justify-center">
+                  <div className="text-[11px] tracking-[0.22em] uppercase text-[#FAF6EA] opacity-70 mb-2">The Takeaway</div>
+                  <div className="font-display text-[19px] leading-snug">Make the <span className="font-italic italic">"why"</span> emotional, then the <span className="font-italic italic">"how"</span> repeatable.</div>
+                </div>
+              </div>
+
+              {/* 2x2 image grid */}
+              <div className="grid grid-cols-2 grid-rows-2 gap-3 min-h-0">
+                {tiles.map((t,i) => (
+                  <div key={i} className="relative rounded-2xl overflow-hidden ring-1 ring-[rgba(27,42,27,0.14)] group">
+                    <img src={t.src} alt={t.label} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/15 to-transparent"/>
+                    <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                      <div className="text-[9px] tracking-[0.22em] uppercase opacity-70">{('0'+(i+1)).slice(-2)}</div>
+                      <div className="text-[12.5px] font-semibold leading-tight">{t.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </SlideFrame>
+      );
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       SLIDE 5 — MEXICO LAUNCH
+       ────────────────────────────────────────────────────────────────── */
+    function Slide5() {
+      const stats = [
+        { l:'Registrations',    v:'75',   highlight:false },
+        { l:'Attendees',        v:'~90',  highlight:false },
+        { l:'Sales Conversion', v:'11%',  highlight:true  },
+      ];
+      const tiles = [
+        { src:'../assets/media_photo-img6337.jpg?v=4',           label:'Localized Curved Video' },
+        { src:'../assets/media_photo-img6336.jpg?v=4',           label:'Custom Screen Dimensions' },
+        { src:'../assets/media_photo-img6340.jpg?v=4',           label:'Large Scale Projection' },
+        { src:'../assets/media_photo-1769122738563.jpeg?v=4',    label:'Localized Welcome Video' },
+      ];
+      return (
+        <SlideFrame kicker="05 · Mexico Launch Workback" gradient="from-white via-[rgba(199,111,61,0.06)] to-[rgba(199,111,61,0.06)]">
+          <div className="flex flex-col h-full gap-3">
+            {/* Header: icon chip + title + 3 stat cards */}
+            <div className="flex items-start justify-between gap-6">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#2D4A2B] flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#FAF6EA" strokeWidth="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                </div>
+                <div>
+                  <h1 className="font-display text-[clamp(24px,3.1vw,36px)] font-semibold tracking-tight text-[#1B2A1B] leading-[1.05]">Mexico Launch Workback</h1>
+                  <div className="mt-1 text-[12.5px] text-[#7A8A7A] font-mono tracking-[0.06em]">GTM Execution · Cross-functional Delivery</div>
+                </div>
+              </div>
+              <div className="flex gap-2.5 flex-shrink-0">
+                {stats.map((s,i) => (
+                  <div key={i} className={`rounded-xl px-4 py-2 min-w-[108px] text-center ${s.highlight ? 'bg-gradient-to-br from-[#C76F3D] to-[#A8523A] text-white ring-1 ring-[#C76F3D]' : 'bg-white ring-1 ring-[rgba(27,42,27,0.14)]'}`}>
+                    <div className={`text-[8.5px] tracking-[0.22em] uppercase font-semibold ${s.highlight ? 'text-[#FAF6EA]' : 'text-[#7A8A7A]'}`}>{s.l}</div>
+                    <div className={`text-[22px] font-bold tabular-nums leading-tight ${s.highlight ? 'text-white' : 'text-[#1B2A1B]'}`}>{s.v}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Problem / Solution split */}
+            <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] p-3.5 grid grid-cols-2 gap-x-6 gap-y-1.5">
+              <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>High-stakes regional launch suffered from <strong className="text-[#1B2A1B]">fragmented messaging</strong> and undefined hardware demos.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Needed fast, localized assets and clear stage-gates to reduce launch-day risk.</span></li>
+              </ul>
+              <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Managed <strong className="text-[#1B2A1B]">end-to-end workbacks</strong> across marketing, engineering, ops, and complex customs shipping.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Delivered <strong className="text-[#1B2A1B]">~90 attendees</strong>, <strong className="text-[#1B2A1B]">75 registrations</strong>, and an <strong className="text-[#1B2A1B]">11% sales conversion rate</strong>.</span></li>
+              </ul>
+            </div>
+
+            {/* Body: 2-col, narrow text left = ops + takeaway, right = enlarged 2x2 grid */}
+            <div className="grid grid-cols-[408px_1fr] gap-3 flex-1 min-h-0">
+              <div className="flex flex-col gap-3 min-h-0">
+                {/* Launch Ops & Scale */}
+                <div className="rounded-xl bg-white ring-1 ring-[rgba(27,42,27,0.14)] p-3.5 border-l-4 border-[#5E7030]">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-7 h-7 rounded-lg bg-[rgba(94,112,48,0.12)] flex items-center justify-center flex-shrink-0">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#5E7030" strokeWidth="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+                    </div>
+                    <div className="text-[13px] font-semibold text-[#1B2A1B]">Launch Ops & Scale</div>
+                  </div>
+                  <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug pl-1">
+                    <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#5E7030] mt-1.5 flex-shrink-0"/><span>Owned <strong className="text-[#1B2A1B]">workback plan</strong> with milestones, owners, readiness criteria.</span></li>
+                    <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#5E7030] mt-1.5 flex-shrink-0"/><span>Used <strong className="text-[#1B2A1B]">Canva AI</strong> for Spanish voiceovers and custom screen formatting.</span></li>
+                    <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#5E7030] mt-1.5 flex-shrink-0"/><span><strong className="text-[#1B2A1B]">Demo sequence coordination</strong> across messaging, CRM, and follow-up.</span></li>
+                  </ul>
+                </div>
+
+                {/* The Takeaway */}
+                <div className="rounded-xl bg-gradient-to-br from-[#1B2A1B] to-[#0F1A0F] text-white p-3.5 flex-1 min-h-0 flex flex-col">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-7 h-7 rounded-lg bg-[rgba(255,255,255,0.08)] flex items-center justify-center flex-shrink-0">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#E8C57A" strokeWidth="1.8" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>
+                    </div>
+                    <div className="text-[13px] font-semibold">The Takeaway</div>
+                  </div>
+                  <ul className="space-y-1.5 text-[12.5px] text-[#E8E0CC] leading-snug pl-1 flex-1">
+                    <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#FAF6EA] mt-1.5 flex-shrink-0"/><span>AI assets drove <strong className="text-white">consistency & better experience</strong>.</span></li>
+                    <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#5E7030] mt-1.5 flex-shrink-0"/><span>Local teams need <strong className="text-white">"usable now,"</strong> not <span className="italic">"perfect later."</span></span></li>
+                  </ul>
+                  <div className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-[rgba(94,112,48,0.18)] ring-1 ring-[rgba(94,112,48,0.4)] py-2 px-3 text-[12px] font-medium text-[#C8D9A8]">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#C8D9A8" strokeWidth="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+                    Balancing local adaptation vs global consistency
+                  </div>
+                </div>
+              </div>
+
+              {/* 2x2 image grid */}
+              <div className="grid grid-cols-2 grid-rows-2 gap-3 min-h-0">
+                {tiles.map((t,i) => (
+                  <div key={i} className="relative rounded-2xl overflow-hidden ring-1 ring-[rgba(27,42,27,0.14)] bg-slate-900 group">
+                    <img src={t.src} alt={t.label} className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"/>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/15 to-transparent"/>
+                    <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                      <div className="text-[12.5px] font-semibold leading-tight">{t.label}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </SlideFrame>
+      );
+    }
+
+    /* ──────────────────────────────────────────────────────────────────
+       SLIDE 6 — MULTI-SITE GOVERNANCE
+       ────────────────────────────────────────────────────────────────── */
+    function Slide6() {
+      const burndown = [
+        { m:'M1', open:6000, closed:300 },
+        { m:'M2', open:4500, closed:1200 },
+        { m:'M3', open:3000, closed:2500 },
+        { m:'M4', open:1500, closed:3800 },
+        { m:'M5', open:800,  closed:4200 },
+        { m:'M6', open:200,  closed:4700 },
+      ];
+      const pins = [
+        { left:'18%', top:'42%', label:'United States' },
+        { left:'50%', top:'30%', label:'Ukraine' },
+        { left:'65%', top:'40%', label:'Pakistan' },
+        { left:'69%', top:'56%', label:'India' },
+        { left:'78%', top:'70%', label:'Singapore' },
+      ];
+      return (
+        <SlideFrame kicker="01 · Multi-Site Governance & Execution" title={<>Operating system for 5 sites · <span className="text-[#5E7030]">4,700+</span> issues · $15M+ shipped.</>} gradient="from-[#F2EBDA] via-white to-[#E8E0CC]">
+          <div className="grid grid-cols-2 gap-6 h-full">
+            <div className="rounded-2xl overflow-hidden bg-[#1B2A1B] relative ring-1 ring-[rgba(242,235,218,0.10)]">
+              {/* faux-map silhouette via SVG continents */}
+              <svg viewBox="0 0 1100 460" className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet">
+                <g fill="rgba(94,112,48,0.18)" stroke="rgba(94,112,48,0.32)" strokeWidth="1">
+                  <path d="M55,65 L125,50 L200,58 L255,80 L285,110 L305,145 L300,185 L275,220 L255,258 L215,285 L170,298 L130,285 L90,255 L65,210 L48,165 L50,115 Z"/>
+                  <path d="M155,290 L200,278 L240,285 L265,320 L272,360 L258,400 L230,418 L200,415 L170,395 L152,362 L148,320 Z"/>
+                  <path d="M460,45 L525,38 L570,50 L595,75 L590,108 L560,128 L525,135 L490,125 L462,100 L455,72 Z"/>
+                  <path d="M455,148 L520,138 L570,152 L600,188 L610,238 L605,295 L580,345 L545,375 L500,378 L460,355 L440,308 L435,252 L440,195 Z"/>
+                  <path d="M565,95 L640,78 L720,88 L775,112 L782,148 L750,165 L695,170 L638,162 L585,148 L565,120 Z"/>
+                  <path d="M715,148 L788,138 L842,152 L865,188 L858,240 L828,278 L790,292 L752,282 L720,255 L708,210 L710,175 Z"/>
+                  <path d="M840,255 L885,242 L930,248 L962,268 L978,298 L960,328 L922,342 L880,338 L848,318 L835,288 Z"/>
+                  <path d="M815,72 L898,55 L975,65 L1028,95 L1042,132 L1020,168 L968,188 L912,192 L858,175 L822,148 L808,108 Z"/>
+                  <path d="M900,335 L982,320 L1058,332 L1108,358 L1112,395 L1082,422 L1032,432 L972,428 L920,405 L896,372 Z"/>
+                </g>
+                {/* Connecting dotted lines from US hub to other sites */}
+                <g stroke="rgba(94,112,48,0.40)" strokeWidth="1.2" strokeDasharray="4 6" fill="none">
+                  <line x1="200" y1="190" x2="540" y2="135"/>
+                  <line x1="200" y1="190" x2="720" y2="180"/>
+                  <line x1="200" y1="190" x2="755" y2="252"/>
+                  <line x1="200" y1="190" x2="860" y2="320"/>
+                </g>
+              </svg>
+              {pins.map(p => (
+                <div key={p.label} className="absolute" style={{ left:p.left, top:p.top, transform:'translate(-50%,-50%)' }}>
+                  <div className="relative">
+                    <div className="absolute rounded-full bg-[#5E7030]/40 pin-pulse" style={{width:14,height:14,top:-7,left:-7}}/>
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#5E7030] ring-2 ring-white shadow"/>
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-[10px] tracking-[0.18em] uppercase text-white/85 whitespace-nowrap font-medium">{p.label}</div>
+                  </div>
+                </div>
+              ))}
+              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-[10px] tracking-[0.22em] uppercase">
+                <span className="text-white/55">5 sites · 1 program</span>
+                <span className="text-[#C76F3D]">$15M+ Shipped</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-4 min-h-0">
+              <div className="flex-1 min-h-0 rounded-2xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] p-4">
+                <div className="text-[10px] tracking-[0.18em] uppercase text-[#7A8A7A] mb-1">Issue burndown · 6 months</div>
+                <div className="flex items-baseline justify-between mb-2">
+                  <h3 className="text-[15px] font-semibold text-[#1B2A1B]">Open vs closed</h3>
+                  <div className="text-[11px] text-[#7A8A7A]">
+                    <span className="inline-block w-2 h-2 rounded-full bg-[#C76F3D] mr-1.5 align-middle"/>Open
+                    <span className="inline-block w-2 h-2 rounded-full bg-[#5E7030] ml-3 mr-1.5 align-middle"/>Closed
+                  </div>
+                </div>
+                <div className="h-[calc(100%-2.75rem)]">
+                  <ResponsiveContainer>
+                    <AreaChart data={burndown} margin={{ top:8, right:8, left:-12, bottom:0 }}>
+                      <defs>
+                        <linearGradient id="gOpen" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#C76F3D" stopOpacity={0.4}/><stop offset="100%" stopColor="#C76F3D" stopOpacity={0}/></linearGradient>
+                        <linearGradient id="gClosed" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#5E7030" stopOpacity={0.45}/><stop offset="100%" stopColor="#5E7030" stopOpacity={0}/></linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(27,42,27,0.12)" vertical={false}/>
+                      <XAxis dataKey="m" stroke="#7A8A7A" tick={{ fontSize:11 }} tickLine={false} axisLine={false}/>
+                      <YAxis stroke="#7A8A7A" tick={{ fontSize:11 }} tickLine={false} axisLine={false}/>
+                      <Tooltip contentStyle={{ borderRadius:8, border:'1px solid rgba(27,42,27,0.14)', background:'#FAF6EA', fontSize:12 }}/>
+                      <Area type="monotone" dataKey="open"   stroke="#C76F3D" strokeWidth={2} fill="url(#gOpen)"   name="Open"/>
+                      <Area type="monotone" dataKey="closed" stroke="#5E7030" strokeWidth={2} fill="url(#gClosed)" name="Closed"/>
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="rounded-xl bg-[#1B2A1B] text-white p-3"><div className="text-[10px] tracking-wider uppercase text-[#7A8A7A] mb-0.5">Sites</div><div className="text-2xl font-bold">5</div></div>
+                <div className="rounded-xl bg-[#1B2A1B] text-white p-3"><div className="text-[10px] tracking-wider uppercase text-[#7A8A7A] mb-0.5">Issues Closed</div><div className="text-2xl font-bold">4,700+</div></div>
+                <div className="rounded-xl bg-[#1B2A1B] text-white p-3"><div className="text-[10px] tracking-wider uppercase text-[#7A8A7A] mb-0.5">Avoided</div><div className="text-2xl font-bold">$0.9M/yr</div></div>
+              </div>
+            </div>
+          </div>
+        </SlideFrame>
+      );
+    }
+
+    const SLIDE_COMPONENTS = [Slide0, Slide6, Slide2, Slide1, Slide4, Slide5, Slide3];
+    const SLIDE_META = [
+      { kicker:'Cover',  label:'Kenneth Lopes' },
+      { kicker:'CS / 01', label:'Multi-Site Governance' },
+      { kicker:'CS / 02', label:'Procurement Intelligence' },
+      { kicker:'CS / 03', label:'GenAI Enablement' },
+      { kicker:'CS / 04', label:'Customer Experience Center' },
+      { kicker:'CS / 05', label:'Mexico Launch' },
+      { kicker:'CS / 06', label:'Creator Community' },
+    ];
+
+    /* v4: mobile branch — render the new horizontal-stack mobile deck below 768px.
+       DeckMobile is exposed by deck-mobile.jsx; falls back to DeckShell on desktop. */
+    const _isMobileDeck = window.matchMedia('(max-width: 768px)').matches;
+    const _DeckRoot = _isMobileDeck && window.DeckMobile ? window.DeckMobile : DeckShell;
+    createRoot(document.getElementById('root')).render(<_DeckRoot />);
+  </script>
+  <script src="../mobile.js" defer></script>
+</body>
+</html>

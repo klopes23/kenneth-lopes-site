@@ -1,0 +1,2257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#F4ECDD" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Nesi Family" />
+<link rel="apple-touch-icon" href="/assets/portrait.jpg" />
+<link rel="manifest" href="/manifest.json" />
+<title>Nesi Family — Media Kit 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg:        #F4ECDD;
+    --bg-2:      #EAD9BD;
+    --paper:     #FBF5E8;
+    --ink:       #2A1A12;
+    --ink-2:     #4A2E20;
+    --muted:     #6B5648;
+    --line:      rgba(42,26,18,0.16);
+    --accent:    #C25A2E;   /* terracotta */
+    --accent-2:  #E8985A;   /* peach — decorative underline strip + tints */
+    --pop:       #D9B65A;   /* mustard */
+
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body:    'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+    --font-italic:  'Instrument Serif', Georgia, serif;
+
+    --gutter: clamp(32px, 7vw, 120px);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--ink); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── VIEW SWITCH ── */
+  .mview { display: none; }
+
+  /* ════════════════════════════════════════════════
+     DESKTOP / EDITORIAL VIEW
+     ════════════════════════════════════════════════ */
+
+  /* ── NAV (shared) ── */
+  .nav-stack { position: sticky; top: 0; z-index: 100; }
+  .topnav {
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .topnav-inner {
+    max-width: 1280px; margin: 0 auto;
+    padding: 18px var(--gutter);
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center; gap: 24px;
+  }
+  .topnav-brand {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--ink); justify-self: start;
+  }
+  .topnav-links { display: flex; gap: 32px; justify-content: center; }
+  .topnav-link {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--muted); font-weight: 700;
+    transition: color 0.15s;
+  }
+  .topnav-link:hover { color: var(--ink); }
+  .topnav-link.is-active { color: var(--ink); }
+  .topnav-cta {
+    justify-self: end;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    background: var(--ink); color: var(--bg);
+    border: 1.5px solid var(--ink);
+    transition: background 0.15s, color 0.15s;
+  }
+  .topnav-cta:hover { background: var(--accent); border-color: var(--accent); }
+  @media (max-width: 720px) {
+    .topnav-links { display: none; }
+    .topnav-inner { grid-template-columns: 1fr auto; }
+  }
+
+  /* ── SUBNAV ── */
+  .subnav {
+    background: rgba(242,235,218,0.92);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  }
+  .subnav-inner {
+    max-width: 1280px; margin: 0 auto;
+    padding: 10px var(--gutter);
+    display: flex; gap: 10px; justify-content: center;
+    overflow: visible;
+    flex-wrap: wrap; row-gap: 8px;
+  }
+  .subnav-inner::-webkit-scrollbar { display: none; }
+  .subnav-link {
+    font-family: var(--font-mono); font-size: 8.5px;
+    letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+    color: var(--muted); white-space: nowrap; line-height: 1;
+    padding: 6px 12px; border: 1px solid var(--line);
+    border-radius: 999px;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .subnav-link:hover { color: var(--ink); border-color: var(--ink); }
+  .subnav-link.is-active { color: var(--ink); border-color: var(--ink); background: rgba(27,42,27,0.04); }
+  section[id] { scroll-margin-top: 130px; }
+
+  /* ── PAGE WRAPPER ── */
+  .page { padding: 0 var(--gutter); max-width: 1280px; margin: 0 auto; }
+
+  /* ── UTIL ── */
+  .rule        { height: 1px;  background: var(--line); width: 100%; }
+  .rule-thick  { height: 2px;  background: var(--ink);  width: 100%; }
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+  }
+  .kicker .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.16em; color: var(--muted);
+  }
+
+  /* ── HERO (image-led, mirrored — portrait left, content right) ── */
+  .hero {
+    padding: 88px 0 0;
+    border-bottom: none;
+  }
+  .hero + .section { padding-top: 40px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 56px;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink); margin-bottom: 22px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(88px, 11vw, 116px);
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .wordmark em {
+    font-family: var(--font-italic);
+    font-style: italic; font-weight: 400; color: var(--accent);
+    display: inline-block; position: relative; padding: 0 0.06em;
+  }
+  .wordmark em::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0.12em; height: 0.22em;
+    background: var(--accent-2); z-index: -1; opacity: 0.8;
+  }
+  .hero-meta {
+    margin-top: 28px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+  .hero-meta .sep { color: var(--line); }
+
+  /* portrait — mirror of portfolio side */
+  .hero-portrait-wrap {
+    position: relative;
+    aspect-ratio: 4/5;
+    transform: rotate(1.2deg);
+    transition: transform 0.35s ease;
+  }
+  .hero-portrait-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 20%;
+    border: 4px solid var(--ink);
+    box-shadow: -14px 14px 0 var(--accent);
+    display: block;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .hero-portrait-wrap:hover { transform: rotate(1.2deg) translate(2px, -2px); }
+  .hero-portrait-wrap:hover img { box-shadow: -20px 20px 0 var(--accent); }
+  .hero-stamp {
+    position: absolute; top: -16px; left: -16px;
+    background: var(--pop); color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.16em;
+    padding: 8px 14px; border: 3px solid var(--ink);
+    transform: rotate(-6deg); z-index: 2;
+  }
+
+  /* ── FEATURE ROW (big-num + side stack) ── */
+  .feature-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 18px;
+    margin-bottom: 56px;
+  }
+  .big-num {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 36px 32px;
+    position: relative; overflow: hidden;
+  }
+  .big-num::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent 0 22px, color-mix(in srgb, var(--accent-2) 22%, transparent) 22px 23px);
+    pointer-events: none;
+  }
+  .big-num .lab {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: color-mix(in srgb, var(--bg) 70%, transparent);
+    position: relative;
+  }
+  .big-num .v {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 9vw, 96px);
+    line-height: 0.9; letter-spacing: -0.045em;
+    color: var(--bg); margin-top: 12px;
+    position: relative;
+  }
+  .big-num .v em {
+    font-family: var(--font-italic); font-style: italic;
+    color: var(--accent-2); font-weight: 400;
+  }
+  .big-num .sub {
+    font-family: var(--font-display); font-style: italic;
+    font-size: 16px; color: color-mix(in srgb, var(--bg) 80%, transparent);
+    margin-top: 14px; position: relative; max-width: 36ch;
+  }
+  .side-stack { display: flex; flex-direction: column; gap: 18px; height: 100%; }
+  .side-card {
+    padding: 18px 20px; border: 1px solid var(--line);
+    display: flex; align-items: end; justify-content: space-between; gap: 14px;
+    background: var(--bg-2); color: var(--ink);
+    text-decoration: none;
+    transition: transform 200ms ease;
+    flex: 1;
+  }
+  .side-card:hover { transform: translateY(-2px); }
+  .side-card .lab {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  }
+  .side-card .v {
+    font-family: var(--font-display);
+    font-size: 36px; line-height: 1; letter-spacing: -0.03em;
+    color: var(--ink); margin-top: 4px;
+  }
+  .side-card .arrow {
+    font-family: var(--font-mono); font-size: 18px; color: var(--ink);
+  }
+  .side-card-end {
+    display: flex; flex-direction: column; align-items: end; gap: 6px;
+    text-align: right;
+  }
+  .side-card .handle {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.06em; color: var(--ink); opacity: 0.85;
+    line-height: 1;
+  }
+  .side-card.accent .handle { color: var(--bg); opacity: 0.85; }
+  .side-card.pop .handle { color: var(--ink); opacity: 0.7; }
+  .side-card.accent { background: var(--accent); color: var(--bg); }
+  .side-card.accent .lab { color: color-mix(in srgb, var(--bg) 70%, transparent); }
+  .side-card.accent .v { color: var(--bg); }
+  .side-card.accent .arrow { color: var(--bg); }
+  .side-card.pop { background: var(--pop); color: var(--ink); }
+  .side-card.pop .lab { color: color-mix(in srgb, var(--ink) 65%, transparent); }
+  .side-card.pop .v { color: var(--ink); }
+  .side-card.pop .arrow { color: var(--ink); }
+
+  /* ── CONTENT PILLAR RAIL ── */
+  .rail-section { margin-bottom: 72px; }
+  .rail-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .rail-head .eyebrow {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink); display: flex; align-items: center; gap: 10px;
+  }
+  .rail-head .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .tile {
+    aspect-ratio: 1/1; border: 1px solid var(--line);
+    position: relative; overflow: hidden;
+    background: var(--bg-2);
+    text-decoration: none; display: block;
+  }
+  .tile picture { display: block; width: 100%; height: 100%; }
+  .tile img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; display: block; }
+  .tile::after {
+    content: ''; position: absolute; inset: 60% 0 0 0;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.5));
+    pointer-events: none;
+  }
+  .tile-tag {
+    position: absolute; bottom: 8px; left: 8px;
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.92);
+    z-index: 2;
+  }
+  .tile.placeholder {
+    background:
+      repeating-linear-gradient(45deg, transparent 0 14px, color-mix(in srgb, var(--ink) 8%, transparent) 14px 15px),
+      var(--bg-2);
+  }
+  .tile.placeholder .tile-tag { color: var(--ink); }
+  .tile.placeholder::after { display: none; }
+
+  @media (max-width: 720px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero-portrait-wrap { transform: none; max-width: 320px; }
+    .hero-portrait-wrap img { box-shadow: -8px 8px 0 var(--accent); }
+    .feature-row { grid-template-columns: 1fr; }
+    .rail { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 88px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-head {
+    display: grid; grid-template-columns: 100px 1fr;
+    gap: 28px; margin-bottom: 56px; align-items: start;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 4.5vw, 60px);
+    font-weight: 400; line-height: 1.04;
+    letter-spacing: -0.03em; margin: 0;
+  }
+  .section-title em {
+    font-family: var(--font-italic);
+    font-style: italic; color: var(--accent);
+    background: linear-gradient(transparent 65%, var(--accent-2) 65%, var(--accent-2) 92%, transparent 92%);
+    padding: 0 4px;
+  }
+
+  /* ── PLATFORMS ── */
+  .platforms {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    border-top: 2px solid var(--ink);
+  }
+  .plat {
+    padding: 32px 24px 28px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 8px;
+    min-height: 220px;
+    position: relative;
+    transition: background 0.15s ease, transform 0.2s ease;
+  }
+  .plat:nth-child(even) { background: var(--bg-2); }
+  a.plat { color: inherit; text-decoration: none; cursor: pointer; }
+  a.plat::after {
+    content: '↗';
+    position: absolute; top: 14px; right: 18px;
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--muted);
+    opacity: 0; transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  a.plat:hover { background: var(--ink); }
+  a.plat:hover::after { opacity: 1; transform: translate(2px, -2px); color: var(--bg); }
+  a.plat:hover .plat-name,
+  a.plat:hover .plat-meta { color: rgba(240,235,224,0.7); }
+  a.plat:hover .plat-name .rank { color: var(--bg); }
+  a.plat:hover .plat-count { color: var(--accent-2); }
+  a.plat:hover .plat-bar { background: rgba(240,235,224,0.18); }
+  a.plat:hover .plat-bar i { background: var(--accent-2); }
+  .plat:last-child { border-right: none; }
+  .plat-name {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted);
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .plat-name .rank { font-size: 10px; color: var(--ink); }
+  .plat-count {
+    font-family: var(--font-display);
+    font-size: 52px; font-weight: 400;
+    letter-spacing: -0.03em; line-height: 1; margin-top: 6px;
+    color: var(--accent);
+  }
+  .plat-meta {
+    margin-top: auto; font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.04em; color: var(--ink-2); line-height: 1.4;
+  }
+  .plat-bar { height: 3px; background: var(--line); overflow: hidden; }
+  .plat-bar i { display: block; height: 100%; background: var(--accent); }
+
+  /* perf strip */
+  .perf {
+    margin-top: 48px;
+    display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr;
+    background: var(--ink); color: var(--bg);
+  }
+  .perf > div {
+    padding: 32px 28px;
+    border-right: 1px solid rgba(240,235,224,0.12);
+  }
+  .perf > div:last-child { border-right: none; }
+  .perf .pf-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(240,235,224,0.55); margin-bottom: 16px;
+  }
+  .perf .pf-num {
+    font-family: var(--font-display);
+    font-size: 44px; line-height: 1;
+    letter-spacing: -0.025em; color: var(--bg);
+  }
+  .perf .pf-sub {
+    margin-top: 10px; font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.04em;
+    color: rgba(240,235,224,0.65);
+  }
+  .perf .pf-headline {
+    font-family: var(--font-display);
+    font-style: italic; font-weight: 300;
+    font-size: 24px; line-height: 1.3;
+    color: var(--bg); max-width: 22ch;
+  }
+
+  /* ── AUDIENCE ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .audience-card {
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 36px 32px;
+  }
+  .ac-row {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 18px; padding: 16px 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .ac-row:last-child { border-bottom: 1px solid var(--line); }
+  .ac-row .lab {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+  .ac-row .val {
+    font-family: var(--font-display);
+    font-size: 22px; line-height: 1.15; color: var(--ink);
+  }
+  .ac-row .val small {
+    font-family: var(--font-mono); font-size: 10px;
+    color: var(--muted); letter-spacing: 0.06em; margin-left: 8px;
+  }
+  .gender-bar {
+    display: flex; height: 22px; margin-top: 8px;
+    border: 1px solid var(--line); overflow: hidden;
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
+  }
+  .gender-bar .f { background: var(--accent); color: var(--bg); display: flex; align-items: center; justify-content: center; }
+  .gender-bar .m { background: var(--bg); color: var(--ink); display: flex; align-items: center; justify-content: center; }
+  .geo-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .geo-list span {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 10px; border: 1px solid var(--line); color: var(--ink-2);
+  }
+
+  .reason-list {
+    list-style: none; margin: 0; padding: 36px 32px;
+    background: var(--bg-2); border: 1px solid var(--line);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .reason-list li {
+    display: grid; grid-template-columns: 48px 1fr auto;
+    gap: 24px; padding: 22px 0;
+    border-bottom: 1px solid var(--line); align-items: baseline;
+  }
+  .reason-list li:first-child { padding-top: 0; }
+  .reason-list li:last-child  { border-bottom: none; padding-bottom: 0; }
+  .reason-list .rn {
+    font-family: var(--font-italic); font-style: italic;
+    font-size: 32px; line-height: 1; color: var(--accent);
+  }
+  .reason-list .rt {
+    font-family: var(--font-display);
+    font-size: 26px; line-height: 1.15;
+    letter-spacing: -0.01em; color: var(--ink);
+  }
+  .reason-list .rd {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-2);
+    white-space: nowrap;
+  }
+
+  /* ── PILLARS ── */
+  .pillars-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .pillar {
+    background: var(--bg);
+    padding: 28px 24px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .pillar.dark { background: var(--ink); color: var(--bg); }
+  .pillar-num {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-2);
+  }
+  .pillar.dark .pillar-num { color: var(--pop); }
+  .pillar-img {
+    width: 100%; aspect-ratio: 4/3;
+    object-fit: cover; display: block;
+    border: 2.5px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--accent);
+  }
+  .pillar.dark .pillar-img { box-shadow: 6px 6px 0 var(--accent-2); }
+  .pillar-title {
+    font-family: var(--font-display);
+    font-size: 26px; line-height: 1.1;
+    letter-spacing: -0.015em; color: var(--ink);
+    margin-top: 4px;
+  }
+  .pillar.dark .pillar-title { color: var(--bg); }
+  .pillar-desc { font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+  .pillar.dark .pillar-desc { color: rgba(240,235,224,0.72); }
+  .pillar-stat {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+  }
+  .pillar.dark .pillar-stat { color: var(--pop); }
+
+  /* ── BRANDS ── */
+  .brand-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-top: 0;
+  }
+  .brand-tile {
+    margin: 0; background: var(--bg-2);
+    border: 1px solid var(--line);
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .brand-tile img {
+    width: 100%; aspect-ratio: 1/1;
+    object-fit: cover; display: block;
+  }
+  .brand-tile figcaption {
+    padding: 12px 14px 16px;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .brand-num {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+  }
+  .brand-name {
+    font-family: var(--font-display); font-size: 18px;
+    line-height: 1.15; color: var(--ink); letter-spacing: -0.01em;
+  }
+  .brand-stat {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.04em; color: var(--muted); margin-top: 2px;
+  }
+
+  /* ── SECTION DIVIDER RULE ── */
+  .section-rule {
+    display: flex; align-items: center; gap: 14px;
+    margin: 52px 0 36px;
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+  }
+  .section-rule::before, .section-rule::after {
+    content: ''; flex: 1; height: 1px; background: var(--line);
+  }
+
+  /* ── OFFER TABLE ── */
+  .offer-table {
+    width: 100%; border-collapse: collapse;
+    border-top: 2px solid var(--ink);
+  }
+  .offer-table tr { border-bottom: 1px solid var(--line); }
+  .offer-table td { padding: 22px 12px; vertical-align: top; }
+  .offer-table td.num {
+    padding-left: 0; width: 52px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.14em; color: var(--muted); padding-top: 28px;
+  }
+  .offer-table td.t {
+    font-family: var(--font-display);
+    font-size: 26px; line-height: 1.1;
+    letter-spacing: -0.01em; width: 34%;
+    color: var(--ink);
+  }
+  .offer-table td.d {
+    font-size: 15px; line-height: 1.5; color: var(--ink-2); max-width: 44ch;
+  }
+  .offer-table td.tag {
+    text-align: right; padding-right: 0;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent-2); white-space: nowrap;
+  }
+
+  /* ── CATEGORIES ── */
+  .cat-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .cat {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 24px 18px 20px;
+    border: 2px solid var(--ink); border-radius: 999px;
+    background: var(--bg-2);
+  }
+  .cat.solid { background: var(--accent); color: var(--bg); }
+  .cat.gold   { background: var(--accent-2); }
+  .cat.pop    { background: var(--pop); color: var(--bg); }
+  .cat .cnum {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.16em; color: var(--muted);
+    border-right: 1px solid var(--line); padding-right: 16px;
+  }
+  .cat.solid .cnum { color: rgba(240,235,224,0.6); border-color: rgba(240,235,224,0.18); }
+  .cat.pop .cnum   { color: rgba(240,235,224,0.6); border-color: rgba(240,235,224,0.18); }
+  .cat .ct {
+    font-family: var(--font-display);
+    font-size: 22px; letter-spacing: -0.01em;
+  }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--ink); color: var(--bg);
+    padding: 96px var(--gutter);
+  }
+  .contact-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.2fr 1fr;
+    gap: 80px; align-items: end;
+  }
+  .contact-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(240,235,224,0.55); margin-bottom: 28px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .contact-eyebrow .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-2); }
+  .contact h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(64px, 9vw, 130px);
+    letter-spacing: -0.04em; line-height: 0.92;
+    margin: 0; color: var(--bg);
+  }
+  .contact h2 em { font-family: var(--font-italic); font-style: italic; color: var(--accent-2); }
+  .contact-rows {
+    display: flex; flex-direction: column;
+    border-top: 1px solid rgba(240,235,224,0.14);
+  }
+  .contact-row {
+    display: grid; grid-template-columns: 120px 1fr;
+    gap: 16px; padding: 18px 0;
+    border-bottom: 1px solid rgba(240,235,224,0.14);
+    align-items: baseline;
+  }
+  .contact-row .lab {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(240,235,224,0.55);
+  }
+  .contact-row .val {
+    font-family: var(--font-display); font-size: 22px; color: var(--bg);
+  }
+  .contact-row .val.mono {
+    font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.04em;
+  }
+
+  /* ── SOCIAL GRID (bottom of "Work with us") ── */
+  .social-grid-wrap {
+    max-width: 1280px; margin: 64px auto 0;
+    padding-top: 40px;
+    border-top: 1px solid rgba(240,235,224,0.14);
+  }
+  .social-grid-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(240,235,224,0.55); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .social-grid-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2);
+  }
+  .social-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .social-btn {
+    position: relative;
+    display: grid; grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto; column-gap: 12px; row-gap: 0;
+    align-items: center;
+    padding: 16px 18px;
+    border: 1px solid rgba(240,235,224,0.18);
+    text-decoration: none;
+    transition: transform 200ms ease, border-color 200ms ease;
+    overflow: hidden;
+  }
+  .social-btn:hover { transform: translateY(-3px); border-color: rgba(240,235,224,0.4); }
+  .social-logo { grid-row: 1 / 3; width: 26px; height: 26px; flex-shrink: 0; }
+  .social-name {
+    grid-column: 2; grid-row: 1; align-self: end;
+    font-family: var(--font-mono);
+    font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    line-height: 1; opacity: 0.75;
+  }
+  .social-count {
+    grid-column: 2; grid-row: 2; align-self: start;
+    font-family: var(--font-display);
+    font-size: 22px; line-height: 1.05; letter-spacing: -0.02em;
+    margin-top: 2px;
+  }
+  .social-arrow {
+    grid-column: 3; grid-row: 1 / 3; align-self: center;
+    font-family: var(--font-mono); font-size: 16px; opacity: 0.6;
+  }
+
+  .social-btn--tiktok    { background: #000000;            color: #FFFFFF; }
+  .social-btn--tiktok:hover    { background: #1a1a1a; }
+  .social-btn--instagram { background: linear-gradient(135deg,#feda75,#fa7e1e 25%,#d62976 55%,#962fbf 80%,#4f5bd5); color: #FFFFFF; }
+  .social-btn--snapchat  { background: #FFFC00;            color: var(--ink); }
+  .social-btn--snapchat .social-name { opacity: 0.65; }
+  .social-btn--youtube   { background: #FF0000;            color: #FFFFFF; }
+  .social-btn--facebook  { background: #1877F2;            color: #FFFFFF; }
+
+  @media (max-width: 900px) {
+    .social-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .social-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── FOOTER ── */
+  .foot {
+    background: var(--ink);
+    border-top: 1px solid rgba(240,235,224,0.12);
+    padding: 24px var(--gutter);
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(240,235,224,0.45);
+    display: flex; justify-content: space-between;
+  }
+
+  /* desktop-only mid-range responsive */
+  @media (max-width: 960px) {
+    .hero-grid, .two-col, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+    .platforms { grid-template-columns: repeat(2, 1fr); }
+    .perf { grid-template-columns: 1fr 1fr; }
+    .pillars-grid { grid-template-columns: 1fr 1fr; }
+    .brand-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ════════════════════════════════════════════════
+     MOBILE / SWIPE-DECK VIEW (scoped under .mview)
+     ════════════════════════════════════════════════ */
+
+  .mview {
+    flex-direction: column;
+    width: 100%;
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .mview .deck-host {
+    flex: 1; min-height: 0; width: 100%;
+    display: flex; overflow: hidden;
+    background: var(--bg);
+  }
+  .mview .deck {
+    position: relative; flex: 1; height: 100%; width: 100%;
+    overflow: hidden; cursor: grab; user-select: none;
+  }
+  .mview .deck.dragging { cursor: grabbing; }
+  .mview .deck-track {
+    display: flex; height: 100%; width: 100%;
+    transition: transform 0.42s cubic-bezier(0.32, 0.72, 0, 1);
+    will-change: transform;
+  }
+  .mview .deck-track.no-trans { transition: none; }
+  .mview .deck-slide { flex: 0 0 100%; height: 100%; overflow: hidden; }
+
+  /* deck nav */
+  .mview .deck-nav {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%; padding: 10px 14px 16px;
+    background: var(--bg); color: var(--ink);
+    border-top: 1px solid var(--line); flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .mview .deck-nav button {
+    appearance: none; background: transparent;
+    border: 1.5px solid var(--line); color: var(--ink);
+    width: 38px; height: 38px; border-radius: 999px;
+    cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s ease; flex-shrink: 0;
+  }
+  .mview .deck-nav button:hover { background: rgba(0,0,0,0.05); }
+  .mview .thumb-strip {
+    flex: 1; display: flex; align-items: stretch; justify-content: center;
+    gap: 4px; background: transparent;
+    border: 1.5px solid transparent;
+    border-radius: 14px; padding: 5px;
+  }
+  .mview .nav-icon {
+    appearance: none; background: transparent;
+    border: 1px solid transparent; color: var(--muted);
+    flex: 1; min-width: 0; padding: 7px 4px 6px;
+    border-radius: 10px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 4px;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    font-family: inherit;
+    opacity: 0.85;
+  }
+  .mview .nav-icon:hover { background: rgba(0,0,0,0.04); color: var(--ink); opacity: 1; }
+  .mview .nav-icon.active { background: var(--ink); color: var(--bg); border-color: var(--ink); opacity: 1; }
+  .mview .nav-icon-glyph { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; }
+  .mview .nav-icon-glyph svg { width: 100%; height: 100%; }
+  .mview .nav-icon-label {
+    font-family: var(--font-mono);
+    font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; line-height: 1;
+  }
+  .mview .nav-icon.active .nav-icon-label { color: var(--bg); }
+
+  /* CARDS */
+  .mview .card {
+    width: 100%; height: 100%;
+    background: var(--bg); color: var(--ink);
+    overflow: hidden; position: relative;
+    display: flex; flex-direction: column;
+    padding-top: 24px; padding-bottom: 28px;
+  }
+  .mview .card-head {
+    padding: 6px 24px 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .mview .card-num {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.22em; color: var(--ink);
+  }
+  .mview .card-num em { font-style: normal; color: var(--accent-2); }
+  .mview .card-body {
+    flex: 1; min-height: 0;
+    padding: 14px 24px 16px;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .mview .kicker {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+    flex-shrink: 0;
+  }
+  .mview .kicker .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .mview .title {
+    font-family: var(--font-display);
+    font-weight: 400; line-height: 1.04; letter-spacing: -0.02em;
+    margin: 0; color: var(--ink); font-size: 42px;
+    flex-shrink: 0;
+  }
+  .mview .title em {
+    font-family: var(--font-italic);
+    font-style: italic; color: var(--accent);
+    background: linear-gradient(transparent 65%, var(--accent-2) 65%, var(--accent-2) 92%, transparent 92%);
+    padding: 0 3px;
+  }
+  .mview .title--xl { font-size: 64px; line-height: 0.92; letter-spacing: -0.04em; }
+  .mview .lede {
+    font-family: var(--font-display);
+    font-size: 17px; line-height: 1.4; color: var(--ink-2); margin-top: 14px;
+  }
+  .mview .sub-title {
+    font-family: var(--font-display);
+    font-weight: 400; font-size: 22px; line-height: 1.05;
+    letter-spacing: -0.01em; margin: 14px 0 10px; color: var(--ink);
+    flex-shrink: 0;
+  }
+  .mview .sub-title em { font-family: var(--font-italic); font-style: italic; color: var(--accent); }
+
+  /* HERO */
+  .mview .hero-card { background: var(--bg); }
+  .mview .hero-portrait-wrap {
+    position: relative; flex: 1; min-height: 0;
+    margin: 12px -4px 0; transform: rotate(-1deg);
+    overflow: visible;
+    aspect-ratio: auto;
+  }
+  .mview .hero-portrait-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 18%;
+    border: 3px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--accent); display: block;
+  }
+  .mview .hero-stamp {
+    position: absolute; top: -10px; right: 2px;
+    background: var(--accent-2); color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.18em;
+    padding: 6px 10px; border: 2px solid var(--ink);
+    transform: rotate(6deg); z-index: 2;
+  }
+  .mview .hero-wordmark {
+    font-family: var(--font-display);
+    font-size: 72px; line-height: 0.9; letter-spacing: -0.038em;
+    margin: 0 0 10px; color: var(--ink);
+    flex-shrink: 0;
+  }
+  .mview .hero-wordmark em {
+    font-family: var(--font-italic);
+    font-style: italic; color: var(--accent); display: block;
+  }
+  .mview .hero-tag {
+    font-family: var(--font-display);
+    font-size: 15px; line-height: 1.4; color: var(--ink-2);
+    margin: 0 0 12px; max-width: 28ch;
+    flex-shrink: 0;
+    font-style: normal;
+  }
+  .mview .hero-pills { display: flex; flex-wrap: wrap; gap: 5px; flex-shrink: 0; margin-bottom: 0; }
+  .mview .pill {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 5px 10px; border: 1px solid var(--line); border-radius: 999px;
+    color: var(--ink-2); background: var(--bg);
+  }
+  .mview .pill.solid { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  /* REACH */
+  .mview .stat-row {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0; background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 14px; margin-bottom: 0; flex-shrink: 0;
+  }
+  .mview .stat { padding: 0 10px; border-right: 1px solid var(--line); }
+  .mview .stat:first-child { padding-left: 0; }
+  .mview .stat:last-child { border-right: none; padding-right: 0; }
+  .mview .stat-num {
+    font-family: var(--font-display);
+    font-size: 30px; line-height: 1; letter-spacing: -0.04em;
+    display: flex; align-items: baseline; gap: 1px;
+  }
+  .mview .stat-num .plus { font-family: var(--font-italic); font-style: italic; color: var(--accent); }
+  .mview .stat:nth-child(1) .stat-num { color: var(--ink); }
+  .mview .stat:nth-child(2) .stat-num { color: var(--accent); }
+  .mview .stat:nth-child(3) .stat-num { color: var(--pop); }
+  .mview .stat-label {
+    font-family: var(--font-mono);
+    font-size: 8.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-top: 8px; line-height: 1.35;
+  }
+
+  .mview .platforms {
+    display: flex; flex-direction: row; flex-wrap: wrap; gap: 0; margin-top: 0;
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
+    grid-template-columns: none;
+  }
+  .mview .platforms .plat {
+    flex: 1; min-width: 0; padding: 12px 6px;
+    border: none; border-right: 1px solid var(--line);
+    display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
+    min-height: 0;
+    color: inherit; text-decoration: none;
+    transition: background 0.15s ease;
+  }
+  .mview .platforms .plat:nth-child(even) { background: var(--bg-2); }
+  .mview a.plat:active { background: var(--ink); color: var(--bg); }
+  .mview a.plat:active .plat-name { color: rgba(240,235,224,0.7); }
+  .mview a.plat:active .plat-count { color: var(--accent-2); }
+  .mview .platforms .plat:last-child { border-right: none; }
+  .mview .platforms .plat-name {
+    font-family: var(--font-mono);
+    font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); display: flex; align-items: center; gap: 4px;
+    justify-content: flex-start;
+  }
+  .mview .platforms .plat-name .rank { display: none; }
+  .mview .platforms .plat-count {
+    font-family: var(--font-display);
+    font-size: 22px; line-height: 1; letter-spacing: -0.02em;
+    color: var(--accent); text-align: left; margin-top: 0;
+  }
+
+  /* AUDIENCE */
+  .mview .audience-box {
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 10px 14px; margin-top: 10px;
+    flex-shrink: 0;
+  }
+  .mview .ac-row {
+    display: grid; grid-template-columns: 82px 1fr;
+    gap: 10px; padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    border-top: none;
+    align-items: baseline;
+  }
+  .mview .ac-row:first-child { padding-top: 0; }
+  .mview .ac-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .mview .ac-row .lab { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .mview .ac-row .val { font-family: var(--font-display); font-size: 16px; line-height: 1.2; color: var(--ink); }
+  .mview .ac-row .val small {
+    display: block; font-family: var(--font-mono);
+    font-size: 8.5px; letter-spacing: 0.1em; color: var(--muted);
+    margin-top: 2px; margin-left: 0; text-transform: uppercase;
+  }
+  .mview .gender-bar {
+    display: flex; height: 24px; margin-top: 6px;
+    border: 1px solid var(--line); overflow: hidden;
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em;
+  }
+  .mview .geo-list { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .mview .geo-list span {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.1em; color: var(--ink-2);
+    padding: 4px 8px; border: 1px solid var(--line); text-transform: uppercase;
+  }
+
+  /* WHY */
+  .mview .section-rule {
+    display: flex; align-items: center; gap: 10px;
+    margin: 14px 0 10px;
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); flex-shrink: 0;
+  }
+  .mview .reason-box { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 0; justify-content: space-between; }
+  .mview .reason {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-bottom: none;
+    padding: 14px 16px;
+    display: grid; grid-template-columns: 36px 1fr auto;
+    column-gap: 12px; row-gap: 4px; align-items: baseline;
+  }
+  .mview .reason:last-child { border-bottom: 1px solid var(--line); }
+  .mview .reason .rn {
+    grid-row: 1 / span 2;
+    font-family: var(--font-italic); font-style: italic;
+    font-size: 32px; line-height: 1; color: var(--accent); align-self: start;
+  }
+  .mview .reason .rt { font-family: var(--font-display); font-size: 18px; line-height: 1.25; color: var(--ink); }
+  .mview .reason .rd { grid-column: 2 / -1; font-family: var(--font-mono); font-size: 9px; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; }
+  .mview .reason .rtag {
+    grid-row: 1; grid-column: 3;
+    font-family: var(--font-mono);
+    font-size: 9px; color: var(--accent-2);
+    letter-spacing: 0.16em; text-transform: uppercase; align-self: center;
+  }
+
+  /* PILLARS */
+  .mview .pillars { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 0; }
+  .mview .pillars .pillar {
+    flex: 1; min-height: 0;
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-bottom: none;
+    padding: 10px 12px;
+    display: grid; grid-template-columns: 96px 1fr;
+    gap: 14px; align-items: center;
+  }
+  .mview .pillars .pillar:last-child { border-bottom: 1px solid var(--line); }
+  .mview .pillars .pillar.dark { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .mview .pillar-img {
+    aspect-ratio: 1/1; width: 100%; object-fit: cover;
+    border: 2px solid var(--ink); box-shadow: 5px 5px 0 var(--accent); display: block;
+  }
+  .mview .pillar.dark .pillar-img { box-shadow: 5px 5px 0 var(--accent-2); }
+  .mview .pillar-text { min-width: 0; }
+  .mview .pillar-num {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent-2); margin-bottom: 4px;
+  }
+  .mview .pillar.dark .pillar-num { color: var(--pop); }
+  .mview .pillar-title { font-family: var(--font-display); font-size: 21px; line-height: 1.1; color: var(--ink); margin-top: 0; }
+  .mview .pillar.dark .pillar-title { color: var(--bg); }
+  .mview .pillar-desc { font-size: 12px; line-height: 1.35; color: var(--ink-2); margin-top: 4px; }
+  .mview .pillar.dark .pillar-desc { color: rgba(240,235,224,0.75); }
+  .mview .pillar-stat {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); margin-top: 6px;
+  }
+  .mview .pillar.dark .pillar-stat { color: var(--pop); }
+
+  /* OFFER / BRANDS */
+  .mview .offer { margin-top: 6px; border-top: 2px solid var(--ink); }
+  .mview .offer-row {
+    display: grid; grid-template-columns: 24px 1fr auto;
+    gap: 10px; padding: 11px 0;
+    border-bottom: 1px solid var(--line); align-items: baseline;
+  }
+  .mview .offer-row:last-child { border-bottom: 1.5px solid var(--ink); }
+  .mview .offer-num { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+  .mview .offer-text { min-width: 0; }
+  .mview .offer-title { font-family: var(--font-display); font-size: 15px; line-height: 1.2; color: var(--ink); }
+  .mview .offer-desc { font-size: 11px; line-height: 1.4; color: var(--muted); margin-top: 3px; }
+  .mview .offer-tag {
+    font-family: var(--font-mono);
+    font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent-2); white-space: nowrap; align-self: center;
+  }
+
+  .mview .brand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; flex: 1; min-height: 0; }
+  .mview .brand-tile {
+    margin: 0; background: var(--bg-2); border: 1px solid var(--line);
+    overflow: hidden; display: flex; flex-direction: column; min-height: 0;
+  }
+  .mview .brand-tile img { width: 100%; flex: 1; min-height: 0; object-fit: cover; display: block; aspect-ratio: auto; }
+  .mview .brand-tile figcaption {
+    padding: 6px 8px 8px;
+    display: flex; flex-direction: column; gap: 2px; min-width: 0;
+    flex-shrink: 0;
+  }
+  .mview .brand-num { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+  .mview .brand-name {
+    font-family: var(--font-display); font-size: 14px; line-height: 1.15;
+    color: var(--ink); letter-spacing: -0.005em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    margin-top: 0;
+  }
+  .mview .brand-stat { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.04em; color: var(--muted); margin-top: 0; }
+
+  /* CATEGORIES */
+  .mview .cat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 2px; }
+  .mview .cat {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 0;
+    padding: 10px 14px;
+    display: grid; grid-template-columns: auto 1fr;
+    align-items: center; gap: 12px; min-height: 50px;
+  }
+  .mview .cat.solid { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .mview .cat-num { font-family: var(--font-italic); font-style: italic; font-size: 28px; line-height: 1; color: var(--accent-2); }
+  .mview .cat.solid .cat-num { color: var(--pop); }
+  .mview .cat-name { font-family: var(--font-display); font-size: 13px; line-height: 1.15; color: var(--ink); }
+  .mview .cat.solid .cat-name { color: var(--bg); }
+
+  /* CONTACT */
+  .mview .contact-card { background: var(--ink); color: var(--bg); padding-top: 24px; }
+  .mview .contact-card .card-head { color: rgba(240,235,224,0.55); }
+  .mview .contact-card .kicker { color: rgba(240,235,224,0.55); }
+  .mview .contact-card .kicker .dot { background: var(--accent-2); }
+  .mview .contact-card .title { color: var(--bg); font-size: 68px; line-height: 0.9; }
+  .mview .contact-card .title em { color: var(--accent-2); background: none; }
+  .mview .contact-list { margin-top: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; }
+  .mview .contact-list .contact-row {
+    display: grid; grid-template-columns: 110px 1fr;
+    gap: 12px; padding: 14px 0;
+    border-bottom: 1px solid rgba(240,235,224,0.12); align-items: baseline;
+  }
+  .mview .contact-list .contact-row:last-child { border-bottom: none; }
+  .mview .contact-list .contact-row .lab {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(240,235,224,0.55);
+  }
+  .mview .contact-list .contact-row .val { font-family: var(--font-display); font-size: 20px; color: var(--bg); }
+  .mview .contact-list .contact-row .val.mono { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.04em; }
+  .mview .contact-list .contact-row .val.email { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; }
+
+  /* ════════════════════════════════════════════════
+     RESPONSIVE BREAKPOINTS
+     ════════════════════════════════════════════════ */
+
+  /* Below 700px → swap to swipe-deck view */
+  @media (max-width: 700px) {
+    /* v4: legacy mview is no longer used; body must scroll for the new
+       .creator-mobile-only block, so do NOT lock body overflow/height,
+       and the old mview deck must stay hidden too (it was leaking under
+       the new Let's Collab block). */
+    body[data-creator="true"] { overflow: visible !important; height: auto !important; }
+    .desktop-view { display: none !important; }
+    .mview { display: none !important; }
+  }
+</style>
+  <link rel="stylesheet" href="mobile.css" />
+</head>
+<body data-creator="true">
+
+<!-- ═══════════════════════════════════════════════════
+     MOBILE VIEW (≤ 768px) — shown only on phones, mirrors
+     proto/screen-mediakit.jsx visual language. Desktop view
+     below is hidden via mobile.css when data-creator is set.
+     ═══════════════════════════════════════════════════ -->
+<div class="creator-mobile-only" style="display:none;">
+
+  <!-- Top bar (warm palette) -->
+  <header class="km-topbar">
+    <a class="km-brand" href="index.html">
+      <span class="km-dot" aria-hidden="true"></span>
+      <span>Nesi <span class="km-brand-soft">· Family</span></span>
+    </a>
+    <div class="km-topbar-right">
+      <a class="km-inquire" href="mailto:thenesifamilybiz@gmail.com?subject=Collab%20Inquiry">Inquire</a>
+      <a class="km-back" href="portfolio.html" aria-label="Back to portfolio">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Section pill bar -->
+  <nav class="km-subnav" aria-label="Sections">
+    <a href="#km-pillars" class="km-pill is-active">Pillars</a>
+    <a href="#km-reach" class="km-pill">Reach</a>
+    <a href="#km-audience" class="km-pill">Audience</a>
+    <a href="#km-brands" class="km-pill">Brands</a>
+    <a href="#km-offer" class="km-pill">Offer</a>
+    <a href="#km-contact" class="km-pill">Contact</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="km-hero">
+    <div class="km-hero-stripe" aria-hidden="true"></div>
+    <div class="km-hero-eyebrow">
+      <span class="km-dot" aria-hidden="true"></span>
+      Father–son · 800K audience
+    </div>
+    <h1 class="km-hero-title">
+      Nesi<br/>
+      <em>Family.</em>
+    </h1>
+    <p class="km-hero-tagline">
+      A father–son creator brand. Food, lifestyle, entertainment — made to be watched together.
+    </p>
+    <div class="km-hero-pills">
+      <span class="km-pill-tag is-solid">Family-friendly</span>
+      <span class="km-pill-tag">18–34 core</span>
+    </div>
+
+    <!-- Hero stat composition: photo (no overlay) + 2 stacked right -->
+    <div class="km-hero-stats">
+      <div class="km-stat-big">
+        <picture><source type="image/webp" srcset="assets/portrait.webp"><img src="assets/portrait.jpg" alt="Kenneth Lopes and son — Nesi Family" /></picture>
+      </div>
+      <div class="km-stat-mid">
+        <div class="km-stat-num">800K<em>+</em></div>
+        <div class="km-stat-sub">Followers</div>
+        <div class="km-stat-lab">Across platforms</div>
+      </div>
+      <div class="km-stat-pop">
+        <div class="km-stat-lab">All-time</div>
+        <div class="km-stat-num">100M<em>+</em></div>
+        <div class="km-stat-sub">Total views</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 / PILLARS -->
+  <section class="km-section" id="km-pillars">
+    <div class="km-section-head"><span class="km-num">01 / Pillars</span><div><div class="km-kicker">Content pillars</div><h2 class="km-h">What we <em>make.</em></h2></div></div>
+    <div class="km-carousel">
+      <article class="km-pcard"><img src="assets/brand-shake-shack.jpg" alt="" loading="lazy"/><div class="km-pstat">12M+ views</div><div class="km-plabel"><div class="km-pnum">01</div><div class="km-pname">Brands</div></div></article>
+      <article class="km-pcard"><img src="assets/family.jpg" alt="" loading="lazy"/><div class="km-pstat">12M views</div><div class="km-plabel"><div class="km-pnum">02</div><div class="km-pname">Family</div></div></article>
+      <article class="km-pcard"><img src="assets/food.jpg" alt="" loading="lazy"/><div class="km-pstat">11.3M views</div><div class="km-plabel"><div class="km-pnum">03</div><div class="km-pname">Food</div></div></article>
+      <article class="km-pcard"><img src="assets/lifestyle.jpg" alt="" loading="lazy"/><div class="km-pstat">600K views</div><div class="km-plabel"><div class="km-pnum">04</div><div class="km-pname">Lifestyle</div></div></article>
+    </div>
+  </section>
+
+  <!-- 02 / REACH -->
+  <section class="km-section" id="km-reach">
+    <div class="km-section-head"><span class="km-num">02 / Reach</span><div><div class="km-kicker">Distribution</div><h2 class="km-h">By <em>platform.</em></h2></div></div>
+    <ol class="km-platforms">
+      <li><span class="km-plat-name">TikTok</span><span class="km-plat-count">650K</span><span class="km-plat-meta">Daily cadence · primary surface</span><span class="km-plat-bar" style="--w:100%;background:#000;"></span></li>
+      <li><span class="km-plat-name">Instagram</span><span class="km-plat-count">65K</span><span class="km-plat-meta">9.9M views · last 90 days</span><span class="km-plat-bar" style="--w:9.4%;background:#E1306C;"></span></li>
+      <li><span class="km-plat-name">Snapchat</span><span class="km-plat-count">55K</span><span class="km-plat-meta">10.4M views · 27–42s watch</span><span class="km-plat-bar" style="--w:7.9%;background:#D9B65A;"></span></li>
+      <li><span class="km-plat-name">YouTube</span><span class="km-plat-count">32K</span><span class="km-plat-meta">Long-form + Shorts pipeline</span><span class="km-plat-bar" style="--w:5%;background:#FF0000;"></span></li>
+      <li><span class="km-plat-name">Facebook</span><span class="km-plat-count">20K</span><span class="km-plat-meta">3.1M views · 785K 1-min</span><span class="km-plat-bar" style="--w:2.4%;background:#1877F2;"></span></li>
+    </ol>
+  </section>
+
+  <!-- 03 / AUDIENCE -->
+  <section class="km-section" id="km-audience">
+    <div class="km-section-head"><span class="km-num">03 / Audience</span><div><div class="km-kicker">Who's watching</div><h2 class="km-h">Female-skewed, <em>18–34.</em></h2></div></div>
+    <dl class="km-audience-table">
+      <div class="km-audrow">
+        <dt>Core age</dt>
+        <dd><strong>18–34</strong><span>Primary cohort</span></dd>
+      </div>
+      <div class="km-audrow">
+        <dt>Gender</dt>
+        <dd><strong>68% / 32%</strong><span>F · M split</span></dd>
+      </div>
+      <div class="km-audrow">
+        <dt>Primary Geo</dt>
+        <dd><strong>United States</strong><span>74% reach</span></dd>
+      </div>
+      <div class="km-audrow">
+        <dt>Global</dt>
+        <dd><strong>CA · MX · UK · AU · BR</strong><span>Top 5 outside US</span></dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 04 / BRANDS -->
+  <section class="km-section" id="km-brands">
+    <div class="km-section-head"><span class="km-num">04 / Brands</span><div><div class="km-kicker">Past brand collaborations</div><h2 class="km-h">Proven results, <em>real brands.</em></h2></div></div>
+    <ol class="km-brand-grid">
+      <li class="km-bcard">
+        <img src="assets/brand-dominos.jpg" alt="Domino's collab" loading="lazy"/>
+        <div class="km-bcard-overlay"></div>
+        <div class="km-bcard-text"><span class="km-bcard-num">01</span><span class="km-bcard-name">Domino's</span><span class="km-bcard-stat">100K views</span></div>
+      </li>
+      <li class="km-bcard">
+        <img src="assets/brand-shake-shack.jpg" alt="Shake Shack collab" loading="lazy"/>
+        <div class="km-bcard-overlay"></div>
+        <div class="km-bcard-text"><span class="km-bcard-num">02</span><span class="km-bcard-name">Shake Shack</span><span class="km-bcard-stat">219.7K views</span></div>
+      </li>
+      <li class="km-bcard">
+        <img src="assets/brand-storm-burger.jpg" alt="Storm Burger collab" loading="lazy"/>
+        <div class="km-bcard-overlay"></div>
+        <div class="km-bcard-text"><span class="km-bcard-num">03</span><span class="km-bcard-name">Storm Burger</span><span class="km-bcard-stat">266K views</span></div>
+      </li>
+      <li class="km-bcard">
+        <img src="assets/brand-baqba.jpg" alt="Baqba Mexican collab" loading="lazy"/>
+        <div class="km-bcard-overlay"></div>
+        <div class="km-bcard-text"><span class="km-bcard-num">04</span><span class="km-bcard-name">Baqba Mexican</span><span class="km-bcard-stat">52K views</span></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 05 / OFFER -->
+  <section class="km-section" id="km-offer">
+    <div class="km-section-head"><span class="km-num">05 / Offer</span><div><div class="km-kicker">Partnership offerings</div><h2 class="km-h">Flexibility, <em>scoped to goal.</em></h2></div></div>
+    <ol class="km-offer-list">
+      <li>
+        <span class="km-olnum">01</span>
+        <div class="km-olbody">
+          <div class="km-olt">Sponsored short-form</div>
+          <div class="km-old">Native posts on TikTok, Reels, Shorts, Snap.</div>
+        </div>
+        <span class="km-oltag">Most requested</span>
+      </li>
+      <li>
+        <span class="km-olnum">02</span>
+        <div class="km-olbody">
+          <div class="km-olt">Cross-platform campaigns</div>
+          <div class="km-old">One concept, five surfaces.</div>
+        </div>
+        <span class="km-oltag">5-surface</span>
+      </li>
+      <li>
+        <span class="km-olnum">03</span>
+        <div class="km-olbody">
+          <div class="km-olt">Product integrations</div>
+          <div class="km-old">Recurring placement inside the family routine.</div>
+        </div>
+        <span class="km-oltag">Always-on</span>
+      </li>
+      <li>
+        <span class="km-olnum">04</span>
+        <div class="km-olbody">
+          <div class="km-olt">UGC &amp; paid usage</div>
+          <div class="km-old">Whitelisting, paid rights, and exclusivity windows.</div>
+        </div>
+        <span class="km-oltag">Add-on</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 06 / CONTACT (dark) -->
+  <section class="km-contact" id="km-contact">
+    <div class="km-contact-eyebrow">
+      <span class="km-cdot" aria-hidden="true"></span>Let's build something
+    </div>
+    <h2 class="km-contact-h">Let's <em>collab.</em></h2>
+    <p class="km-contact-tagline">Send a brief, budget range, and timeline. Replies within 24h, M–F.</p>
+    <dl class="km-contact-table">
+      <div>
+        <dt>Creator</dt>
+        <dd>Kenneth Lopes</dd>
+      </div>
+      <div>
+        <dt>Inquiries</dt>
+        <dd><a href="mailto:thenesifamilybiz@gmail.com?subject=Collab%20Inquiry">thenesifamilybiz@gmail.com</a></dd>
+      </div>
+    </dl>
+    <div class="km-socials-eyebrow">
+      <span class="km-cdot" aria-hidden="true"></span>Find us on socials
+    </div>
+    <div class="km-socials">
+      <a href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener" class="km-social km-social--tiktok">
+        <span class="km-soc-name">TikTok</span>
+        <span class="km-soc-count">650K</span>
+        <span class="km-soc-handle">@nesimento_</span>
+      </a>
+      <a href="https://www.instagram.com/nesimento" target="_blank" rel="noopener" class="km-social km-social--ig">
+        <span class="km-soc-name">Instagram</span>
+        <span class="km-soc-count">65K</span>
+        <span class="km-soc-handle">@nesimento</span>
+      </a>
+      <a href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener" class="km-social km-social--snap">
+        <span class="km-soc-name">Snapchat</span>
+        <span class="km-soc-count">55K</span>
+        <span class="km-soc-handle">@nesimento</span>
+      </a>
+      <a href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener" class="km-social km-social--yt">
+        <span class="km-soc-name">YouTube</span>
+        <span class="km-soc-count">32K</span>
+        <span class="km-soc-handle">@thenesifamily</span>
+      </a>
+    </div>
+    <footer class="km-foot">
+      <div class="km-foot-row">
+        <span class="km-foot-brand">Nesi <em>Family.</em></span>
+        <span class="km-foot-year">© 2026</span>
+      </div>
+      <div class="km-foot-email">thenesifamilybiz@gmail.com</div>
+    </footer>
+  </section>
+
+</div><!-- /creator-mobile-only -->
+
+<!-- ═══════════════════════════════════════════════════
+     DESKTOP / EDITORIAL VIEW (≥ 701px)
+     ═══════════════════════════════════════════════════ -->
+<div class="desktop-view">
+
+  <!-- TOP NAV -->
+  <div class="nav-stack">
+  <nav class="topnav" aria-label="Main navigation">
+    <div class="topnav-inner">
+      <a class="topnav-brand" href="index.html">K · L</a>
+      <div class="topnav-links">
+        <a class="topnav-link" href="index.html">Home</a>
+        <a class="topnav-link" href="portfolio.html">Portfolio</a>
+        <a class="topnav-link is-active" href="media-kit.html">Creator</a>
+      </div>
+      <a class="topnav-cta" href="mailto:thenesifamilybiz@gmail.com?subject=Collab%20Inquiry">Contact</a>
+    </div>
+  </nav>
+
+  <!-- SUBNAV -->
+  <nav class="subnav" aria-label="Page sections">
+    <div class="subnav-inner">
+      <a class="subnav-link" href="#reach">Reach</a>
+      <a class="subnav-link" href="#content">Content</a>
+      <a class="subnav-link" href="#audience">Audience</a>
+      <a class="subnav-link" href="#brands">Brands</a>
+      <a class="subnav-link" href="#offer">Offer</a>
+      <a class="subnav-link" href="#contact">Contact</a>
+    </div>
+  </nav>
+  </div><!-- /nav-stack -->
+
+  <div class="page">
+
+    <!-- HERO — image-led, mirrored (portrait left, content right) -->
+    <section class="hero" id="hero">
+      <div class="hero-grid">
+        <div class="hero-portrait-wrap">
+          <span class="hero-stamp">EST. 2025</span>
+          <img src="assets/portrait.jpg" alt="Kenneth Lopes and son" />
+        </div>
+        <div class="hero-l">
+          <div class="hero-eyebrow"><span class="dot"></span>Father–son · 800K</div>
+          <h1 class="wordmark">Nesi<br/><em>Family.</em></h1>
+          <div class="hero-meta">
+            <span><strong>Food</strong> · Lifestyle · Family</span>
+            <span class="sep">·</span>
+            <span><strong>@nesimento</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE ROW — big-num + side stack -->
+      <div class="feature-row">
+        <div class="big-num">
+          <div class="lab">Followers</div>
+          <div class="v">800K<em>+</em></div>
+          <div class="sub">5 platforms · 70M+ views (90d) · 100M+ all-time</div>
+        </div>
+        <div class="side-stack">
+          <a class="side-card accent" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer">
+            <div>
+              <div class="lab">TikTok</div>
+              <div class="v">650K</div>
+            </div>
+            <div class="side-card-end">
+              <span class="handle">@nesimento_</span>
+              <span class="arrow" aria-hidden>↗</span>
+            </div>
+          </a>
+          <a class="side-card pop" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
+            <div>
+              <div class="lab">Instagram</div>
+              <div class="v">65K</div>
+            </div>
+            <div class="side-card-end">
+              <span class="handle">@nesimento</span>
+              <span class="arrow" aria-hidden>↗</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- CONTENT PILLAR RAIL -->
+      <section class="rail-section">
+        <div class="rail-head">
+          <span class="eyebrow"><span class="dot"></span>Content pillars</span>
+        </div>
+        <div class="rail">
+          <a class="tile" href="#brands">
+            <img src="assets/brand-shake-shack.jpg" alt="Brand collaborations"/>
+            <span class="tile-tag">Brands</span>
+          </a>
+          <a class="tile" href="#content">
+            <picture>
+              <source type="image/webp" srcset="assets/family.webp">
+              <img src="assets/family.jpg" alt="Father–son family content pillar" loading="lazy"/>
+            </picture>
+            <span class="tile-tag">Family</span>
+          </a>
+          <a class="tile" href="#content">
+            <picture>
+              <source type="image/webp" srcset="assets/food.webp">
+              <img src="assets/food.jpg" alt="Food content pillar" loading="lazy"/>
+            </picture>
+            <span class="tile-tag">Food</span>
+          </a>
+          <a class="tile" href="#content">
+            <picture>
+              <source type="image/webp" srcset="assets/lifestyle.webp">
+              <img src="assets/lifestyle.jpg" alt="Lifestyle content pillar" loading="lazy"/>
+            </picture>
+            <span class="tile-tag">Lifestyle</span>
+          </a>
+        </div>
+      </section>
+    </section>
+
+    <!-- 01 PLATFORMS -->
+    <section class="section" id="reach">
+      <div class="section-head">
+        <div class="section-num">01 / Reach</div>
+        <div>
+          <div class="kicker"><span class="dot"></span>Where the audience lives</div>
+        </div>
+      </div>
+
+      <div class="platforms">
+        <a class="plat" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer">
+          <div class="plat-name"><span>TikTok</span><span class="rank">01</span></div>
+          <div class="plat-count">650K</div>
+          <div class="plat-meta">Primary surface · daily posting cadence</div>
+          <div class="plat-bar"><i style="width:100%"></i></div>
+        </a>
+        <a class="plat" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
+          <div class="plat-name"><span>Instagram</span><span class="rank">02</span></div>
+          <div class="plat-count">65K</div>
+          <div class="plat-meta">9.9M views · last 90 days</div>
+          <div class="plat-bar"><i style="width:9.4%"></i></div>
+        </a>
+        <a class="plat" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer">
+          <div class="plat-name"><span>Snapchat</span><span class="rank">03</span></div>
+          <div class="plat-count">55K</div>
+          <div class="plat-meta">10.4M views · 27–42s avg watch</div>
+          <div class="plat-bar"><i style="width:7.9%"></i></div>
+        </a>
+        <a class="plat" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer">
+          <div class="plat-name"><span>YouTube</span><span class="rank">04</span></div>
+          <div class="plat-count">32K</div>
+          <div class="plat-meta">Long-form &amp; Shorts pipeline</div>
+          <div class="plat-bar"><i style="width:5.0%"></i></div>
+        </a>
+        <a class="plat" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer">
+          <div class="plat-name"><span>Facebook</span><span class="rank">05</span></div>
+          <div class="plat-count">20K</div>
+          <div class="plat-meta">3.1M views · 785K+ 1-min views</div>
+          <div class="plat-bar"><i style="width:2.4%"></i></div>
+        </a>
+      </div>
+
+    </section>
+
+    <!-- 02 CONTENT PILLARS -->
+    <section class="section" id="content">
+      <div class="section-head">
+        <div class="section-num">02 / Content</div>
+        <div>
+          <div class="kicker"><span class="dot"></span>What we make</div>
+          <h2 class="section-title">Three pillars, <em>one voice.</em></h2>
+        </div>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar">
+          <div class="pillar-num">P/01 · Lifestyle</div>
+          <img class="pillar-img" src="assets/pillar-lifestyle.jpg" alt="Lifestyle" />
+          <div class="pillar-title">Lifestyle &amp; family POV</div>
+          <div class="pillar-desc">Travel, retail, and product moments inside a real father–son routine.</div>
+          <div class="pillar-stat">12M views · single post</div>
+        </div>
+        <div class="pillar dark">
+          <div class="pillar-num">P/02 · Food</div>
+          <img class="pillar-img" src="assets/pillar-food.jpg" alt="Food" />
+          <div class="pillar-title">Food reviews</div>
+          <div class="pillar-desc">QSR taste-tests, menu hacks, recurring formats.</div>
+          <div class="pillar-stat">11.3M views · single post</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">P/03 · Entertainment</div>
+          <img class="pillar-img" src="assets/pillar-entertainment.jpg" alt="Entertainment" />
+          <div class="pillar-title">Entertainment &amp; culture</div>
+          <div class="pillar-desc">POV bits, game-day moments, cultural touchpoints.</div>
+          <div class="pillar-stat">600K views · single post</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 AUDIENCE -->
+    <section class="section" id="audience">
+      <div class="section-head">
+        <div class="section-num">03 / Audience</div>
+        <div>
+          <div class="kicker"><span class="dot"></span>Who's watching</div>
+          <h2 class="section-title">Family-friendly, <em>female-skewed,</em> 18–34.</h2>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="audience-card">
+          <div class="kicker"><span class="dot"></span>Audience snapshot</div>
+          <div class="ac-row">
+            <div class="lab">Core age</div>
+            <div class="val">18–34 <small>primary cohort</small></div>
+          </div>
+          <div class="ac-row">
+            <div class="lab">Gender</div>
+            <div>
+              <div class="val" style="margin-bottom:8px">Female-skewed <small>up to 78% F on Facebook</small></div>
+              <div class="gender-bar">
+                <div class="f" style="flex:78">F · 78%</div>
+                <div class="m" style="flex:22">M · 22%</div>
+              </div>
+            </div>
+          </div>
+          <div class="ac-row">
+            <div class="lab">Primary geo</div>
+            <div class="val">United States</div>
+          </div>
+          <div class="ac-row">
+            <div class="lab">Global reach</div>
+            <div>
+              <div class="geo-list">
+                <span>South Africa</span><span>Philippines</span>
+                <span>Australia</span><span>United Kingdom</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="reason-list">
+          <li>
+            <span class="rn">i</span>
+            <span class="rt">Father–son storytelling, safe for every brief.</span>
+            <span class="rd">PG · ad-friendly</span>
+          </li>
+          <li>
+            <span class="rn">ii</span>
+            <span class="rt">Above-benchmark watch times.</span>
+            <span class="rd">27–42s · Snap</span>
+          </li>
+          <li>
+            <span class="rn">iii</span>
+            <span class="rt">One shoot, five platforms.</span>
+            <span class="rd">5× distribution</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- 04 BRANDS -->
+    <section class="section" id="brands">
+      <div class="section-head">
+        <div class="section-num">04 / Brands</div>
+        <div>
+          <div class="kicker"><span class="dot"></span>Past brand collaborations</div>
+          <h2 class="section-title">Proven results, <em>real brands.</em></h2>
+        </div>
+      </div>
+
+      <div class="brand-grid">
+        <figure class="brand-tile">
+          <img src="assets/brand-dominos.jpg" alt="Domino's collaboration" />
+          <figcaption>
+            <span class="brand-num">01</span>
+            <span class="brand-name">Domino's</span>
+            <span class="brand-stat">100K views</span>
+          </figcaption>
+        </figure>
+        <figure class="brand-tile">
+          <img src="assets/brand-shake-shack.jpg" alt="Shake Shack collaboration" />
+          <figcaption>
+            <span class="brand-num">02</span>
+            <span class="brand-name">Shake Shack</span>
+            <span class="brand-stat">219.7K views</span>
+          </figcaption>
+        </figure>
+        <figure class="brand-tile">
+          <img src="assets/brand-storm-burger.jpg" alt="Storm Burger collaboration" />
+          <figcaption>
+            <span class="brand-num">03</span>
+            <span class="brand-name">Storm Burger</span>
+            <span class="brand-stat">266K views</span>
+          </figcaption>
+        </figure>
+        <figure class="brand-tile">
+          <img src="assets/brand-baqba.jpg" alt="Baqba Mexican Grill collaboration" />
+          <figcaption>
+            <span class="brand-num">04</span>
+            <span class="brand-name">Baqba Mexican Grill</span>
+            <span class="brand-stat">52K views</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="section-rule"><span>Ideal brand categories</span></div>
+
+      <div class="cat-row">
+        <div class="cat solid"><span class="cnum">A</span><span class="ct">Food &amp; QSR</span></div>
+        <div class="cat gold"><span class="cnum">B</span><span class="ct">Family &amp; lifestyle</span></div>
+        <div class="cat"><span class="cnum">C</span><span class="ct">Entertainment &amp; experiences</span></div>
+        <div class="cat pop"><span class="cnum">D</span><span class="ct">Retail &amp; CPG</span></div>
+      </div>
+    </section>
+
+    <!-- 05 OFFERINGS -->
+    <section class="section" id="offer">
+      <div class="section-head">
+        <div class="section-num">05 / Offer</div>
+        <div>
+          <div class="kicker"><span class="dot"></span>Partnership offerings</div>
+          <h2 class="section-title">Flexibility, <em>scoped to goal.</em></h2>
+        </div>
+      </div>
+
+      <table class="offer-table">
+        <tr>
+          <td class="num">01</td>
+          <td class="t">Sponsored short-form</td>
+          <td class="d">Native posts on TikTok, Reels, Shorts, Snap — platform-tuned creative.</td>
+          <td class="tag">Most requested</td>
+        </tr>
+        <tr>
+          <td class="num">02</td>
+          <td class="t">Cross-platform campaigns</td>
+          <td class="d">One concept, five surfaces. Each cut tuned to the platform's format.</td>
+          <td class="tag">5-surface reach</td>
+        </tr>
+        <tr>
+          <td class="num">03</td>
+          <td class="t">Product integrations</td>
+          <td class="d">Recurring placement inside the family routine — natural and repeatable.</td>
+          <td class="tag">Always-on</td>
+        </tr>
+        <tr>
+          <td class="num">04</td>
+          <td class="t">UGC &amp; paid usage</td>
+          <td class="d">Whitelisting, paid rights, and exclusivity windows on request.</td>
+          <td class="tag">Add-on</td>
+        </tr>
+      </table>
+    </section>
+
+  </div><!-- /page -->
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="contact-inner">
+      <div>
+        <div class="contact-eyebrow"><span class="dot"></span>Let's build something</div>
+        <h2>Work<br/>with <em>us.</em></h2>
+      </div>
+      <div class="contact-rows">
+        <div class="contact-row">
+          <div class="lab">Creator</div>
+          <div class="val">Kenneth Lopes</div>
+        </div>
+        <div class="contact-row">
+          <div class="lab">TikTok</div>
+          <div class="val mono">@nesimento_</div>
+        </div>
+        <div class="contact-row">
+          <div class="lab">Everywhere else</div>
+          <div class="val mono">@nesimento</div>
+        </div>
+        <div class="contact-row">
+          <div class="lab">Inquiries</div>
+          <div class="val mono">thenesifamilybiz@gmail.com</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOCIAL GRID -->
+    <div class="social-grid-wrap">
+      <div class="social-grid-eyebrow"><span class="dot"></span>Find us on socials</div>
+      <div class="social-grid">
+        <a class="social-btn social-btn--tiktok" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer" aria-label="TikTok @nesimento_">
+          <svg class="social-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.6 6.3a4.7 4.7 0 0 1-2.7-1.6 4.6 4.6 0 0 1-1.1-2.7h-3.4v13.3a2.7 2.7 0 1 1-2.7-2.7c.3 0 .6 0 .9.1V9.2a6 6 0 0 0-.9-.1A6.1 6.1 0 1 0 15.8 15V8.8a8 8 0 0 0 4.7 1.5V6.9a4.6 4.6 0 0 1-.9-.6z"/></svg>
+          <div class="social-name">TikTok</div>
+          <div class="social-count">650K</div>
+          <span class="social-arrow">↗</span>
+        </a>
+        <a class="social-btn social-btn--instagram" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer" aria-label="Instagram @nesimento">
+          <svg class="social-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <div class="social-name">Instagram</div>
+          <div class="social-count">65K</div>
+          <span class="social-arrow">↗</span>
+        </a>
+        <a class="social-btn social-btn--snapchat" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer" aria-label="Snapchat @nesimento">
+          <svg class="social-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.6c3.5 0 6.4 2.5 6.7 6 0 .6.1 1.4.1 2.1 0 1.6 0 1.7.4 2.5.4.7 1.4 1.4 2.4 1.7.6.2.6.5.4 1-.3.5-.9.8-1.6 1-.4.1-.5.4-.5.7 0 .4-.4.6-1 .6-.4 0-1 0-1.5.2-.5.2-.7.6-1 1.2-.4.6-.9 1-1.7 1.3-.7.2-1.3.1-2-.2-.7-.3-1.3-.4-2-.4s-1.3.1-2 .4c-.7.3-1.3.4-2 .2-.8-.3-1.3-.7-1.7-1.3-.3-.6-.5-1-1-1.2-.5-.2-1.1-.2-1.5-.2-.6 0-1-.2-1-.6 0-.3-.1-.6-.5-.7-.7-.2-1.3-.5-1.6-1-.2-.5-.2-.8.4-1 1-.3 2-1 2.4-1.7.4-.8.4-.9.4-2.5 0-.7 0-1.5.1-2.1.3-3.5 3.2-6 6.7-6z"/></svg>
+          <div class="social-name">Snapchat</div>
+          <div class="social-count">55K</div>
+          <span class="social-arrow">↗</span>
+        </a>
+        <a class="social-btn social-btn--youtube" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer" aria-label="YouTube @thenesifamily">
+          <svg class="social-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22.5 7.2a2.7 2.7 0 0 0-1.9-1.9C18.9 5 12 5 12 5s-6.9 0-8.6.4A2.7 2.7 0 0 0 1.5 7.2 28 28 0 0 0 1.1 12a28 28 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9c1.7.4 8.6.4 8.6.4s6.9 0 8.6-.4a2.7 2.7 0 0 0 1.9-1.9 28 28 0 0 0 .4-4.8 28 28 0 0 0-.4-4.8zM9.8 15.3V8.7l5.7 3.3-5.7 3.3z"/></svg>
+          <div class="social-name">YouTube</div>
+          <div class="social-count">32K</div>
+          <span class="social-arrow">↗</span>
+        </a>
+        <a class="social-btn social-btn--facebook" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer" aria-label="Facebook @nesimento">
+          <svg class="social-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9h2.5V6H14c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6.5h3V14h2.5l.5-3h-3V9.5c0-.3.2-.5.5-.5z"/></svg>
+          <div class="social-name">Facebook</div>
+          <div class="social-count">20K</div>
+          <span class="social-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>© 2026 Nesi Family</span>
+    <span>Media Kit · v1.0</span>
+    <span>thenesifamilybiz@gmail.com</span>
+    <a href="https://linkedin.com/in/kennethlopes" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;color:inherit;text-decoration:none;"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;display:inline-block;vertical-align:-1px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
+  </div>
+
+</div><!-- /.desktop-view -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     MOBILE / SWIPE-DECK VIEW (≤ 700px)
+     ═══════════════════════════════════════════════════ -->
+<div class="mview">
+  <div class="deck-host" id="deck-host"></div>
+  <div class="deck-nav">
+    <button id="prev" type="button" aria-label="Previous">‹</button>
+    <div class="thumb-strip" id="thumbs"></div>
+    <button id="next" type="button" aria-label="Next">›</button>
+  </div>
+</div>
+
+<template id="tpl-hero">
+  <div class="card hero-card">
+    <div class="card-head">
+      <span>Nesi Family · Media Kit</span>
+      <span>Q2 / 26</span>
+    </div>
+    <div class="card-body">
+      <div class="kicker"><span class="dot"></span>Family · Food · Lifestyle</div>
+      <h1 class="hero-wordmark">Nesi<em>Family.</em></h1>
+      <p class="hero-tag">A father–son creator brand. Food, lifestyle, entertainment — made to be watched together.</p>
+      <div class="hero-pills">
+        <span class="pill solid">Family-friendly</span>
+        <span class="pill">Food</span>
+        <span class="pill">Lifestyle</span>
+        <span class="pill">Entertainment</span>
+      </div>
+      <div class="hero-portrait-wrap">
+        <span class="hero-stamp">EST. 2025</span>
+        <img src="assets/portrait.jpg" alt="Kenneth Lopes and son" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-reach">
+  <div class="card">
+    <div class="card-head">
+      <span class="card-num">01<em>/</em>Reach &amp; content</span>
+      <span>Where they live · what we make</span>
+    </div>
+    <div class="card-body">
+      <div class="kicker"><span class="dot"></span>Reach &amp; content</div>
+      <h2 class="title title--xl">Reach.</h2>
+      <div style="margin-top:16px">
+        <div class="stat-row">
+          <div class="stat">
+            <div class="stat-num">800K<span class="plus">+</span></div>
+            <div class="stat-label">Total audience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100M<span class="plus">+</span></div>
+            <div class="stat-label">All-time views</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">70M<span class="plus">+</span></div>
+            <div class="stat-label">Last 90 days</div>
+          </div>
+        </div>
+        <div class="platforms">
+          <a class="plat" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer">
+            <div class="plat-name"><span>TikTok</span><span class="rank">01</span></div>
+            <div class="plat-count">650K</div>
+          </a>
+          <a class="plat" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
+            <div class="plat-name"><span>Instagram</span><span class="rank">02</span></div>
+            <div class="plat-count">65K</div>
+          </a>
+          <a class="plat" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer">
+            <div class="plat-name"><span>Snapchat</span><span class="rank">03</span></div>
+            <div class="plat-count">55K</div>
+          </a>
+          <a class="plat" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer">
+            <div class="plat-name"><span>YouTube</span><span class="rank">04</span></div>
+            <div class="plat-count">32K</div>
+          </a>
+          <a class="plat" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer">
+            <div class="plat-name"><span>Facebook</span><span class="rank">05</span></div>
+            <div class="plat-count">20K</div>
+          </a>
+        </div>
+      </div>
+      <h3 class="sub-title">Three pillars, <em>one voice.</em></h3>
+      <div class="pillars">
+        <div class="pillar dark">
+          <img class="pillar-img" src="assets/pillar-food.jpg" alt="Food"/>
+          <div class="pillar-text">
+            <div class="pillar-num">P/01 · Food</div>
+            <div class="pillar-title">Food reviews</div>
+            <div class="pillar-stat">11.3M views · single post</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <img class="pillar-img" src="assets/pillar-lifestyle.jpg" alt="Lifestyle"/>
+          <div class="pillar-text">
+            <div class="pillar-num">P/02 · Lifestyle</div>
+            <div class="pillar-title">Lifestyle &amp; family POV</div>
+            <div class="pillar-stat">12M views · single post</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <img class="pillar-img" src="assets/pillar-entertainment.jpg" alt="Entertainment"/>
+          <div class="pillar-text">
+            <div class="pillar-num">P/03 · Entertainment</div>
+            <div class="pillar-title">Entertainment &amp; culture</div>
+            <div class="pillar-stat">600K views · single post</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-audience">
+  <div class="card">
+    <div class="card-head">
+      <span class="card-num">02<em>/</em>Audience</span>
+      <span>Who's watching · why brands win</span>
+    </div>
+    <div class="card-body">
+      <div class="kicker"><span class="dot"></span>Who's watching</div>
+      <h2 class="title">Female-skewed, <em>18–34.</em></h2>
+      <div class="audience-box">
+        <div class="ac-row">
+          <div class="lab">Core age</div>
+          <div class="val">18–34<small>Primary cohort</small></div>
+        </div>
+        <div class="ac-row">
+          <div class="lab">Gender</div>
+          <div>
+            <div class="val">Female-skewed<small>Up to 78% F on Facebook</small></div>
+            <div class="gender-bar">
+              <div class="f" style="flex:78">F · 78%</div>
+              <div class="m" style="flex:22">M · 22%</div>
+            </div>
+          </div>
+        </div>
+        <div class="ac-row">
+          <div class="lab">Primary geo</div>
+          <div class="val">United States</div>
+        </div>
+        <div class="ac-row">
+          <div class="lab">Global</div>
+          <div class="geo-list">
+            <span>South Africa</span><span>Philippines</span>
+            <span>Australia</span><span>UK</span>
+          </div>
+        </div>
+      </div>
+      <div class="section-rule"><span>Why brands win here</span></div>
+      <div class="reason-box">
+        <div class="reason">
+          <span class="rn">i</span>
+          <div class="rt">Father–son storytelling, safe for every brief.</div>
+          <div class="rtag">PG · ad-friendly</div>
+        </div>
+        <div class="reason">
+          <span class="rn">ii</span>
+          <div class="rt">Above-benchmark watch times.</div>
+          <div class="rtag">27–42s · Snap</div>
+        </div>
+        <div class="reason">
+          <span class="rn">iii</span>
+          <div class="rt">One shoot, five platforms.</div>
+          <div class="rtag">5× distribution</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-offer">
+  <div class="card">
+    <div class="card-head">
+      <span class="card-num">03<em>/</em>Brands</span>
+      <span>Past collaborations · ideal categories</span>
+    </div>
+    <div class="card-body">
+      <div class="kicker"><span class="dot"></span>Past brand collaborations</div>
+      <h2 class="title title--xl">Brands.</h2>
+      <div class="brand-grid">
+        <figure class="brand-tile">
+          <img src="assets/brand-dominos.jpg" alt="Domino's collaboration"/>
+          <figcaption>
+            <span class="brand-num">01</span>
+            <span class="brand-name">Domino's</span>
+            <span class="brand-stat">100K views</span>
+          </figcaption>
+        </figure>
+        <figure class="brand-tile">
+          <img src="assets/brand-shake-shack.jpg" alt="Shake Shack collaboration"/>
+          <figcaption>
+            <span class="brand-num">02</span>
+            <span class="brand-name">Shake Shack</span>
+            <span class="brand-stat">219.7K views</span>
+          </figcaption>
+        </figure>
+        <figure class="brand-tile">
+          <img src="assets/brand-storm-burger.jpg" alt="Storm Burger collaboration"/>
+          <figcaption>
+            <span class="brand-num">03</span>
+            <span class="brand-name">Storm Burger</span>
+            <span class="brand-stat">266K views</span>
+          </figcaption>
+        </figure>
+        <figure class="brand-tile">
+          <img src="assets/brand-baqba.jpg" alt="Baqba Mexican Grill collaboration"/>
+          <figcaption>
+            <span class="brand-num">04</span>
+            <span class="brand-name">Baqba Mexican</span>
+            <span class="brand-stat">52K views</span>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="section-rule"><span>Ideal brand categories</span></div>
+      <div class="cat-grid">
+        <div class="cat solid"><span class="cat-num">A</span><span class="cat-name">Food &amp; QSR</span></div>
+        <div class="cat"><span class="cat-num">B</span><span class="cat-name">Family &amp; lifestyle</span></div>
+        <div class="cat"><span class="cat-num">C</span><span class="cat-name">Entertainment</span></div>
+        <div class="cat solid"><span class="cat-num">D</span><span class="cat-name">Retail &amp; CPG</span></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="tpl-contact">
+  <div class="card contact-card">
+    <div class="card-head">
+      <span class="card-num">04<em>/</em>Contact</span>
+      <span>Let's build</span>
+    </div>
+    <div class="card-body">
+      <div class="kicker"><span class="dot"></span>Let's build something</div>
+      <h2 class="title">Work<br/>with <em>us.</em></h2>
+      <div class="contact-list">
+        <div class="contact-row">
+          <div class="lab">Creator</div>
+          <div class="val">Kenneth Lopes</div>
+        </div>
+        <div class="contact-row">
+          <div class="lab">TikTok</div>
+          <div class="val mono">@nesimento_</div>
+        </div>
+        <div class="contact-row">
+          <div class="lab">Everywhere</div>
+          <div class="val mono">@nesimento</div>
+        </div>
+        <div class="contact-row">
+          <div class="lab">Inquiries</div>
+          <div class="val email">thenesifamilybiz@gmail.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+(function () {
+  const cards = [
+    { id: 'hero',     label: 'About',    tpl: 'tpl-hero' },
+    { id: 'reach',    label: 'Reach',    tpl: 'tpl-reach' },
+    { id: 'audience', label: 'Audience', tpl: 'tpl-audience' },
+    { id: 'offer',    label: 'Brands',   tpl: 'tpl-offer' },
+    { id: 'contact',  label: 'Contact',  tpl: 'tpl-contact' },
+  ];
+
+  const navIcons = {
+    hero:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="3"/><circle cx="16" cy="11" r="2.2"/><path d="M3.5 19c1-3 3.2-4.5 5.5-4.5s4.2 1.2 5.2 3"/><path d="M13 18c.6-1.6 1.8-2.6 3-2.6s2.4 1 3 2.6"/></svg>',
+    reach:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V11"/><path d="M10 19V7"/><path d="M16 19V13"/><path d="M22 19V5"/><path d="M3 19h20"/></svg>',
+    audience: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.2"/><path d="M5 19c.8-3 3.6-4.6 7-4.6s6.2 1.6 7 4.6"/></svg>',
+    offer:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V5a1 1 0 0 0-1-1h-7L3 14l7 7L21 12Z"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/></svg>',
+    contact:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>',
+  };
+
+  const host = document.getElementById('deck-host');
+  const thumbs = document.getElementById('thumbs');
+
+  let deckEl, trackEl;
+  let state = { i: 0, drag: 0, startX: null, dragging: false };
+
+  function buildDeck() {
+    deckEl = document.createElement('div');
+    deckEl.className = 'deck';
+    trackEl = document.createElement('div');
+    trackEl.className = 'deck-track';
+    cards.forEach(c => {
+      const slide = document.createElement('div');
+      slide.className = 'deck-slide';
+      const tpl = document.getElementById(c.tpl);
+      slide.appendChild(tpl.content.cloneNode(true));
+      trackEl.appendChild(slide);
+    });
+    deckEl.appendChild(trackEl);
+
+    deckEl.addEventListener('touchstart', onPointerStart, { passive: true });
+    deckEl.addEventListener('touchmove', onPointerMove, { passive: true });
+    deckEl.addEventListener('touchend', onPointerEnd);
+    deckEl.addEventListener('mousedown', onPointerStart);
+    deckEl.addEventListener('mousemove', onPointerMove);
+    deckEl.addEventListener('mouseup', onPointerEnd);
+    deckEl.addEventListener('mouseleave', onPointerEnd);
+
+    host.appendChild(deckEl);
+    applyTransform();
+  }
+
+  function applyTransform() {
+    const i = state.i, drag = state.drag;
+    trackEl.classList.toggle('no-trans', drag !== 0);
+    trackEl.style.transform = `translateX(calc(${-i * 100}% + ${drag}px))`;
+    [...thumbs.querySelectorAll('.nav-icon')].forEach((t, idx) => {
+      t.classList.toggle('active', idx === i);
+    });
+  }
+
+  function go(dir) {
+    state.i = Math.max(0, Math.min(cards.length - 1, state.i + dir));
+    state.drag = 0;
+    applyTransform();
+  }
+  function goTo(n) {
+    state.i = Math.max(0, Math.min(cards.length - 1, n));
+    state.drag = 0;
+    applyTransform();
+  }
+
+  function clientX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
+  function onPointerStart(e) {
+    state.startX = clientX(e);
+    state.drag = 0;
+    state.dragging = true;
+    deckEl.classList.add('dragging');
+  }
+  function onPointerMove(e) {
+    if (!state.dragging || state.startX === null) return;
+    state.drag = clientX(e) - state.startX;
+    applyTransform();
+  }
+  function onPointerEnd() {
+    if (!state.dragging) return;
+    const w = trackEl ? trackEl.offsetWidth : 300;
+    const drag = state.drag;
+    state.dragging = false;
+    deckEl.classList.remove('dragging');
+    state.startX = null;
+    if (drag < -w * 0.18) go(1);
+    else if (drag > w * 0.18) go(-1);
+    else { state.drag = 0; applyTransform(); }
+  }
+
+  // Build thumb-strip nav
+  cards.forEach((c, idx) => {
+    const t = document.createElement('button');
+    t.type = 'button';
+    t.className = 'nav-icon';
+    t.title = c.label;
+    t.setAttribute('aria-label', c.label);
+    t.innerHTML = `
+      <span class="nav-icon-glyph">${navIcons[c.id] || navIcons.hero}</span>
+      <span class="nav-icon-label">${c.label}</span>
+    `;
+    t.addEventListener('click', () => goTo(idx));
+    thumbs.appendChild(t);
+  });
+
+  document.getElementById('prev').addEventListener('click', () => go(-1));
+  document.getElementById('next').addEventListener('click', () => go(1));
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') go(1);
+    else if (e.key === 'ArrowLeft') go(-1);
+  });
+
+  buildDeck();
+})();
+</script>
+
+  <script src="mobile.js" defer></script>
+</body>
+</html>

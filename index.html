@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#F2EBDA" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Kenneth Lopes" />
+  <link rel="apple-touch-icon" href="/assets/headshot.jpg" />
+  <link rel="manifest" href="/manifest.json" />
+  <title>Kenneth Lopes</title>
+  <meta name="description" content="Kenneth Lopes — Program Manager, AI Enablement & Creator. Two worlds: professional portfolio and Nesi Family creator brand." />
+  <meta property="og:title" content="Kenneth Lopes" />
+  <meta property="og:description" content="Program Manager, AI Enablement & Creator. Two worlds, one person." />
+  <meta property="og:image" content="https://kennethlopes.com/assets/og-home.jpg" />
+  <meta property="og:url" content="https://kennethlopes.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/assets/favicon.ico" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,400&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:     #F2EBDA;
+      --ink:    #1B2A1B;
+      --muted:  #7A8A7A;
+      --line:   rgba(27,42,27,0.14);
+      --accent: #2D4A2B;
+      --pop:    #C76F3D;
+      --pad:    clamp(20px, 3.5vw, 52px);
+      --shadow: clamp(10px, 1.2vw, 18px);
+      --gap:    clamp(16px, 2vw, 32px);
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-italic:  'Instrument Serif', Georgia, serif;
+      --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--bg); -webkit-font-smoothing: antialiased; overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ── PAGE ── */
+    .page {
+      height: 100dvh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    /* ── NAV (shared) ── */
+    nav.topnav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 18px var(--pad);
+      border-bottom: 1px solid var(--line);
+    }
+    .topnav-brand {
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink);
+      justify-self: start;
+    }
+    .topnav-links { display: flex; gap: 32px; justify-content: center; }
+    .topnav-link {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+      font-weight: 700;
+      transition: color 0.15s;
+    }
+    .topnav-link:hover { color: var(--ink); }
+    .topnav-link.is-active { color: var(--ink); }
+    .topnav-cta {
+      justify-self: end;
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 10px 18px; border: 1.5px solid var(--ink); color: var(--ink);
+      transition: background 0.15s, color 0.15s;
+    }
+    .topnav-cta:hover { background: var(--ink); color: var(--bg); }
+    @media (max-width: 720px) {
+      .topnav-links { display: none; }
+      nav.topnav { grid-template-columns: 1fr auto; }
+    }
+
+    /* ── CARDS AREA ── */
+    .cards-area {
+      padding: var(--pad);
+      display: flex;
+      align-items: stretch;
+      position: relative;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    /* ── AMPERSAND MEDALLION ── */
+    .medallion {
+      position: absolute;
+      left: 50%; top: 42%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      width: clamp(44px, 5vw, 64px);
+      height: clamp(44px, 5vw, 64px);
+      background: var(--bg);
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      box-shadow: 0 2px 14px rgba(27,42,27,0.13);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-size: clamp(18px, 2.2vw, 28px);
+      color: var(--ink);
+      pointer-events: none;
+    }
+
+    /* ── CARD WRAPPERS ── */
+    .door-wrap {
+      flex: 1;
+      position: relative;
+    }
+    .door-wrap + .door-wrap { margin-left: var(--gap); }
+
+    /* Shadow block */
+    .door-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      transition: transform 0.35s ease;
+    }
+    .door-wrap--pro::before {
+      background: var(--accent);
+      transform: translate(var(--shadow), var(--shadow));
+    }
+    .door-wrap--creator::before {
+      background: var(--pop);
+      transform: translate(calc(var(--shadow) * -1), var(--shadow));
+    }
+    .door-wrap--pro:hover::before    { transform: translate(calc(var(--shadow) + 5px), calc(var(--shadow) + 5px)); }
+    .door-wrap--creator:hover::before { transform: translate(calc((var(--shadow) + 5px) * -1), calc(var(--shadow) + 5px)); }
+
+    /* ── CARD ── */
+    .door {
+      position: relative; z-index: 1;
+      height: 100%;
+      display: flex; flex-direction: column;
+      overflow: hidden; cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .door--pro     { border: 2.5px solid var(--accent); }
+    .door--creator { border: 2.5px solid var(--pop); }
+    .door--pro:hover     { transform: translate(-4px, -4px); }
+    .door--creator:hover { transform: translate(4px, -4px); }
+
+    /* Photo */
+    .door-photo {
+      flex: 1; overflow: hidden; min-height: 0; position: relative;
+    }
+    .door-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 18%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .door--creator .door-photo img { object-position: center 0%; }
+    .door:hover .door-photo img { transform: scale(1.04); }
+
+    /* Badge */
+    .door-badge {
+      position: absolute; top: 14px; z-index: 2;
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.2em; text-transform: uppercase; padding: 6px 14px;
+    }
+    .door--pro  .door-badge { right: 14px; background: var(--accent);  color: var(--bg); }
+    .door--creator .door-badge { left: 14px;  background: var(--pop); color: #fff; }
+
+    /* Footer caption */
+    .door-footer {
+      flex-shrink: 0;
+      padding: clamp(16px, 2vw, 24px) clamp(18px, 2.2vw, 28px);
+    }
+    .door--pro     .door-footer { background: var(--bg); }
+    .door--creator .door-footer { background: var(--accent); }
+
+    .door-eyebrow {
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .door--pro     .door-eyebrow { color: var(--muted); }
+    .door--creator .door-eyebrow { color: rgba(242,235,218,0.45); }
+
+    .door-footer-row {
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+    }
+
+    .door-title {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: clamp(20px, 2.2vw, 36px);
+      letter-spacing: -0.025em; line-height: 1.05; margin-bottom: 5px;
+    }
+    .door-title em { font-family: var(--font-italic); font-style: italic; }
+    .door--pro     .door-title    { color: var(--ink); }
+    .door--pro     .door-title em { color: var(--accent); }
+    .door--creator .door-title    { color: var(--bg); }
+    .door--creator .door-title em { color: rgba(242,235,218,0.85); }
+
+    .door-desc {
+      font-family: var(--font-mono); font-size: clamp(9px, 0.8vw, 11px); letter-spacing: 0.05em;
+    }
+    .door--pro     .door-desc { color: var(--muted); }
+    .door--creator .door-desc { color: rgba(242,235,218,0.45); }
+
+    .door-enter {
+      flex-shrink: 0;
+      font-family: var(--font-mono); font-size: 9px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 10px 18px; white-space: nowrap;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .door--pro .door-enter     { background: var(--ink); color: var(--bg); }
+    .door--pro:hover .door-enter { background: var(--accent); }
+    .door--creator .door-enter { border: 1.5px solid rgba(242,235,218,0.35); color: var(--bg); }
+    .door--creator:hover .door-enter { background: rgba(242,235,218,0.1); }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--accent);
+      padding: 18px var(--pad);
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    }
+    .footer-copy {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,235,218,0.55);
+    }
+    .footer-email {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(242,235,218,0.7); text-align: center; transition: color 0.15s;
+    }
+    .footer-email:hover { color: var(--bg); }
+    .footer-location {
+      font-family: var(--font-mono); font-size: 10px;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(242,235,218,0.55); text-align: right;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 680px) {
+      html, body { overflow: auto; }
+      .page { height: auto; min-height: 100dvh; }
+      .cards-area { flex-direction: column; padding: 16px; gap: 28px; }
+      .door-wrap + .door-wrap { margin-left: 0; margin-top: 0; }
+      .door-wrap { flex: none; height: 70vw; min-height: 280px; }
+      .door-wrap--creator::before { transform: translate(0, var(--shadow)); }
+      .medallion { display: none; }
+      .site-footer { grid-template-columns: 1fr; gap: 6px; text-align: center; }
+      .footer-email, .footer-location { text-align: center; }
+    }
+  </style>
+  <link rel="stylesheet" href="mobile.css" />
+</head>
+<body>
+<div class="page">
+
+  <!-- NAV -->
+  <nav class="topnav">
+    <a class="topnav-brand" href="index.html">K · L</a>
+    <div class="topnav-links">
+      <a class="topnav-link is-active" href="index.html">Home</a>
+      <a class="topnav-link" href="portfolio.html">Portfolio</a>
+      <a class="topnav-link" href="media-kit.html">Creator</a>
+    </div>
+    <a class="topnav-cta" href="mailto:klopes23@gmail.com">Contact</a>
+  </nav>
+
+  <!-- CARDS -->
+  <div class="cards-area">
+    <div class="medallion">&amp;</div>
+
+    <!-- Professional -->
+    <div class="door-wrap door-wrap--pro">
+      <a class="door door--pro" href="portfolio.html" aria-label="View professional portfolio">
+        <div class="door-photo">
+          <picture><source type="image/webp" srcset="assets/headshot.webp"><img src="assets/headshot.jpg" alt="Kenneth Lopes — professional headshot" width="592" height="666" /></picture>
+          <span class="door-badge">Professional</span>
+        </div>
+        <div class="door-footer">
+          <p class="door-eyebrow">A / Work</p>
+          <div class="door-footer-row">
+            <div>
+              <h2 class="door-title">The <em>Portfolio.</em></h2>
+              <p class="door-desc">Program manager · AI enablement · case studies</p>
+            </div>
+            <span class="door-enter">Enter →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Creator -->
+    <div class="door-wrap door-wrap--creator">
+      <a class="door door--creator" href="media-kit.html" aria-label="View Nesi Family creator media kit">
+        <div class="door-photo">
+          <picture><source type="image/webp" srcset="assets/portrait.webp"><img src="assets/portrait.jpg" alt="Kenneth Lopes and son — Nesi Family" width="1800" height="2700" onerror="this.parentElement.style.display='none'" /></picture>
+          <span class="door-badge">Creator</span>
+        </div>
+        <div class="door-footer">
+          <p class="door-eyebrow">B / Creator</p>
+          <div class="door-footer-row">
+            <div>
+              <h2 class="door-title">Nesi <em>Family.</em></h2>
+              <p class="door-desc">Father–son brand · 800K+ audience · media kit</p>
+            </div>
+            <span class="door-enter">Enter →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span class="footer-copy">© 2026 Kenneth Lopes</span>
+    <a class="footer-email" href="mailto:klopes23@gmail.com">klopes23@gmail.com</a>
+    <span class="footer-location">Los Angeles · CA</span>
+    <a class="footer-linkedin" href="https://linkedin.com/in/kennethlopes" target="_blank" rel="noopener" style="font-family:var(--font-mono,'JetBrains Mono',monospace);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:inherit;display:inline-flex;align-items:center;"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;display:inline-block;vertical-align:-1px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
+  </footer>
+
+</div>
+  <script src="mobile.js" defer></script>
+</body>
+</html>

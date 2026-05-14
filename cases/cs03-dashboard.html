@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CS / 03 — CM Copilot Usage Dashboard · Kenneth Lopes</title>
+<meta name="description" content="Live analytics dashboard from the GenAI enablement program: 41 users, 24 weeks, 435 questions, 56% DAU lift across the 8-week adoption window." />
+<meta property="og:title" content="CM Copilot Usage Dashboard — Kenneth Lopes" />
+<meta property="og:description" content="24-week usage report. 41 users · 13 departments · 435 questions · 56% DAU lift." />
+<meta property="og:image" content="https://kennethlopes.com/assets/og-portfolio.jpg" />
+<link rel="icon" href="/assets/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#F2EBDA" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="K · L Dashboard" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="case.css" />
+<link rel="stylesheet" href="../mobile.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+<script src="https://unpkg.com/recharts@2.12.7/umd/Recharts.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html, body { background: #F2EBDA; }
+  ::selection { background: rgba(45,74,43,0.22); }
+  /* nicer scrollbars on dark */
+  ::-webkit-scrollbar { height: 10px; width: 10px; }
+  ::-webkit-scrollbar-track { background: #E8E0CC; }
+  ::-webkit-scrollbar-thumb { background: #7A8A7A; border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3A4A3A; }
+  .recharts-cartesian-axis-tick text { font-feature-settings: 'tnum'; }
+</style>
+</head>
+<body>
+
+<div class="nav-stack">
+<nav class="topnav" aria-label="Main navigation">
+  <div class="topnav-inner">
+    <a class="topnav-brand" href="../index.html">K · L</a>
+    <div class="topnav-links">
+      <a class="topnav-link" href="../index.html">Home</a>
+      <a class="topnav-link is-active" href="../portfolio.html">Portfolio</a>
+      <a class="topnav-link" href="../media-kit.html">Creator</a>
+    </div>
+    <a class="topnav-cta" href="mailto:klopes23@gmail.com?subject=Let's connect">Contact</a>
+  </div>
+</nav>
+<nav class="subnav" aria-label="Breadcrumb">
+  <div class="subnav-inner">
+    <div class="subnav-trail">
+      <a href="../portfolio.html">Portfolio</a>
+      <span class="sep">/</span>
+      <a href="cs03-genai-enablement.html">CS · 03</a>
+      <span class="sep">/</span>
+      <span class="current">Dashboard</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="https://linkedin.com/in/kennethlopes" target="_blank" rel="noopener" style="color:#3A4A3A;text-decoration:none;display:inline-flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;display:inline-block;vertical-align:-1px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
+      <a class="subnav-back" href="deck.html#/3">← Back to case study</a>
+    </div>
+  </div>
+</nav>
+</div>
+<div id="root"></div>
+<script type="text/babel" data-presets="react,env">
+/* global React, ReactDOM, Recharts */
+const { useState, useEffect, useRef, useMemo } = React;
+const {
+  LineChart, BarChart, AreaChart, ComposedChart, ScatterChart,
+  Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  ReferenceArea, ReferenceLine, Area, Bar, Line, Scatter,
+  ResponsiveContainer,
+} = Recharts;
+
+/* ============================================================
+   DATA
+   ============================================================ */
+const DEPT_COLORS = {
+  Engineering:        "#2D4A2B",
+  Manufacturing:      "#5E7030",
+  Product:            "#3F6B70",
+  Operations:         "#C76F3D",
+  "People & Culture": "#7E5773",
+  Marketing:          "#A8523A",
+  Sales:              "#B5862E",
+  Other:              "#6E6A5C",
+};
+
+const KPIS = {
+  totalUsers: 41,
+  totalDepartments: 13,
+  totalQuestions: 435,
+  totalSessions: 73,
+  answerRate: 100,
+  preAdoptionPeak: 8,
+  adoptionPeak: 12,
+  newFromAdoption: 23,
+  weeks10Plus: 2,
+  totalWeeks: 24,
+};
+
+const WEEKLY = [
+  { wk: 1,  date: "Sep 01", users: 1,  q: 19, sessions: 1,  newU: 1, ret: 0, cum: 1,  adopt: false },
+  { wk: 2,  date: "Sep 08", users: 8,  q: 52, sessions: 10, newU: 8, ret: 0, cum: 9,  adopt: false },
+  { wk: 3,  date: "Sep 15", users: 4,  q: 42, sessions: 4,  newU: 3, ret: 0, cum: 12, adopt: false },
+  { wk: 4,  date: "Sep 22", users: 5,  q: 44, sessions: 6,  newU: 1, ret: 2, cum: 13, adopt: false },
+  { wk: 5,  date: "Sep 29", users: 1,  q: 10, sessions: 1,  newU: 0, ret: 1, cum: 13, adopt: false },
+  { wk: 6,  date: "Oct 06", users: 2,  q: 2,  sessions: 1,  newU: 0, ret: 1, cum: 13, adopt: false },
+  { wk: 7,  date: "Oct 13", users: 3,  q: 13, sessions: 1,  newU: 0, ret: 1, cum: 13, adopt: false },
+  { wk: 8,  date: "Oct 20", users: 1,  q: 1,  sessions: 0,  newU: 0, ret: 0, cum: 13, adopt: false },
+  { wk: 9,  date: "Oct 27", users: 1,  q: 1,  sessions: 0,  newU: 0, ret: 0, cum: 13, adopt: false },
+  { wk: 11, date: "Nov 10", users: 1,  q: 12, sessions: 2,  newU: 0, ret: 1, cum: 13, adopt: false },
+  { wk: 12, date: "Nov 17", users: 1,  q: 1,  sessions: 0,  newU: 0, ret: 0, cum: 13, adopt: false },
+  { wk: 14, date: "Dec 01", users: 2,  q: 20, sessions: 1,  newU: 0, ret: 1, cum: 13, adopt: false },
+  { wk: 15, date: "Dec 08", users: 3,  q: 13, sessions: 3,  newU: 3, ret: 0, cum: 16, adopt: false },
+  { wk: 16, date: "Dec 15", users: 4,  q: 12, sessions: 3,  newU: 1, ret: 1, cum: 17, adopt: false },
+  { wk: 17, date: "Dec 22", users: 1,  q: 1,  sessions: 1,  newU: 1, ret: 0, cum: 18, adopt: false },
+  { wk: 18, date: "Dec 29", users: 3,  q: 3,  sessions: 2,  newU: 0, ret: 2, cum: 18, adopt: false },
+  { wk: 19, date: "Jan 05", users: 3,  q: 8,  sessions: 3,  newU: 1, ret: 1, cum: 19, adopt: true  },
+  { wk: 20, date: "Jan 12", users: 5,  q: 17, sessions: 3,  newU: 1, ret: 2, cum: 20, adopt: true  },
+  { wk: 21, date: "Jan 19", users: 12, q: 48, sessions: 18, newU: 7, ret: 1, cum: 27, adopt: true  },
+  { wk: 22, date: "Jan 26", users: 11, q: 39, sessions: 16, newU: 5, ret: 2, cum: 32, adopt: true  },
+  { wk: 23, date: "Feb 02", users: 7,  q: 24, sessions: 8,  newU: 2, ret: 2, cum: 34, adopt: true  },
+  { wk: 24, date: "Feb 09", users: 7,  q: 18, sessions: 5,  newU: 1, ret: 2, cum: 35, adopt: true  },
+  { wk: 25, date: "Feb 16", users: 12, q: 33, sessions: 9,  newU: 6, ret: 2, cum: 41, adopt: true  },
+  { wk: 26, date: "Feb 23", users: 3,  q: 3,  sessions: 1,  newU: 0, ret: 1, cum: 41, adopt: true  },
+];
+
+const DEPARTMENTS = [
+  { name: "Engineering",        users: 16, q: 213, sessions: 216, avg: 13.3, pct: 49.0 },
+  { name: "Manufacturing",      users: 6,  q: 70,  sessions: 70,  avg: 11.7, pct: 16.1 },
+  { name: "Product",            users: 2,  q: 52,  sessions: 41,  avg: 26.0, pct: 12.0 },
+  { name: "Operations",         users: 3,  q: 34,  sessions: 34,  avg: 11.3, pct: 7.8  },
+  { name: "People & Culture",   users: 3,  q: 23,  sessions: 23,  avg: 7.7,  pct: 5.3  },
+  { name: "Marketing",          users: 2,  q: 12,  sessions: 14,  avg: 6.0,  pct: 2.8  },
+  { name: "Sales",              users: 1,  q: 12,  sessions: 5,   avg: 12.0, pct: 2.8  },
+  { name: "Other",              users: 7,  q: 19,  sessions: 22,  avg: 2.7,  pct: 4.4  },
+];
+
+const ADOPT_DEPT_WEEKS = [
+  { date: "Jan 05", Engineering: 1, Manufacturing: 1, Operations: 0, "People & Culture": 0, Product: 0, Other: 1 },
+  { date: "Jan 12", Engineering: 1, Manufacturing: 1, Operations: 0, "People & Culture": 0, Product: 0, Other: 3 },
+  { date: "Jan 19", Engineering: 4, Manufacturing: 0, Operations: 1, "People & Culture": 0, Product: 0, Other: 7 },
+  { date: "Jan 26", Engineering: 2, Manufacturing: 1, Operations: 1, "People & Culture": 0, Product: 1, Other: 6 },
+  { date: "Feb 02", Engineering: 2, Manufacturing: 2, Operations: 0, "People & Culture": 0, Product: 0, Other: 3 },
+  { date: "Feb 09", Engineering: 2, Manufacturing: 0, Operations: 0, "People & Culture": 1, Product: 0, Other: 4 },
+  { date: "Feb 16", Engineering: 8, Manufacturing: 0, Operations: 0, "People & Culture": 0, Product: 0, Other: 4 },
+  { date: "Feb 23", Engineering: 0, Manufacturing: 1, Operations: 0, "People & Culture": 0, Product: 0, Other: 2 },
+];
+
+// Each user: name, dept, q, sessions, weeksActive, firstWk, lastWk, badges
+const USERS = [
+  ["Eric B.","Engineering",117,36,14,3,25,["Power User","Most Loyal","Pioneer"]],
+  ["Kenneth L.","Product",48,3,18,2,25,["Power User","Most Loyal","Pioneer"]],
+  ["Digna N.","Engineering",42,3,4,3,24,["Power User","Pioneer"]],
+  ["Elisa P.","Manufacturing",23,1,3,2,22,["Pioneer"]],
+  ["Genaro F.","Manufacturing",20,2,4,22,26,[]],
+  ["Elsa A.","People & Culture",19,1,1,1,1,["Pioneer"]],
+  ["Keith O.","Operations",19,4,5,2,25,["Pioneer"]],
+  ["Lucky Jay B.","Manufacturing",17,1,4,20,25,[]],
+  ["Jay S.","Operations",14,1,1,2,2,["Pioneer"]],
+  ["Husein N.","Engineering",12,2,2,21,25,[]],
+  ["Rafael T.","Sales",12,1,4,20,24,[]],
+  ["Hieu N.","Engineering",11,1,3,15,26,[]],
+  ["Manuel R.","Engineering",10,1,2,21,22,[]],
+  ["Ally N.","Marketing",8,8,1,21,21,[]],
+  ["Malik A.","Management",7,2,2,2,20,["Pioneer"]],
+  ["Jose G.","Engineering",6,1,2,21,22,[]],
+  ["Amber F.","Marketing",4,2,2,16,21,[]],
+  ["Arthur L.","Manufacturing",4,3,1,2,2,["Pioneer"]],
+  ["Chris P.","Product",4,1,1,22,22,[]],
+  ["Ozer F.","Manufacturing",4,2,3,23,26,[]],
+  ["Brian K.","Engineering",3,1,2,15,16,[]],
+  ["Ion B.","Purchasing",3,1,2,2,21,["Pioneer"]],
+  ["Saleem S.","Solutions",3,1,1,21,21,[]],
+  ["Aylah C.","Product Management",2,2,1,21,21,[]],
+  ["Anil P.","Engineering",2,1,1,15,15,[]],
+  ["Armen T.","Engineering",2,2,1,22,22,[]],
+  ["Catrina B.","People & Culture",2,1,1,24,24,[]],
+  ["Claudia F.","Accounting",2,1,1,3,3,["Pioneer"]],
+  ["Edson L.","Manufacturing",2,1,1,19,19,[]],
+  ["M. S.","Engineering",2,1,1,25,25,[]],
+  ["Nancy M.","People & Culture",2,1,1,4,4,["Pioneer"]],
+  ["B. S.","Engineering",1,1,1,25,25,[]],
+  ["Jose R.","Operations",1,1,1,21,21,[]],
+  ["Nestor O.","Solutions",1,1,1,2,2,["Pioneer"]],
+  ["N. V.","Other",1,1,1,22,22,[]],
+  ["R. A.","Engineering",1,1,1,25,25,[]],
+  ["R. K.","Engineering",1,1,1,25,25,[]],
+  ["R. Kh.","Engineering",1,1,1,25,25,[]],
+  ["Steve H.","Engineering",1,1,1,23,23,[]],
+  ["Siddharth S.","Engineering",1,1,1,25,25,[]],
+  ["Tim M.","IT",1,1,1,17,17,[]],
+].map(([name,dept,q,sessions,weeksActive,firstWk,lastWk,badges])=>({
+  name, dept, q, sessions, weeksActive, firstWk, lastWk, badges,
+  color: DEPT_COLORS[dept] || DEPT_COLORS.Other,
+}));
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const PRE = WEEKLY.filter(w => !w.adopt);
+const ADOPT = WEEKLY.filter(w => w.adopt);
+const sum = (arr, k) => arr.reduce((a,b) => a + b[k], 0);
+const avg = (arr, k) => sum(arr,k) / arr.length;
+
+const PRE_STATS = {
+  weeks: PRE.length,
+  totalUsers: sum(PRE,"users"),
+  totalQ: sum(PRE,"q"),
+  totalSessions: sum(PRE,"sessions"),
+  avgUsers: avg(PRE,"users"),
+  avgQ: avg(PRE,"q"),
+  peakUsers: Math.max(...PRE.map(w=>w.users)),
+};
+const ADOPT_STATS = {
+  weeks: ADOPT.length,
+  totalUsers: sum(ADOPT,"users"),
+  totalQ: sum(ADOPT,"q"),
+  totalSessions: sum(ADOPT,"sessions"),
+  avgUsers: avg(ADOPT,"users"),
+  avgQ: avg(ADOPT,"q"),
+  peakUsers: Math.max(...ADOPT.map(w=>w.users)),
+};
+
+// Funnel stages
+const POWER = USERS.filter(u => u.q >= 10).length;
+const REPEAT = USERS.filter(u => u.weeksActive >= 2).length;
+const ACTIVE = USERS.filter(u => u.q >= 2).length;
+const FUNNEL = [
+  { stage: "Total Users",   value: 41,     color: "#2D4A2B", desc: "all signed in" },
+  { stage: "Active",        value: ACTIVE, color: "#3F6B70", desc: "≥ 2 questions" },
+  { stage: "Repeat",        value: REPEAT, color: "#7E5773", desc: "≥ 2 weeks active" },
+  { stage: "Power Users",   value: POWER,  color: "#C76F3D", desc: "≥ 10 questions" },
+];
+
+/* ============================================================
+   ANIMATED COUNTER
+   ============================================================ */
+function useCountUp(target, duration = 1400, decimals = 0) {
+  const [val, setVal] = useState(0);
+  useEffect(() => {
+    let raf, start;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const p = Math.min(1, (ts - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setVal(target * eased);
+      if (p < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration]);
+  return decimals === 0 ? Math.round(val) : Number(val.toFixed(decimals));
+}
+
+function KpiCard({ label, value, suffix = "", decimals = 0, accent = "#2D4A2B", sub, delay = 0 }) {
+  const [shown, setShown] = useState(false);
+  useEffect(() => { const t = setTimeout(()=>setShown(true), delay); return ()=>clearTimeout(t); }, [delay]);
+  const v = useCountUp(shown ? value : 0, 1400, decimals);
+  return (
+    <div className="relative overflow-hidden rounded-xl border border-[rgba(27,42,27,0.14)] bg-[#FAF6EA] p-5 transition-all hover:border-[rgba(27,42,27,0.20)]">
+      <div className="absolute inset-x-0 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${accent}, transparent)` }} />
+      <div className="text-[10px] uppercase tracking-[0.18em] text-[#7A8A7A] font-medium">{label}</div>
+      <div className="mt-3 flex items-baseline gap-1">
+        <div className="text-4xl font-semibold tabular-nums tracking-tight text-[#1B2A1B]" style={{ fontFeatureSettings: "'tnum'" }}>
+          {v.toLocaleString()}
+        </div>
+        {suffix && <div className="text-xl font-medium text-[#3A4A3A]">{suffix}</div>}
+      </div>
+      {sub && <div className="mt-1.5 text-xs text-[#7A8A7A]">{sub}</div>}
+    </div>
+  );
+}
+
+/* ============================================================
+   TOOLTIP
+   ============================================================ */
+function DarkTooltip({ active, payload, label, suffix = "" }) {
+  if (!active || !payload || !payload.length) return null;
+  return (
+    <div className="rounded-lg border border-[rgba(27,42,27,0.20)] bg-[#FAF6EA]/95 px-3 py-2 backdrop-blur shadow-2xl">
+      <div className="text-[11px] uppercase tracking-wider text-[#7A8A7A] mb-1.5">{label}</div>
+      <div className="space-y-1">
+        {payload.map((p,i) => (
+          <div key={i} className="flex items-center gap-2 text-xs">
+            <span className="w-2 h-2 rounded-sm" style={{ background: p.color || p.fill }} />
+            <span className="text-[#3A4A3A]">{p.name}</span>
+            <span className="ml-auto text-[#1B2A1B] font-medium tabular-nums">{p.value}{suffix}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+function HeroKPIs() {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
+      <KpiCard label="Total Users"      value={41}  accent="#2D4A2B" sub="13 departments"     delay={0} />
+      <KpiCard label="Questions Asked"  value={435} accent="#3F6B70" sub="across 24 weeks"    delay={80} />
+      <KpiCard label="Sessions"         value={73}  accent="#7E5773" sub="conversation threads" delay={160} />
+      <KpiCard label="Answer Rate"      value={100} suffix="%" accent="#5E7030" sub="every question answered" delay={240} />
+      <KpiCard label="Response CSAT"    value={84}  suffix="%" accent="#5E7030" sub="liked the RAG response" delay={320} />
+      <KpiCard label="Adoption Peak"    value={12}  accent="#C76F3D" sub="weekly users · 50% lift" delay={400} />
+      <KpiCard label="New Users (8wk)"  value={23}  accent="#A8523A" sub="56% of total roster" delay={480} />
+    </div>
+  );
+}
+
+function WeeklyTimeSeries() {
+  const wauLift = ((ADOPT_STATS.avgUsers - PRE_STATS.avgUsers) / PRE_STATS.avgUsers) * 100;
+  return (
+    <Panel title="Weekly Activity" subtitle="Users and questions across 24 weeks · adoption program window shaded">
+      <div className="mb-4 rounded-lg border p-4 flex items-center gap-5 flex-wrap" style={{
+        borderColor: "rgba(45,74,43,0.30)",
+        background: "linear-gradient(90deg, rgba(45,74,43,0.10), rgba(45,74,43,0.02) 60%, transparent)",
+      }}>
+        <div className="flex items-baseline gap-2">
+          <span className="text-3xl font-semibold tabular-nums" style={{ color: "#2D4A2B" }}>
+            +{wauLift.toFixed(0)}%
+          </span>
+          <span className="text-[10px] uppercase tracking-[0.18em] text-[#3A4A3A]">Weekly active users</span>
+        </div>
+        <div className="h-8 w-px bg-[rgba(27,42,27,0.18)]" />
+        <div className="flex items-center gap-4 text-xs">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.16em] text-[#7A8A7A]">Pre-adoption</div>
+            <div className="text-[#1B2A1B] tabular-nums mt-0.5">{PRE_STATS.avgUsers.toFixed(1)} <span className="text-[#7A8A7A]">users / wk</span></div>
+          </div>
+          <span className="text-[#7A8A7A]">→</span>
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.16em]" style={{ color: "#C76F3D" }}>Adoption program</div>
+            <div className="tabular-nums mt-0.5" style={{ color: "#C76F3D" }}>{ADOPT_STATS.avgUsers.toFixed(1)} <span className="text-[#7A8A7A]">users / wk</span></div>
+          </div>
+        </div>
+        <div className="ml-auto text-[11px] text-[#7A8A7A] max-w-[260px]">
+          Average weekly active users nearly tripled during the 8-week adoption push.
+        </div>
+      </div>
+      <div className="h-[340px]">
+        <ResponsiveContainer>
+          <ComposedChart data={WEEKLY} margin={{ top: 10, right: 16, left: 0, bottom: 0 }}>
+            <defs>
+              <linearGradient id="qFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stopColor="#5E7030" stopOpacity={0.35} />
+                <stop offset="100%" stopColor="#5E7030" stopOpacity={0} />
+              </linearGradient>
+              <linearGradient id="adoptFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stopColor="#C76F3D" stopOpacity={0.12} />
+                <stop offset="100%" stopColor="#C76F3D" stopOpacity={0.02} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid stroke="rgba(27,42,27,0.12)" vertical={false} />
+            <XAxis dataKey="date" stroke="#7A8A7A" tick={{ fill: "#7A8A7A", fontSize: 11 }} interval={1} tickLine={false} axisLine={{ stroke: "rgba(27,42,27,0.18)" }} />
+            <YAxis yAxisId="left"  stroke="#7A8A7A" tick={{ fill: "#7A8A7A", fontSize: 11 }} tickLine={false} axisLine={false} />
+            <YAxis yAxisId="right" orientation="right" stroke="#7A8A7A" tick={{ fill: "#7A8A7A", fontSize: 11 }} tickLine={false} axisLine={false} />
+            <ReferenceArea yAxisId="left" x1="Jan 05" x2="Feb 23" fill="url(#adoptFill)" stroke="#C76F3D" strokeOpacity={0.4} strokeDasharray="3 4" />
+            <Tooltip content={<DarkTooltip />} cursor={{ stroke: "rgba(27,42,27,0.18)" }} />
+            <Area  yAxisId="right" type="monotone" dataKey="q"     name="Questions" stroke="#5E7030" strokeWidth={1.5} fill="url(#qFill)" />
+            <Bar   yAxisId="left"  dataKey="users" name="Users"   barSize={14} radius={[2,2,0,0]}>
+              {WEEKLY.map((w,i) => <Cell key={i} fill={w.adopt ? "#C76F3D" : "#2F3D2F"} fillOpacity={w.adopt ? 0.95 : 0.55} />)}
+            </Bar>
+            <Line  yAxisId="left"  type="monotone" dataKey="cum"   name="Cumulative" stroke="#2D4A2B" strokeWidth={2} dot={false} />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+      <Legend2 items={[
+        { color: "#2F3D2F", label: "Weekly users (pre)" },
+        { color: "#C76F3D", label: "Weekly users (adoption)" },
+        { color: "#5E7030", label: "Questions" },
+        { color: "#2D4A2B", label: "Cumulative users" },
+      ]} />
+    </Panel>
+  );
+}
+
+function BeforeAfter() {
+  const lift = (a,b) => ((b-a)/a*100);
+  const rows = [
+    { k: "Avg weekly users",     a: PRE_STATS.avgUsers,     b: ADOPT_STATS.avgUsers,     d: 1 },
+    { k: "Avg weekly questions", a: PRE_STATS.avgQ,         b: ADOPT_STATS.avgQ,         d: 1 },
+    { k: "Peak users",           a: PRE_STATS.peakUsers,    b: ADOPT_STATS.peakUsers,    d: 0 },
+    { k: "Total sessions",       a: PRE_STATS.totalSessions, b: ADOPT_STATS.totalSessions, d: 0 },
+  ];
+  return (
+    <Panel title="Before / After" subtitle="Pre-adoption (16 weeks) vs Adoption Program (8 weeks)" className="h-full flex flex-col">
+      <div className="grid grid-cols-2 gap-3 mb-4">
+        <div className="rounded-lg border border-[rgba(27,42,27,0.14)] bg-[#E8E0CC] p-4">
+          <div className="text-[10px] uppercase tracking-[0.18em] text-[#7A8A7A]">Pre-adoption</div>
+          <div className="mt-1 text-xs text-[#3A4A3A]">Sep 1 – Dec 29 · 16 wks</div>
+          <div className="mt-3 text-2xl font-semibold text-[#1B2A1B] tabular-nums">{PRE_STATS.totalQ}</div>
+          <div className="text-xs text-[#7A8A7A]">questions</div>
+        </div>
+        <div className="rounded-lg border p-4" style={{ borderColor: "rgba(199,111,61,0.32)", background: "linear-gradient(135deg, rgba(199,111,61,0.10), rgba(199,111,61,0.02))" }}>
+          <div className="text-[10px] uppercase tracking-[0.18em]" style={{ color: "#C76F3D" }}>Adoption program</div>
+          <div className="mt-1 text-xs text-[#3A4A3A]">Jan 5 – Feb 23 · 8 wks</div>
+          <div className="mt-3 text-2xl font-semibold tabular-nums" style={{ color: "#C76F3D" }}>{ADOPT_STATS.totalQ}</div>
+          <div className="text-xs text-[#7A8A7A]">questions</div>
+        </div>
+      </div>
+      <div className="space-y-2.5 flex-1 flex flex-col justify-around">
+        {rows.map((r,i) => {
+          const pct = lift(r.a, r.b);
+          const max = Math.max(r.a, r.b);
+          return (
+            <div key={i} className="grid grid-cols-[1fr_auto] gap-x-3 text-xs">
+              <div className="text-[#3A4A3A]">{r.k}</div>
+              <div className="text-[#2D4A2B] font-medium tabular-nums">+{pct.toFixed(0)}%</div>
+              <div className="col-span-2 grid grid-cols-2 gap-2 mt-1">
+                <Bar2 value={r.a} max={max} color="#334155" label={r.a.toFixed(r.d)} />
+                <Bar2 value={r.b} max={max} color="#C76F3D" label={r.b.toFixed(r.d)} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </Panel>
+  );
+}
+
+function Bar2({ value, max, color, label }) {
+  const w = max ? (value / max) * 100 : 0;
+  return (
+    <div className="relative h-6 rounded bg-[rgba(27,42,27,0.05)] overflow-hidden">
+      <div className="absolute inset-y-0 left-0 transition-all duration-1000" style={{ width: `${w}%`, background: color, opacity: 0.85 }} />
+      <div className="absolute inset-0 flex items-center px-2 text-[11px] text-[#1B2A1B] tabular-nums font-medium">{label}</div>
+    </div>
+  );
+}
+
+function DepartmentBubbles() {
+  const data = DEPARTMENTS.map(d => ({ ...d, color: DEPT_COLORS[d.name] || DEPT_COLORS.Other }));
+  return (
+    <Panel title="Departments" subtitle="Users × Questions · bubble = avg questions/user" className="h-full flex flex-col">
+      <div className="flex-1 min-h-[340px]">
+        <ResponsiveContainer>
+          <ScatterChart margin={{ top: 16, right: 24, left: 0, bottom: 8 }}>
+            <CartesianGrid stroke="rgba(27,42,27,0.12)" />
+            <XAxis type="number" dataKey="users" name="Users" stroke="#7A8A7A" tick={{ fill: "#7A8A7A", fontSize: 11 }} tickLine={false} axisLine={{ stroke: "rgba(27,42,27,0.18)" }} domain={[0, 18]} label={{ value: "Users", position: "insideBottom", offset: -2, fill: "#3A4A3A", fontSize: 11 }} />
+            <YAxis type="number" dataKey="q" name="Questions" stroke="#7A8A7A" tick={{ fill: "#7A8A7A", fontSize: 11 }} tickLine={false} axisLine={false} domain={[0, 240]} label={{ value: "Questions", angle: -90, position: "insideLeft", fill: "#3A4A3A", fontSize: 11 }} />
+            <Tooltip cursor={{ strokeDasharray: "3 3", stroke: "rgba(27,42,27,0.18)" }} content={({ active, payload }) => {
+              if (!active || !payload?.length) return null;
+              const d = payload[0].payload;
+              return (
+                <div className="rounded-lg border border-[rgba(27,42,27,0.20)] bg-[#FAF6EA]/95 px-3 py-2 backdrop-blur shadow-2xl text-xs">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="w-2 h-2 rounded-sm" style={{ background: d.color }} />
+                    <span className="text-[#1B2A1B] font-medium">{d.name}</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-0.5 text-[#3A4A3A]">
+                    <span>Users</span><span className="text-[#1B2A1B] tabular-nums text-right">{d.users}</span>
+                    <span>Questions</span><span className="text-[#1B2A1B] tabular-nums text-right">{d.q}</span>
+                    <span>Avg Q/user</span><span className="text-[#1B2A1B] tabular-nums text-right">{d.avg}</span>
+                    <span>Share</span><span className="text-[#1B2A1B] tabular-nums text-right">{d.pct}%</span>
+                  </div>
+                </div>
+              );
+            }} />
+            <Scatter data={data} shape={(props) => {
+              const { cx, cy, payload } = props;
+              const r = 6 + Math.sqrt(payload.avg) * 3.6;
+              return (
+                <g>
+                  <circle cx={cx} cy={cy} r={r} fill={payload.color} fillOpacity={0.18} stroke={payload.color} strokeWidth={1.5} />
+                  <circle cx={cx} cy={cy} r={3} fill={payload.color} />
+                </g>
+              );
+            }}>
+              {data.map((d,i) => <Cell key={i} fill={d.color} />)}
+            </Scatter>
+          </ScatterChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2">
+        {data.map((d,i) => (
+          <div key={i} className="flex items-center gap-1.5 text-[11px] text-[#3A4A3A]">
+            <span className="w-2 h-2 rounded-sm" style={{ background: d.color }} />
+            <span>{d.name}</span>
+            <span className="text-[#7A8A7A] tabular-nums">{d.q}</span>
+          </div>
+        ))}
+      </div>
+    </Panel>
+  );
+}
+
+function Funnel() {
+  const max = FUNNEL[0].value;
+  return (
+    <Panel title="User Funnel" subtitle="From signed-in to power users">
+      <div className="space-y-2.5 mt-2">
+        {FUNNEL.map((s, i) => {
+          const w = (s.value / max) * 100;
+          const dropPct = i > 0 ? Math.round((s.value / FUNNEL[i-1].value) * 100) : 100;
+          return (
+            <div key={i} className="group">
+              <div className="flex items-baseline justify-between text-xs mb-1">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.color }} />
+                  <span className="text-[#1B2A1B] font-medium">{s.stage}</span>
+                  <span className="text-[#7A8A7A]">· {s.desc}</span>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-[#1B2A1B] text-base font-semibold tabular-nums">{s.value}</span>
+                  <span className="text-[#7A8A7A] tabular-nums">{dropPct}%</span>
+                </div>
+              </div>
+              <div className="h-9 rounded bg-[rgba(27,42,27,0.05)] overflow-hidden relative">
+                <div className="h-full transition-all duration-700 origin-left" style={{
+                  width: `${w}%`,
+                  background: `linear-gradient(90deg, ${s.color}cc, ${s.color}55)`,
+                  borderRight: `2px solid ${s.color}`,
+                }} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="mt-4 grid grid-cols-3 gap-3 text-center pt-4 border-t border-[rgba(27,42,27,0.14)]">
+        <Stat label="Signed → Power" value={`${Math.round(POWER/41*100)}%`} />
+        <Stat label="Power users" value={POWER} />
+        <Stat label="Top user share" value={`${Math.round(117/435*100)}%`} sub="Eric B." />
+      </div>
+    </Panel>
+  );
+}
+
+function Stat({ label, value, sub }) {
+  return (
+    <div>
+      <div className="text-[10px] uppercase tracking-[0.16em] text-[#7A8A7A]">{label}</div>
+      <div className="text-xl font-semibold text-[#1B2A1B] tabular-nums mt-0.5">{value}</div>
+      {sub && <div className="text-[11px] text-[#7A8A7A]">{sub}</div>}
+    </div>
+  );
+}
+
+/* ============================================================
+   HEATMAP — 41 users x 24 weeks
+   ============================================================ */
+function Heatmap() {
+  // Approximate per-user-per-week activity. We don't have exact week counts,
+  // so we distribute each user's questions across their active span:
+  // - first week and last week are guaranteed active
+  // - if weeksActive > 2, sprinkle remaining active weeks evenly between
+  const grid = useMemo(() => {
+    const weekIdx = WEEKLY.map(w => w.wk);
+    return USERS.map(u => {
+      const active = new Set();
+      active.add(u.firstWk);
+      active.add(u.lastWk);
+      if (u.weeksActive > 2) {
+        const span = u.lastWk - u.firstWk;
+        const step = span / (u.weeksActive - 1);
+        for (let i = 1; i < u.weeksActive - 1; i++) {
+          active.add(Math.round(u.firstWk + i * step));
+        }
+      }
+      // questions per active week ≈ uniform
+      const qPer = u.q / u.weeksActive;
+      const cells = weekIdx.map(wk => {
+        if (active.has(wk)) {
+          const isAdopt = WEEKLY.find(w=>w.wk===wk)?.adopt;
+          return { wk, q: qPer, adopt: isAdopt };
+        }
+        return { wk, q: 0, adopt: false };
+      });
+      return { ...u, cells };
+    }).sort((a,b) => b.q - a.q);
+  }, []);
+
+  // shade scale
+  const maxQ = Math.max(...grid.flatMap(g => g.cells.map(c => c.q)));
+  const shade = (q) => {
+    if (q === 0) return 0;
+    return 0.18 + 0.82 * Math.pow(q / maxQ, 0.4);
+  };
+
+  return (
+    <Panel title="User Activity Heatmap" subtitle={`41 users × 24 weeks · sorted by total questions · color intensity = activity`}>
+      <div className="overflow-x-auto -mx-1 px-1">
+        <div className="min-w-[720px]">
+          {/* week headers */}
+          <div className="grid items-end gap-[2px] mb-1.5" style={{ gridTemplateColumns: `140px repeat(${WEEKLY.length}, minmax(0,1fr)) 60px` }}>
+            <div />
+            {WEEKLY.map((w,i) => (
+              <div key={i} className="text-[8px] text-[#7A8A7A] text-center tabular-nums" style={{ writingMode: "vertical-rl", transform: "rotate(180deg)", height: 36, lineHeight: 1, fontFeatureSettings: "'tnum'" }}>
+                {w.date}
+              </div>
+            ))}
+            <div className="text-[9px] text-[#7A8A7A] text-right pr-1">Q</div>
+          </div>
+          {/* rows */}
+          <div className="space-y-[2px]">
+            {grid.map((u, ri) => (
+              <div key={ri} className="grid items-center gap-[2px]" style={{ gridTemplateColumns: `140px repeat(${WEEKLY.length}, minmax(0,1fr)) 60px` }}>
+                <div className="flex items-center gap-1.5 pr-2 truncate">
+                  <span className="w-1.5 h-1.5 rounded-sm shrink-0" style={{ background: u.color }} />
+                  <span className="text-[10px] text-[#1B2A1B] truncate" title={u.name}>{u.name}</span>
+                </div>
+                {u.cells.map((c, ci) => {
+                  const op = shade(c.q);
+                  const inAdopt = c.adopt;
+                  return (
+                    <div key={ci} className="h-3.5 rounded-[2px]" style={{
+                      background: op === 0
+                        ? (inAdopt ? "rgba(199,111,61,0.06)" : "rgba(255,255,255,0.025)")
+                        : `rgba(88,166,255,${op})`,
+                      boxShadow: op > 0 && inAdopt ? "inset 0 0 0 1px rgba(199,111,61,0.75)" : "none",
+                    }} title={`${u.name} · ${WEEKLY[ci].date} · ${c.q ? c.q.toFixed(1) : 0} q`} />
+                  );
+                })}
+                <div className="text-[10px] text-[#3A4A3A] tabular-nums text-right pr-1">{u.q}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="flex items-center justify-between mt-3 text-[10px] text-[#7A8A7A]">
+        <div className="flex items-center gap-2">
+          <span>less</span>
+          {[0.1,0.3,0.5,0.7,1].map((o,i)=>(
+            <span key={i} className="w-3.5 h-3.5 rounded-[2px]" style={{ background: `rgba(45,74,43,${o})` }} />
+          ))}
+          <span>more</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-3.5 h-3.5 rounded-[2px]" style={{ background: "rgba(88,166,255,0.6)", boxShadow: "inset 0 0 0 1px rgba(199,111,61,0.75)" }} />
+          <span>adoption-program week</span>
+        </div>
+      </div>
+    </Panel>
+  );
+}
+
+/* ============================================================
+   ADOPTION DEPT BREAKDOWN (extra insight)
+   ============================================================ */
+function AdoptionDeptStack() {
+  const keys = ["Engineering","Manufacturing","Operations","People & Culture","Product","Other"];
+  return (
+    <Panel title="Adoption Program · Departments by Week" subtitle="8-week active-user composition" className="h-full flex flex-col">
+      <div className="flex-1 min-h-[260px]">
+        <ResponsiveContainer>
+          <BarChart data={ADOPT_DEPT_WEEKS} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
+            <CartesianGrid stroke="rgba(27,42,27,0.12)" vertical={false} />
+            <XAxis dataKey="date" stroke="#7A8A7A" tick={{ fill: "#7A8A7A", fontSize: 11 }} tickLine={false} axisLine={{ stroke: "rgba(27,42,27,0.18)" }} />
+            <YAxis stroke="#7A8A7A" tick={{ fill: "#7A8A7A", fontSize: 11 }} tickLine={false} axisLine={false} />
+            <Tooltip content={<DarkTooltip />} cursor={{ fill: "rgba(27,42,27,0.04)" }} />
+            {keys.map((k,i) => (
+              <Bar key={k} dataKey={k} stackId="a" fill={DEPT_COLORS[k]} radius={i === keys.length - 1 ? [3,3,0,0] : 0} />
+            ))}
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      <Legend2 items={keys.map(k => ({ color: DEPT_COLORS[k], label: k }))} />
+    </Panel>
+  );
+}
+
+/* ============================================================
+   PRIMITIVES
+   ============================================================ */
+function Panel({ title, subtitle, children, className = "" }) {
+  return (
+    <div className={`rounded-xl border border-[rgba(27,42,27,0.14)] bg-[#FAF6EA] p-5 ${className}`}>
+      <div className="flex items-baseline justify-between mb-4 gap-3">
+        <div>
+          <div className="text-sm font-semibold text-[#1B2A1B]">{title}</div>
+          {subtitle && <div className="text-xs text-[#7A8A7A] mt-0.5">{subtitle}</div>}
+        </div>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function Legend2({ items }) {
+  return (
+    <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-2">
+      {items.map((it,i)=>(
+        <div key={i} className="flex items-center gap-1.5 text-[11px] text-[#3A4A3A]">
+          <span className="w-2.5 h-2.5 rounded-sm" style={{ background: it.color }} />
+          <span>{it.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ============================================================
+   ROOT
+   ============================================================ */
+function Dashboard() {
+  return (
+    <div className="min-h-screen bg-[#F2EBDA] text-[#1B2A1B]" style={{
+      backgroundImage: "radial-gradient(circle at 15% -10%, rgba(45,74,43,0.06), transparent 50%), radial-gradient(circle at 95% 0%, rgba(199,111,61,0.05), transparent 45%)",
+      fontFamily: "'Inter', -apple-system, 'Segoe UI', sans-serif",
+    }}>
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-10">
+        {/* HEADER */}
+        <header className="flex items-end justify-between flex-wrap gap-4 mb-8">
+          <div>
+            <div className="flex items-center gap-2.5 mb-2">
+              <span className="w-2 h-2 rounded-full bg-[#5E7030] animate-pulse" />
+              <span className="text-[11px] uppercase tracking-[0.22em] text-[#7A8A7A]">Canoga Perkins · Internal AI</span>
+            </div>
+            <h1 className="text-3xl lg:text-4xl font-semibold tracking-tight text-[#1B2A1B]">
+              Corporate Memory Copilot
+            </h1>
+            <div className="text-sm text-[#3A4A3A] mt-1.5">
+              24-week usage report · <span className="text-[#1B2A1B]">Sep 2025 — Feb 2026</span>
+              <span className="mx-2 text-[#7A8A7A]">|</span>
+              <span style={{ color: "#C76F3D" }}>● 8-week adoption program</span>
+              <span className="text-[#7A8A7A]"> Jan 5 – Feb 23, 2026</span>
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-[10px] uppercase tracking-[0.18em] text-[#7A8A7A]">Report generated</div>
+            <div className="text-sm text-[#1B2A1B] tabular-nums mt-1">May 7, 2026</div>
+          </div>
+        </header>
+
+        {/* KPIs */}
+        <section className="mb-6">
+          <HeroKPIs />
+        </section>
+
+        {/* ROW 1 — full width time series */}
+        <section className="mb-6">
+          <WeeklyTimeSeries />
+        </section>
+
+        {/* ROW 2 — before/after + bubble */}
+        <section className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6 items-stretch">
+          <div className="lg:col-span-2 h-full"><BeforeAfter /></div>
+          <div className="lg:col-span-3 h-full"><DepartmentBubbles /></div>
+        </section>
+
+        {/* ROW 3 — funnel + adoption stack */}
+        <section className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6 items-stretch">
+          <div className="lg:col-span-2 h-full"><Funnel /></div>
+          <div className="lg:col-span-3 h-full"><AdoptionDeptStack /></div>
+        </section>
+
+        {/* ROW 4 — heatmap */}
+        <section className="mb-10">
+          <Heatmap />
+        </section>
+
+        <footer className="border-t border-[rgba(27,42,27,0.14)] pt-5 text-xs text-[#7A8A7A] flex justify-between flex-wrap gap-2">
+          <div>41 users · 13 departments · 435 questions · 73 sessions · 100% answer rate</div>
+          <div>Data through Feb 23, 2026</div>
+        </footer>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Dashboard />);
+
+</script>
+<script src="../mobile.js" defer></script>
+</body>
+</html>
