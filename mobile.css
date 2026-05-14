@@ -1029,6 +1029,14 @@
     padding: 14px 0; border-bottom: 1px solid var(--kc-line);
   }
   body[data-creator="true"] .km-platforms li:last-child { border-bottom: none; }
+  /* v4: anchor wraps the grid contents so each row is a tappable link to the social channel */
+  body[data-creator="true"] .km-plat-link {
+    display: contents; color: inherit; text-decoration: none;
+    -webkit-tap-highlight-color: rgba(199,111,61,0.18);
+  }
+  body[data-creator="true"] .km-platforms li { cursor: pointer; transition: background 0.15s; }
+  body[data-creator="true"] .km-platforms li:hover { background: rgba(199,111,61,0.04); }
+  body[data-creator="true"] .km-platforms li:hover .km-plat-name { color: var(--kc-accent, #C76F3D); }
   body[data-creator="true"] .km-plat-name {
     grid-area: name; font-family: 'Fraunces', Georgia, serif; font-size: 18px;
     font-weight: 500; letter-spacing: -0.015em; color: var(--kc-ink);
