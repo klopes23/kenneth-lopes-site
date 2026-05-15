@@ -237,10 +237,20 @@
   .hero-stat {
     padding: 22px 24px;
     display: flex; flex-direction: column; justify-content: space-between;
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  /* v4: hover — same lift + offset block reveal as the photo above */
+  .hero-stat:hover {
+    transform: translate(-6px, -6px);
+    box-shadow: 12px 12px 0 var(--ink);
   }
   .hero-stat--terracotta { background: var(--accent); color: #fff; }
   .hero-stat--mustard    { background: var(--pop); color: var(--ink); }
   .hero-stat--forest     { background: #5E7030; color: #fff; }
+  /* per-tile shadow color so each tile reveals its own brand-aligned block */
+  .hero-stat--terracotta:hover { box-shadow: 12px 12px 0 #5E7030; }
+  .hero-stat--mustard:hover    { box-shadow: 12px 12px 0 var(--accent); }
+  .hero-stat--forest:hover     { box-shadow: 12px 12px 0 var(--pop); }
   .hero-stat__lab {
     font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
     letter-spacing: 0.22em; text-transform: uppercase;
@@ -1743,6 +1753,31 @@
 <body data-creator="true">
 
 <!-- ═══════════════════════════════════════════════════
+     SINGLE SOURCE OF TRUTH for the "Last updated" date.
+     Update this ONE date string every time you refresh
+     numbers / metrics / analytics on this page. Both the
+     mobile and desktop hero eyebrows pick it up via
+     [data-last-updated] selectors.
+
+     Format: MM/DD/YYYY
+     ═══════════════════════════════════════════════════ -->
+<script>
+  (function () {
+    var LAST_DATA_UPDATE = '05/15/2026';
+    function stamp() {
+      document.querySelectorAll('[data-last-updated]').forEach(function (n) {
+        n.textContent = LAST_DATA_UPDATE;
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', stamp);
+    } else {
+      stamp();
+    }
+  })();
+</script>
+
+<!-- ═══════════════════════════════════════════════════
      MOBILE VIEW (≤ 768px) — shown only on phones, mirrors
      proto/screen-mediakit.jsx visual language. Desktop view
      below is hidden via mobile.css when data-creator is set.
@@ -1778,7 +1813,7 @@
     <div class="km-hero-stripe" aria-hidden="true"></div>
     <div class="km-hero-eyebrow">
       <span class="km-dot" aria-hidden="true"></span>
-      Last updated · 05/14/2026
+      Last updated · <span data-last-updated>05/15/2026</span>
     </div>
     <h1 class="km-hero-title">
       Nesi<br/>
@@ -2083,7 +2118,7 @@
 
     <!-- HERO — wordmark, tagline, download, pills, then photo + 3 colored stat tiles -->
     <section class="hero" id="hero">
-      <div class="hero-eyebrow"><span class="dot"></span>Last updated · 05/15/2026</div>
+      <div class="hero-eyebrow"><span class="dot"></span>Last updated · <span data-last-updated>05/15/2026</span></div>
       <h1 class="wordmark">Nesi <em>Family.</em></h1>
       <p class="hero-tagline">Father–son content — made to be watched together.</p>
       <a class="hero-download" href="#" onclick="downloadMediaKitPDF();return false;" role="button">↓ Download media kit (PDF)</a>
