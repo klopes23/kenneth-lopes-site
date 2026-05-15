@@ -870,9 +870,9 @@
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
   }
   .cat {
-    display: flex; align-items: center; gap: 12px;
-    padding: 14px 18px;
-    border: 2px solid var(--ink); border-radius: 999px;
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+    border: 2px solid var(--ink); border-radius: 28px;
     background: var(--bg-2);
     min-width: 0;
   }
@@ -880,30 +880,31 @@
   .cat.gold   { background: var(--accent-2); }
   .cat.pop    { background: var(--pop); color: var(--bg); }
   .cat .cnum {
-    font-family: var(--font-mono); font-size: 10px;
+    font-family: var(--font-mono); font-size: 9.5px;
     letter-spacing: 0.16em; color: var(--muted);
-    border-right: 1px solid var(--line); padding-right: 12px;
+    border-right: 1px solid var(--line); padding-right: 10px;
     flex-shrink: 0;
   }
   .cat.solid .cnum { color: rgba(240,235,224,0.6); border-color: rgba(240,235,224,0.18); }
   .cat.pop .cnum   { color: rgba(240,235,224,0.6); border-color: rgba(240,235,224,0.18); }
   .cat .ct {
     font-family: var(--font-display);
-    font-size: 18px; line-height: 1.1; letter-spacing: -0.01em;
+    font-size: clamp(13px, 1.2vw, 16px); line-height: 1.1; letter-spacing: -0.01em;
+    min-width: 0;
   }
   @media (max-width: 720px) {
     .cat-row { grid-template-columns: 1fr 1fr; }
   }
 
-  /* ── CONTACT ── */
+  /* ── CONTACT — v4: centered like portfolio's "Let's connect" section ── */
   .contact {
     background: var(--ink); color: var(--bg);
     padding: 64px var(--gutter);
   }
   .contact-inner {
-    max-width: 1280px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.2fr 1fr;
-    gap: 56px; align-items: end;
+    max-width: 960px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 64px; align-items: end;
   }
   .contact-eyebrow {
     font-family: var(--font-mono);
@@ -942,10 +943,10 @@
     font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.04em;
   }
 
-  /* ── SOCIAL GRID (bottom of "Work with us") ── */
+  /* ── SOCIAL GRID (bottom of "Work with us") — centered to match contact-inner ── */
   .social-grid-wrap {
-    max-width: 1280px; margin: 64px auto 0;
-    padding-top: 40px;
+    max-width: 960px; margin: 48px auto 0;
+    padding-top: 32px;
     border-top: 1px solid rgba(240,235,224,0.14);
   }
   .social-grid-eyebrow {
@@ -1468,13 +1469,42 @@
 
   /* ════════════════════════════════════════════════
      PRINT (Download media kit -> Save as PDF)
-     Outputs: hero (top heading) + 01 Reach + 04 Brands only.
-     Hides: navs, pillars, audience, offer, contact, footer.
+     One-page deliverable. Mirrors the live media kit's brand language
+     and gives a decision-maker everything they need in a single sheet:
+       - Brand wordmark + tagline + 3 hero stats (followers / views / 90d)
+       - 01 Reach: 5 platforms with handles + counts
+       - 03 Audience snapshot: gender split + age + geo
+       - 04 Brands: 4 collab proof tiles with view counts
      ════════════════════════════════════════════════ */
   @media print {
-    @page { margin: 0.5in; }
-    /* Force desktop view for a clean print (mobile creator-only block is hidden) */
-    body[data-creator="true"] { background: #fff !important; color: #000 !important; }
+    /* Generous page margins so the kit reads like a printed sheet, not a poster */
+    @page { size: Letter; margin: 0.7in 0.75in; }
+    html, body { height: auto !important; }
+    body[data-creator="true"] {
+      background: var(--bg) !important;
+      color: var(--ink) !important;
+      font-size: 8pt;
+    }
+    /* Constrain content + flex-stack so everything packs onto one page.
+       The same HTML elements render here as on screen, so any number change
+       on the live page (TikTok / IG / Snap / YT / FB / brand collab views)
+       propagates to the printed PDF automatically. */
+    .desktop-view {
+      display: flex !important;
+      flex-direction: column;
+      gap: 6px;
+      max-width: 6.5in;
+      margin: 0 auto;
+    }
+    /* exact colors so brand tiles + chips print as designed */
+    body[data-creator="true"] *,
+    body[data-creator="true"] *::before,
+    body[data-creator="true"] *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* Hide chrome + non-essential sections */
     .creator-mobile-only,
     .nav-stack,
     .topnav,
@@ -1483,41 +1513,180 @@
     .hero-pills,
     .hero-download,
     .km-hero-download,
-    /* keep #hero, #reach, #brands; hide everything else */
+    .hero-photo,
     #content,
-    #audience,
-    #offer,
     #contact,
-    .contact { display: none !important; }
+    .contact,
+    .foot { display: none !important; }
+
+    /* Inside #offer: hide the offer table + section-head; only show the
+       brand-categories pills row at the bottom. */
+    #offer .section-head,
+    #offer .offer-table { display: none !important; }
+    #offer { display: block !important; padding: 4px 0 !important; }
 
     .desktop-view { display: block !important; }
     .page { padding: 0 !important; max-width: 100% !important; }
-    .section { padding: 24px 0 !important; border-bottom: none !important; page-break-inside: avoid; }
-    .hero { padding: 0 !important; page-break-after: avoid; }
+    .section,
+    .hero {
+      padding: 6px 0 !important;
+      border-bottom: none !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .hero { padding: 0 0 4px !important; }
+    .section-head {
+      grid-template-columns: 50px 1fr !important;
+      margin-bottom: 4px !important;
+    }
+    .section-num { font-size: 7pt !important; }
+    .kicker { font-size: 7pt !important; margin-bottom: 0 !important; }
+
+    /* === HERO BLOCK (wordmark + 3 stats) === */
+    .hero-eyebrow {
+      font-size: 7pt !important;
+      margin-bottom: 4px !important;
+    }
+    .wordmark {
+      font-size: 32pt !important;
+      line-height: 0.86 !important;
+      margin: 0 !important;
+    }
+    .hero-tagline {
+      font-size: 8.5pt !important;
+      margin-top: 3px !important;
+      max-width: none !important;
+    }
     .hero-stats-grid {
       grid-template-columns: 1fr 1fr 1fr !important;
       grid-template-rows: auto !important;
       min-height: 0 !important;
-      margin-top: 18px !important;
+      margin-top: 8px !important;
+      gap: 4px !important;
     }
-    .hero-photo { display: none !important; }
-    .hero-stat { padding: 14px 16px !important; }
-    .hero-stat__num { font-size: 36px !important; }
-    /* exact-color print so brand tiles + stat tiles keep their hues */
-    .plat--brand,
-    .hero-stat,
-    .brand-tile figcaption {
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
+    .hero-stat { padding: 6px 8px !important; }
+    .hero-stat__lab { font-size: 6pt !important; margin-bottom: 2px !important; letter-spacing: 0.18em !important; }
+    .hero-stat__num { font-size: 18pt !important; line-height: 1 !important; }
+    .hero-stat__sub { font-size: 6pt !important; margin-top: 2px !important; letter-spacing: 0.18em !important; }
+
+    /* === 01 REACH (5 platforms in a row) === */
+    .platforms {
+      grid-template-columns: repeat(5, 1fr) !important;
+      border-top: none !important;
     }
-    .platforms { grid-template-columns: repeat(5, 1fr) !important; }
-    .plat { min-height: 0 !important; padding: 16px 14px !important; }
-    .plat-count { font-size: 28px !important; }
-    .brand-grid { grid-template-columns: repeat(4, 1fr) !important; }
+    .plat {
+      min-height: 0 !important;
+      padding: 6px 8px !important;
+      border-right: none !important;
+      border-bottom: none !important;
+    }
+    .plat-name { font-size: 7pt !important; }
+    .plat-count { font-size: 14pt !important; margin-top: 1px !important; }
+    .plat-meta { font-size: 6pt !important; line-height: 1.2 !important; }
+    .plat-bar { display: none !important; }
+    .plat-logo { width: 12px !important; height: 12px !important; top: 6px !important; right: 6px !important; }
+
+    /* === 03 AUDIENCE (split bar + chips) === */
+    #audience { display: block !important; }
+    .aud-gender-d__head { font-size: 6.5pt !important; margin-bottom: 3px !important; }
+    .aud-gender-d__bar { height: 22px !important; border-width: 1px !important; }
+    .aud-gender-d__f,
+    .aud-gender-d__m { padding: 0 8px !important; }
+    .aud-gender-d__bar .lab { font-size: 6.5pt !important; }
+    .aud-gender-d__bar .pct { font-size: 11pt !important; }
+    .aud-grid-d { gap: 4px !important; }
+    .aud-chip-d { padding: 6px 10px !important; }
+    .aud-chip-d__lab { font-size: 6.5pt !important; margin-bottom: 2px !important; }
+    .aud-chip-d__val { font-size: 12pt !important; }
+    .aud-chip-d--dark .aud-chip-d__val { font-size: 11pt !important; }
+    .aud-chip-d__sub { font-size: 6.5pt !important; margin-top: 1px !important; }
+    .aud-chip-d__pills { gap: 4px !important; margin-top: 2px !important; }
+    .aud-chip-d__pills span {
+      padding: 2px 6px !important;
+      font-size: 6.5pt !important;
+    }
+    .audience-v2 { gap: 6px !important; }
+
+    /* === 04 BRANDS (4 collab tiles) === */
+    .brand-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+      gap: 6px !important;
+    }
+    .brand-tile {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    /* keep images short so the row fits */
+    .brand-tile img {
+      aspect-ratio: 4 / 3 !important;
+      max-height: 1.05in !important;
+      object-fit: cover !important;
+    }
+    .brand-tile figcaption { padding: 6px 8px !important; }
+    .brand-num { font-size: 6.5pt !important; }
+    .brand-name { font-size: 8pt !important; }
+    .brand-stat { font-size: 7pt !important; }
+
     a { color: inherit !important; text-decoration: none !important; }
-    /* page-break hints */
-    #reach { page-break-after: always; }
+
+    /* === Brand categories pills (Ideal Brand Categories) === */
+    .section-rule {
+      margin: 4px 0 6px !important;
+      font-size: 6.5pt !important;
+      letter-spacing: 0.18em !important;
+    }
+    .section-rule span { padding: 0 8px !important; }
+    .cat-row {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      gap: 4px !important;
+      margin: 0 !important;
+    }
+    .cat {
+      padding: 5px 8px !important;
+      gap: 6px !important;
+      border-width: 1px !important;
+      border-radius: 16px !important;
+      min-width: 0 !important;
+      align-items: center !important;
+    }
+    .cat .cnum {
+      font-size: 6pt !important;
+      letter-spacing: 0.12em !important;
+      padding-right: 5px !important;
+      border-right-width: 1px !important;
+    }
+    .cat .ct {
+      font-size: 7.5pt !important;
+      line-height: 1.05 !important;
+      letter-spacing: -0.005em !important;
+    }
+
+    /* hard stop — anything that bleeds past page 1 gets hidden */
+    .desktop-view > :nth-child(n+7) { display: none !important; }
+
+    /* === PAGE 2 — grayscale clone (printer-friendly black-and-white version) === */
+    .print-bw-clone {
+      display: flex !important;
+      flex-direction: column;
+      gap: 6px;
+      max-width: 6.5in;
+      margin: 0 auto;
+      page-break-before: always;
+      break-before: page;
+      page-break-after: avoid;
+      break-after: avoid;
+      filter: grayscale(1) contrast(1.05);
+      -webkit-filter: grayscale(1) contrast(1.05);
+    }
+    .print-bw-clone > :nth-child(n+7) { display: none !important; }
+    .print-bw-clone > * { page-break-inside: avoid; break-inside: avoid; }
+    /* Avoid the original color page bleeding to page 2 */
+    .desktop-view { page-break-after: avoid; break-after: avoid; }
+    .desktop-view > * { page-break-inside: avoid; break-inside: avoid; }
   }
+  /* Hide the clone everywhere on screen */
+  .print-bw-clone { display: none; }
 </style>
   <link rel="stylesheet" href="mobile.css" />
 </head>
@@ -1568,12 +1737,12 @@
     <p class="km-hero-tagline">
       Father–son content — made to be watched together.
     </p>
-    <a class="km-hero-download" href="#" onclick="window.print();return false;" role="button">↓ Download media kit (PDF)</a>
+    <a class="km-hero-download" href="#" onclick="downloadMediaKitPDF();return false;" role="button">↓ Download media kit (PDF)</a>
     <div class="km-hero-pills">
       <span class="km-pill-tag is-solid">Food</span>
+      <span class="km-pill-tag">Family-friendly</span>
       <span class="km-pill-tag">Lifestyle</span>
       <span class="km-pill-tag">Entertainment</span>
-      <span class="km-pill-tag">Family-friendly</span>
       <span class="km-pill-tag">18–34 core</span>
     </div>
 
@@ -1624,7 +1793,7 @@
         <svg class="reach-tile__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c4.1 0 5.5 3.1 5.5 5.6 0 .9-.1 1.7-.2 2.5.4.1.8.4 1.2.5.5.2 1 .3 1.5.3.4 0 .7.3.7.7 0 1-2.6 1.4-3.1 1.6-.1 0-.1.1-.1.2.1.3.7 1.6 2 2.6.7.5 1.5.8 2.3 1 .3.1.5.3.5.6 0 .5-.9 1.1-3.6 1.5-.1.2-.2.6-.3 1-.1.3-.4.5-.7.5-.4 0-.9-.2-1.7-.2-1 0-1.4.1-2.3.8-.8.6-1.7 1.2-3.2 1.2s-2.5-.6-3.2-1.2c-.9-.7-1.3-.8-2.3-.8-.8 0-1.3.2-1.7.2-.4 0-.7-.3-.7-.6 0-.4-.2-.7-.3-1-2.7-.4-3.6-1-3.6-1.5 0-.3.2-.5.5-.6.8-.2 1.5-.5 2.3-1 1.3-1 1.9-2.3 2-2.6 0-.1 0-.2-.1-.2-.5-.2-3.1-.6-3.1-1.6 0-.4.3-.7.7-.7.5 0 1 .1 1.5-.3.4-.1.8-.4 1.2-.5-.1-.8-.2-1.6-.2-2.5C6.5 5.1 7.9 2 12 2z"/></svg>
         <div class="reach-tile__head">
           <span class="reach-tile__name">Snapchat</span>
-          <span class="reach-tile__count">55K</span>
+          <span class="reach-tile__count">60K</span>
         </div>
         <span class="reach-tile__meta">10.4M views · 27–42s watch</span>
       </a>
@@ -1640,7 +1809,7 @@
         <svg class="reach-tile__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
         <div class="reach-tile__head">
           <span class="reach-tile__name">Facebook</span>
-          <span class="reach-tile__count">20K</span>
+          <span class="reach-tile__count">25K</span>
         </div>
         <span class="reach-tile__meta">3.1M views · 785K 1-min views</span>
       </a>
@@ -1650,7 +1819,7 @@
   <!-- 02 / PILLARS -->
   <section class="km-section" id="km-pillars">
     <div class="km-section-head"><span class="km-num">02 / Pillars</span><div><div class="km-kicker">What we make</div></div></div>
-    <div class="km-carousel">
+    <div class="km-carousel" data-carousel-dots>
       <article class="km-pcard"><img src="assets/brand-shake-shack.jpg" alt="" loading="lazy"/><div class="km-pstat">12M+ views</div><div class="km-plabel"><div class="km-pnum">01</div><div class="km-pname">Brands</div></div></article>
       <article class="km-pcard"><img src="assets/family.jpg" alt="" loading="lazy"/><div class="km-pstat">16M+ views</div><div class="km-plabel"><div class="km-pnum">02</div><div class="km-pname">Family</div></div></article>
       <article class="km-pcard"><img src="assets/food.jpg" alt="" loading="lazy"/><div class="km-pstat">11.3M+ views</div><div class="km-plabel"><div class="km-pnum">03</div><div class="km-pname">Food</div></div></article>
@@ -1786,29 +1955,34 @@
     </div>
     <!-- v4: TikTok promoted to a full-width hero row, then 2x2 grid of remaining tiles incl. Facebook -->
     <a href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener" class="km-social km-social--tiktok km-social--wide">
+      <svg class="km-soc-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 14 2h-3.1v13.05a2.6 2.6 0 1 1-2.6-2.6c.27 0 .53.04.78.13V9.4A5.92 5.92 0 0 0 8.3 9.4a5.65 5.65 0 1 0 5.65 5.65V8.62a7.32 7.32 0 0 0 4.27 1.37V6.85a4.36 4.36 0 0 1-1.62-1.03z"/></svg>
       <span class="km-soc-name">TikTok</span>
       <span class="km-soc-count">650K</span>
       <span class="km-soc-handle">@nesimento_</span>
     </a>
     <div class="km-socials km-socials--grid">
       <a href="https://www.instagram.com/nesimento" target="_blank" rel="noopener" class="km-social km-social--ig">
+        <svg class="km-soc-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
         <span class="km-soc-name">Instagram</span>
         <span class="km-soc-count">65K</span>
         <span class="km-soc-handle">@nesimento</span>
       </a>
       <a href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener" class="km-social km-social--snap">
+        <svg class="km-soc-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c4.1 0 5.5 3.1 5.5 5.6 0 .9-.1 1.7-.2 2.5.4.1.8.4 1.2.5.5.2 1 .3 1.5.3.4 0 .7.3.7.7 0 1-2.6 1.4-3.1 1.6-.1 0-.1.1-.1.2.1.3.7 1.6 2 2.6.7.5 1.5.8 2.3 1 .3.1.5.3.5.6 0 .5-.9 1.1-3.6 1.5-.1.2-.2.6-.3 1-.1.3-.4.5-.7.5-.4 0-.9-.2-1.7-.2-1 0-1.4.1-2.3.8-.8.6-1.7 1.2-3.2 1.2s-2.5-.6-3.2-1.2c-.9-.7-1.3-.8-2.3-.8-.8 0-1.3.2-1.7.2-.4 0-.7-.3-.7-.6 0-.4-.2-.7-.3-1-2.7-.4-3.6-1-3.6-1.5 0-.3.2-.5.5-.6.8-.2 1.5-.5 2.3-1 1.3-1 1.9-2.3 2-2.6 0-.1 0-.2-.1-.2-.5-.2-3.1-.6-3.1-1.6 0-.4.3-.7.7-.7.5 0 1 .1 1.5-.3.4-.1.8-.4 1.2-.5-.1-.8-.2-1.6-.2-2.5C6.5 5.1 7.9 2 12 2z"/></svg>
         <span class="km-soc-name">Snapchat</span>
-        <span class="km-soc-count">55K</span>
+        <span class="km-soc-count">60K</span>
         <span class="km-soc-handle">@nesimento</span>
       </a>
       <a href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener" class="km-social km-social--yt">
+        <svg class="km-soc-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.4 2.4 0 0 0-1.7-1.7C18.3 5 12 5 12 5s-6.3 0-7.9.5A2.4 2.4 0 0 0 2.4 7.2 25 25 0 0 0 2 12a25 25 0 0 0 .4 4.8 2.4 2.4 0 0 0 1.7 1.7C5.7 19 12 19 12 19s6.3 0 7.9-.5a2.4 2.4 0 0 0 1.7-1.7A25 25 0 0 0 22 12a25 25 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>
         <span class="km-soc-name">YouTube</span>
         <span class="km-soc-count">32K</span>
         <span class="km-soc-handle">@thenesifamily</span>
       </a>
       <a href="https://www.facebook.com/nesimento" target="_blank" rel="noopener" class="km-social km-social--fb">
+        <svg class="km-soc-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
         <span class="km-soc-name">Facebook</span>
-        <span class="km-soc-count">20K</span>
+        <span class="km-soc-count">25K</span>
         <span class="km-soc-handle">@nesimento</span>
       </a>
     </div>
@@ -1862,12 +2036,12 @@
       <div class="hero-eyebrow"><span class="dot"></span>Last updated · 05/15/2026</div>
       <h1 class="wordmark">Nesi <em>Family.</em></h1>
       <p class="hero-tagline">Father–son content — made to be watched together.</p>
-      <a class="hero-download" href="#" onclick="window.print();return false;" role="button">↓ Download media kit (PDF)</a>
+      <a class="hero-download" href="#" onclick="downloadMediaKitPDF();return false;" role="button">↓ Download media kit (PDF)</a>
       <div class="hero-pills">
         <span class="pill-tag is-solid">Food</span>
+        <span class="pill-tag">Family-friendly</span>
         <span class="pill-tag">Lifestyle</span>
         <span class="pill-tag">Entertainment</span>
-        <span class="pill-tag">Family-friendly</span>
         <span class="pill-tag">18–34 core</span>
       </div>
 
@@ -1923,7 +2097,7 @@
         <a class="plat plat--brand" style="--brand:#FFFC00;--fg:#2A1A12;" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer">
           <svg class="plat-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c4.1 0 5.5 3.1 5.5 5.6 0 .9-.1 1.7-.2 2.5.4.1.8.4 1.2.5.5.2 1 .3 1.5.3.4 0 .7.3.7.7 0 1-2.6 1.4-3.1 1.6-.1 0-.1.1-.1.2.1.3.7 1.6 2 2.6.7.5 1.5.8 2.3 1 .3.1.5.3.5.6 0 .5-.9 1.1-3.6 1.5-.1.2-.2.6-.3 1-.1.3-.4.5-.7.5-.4 0-.9-.2-1.7-.2-1 0-1.4.1-2.3.8-.8.6-1.7 1.2-3.2 1.2s-2.5-.6-3.2-1.2c-.9-.7-1.3-.8-2.3-.8-.8 0-1.3.2-1.7.2-.4 0-.7-.3-.7-.6 0-.4-.2-.7-.3-1-2.7-.4-3.6-1-3.6-1.5 0-.3.2-.5.5-.6.8-.2 1.5-.5 2.3-1 1.3-1 1.9-2.3 2-2.6 0-.1 0-.2-.1-.2-.5-.2-3.1-.6-3.1-1.6 0-.4.3-.7.7-.7.5 0 1 .1 1.5-.3.4-.1.8-.4 1.2-.5-.1-.8-.2-1.6-.2-2.5C6.5 5.1 7.9 2 12 2z"/></svg>
           <div class="plat-name"><span>Snapchat</span></div>
-          <div class="plat-count">55K</div>
+          <div class="plat-count">60K</div>
           <div class="plat-meta">10.4M views · 27–42s avg watch</div>
           <div class="plat-bar"><i style="width:7.9%"></i></div>
         </a>
@@ -1937,7 +2111,7 @@
         <a class="plat plat--brand" style="--brand:#1877F2;--fg:#fff;" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer">
           <svg class="plat-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
           <div class="plat-name"><span>Facebook</span></div>
-          <div class="plat-count">20K</div>
+          <div class="plat-count">25K</div>
           <div class="plat-meta">3.1M views · 785K+ 1-min views</div>
           <div class="plat-bar"><i style="width:2.4%"></i></div>
         </a>
@@ -2147,7 +2321,7 @@
         <a class="social-btn social-btn--snapchat" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer" aria-label="Snapchat @nesimento">
           <svg class="social-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.6c3.5 0 6.4 2.5 6.7 6 0 .6.1 1.4.1 2.1 0 1.6 0 1.7.4 2.5.4.7 1.4 1.4 2.4 1.7.6.2.6.5.4 1-.3.5-.9.8-1.6 1-.4.1-.5.4-.5.7 0 .4-.4.6-1 .6-.4 0-1 0-1.5.2-.5.2-.7.6-1 1.2-.4.6-.9 1-1.7 1.3-.7.2-1.3.1-2-.2-.7-.3-1.3-.4-2-.4s-1.3.1-2 .4c-.7.3-1.3.4-2 .2-.8-.3-1.3-.7-1.7-1.3-.3-.6-.5-1-1-1.2-.5-.2-1.1-.2-1.5-.2-.6 0-1-.2-1-.6 0-.3-.1-.6-.5-.7-.7-.2-1.3-.5-1.6-1-.2-.5-.2-.8.4-1 1-.3 2-1 2.4-1.7.4-.8.4-.9.4-2.5 0-.7 0-1.5.1-2.1.3-3.5 3.2-6 6.7-6z"/></svg>
           <div class="social-name">Snapchat</div>
-          <div class="social-count">55K</div>
+          <div class="social-count">60K</div>
           <span class="social-arrow">↗</span>
         </a>
         <a class="social-btn social-btn--youtube" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer" aria-label="YouTube @thenesifamily">
@@ -2159,7 +2333,7 @@
         <a class="social-btn social-btn--facebook" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer" aria-label="Facebook @nesimento">
           <svg class="social-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 9h2.5V6H14c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6.5h3V14h2.5l.5-3h-3V9.5c0-.3.2-.5.5-.5z"/></svg>
           <div class="social-name">Facebook</div>
-          <div class="social-count">20K</div>
+          <div class="social-count">25K</div>
           <span class="social-arrow">↗</span>
         </a>
       </div>
@@ -2253,7 +2427,7 @@
           </a>
           <a class="plat" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer">
             <div class="plat-name"><span>Snapchat</span></div>
-            <div class="plat-count">55K</div>
+            <div class="plat-count">60K</div>
           </a>
           <a class="plat" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer">
             <div class="plat-name"><span>YouTube</span></div>
@@ -2261,7 +2435,7 @@
           </a>
           <a class="plat" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer">
             <div class="plat-name"><span>Facebook</span></div>
-            <div class="plat-count">20K</div>
+            <div class="plat-count">25K</div>
           </a>
         </div>
       </div>
@@ -2559,5 +2733,28 @@
 </script>
 
   <script src="mobile.js" defer></script>
+  <!-- v4: Download Media Kit (PDF) — clones the printable surface so the PDF
+       prints page 1 in color + page 2 in grayscale (printer-friendly).
+       Numbers stay in sync with the live page since the clone reads the
+       same DOM at click time. -->
+  <script>
+    function downloadMediaKitPDF() {
+      var src = document.querySelector('.desktop-view');
+      if (!src) { window.print(); return; }
+      // Remove any stale clone from a previous click that didn't get GC'd
+      document.querySelectorAll('.print-bw-clone').forEach(function (n) { n.remove(); });
+      var clone = src.cloneNode(true);
+      clone.classList.add('print-bw-clone');
+      // strip duplicate IDs so we don't violate the unique-ID rule
+      clone.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
+      src.parentNode.insertBefore(clone, src.nextSibling);
+      // Print, then clean up after the dialog closes
+      var cleanup = function () { if (clone.parentNode) clone.parentNode.removeChild(clone); window.removeEventListener('afterprint', cleanup); };
+      window.addEventListener('afterprint', cleanup);
+      // Belt-and-suspenders: also clean up on a delay in case afterprint doesn't fire
+      setTimeout(cleanup, 8000);
+      window.print();
+    }
+  </script>
 </body>
 </html>

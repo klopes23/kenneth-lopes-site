@@ -696,6 +696,105 @@ Object.assign(window, {
 
 const { useState: dUseState, useEffect: dUseEffect, useRef: dUseRef } = React;
 
+// v4: long-press helper — non-hook factory so it can be called inside .map().
+// Fires `callback` after `delay` ms of held touch / mouse. Right-click also
+// triggers (contextmenu). Cancels on move/release.
+function makeLongPress(callback, delay = 480) {
+  let timer = null;
+  const start = () => {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(() => { timer = null; callback(); }, delay);
+  };
+  const cancel = () => {
+    if (timer) { clearTimeout(timer); timer = null; }
+  };
+  return {
+    onTouchStart: start,
+    onTouchEnd: cancel,
+    onTouchMove: cancel,
+    onTouchCancel: cancel,
+    onMouseDown: start,
+    onMouseUp: cancel,
+    onMouseLeave: cancel,
+    onContextMenu: (e) => { e.preventDefault(); cancel(); callback(); },
+  };
+}
+
+// v4: dot pagination indicator for any horizontal scroll-snap carousel.
+// Pass a ref to the scrolling track + the number of items.
+function CarouselDots({ trackRef, count }) {
+  const [active, setActive] = dUseState(0);
+  dUseEffect(() => {
+    const el = trackRef.current;
+    if (!el || count < 2) return;
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const first = el.firstElementChild;
+        if (!first) return;
+        const tileW = first.getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(el).gap) || 10;
+        const idx = Math.round(el.scrollLeft / (tileW + gap));
+        setActive(Math.min(Math.max(idx, 0), count - 1));
+      });
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => { cancelAnimationFrame(raf); el.removeEventListener('scroll', onScroll); };
+  }, [count]);
+  if (count < 2) return null;
+  return (
+    <div style={{
+      display: 'flex', justifyContent: 'center', gap: 6,
+      margin: '14px auto 0',
+    }}>
+      {Array.from({ length: count }).map((_, i) => (
+        <span key={i} style={{
+          width: i === active ? 22 : 6, height: 6, borderRadius: 999,
+          background: i === active ? MS_C.accent : 'rgba(27,42,27,0.22)',
+          transition: 'width 0.2s ease, background 0.2s ease',
+        }}/>
+      ))}
+    </div>
+  );
+}
+
+// v4: fullscreen image overlay — tap anywhere to close
+function Lightbox({ src, onClose }) {
+  if (!src) return null;
+  return (
+    <div onClick={onClose} role="dialog" aria-modal="true" style={{
+      position: 'fixed', inset: 0, zIndex: 9999,
+      background: 'rgba(8,12,8,0.94)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: 'calc(env(safe-area-inset-top, 0px) + 56px) 16px calc(env(safe-area-inset-bottom, 0px) + 56px)',
+      animation: 'mskFade 160ms ease-out',
+    }}>
+      <img src={src} alt="" style={{
+        maxWidth: '100%', maxHeight: '100%', objectFit: 'contain',
+        boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+        borderRadius: 8,
+      }}/>
+      <button onClick={(e)=>{e.stopPropagation();onClose();}} aria-label="Close preview" style={{
+        position: 'fixed', top: 'calc(env(safe-area-inset-top, 0px) + 14px)', right: 14,
+        appearance: 'none', WebkitAppearance: 'none', border: 'none', cursor: 'pointer',
+        padding: '8px 14px', background: 'rgba(255,255,255,0.16)',
+        color: '#fff', fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
+        letterSpacing: '0.2em', textTransform: 'uppercase',
+        borderRadius: 999, backdropFilter: 'blur(8px)',
+      }}>Close</button>
+      <div style={{
+        position: 'fixed', bottom: 'calc(env(safe-area-inset-bottom, 0px) + 18px)',
+        left: '50%', transform: 'translateX(-50%)',
+        padding: '6px 12px', background: 'rgba(255,255,255,0.10)',
+        color: 'rgba(255,255,255,0.85)', fontFamily: MS_FONT.mono, fontSize: 9.5,
+        letterSpacing: '0.2em', textTransform: 'uppercase',
+        borderRadius: 999, pointerEvents: 'none',
+      }}>Tap to close</div>
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────
 // SLIDES — slot 1..7 mirrors the desktop deck order
 // ─────────────────────────────────────────────────────────────
@@ -1063,8 +1162,10 @@ function S3_RAG({ slide, total }) {
           </div>
         </div>
         <p style={{ marginTop: 12, fontFamily: MS_FONT.body, fontSize: 13, color: MS_C.muted, lineHeight: 1.45 }}>
-          Retrieval-augmented LLM with Human-in-the-Loop approval. Buyer drafts go through
-          policy guardrails before send. Adoption ramped Sep '25 → Feb '26 from 1 user / week to 12.
+          AI + automation pulls supplier lead times, inventory, and price changes from
+          ERP-adjacent sources, normalizes them into a structured purchasing recommendation,
+          and routes it to a human reviewer. Approved updates flow back into ERP for global
+          planning visibility.
         </p>
       </div>
     </SlideShell>
@@ -1193,6 +1294,8 @@ function S5_CEC({ slide, total }) {
     { src: '../assets/cs04-syncmetra.jpg',         label: 'Edge compute rack · live latency' },
     { src: '../assets/media_photo-img6344.jpg',    label: 'AR robotics · future-state PoC' },
   ];
+  const [lightboxSrc, setLightboxSrc] = dUseState(null);
+  const trackRef = dUseRef(null);
   return (
     <SlideShell slide={slide} total={total} contentPad="90px 0 110px">
       <div style={{ padding: '0 22px' }}>
@@ -1210,20 +1313,22 @@ function S5_CEC({ slide, total }) {
         </h2>
       </div>
 
-      <div style={{
+      <div ref={trackRef} style={{
         marginTop: 22, display: 'flex', gap: 10,
         padding: '0 22px 4px',
         overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none',
       }}>
         {tiles.map((t, i) => (
-          <div key={i} style={{
+          <div key={i} {...makeLongPress(() => setLightboxSrc(t.src))} style={{
             scrollSnapAlign: 'start', flex: '0 0 78%',
             position: 'relative', aspectRatio: '4 / 5',
             borderRadius: 18, overflow: 'hidden',
             border: `1px solid ${MS_C.line}`,
+            WebkitTouchCallout: 'none', userSelect: 'none',
           }}>
-            <img src={t.src} alt="" style={{
+            <img src={t.src} alt="" draggable="false" style={{
               position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+              WebkitUserDrag: 'none', WebkitTouchCallout: 'none',
             }} />
             <div style={{
               position: 'absolute', inset: 0,
@@ -1248,11 +1353,12 @@ function S5_CEC({ slide, total }) {
         ))}
       </div>
 
+      <CarouselDots trackRef={trackRef} count={tiles.length} />
       <p style={{
-        margin: '12px 22px 0', fontFamily: MS_FONT.mono,
+        margin: '8px 22px 0', fontFamily: MS_FONT.mono,
         fontWeight: 600, fontSize: 9.5, letterSpacing: '0.22em',
-        textTransform: 'uppercase', color: MS_C.muted,
-      }}>Swipe through PoCs ↔</p>
+        textTransform: 'uppercase', color: MS_C.muted, textAlign: 'center',
+      }}>Swipe through PoCs ↔ · Press &amp; hold to preview</p>
 
       <div style={{ padding: '22px 22px 0' }}>
         <div style={{
@@ -1277,6 +1383,7 @@ function S5_CEC({ slide, total }) {
           </p>
         </div>
       </div>
+      <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
     </SlideShell>
   );
 }
@@ -1285,6 +1392,9 @@ function S5_CEC({ slide, total }) {
 // SLIDE 6 / 7 — Mexico Launch (CS05)
 // ─────────────────────────────────────────────────────────────
 function S6_Mexico({ slide, total }) {
+  const [lightboxSrc, setLightboxSrc] = dUseState(null);
+  const trackRef = dUseRef(null);
+  const tileCount = 5;
   return (
     <SlideShell slide={slide} total={total}>
       <p style={{
@@ -1310,21 +1420,23 @@ function S6_Mexico({ slide, total }) {
           { src: '../assets/media_photo-img6336.jpg',        label: 'Custom screen dimensions' },
         ];
         return (
-          <div style={{
+          <div ref={trackRef} style={{
             marginTop: 22, display: 'flex', gap: 10,
             paddingBottom: 4,
             marginLeft: -22, marginRight: -22, paddingLeft: 22, paddingRight: 22,
             overflowX: 'auto', scrollSnapType: 'x mandatory', scrollbarWidth: 'none',
           }}>
             {launchTiles.map((t, i) => (
-              <div key={i} style={{
+              <div key={i} {...makeLongPress(() => setLightboxSrc(t.src))} style={{
                 scrollSnapAlign: 'start', flex: '0 0 78%',
                 position: 'relative', aspectRatio: '4 / 5',
                 borderRadius: 18, overflow: 'hidden',
                 border: `1px solid ${MS_C.line}`, background: MS_C.ink,
+                WebkitTouchCallout: 'none', userSelect: 'none',
               }}>
-                <img src={t.src} alt={t.label} loading="lazy" style={{
+                <img src={t.src} alt={t.label} loading="lazy" draggable="false" style={{
                   position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover',
+                  WebkitUserDrag: 'none', WebkitTouchCallout: 'none',
                 }} />
                 <div style={{
                   position: 'absolute', inset: 0,
@@ -1350,11 +1462,12 @@ function S6_Mexico({ slide, total }) {
           </div>
         );
       })()}
+      <CarouselDots trackRef={trackRef} count={tileCount} />
       <p style={{
-        margin: '12px 0 0', fontFamily: MS_FONT.mono,
+        margin: '8px 0 0', fontFamily: MS_FONT.mono,
         fontWeight: 600, fontSize: 9.5, letterSpacing: '0.22em',
-        textTransform: 'uppercase', color: MS_C.muted,
-      }}>Swipe through launch ↔</p>
+        textTransform: 'uppercase', color: MS_C.muted, textAlign: 'center',
+      }}>Swipe through launch ↔ · Press &amp; hold to preview</p>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 14 }}>
         <div style={{
@@ -1384,6 +1497,7 @@ function S6_Mexico({ slide, total }) {
         <MetricRow eyebrow="Attendees" v="~90" sub="20% walk-up over registration" />
         <MetricRow eyebrow="Sales conversion" v="11%" sub="Attendees → next-step meetings" highlight />
       </div>
+      <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
     </SlideShell>
   );
 }
@@ -1431,7 +1545,7 @@ const CREATOR_ANGLES = {
     kicker: '— Platform + algorithm fluency',
     h: <>Learned every platform's <Em>algorithm + creator stack</Em> first-hand.</>,
     bullets: [
-      'TikTok 650K · IG 65K · Snap 55K · YT 32K · FB 20K',
+      'TikTok 650K · IG 65K · Snap 60K · YT 32K · FB 25K',
       'Format A/B testing across 5 platforms simultaneously',
       'Built creator-tooling instincts no product team can fake',
     ],
@@ -1451,13 +1565,14 @@ const CREATOR_ANGLES = {
 function S7_Creator({ slide, total }) {
   const [angle, setAngle] = dUseState('pm');
   const A = CREATOR_ANGLES[angle];
+  const platTrackRef = dUseRef(null);
   const platforms = [
     // v4: per-platform caption box uses fg (text/border) + tint (fill) for an opaque branded card
     { name:'TikTok',    count:'650K', accent:'#FF0050', fg:'#FFFFFF', tint:'#FF0050', img:'../assets/TT.jpg' },
     { name:'Instagram', count:'65K',  accent:'#E1306C', fg:'#FFFFFF', tint:'#E1306C', img:'../assets/IG.jpg' },
-    { name:'Snapchat',  count:'55K',  accent:'#FFFC00', fg:'#1B2A1B', tint:'#FFFC00', img:'../assets/Snap.jpg' },
+    { name:'Snapchat',  count:'60K',  accent:'#FFFC00', fg:'#1B2A1B', tint:'#FFFC00', img:'../assets/Snap.jpg' },
     { name:'YouTube',   count:'32K',  accent:'#FF0000', fg:'#FFFFFF', tint:'#FF0000', img:'../assets/YT.jpg' },
-    { name:'Facebook',  count:'20K',  accent:'#1877F2', fg:'#FFFFFF', tint:'#1877F2', img:'../assets/Facebook.jpg' },
+    { name:'Facebook',  count:'25K',  accent:'#1877F2', fg:'#FFFFFF', tint:'#1877F2', img:'../assets/Facebook.jpg' },
   ];
   return (
     <SlideShell slide={slide} total={total}>
@@ -1532,7 +1647,7 @@ function S7_Creator({ slide, total }) {
         color: MS_C.muted, marginBottom: 10,
       }}>By platform</p>
       {/* v4: per-platform iPhone-style frames showing actual app screenshots */}
-      <div style={{
+      <div ref={platTrackRef} style={{
         display: 'flex', gap: 16, overflowX: 'auto',
         scrollSnapType: 'x mandatory', scrollbarWidth: 'none',
         marginLeft: -22, marginRight: -22, padding: '8px 22px 4px',
@@ -1594,6 +1709,7 @@ function S7_Creator({ slide, total }) {
           </div>
         ))}
       </div>
+      <CarouselDots trackRef={platTrackRef} count={platforms.length} />
     </SlideShell>
   );
 }
@@ -2122,12 +2238,12 @@ window.DeckSlideStatic = DeckSlideStatic;
             {/* Problem / Solution split — single card, 2 columns */}
             <div className="rounded-xl bg-[#FAF6EA] ring-1 ring-[rgba(27,42,27,0.14)] p-3.5 grid grid-cols-2 gap-x-6 gap-y-1.5">
               <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
-                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Supported an <strong className="text-[#1B2A1B]">AI workflow-capture assessment</strong> using Teramind to uncover <strong className="text-[#1B2A1B]">$1M+ in procurement savings opportunities</strong> across ERP-adjacent purchasing processes.</span></li>
-                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Prioritized use cases needed a scalable home — without over-engineering a heavy custom platform.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Supplier <strong className="text-[#1B2A1B]">lead times, inventory levels, and price changes</strong> lived across disconnected ERP-adjacent systems — buyers couldn't see them in one place.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D] mt-1.5 flex-shrink-0"/><span>Manual data collection slowed planning decisions and created risk in <strong className="text-[#1B2A1B]">global supply visibility</strong>.</span></li>
               </ul>
               <ul className="space-y-1.5 text-[12.5px] text-[#3A4A3A] leading-snug">
-                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Operationalized prioritized use cases into a <strong className="text-[#1B2A1B]">SharePoint-backed RAG + HITL workflow</strong>.</span></li>
-                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Reduced manual work <strong className="text-[#1B2A1B]">60%</strong> and generated <strong className="text-[#1B2A1B]">$85K in savings</strong>.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>Built an <strong className="text-[#1B2A1B]">AI + automation workflow</strong> that collects lead times, inventory, and pricing from ERP-adjacent sources, then normalizes them into a structured purchasing recommendation.</span></li>
+                <li className="flex gap-2"><span className="w-1.5 h-1.5 rounded-full bg-[#2D4A2B] mt-1.5 flex-shrink-0"/><span>A <strong className="text-[#1B2A1B]">human reviewer validates each recommendation</strong> before approved updates flow back into ERP for global planning visibility — reducing manual work <strong className="text-[#1B2A1B]">60%</strong> and generating <strong className="text-[#1B2A1B]">$85K in savings</strong>.</span></li>
               </ul>
             </div>
 
@@ -2245,9 +2361,9 @@ window.DeckSlideStatic = DeckSlideStatic;
       const platforms = [
         { name:'TikTok',    handle:'650K Followers', img:'../assets/TT.jpg?v=4',       accent:'#1B2A1B', tint:'rgba(27,42,27,0.06)',   stats:[['Views','44M'],['Likes','2.3M'],['Shares','42K']] },
         { name:'Instagram', handle:'65K Followers',  img:'../assets/IG.jpg?v=4',       accent:'#C76F3D', tint:'rgba(199,111,61,0.10)', stats:[['Views','9.3M'],['Engag','585K'],['Saves','42K']] },
-        { name:'Snapchat',  handle:'55K Followers',  img:'../assets/Snap.jpg?v=4',     accent:'#B8932F', tint:'rgba(217,182,90,0.18)', stats:[['Views','9.1M'],['Faves','33.6K'],['Shares','2.7K']] },
+        { name:'Snapchat',  handle:'60K Followers',  img:'../assets/Snap.jpg?v=4',     accent:'#B8932F', tint:'rgba(217,182,90,0.18)', stats:[['Views','9.1M'],['Faves','33.6K'],['Shares','2.7K']] },
         { name:'YouTube',   handle:'32K Subs',       img:'../assets/YT.jpg?v=4',       accent:'#C25A2E', tint:'rgba(194,90,46,0.10)',  stats:[['Views','397K'],['Watch','54%'],['New Aud','89%']] },
-        { name:'Facebook',  handle:'20K Followers',  img:'../assets/Facebook.jpg?v=4', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',   stats:[['Views','3.1M'],['1-min','785K'],['Reach','1.4M']] },
+        { name:'Facebook',  handle:'25K Followers',  img:'../assets/Facebook.jpg?v=4', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',   stats:[['Views','3.1M'],['1-min','785K'],['Reach','1.4M']] },
       ];
       const strategies = [
         { title:'Engagement Loops', body:'Active commenting, replies, participation rituals to build community', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',

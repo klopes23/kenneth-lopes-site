@@ -122,10 +122,42 @@
     });
   }
 
+  // v4: scroll-progress dots for any horizontal scroll-snap carousel
+  // marked with [data-carousel-dots]. Tracks scrollLeft, highlights the
+  // dot for the currently snapped tile.
+  function wireCarouselDots() {
+    document.querySelectorAll('[data-carousel-dots]').forEach((track) => {
+      if (track.dataset.dotsInit === '1') return;
+      const tiles = Array.from(track.children);
+      if (tiles.length < 2) return;
+      track.dataset.dotsInit = '1';
+      const wrap = document.createElement('div');
+      wrap.className = 'carousel-dots';
+      tiles.forEach((_, i) => {
+        const d = document.createElement('span');
+        d.className = 'carousel-dots__dot' + (i === 0 ? ' is-active' : '');
+        wrap.appendChild(d);
+      });
+      track.parentNode.insertBefore(wrap, track.nextSibling);
+      let raf = 0;
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          const first = tiles[0];
+          const tileW = first.getBoundingClientRect().width;
+          const gap = parseFloat(getComputedStyle(track).gap) || 10;
+          const idx = Math.round(track.scrollLeft / (tileW + gap));
+          const clamped = Math.max(0, Math.min(idx, tiles.length - 1));
+          [...wrap.children].forEach((d, i) => d.classList.toggle('is-active', i === clamped));
+        });
+      }, { passive: true });
+    });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { buildSheet(); wireSwipeBack(); });
+    document.addEventListener('DOMContentLoaded', () => { buildSheet(); wireSwipeBack(); wireCarouselDots(); });
   } else {
-    buildSheet(); wireSwipeBack();
+    buildSheet(); wireSwipeBack(); wireCarouselDots();
   }
 
   let wasMobile = isMobile();
