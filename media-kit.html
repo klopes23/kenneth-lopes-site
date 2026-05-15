@@ -1494,12 +1494,13 @@
       font-size: 8pt;
     }
     /* Constrain content + flex-stack so everything packs onto one page.
-       The same HTML elements render here as on screen, so any number change
-       on the live page (TikTok / IG / Snap / YT / FB / brand collab views)
-       propagates to the printed PDF automatically. */
+       Use body[data-creator="true"] specificity so this single rule wins
+       over mobile.css's hide rule when printing from a phone — guarantees
+       the SAME desktop PDF on mobile + desktop. */
+    body[data-creator="true"] .desktop-view,
     .desktop-view {
       display: flex !important;
-      flex-direction: column;
+      flex-direction: column !important;
       gap: 6px;
       max-width: 6.5in;
       margin: 0 auto;
@@ -1512,12 +1513,16 @@
       print-color-adjust: exact !important;
     }
 
-    /* Hide chrome + non-essential sections */
-    .creator-mobile-only,
+    /* Hide chrome + non-essential sections.
+       Use body[data-creator="true"] specificity so these win over the
+       mobile.css rules — guarantees the same desktop PDF when printing
+       from a phone (where mobile.css would otherwise hide .desktop-view
+       and show .creator-mobile-only). */
+    body[data-creator="true"] .creator-mobile-only,
+    body[data-creator="true"] .mview,
     .nav-stack,
     .topnav,
     .subnav,
-    .mview,
     .hero-pills,
     .hero-download,
     .km-hero-download,
@@ -1533,7 +1538,8 @@
     #offer .offer-table { display: none !important; }
     #offer { display: block !important; padding: 4px 0 !important; }
 
-    .desktop-view { display: block !important; }
+    /* (.desktop-view display:flex is set above with body[data-creator] specificity
+       so it already overrides mobile.css's hide rule.) */
     .page { padding: 0 !important; max-width: 100% !important; }
     .section,
     .hero {
@@ -1674,7 +1680,10 @@
     /* hard stop — anything that bleeds past page 1 gets hidden */
     .desktop-view > :nth-child(n+7) { display: none !important; }
 
-    /* === PAGE 2 — pure black-and-white clone (printer-friendly, no colors) === */
+    /* === PAGE 2 — pure black-and-white clone (printer-friendly, no colors)
+       Selector specificity matches mobile.css's `body[data-creator] .desktop-view`
+       rule so the clone reliably renders when printing from mobile too. */
+    body[data-creator="true"] .print-bw-clone,
     .print-bw-clone {
       display: flex !important;
       flex-direction: column;
@@ -2786,13 +2795,14 @@
       document.querySelectorAll('.print-bw-clone').forEach(function (n) { n.remove(); });
       var clone = src.cloneNode(true);
       clone.classList.add('print-bw-clone');
-      // strip duplicate IDs so we don't violate the unique-ID rule
-      clone.querySelectorAll('[id]').forEach(function (n) { n.removeAttribute('id'); });
+      // Keep the IDs intact so the print stylesheet's #content / #contact /
+      // #offer hide rules apply to the clone too (otherwise the B/W page
+      // overflows because pillars / contact / offer-table become visible).
+      // Browsers tolerate duplicate IDs for visual rendering, and the clone
+      // is removed after print.
       src.parentNode.insertBefore(clone, src.nextSibling);
-      // Print, then clean up after the dialog closes
       var cleanup = function () { if (clone.parentNode) clone.parentNode.removeChild(clone); window.removeEventListener('afterprint', cleanup); };
       window.addEventListener('afterprint', cleanup);
-      // Belt-and-suspenders: also clean up on a delay in case afterprint doesn't fire
       setTimeout(cleanup, 8000);
       window.print();
     }
