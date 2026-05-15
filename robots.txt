@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /assets/*.bak
+
+Sitemap: https://kennethlopes.com/sitemap.xml
