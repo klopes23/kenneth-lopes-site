@@ -1623,61 +1623,57 @@ function DeckMobile() {
       position: 'relative', height: '100%', background: MS_C.bg,
       display: 'flex', flexDirection: 'column',
     }}>
-      {/* v4: persistent topnav above the deck — K·L brand + Home/Portfolio/Creator links + slide counter + menu */}
+      {/* v4: single-row topnav — brand · inline nav · counter + menu */}
       <header style={{
         flex: '0 0 auto', position: 'relative', zIndex: 50,
-        padding: 'calc(8px + env(safe-area-inset-top, 0px)) 16px 8px',
+        padding: 'calc(10px + env(safe-area-inset-top, 0px)) 16px 10px',
         background: 'rgba(242,235,218,0.92)',
         backdropFilter: 'blur(14px) saturate(160%)',
         WebkitBackdropFilter: 'blur(14px) saturate(160%)',
         borderBottom: `1px solid ${MS_C.line}`,
       }}>
-        {/* Row 1: brand + counter + menu */}
         <div style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          display: 'grid', gridTemplateColumns: 'auto 1fr auto',
+          alignItems: 'center', gap: 12,
         }}>
           <a href="../portfolio.html" style={{
             fontFamily: MS_FONT.mono, fontSize: 11, fontWeight: 600,
             letterSpacing: '0.22em', textTransform: 'uppercase',
             color: MS_C.ink, textDecoration: 'none',
           }}>K · L</a>
+          <nav aria-label="Site" style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14,
+          }}>
+            <a href="../index.html" style={{
+              fontFamily: MS_FONT.mono, fontSize: 9.5, fontWeight: 600,
+              letterSpacing: '0.18em', textTransform: 'uppercase',
+              color: MS_C.muted, textDecoration: 'none',
+            }}>Home</a>
+            <a href="../portfolio.html" style={{
+              fontFamily: MS_FONT.mono, fontSize: 9.5, fontWeight: 600,
+              letterSpacing: '0.18em', textTransform: 'uppercase',
+              color: MS_C.ink, textDecoration: 'none',
+              borderBottom: `1.5px solid ${MS_C.accent}`, paddingBottom: 2,
+            }}>Portfolio</a>
+            <a href="../media-kit.html" style={{
+              fontFamily: MS_FONT.mono, fontSize: 9.5, fontWeight: 600,
+              letterSpacing: '0.18em', textTransform: 'uppercase',
+              color: MS_C.muted, textDecoration: 'none',
+            }}>Creator</a>
+          </nav>
           <button type="button" onClick={() => setSheet(true)} aria-label="Open slides menu" style={{
             appearance: 'none', WebkitAppearance: 'none', border: 'none',
             background: 'transparent', cursor: 'pointer', padding: 6, margin: -6,
-            color: MS_C.ink, display: 'inline-flex', alignItems: 'center', gap: 8,
+            color: MS_C.ink, display: 'inline-flex', alignItems: 'center', gap: 6,
             WebkitTapHighlightColor: 'transparent',
           }}>
             <span style={{
-              fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
-              letterSpacing: '0.22em', textTransform: 'uppercase', color: MS_C.muted,
-            }}>{`${String(current + 1).padStart(2, '0')} / ${String(DECK_SLIDES.length).padStart(2, '0')}`}</span>
+              fontFamily: MS_FONT.mono, fontSize: 9.5, fontWeight: 600,
+              letterSpacing: '0.18em', textTransform: 'uppercase', color: MS_C.muted,
+            }}>{`${String(current + 1).padStart(2, '0')}/${String(DECK_SLIDES.length).padStart(2, '0')}`}</span>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
           </button>
         </div>
-        {/* Row 2: site nav links */}
-        <nav aria-label="Site" style={{
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          gap: 18, marginTop: 8,
-        }}>
-          <a href="../index.html" style={{
-            fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
-            letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: MS_C.muted, textDecoration: 'none',
-          }}>Home</a>
-          <span style={{ width: 3, height: 3, borderRadius: 999, background: 'rgba(27,42,27,0.18)' }}/>
-          <a href="../portfolio.html" style={{
-            fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
-            letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: MS_C.ink, textDecoration: 'none',
-            borderBottom: `1.5px solid ${MS_C.accent}`, paddingBottom: 2,
-          }}>Portfolio</a>
-          <span style={{ width: 3, height: 3, borderRadius: 999, background: 'rgba(27,42,27,0.18)' }}/>
-          <a href="../media-kit.html" style={{
-            fontFamily: MS_FONT.mono, fontSize: 10, fontWeight: 600,
-            letterSpacing: '0.22em', textTransform: 'uppercase',
-            color: MS_C.muted, textDecoration: 'none',
-          }}>Creator</a>
-        </nav>
       </header>
 
       <div ref={trackRef} style={{
