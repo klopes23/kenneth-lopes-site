@@ -891,6 +891,16 @@
     font-family: 'JetBrains Mono', monospace; font-size: 10px;
     letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--kc-accent); font-weight: 600; margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  /* v4: "Last updated" chip pinned to the right of the eyebrow row */
+  body[data-creator="true"] .km-hero-updated {
+    margin-left: auto;
+    padding: 4px 8px;
+    background: rgba(199,111,61,0.10);
+    border: 1px solid var(--kc-accent);
+    color: var(--kc-accent);
+    font-size: 8.5px; letter-spacing: 0.16em;
   }
   body[data-creator="true"] .km-hero-title {
     font-family: 'Fraunces', Georgia, serif; font-weight: 600;
