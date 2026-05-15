@@ -214,6 +214,13 @@
     background: var(--bg-2);
     background-image: repeating-linear-gradient(135deg, var(--paper) 0 14px, var(--bg-2) 14px 28px);
     border: 1px solid var(--accent);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  /* v4: hover — lift the photo and expose an offset terracotta block behind it
+     (mirrors the .hero-photo-wrap hover effect on portfolio.html) */
+  .hero-photo:hover {
+    transform: translate(-6px, -6px);
+    box-shadow: 12px 12px 0 var(--accent);
   }
   .hero-photo img {
     position: absolute; inset: 0;
@@ -896,13 +903,14 @@
     .cat-row { grid-template-columns: 1fr 1fr; }
   }
 
-  /* ── CONTACT — v4: centered like portfolio's "Let's connect" section ── */
+  /* ── CONTACT — v4: edges align with .page (max 1280, gutter inside) ── */
   .contact {
     background: var(--ink); color: var(--bg);
-    padding: 64px var(--gutter);
+    padding: 64px 0;
   }
   .contact-inner {
-    max-width: 960px; margin: 0 auto;
+    max-width: 1280px; margin: 0 auto;
+    padding: 0 var(--gutter);
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 64px; align-items: end;
   }
@@ -943,10 +951,10 @@
     font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.04em;
   }
 
-  /* ── SOCIAL GRID (bottom of "Work with us") — centered to match contact-inner ── */
+  /* ── SOCIAL GRID — same outer rhythm as .contact-inner (max 1280 + gutter inside) ── */
   .social-grid-wrap {
-    max-width: 960px; margin: 48px auto 0;
-    padding-top: 32px;
+    max-width: 1280px; margin: 48px auto 0;
+    padding: 32px var(--gutter) 0;
     border-top: 1px solid rgba(240,235,224,0.14);
   }
   .social-grid-eyebrow {
@@ -1582,7 +1590,8 @@
     }
     .plat-name { font-size: 7pt !important; }
     .plat-count { font-size: 14pt !important; margin-top: 1px !important; }
-    .plat-meta { font-size: 6pt !important; line-height: 1.2 !important; }
+    /* v4: hide the meta line (e.g. "9.9M views · last 90 days") in print — keep only name + count */
+    .plat-meta { display: none !important; }
     .plat-bar { display: none !important; }
     .plat-logo { width: 12px !important; height: 12px !important; top: 6px !important; right: 6px !important; }
 
@@ -1665,7 +1674,7 @@
     /* hard stop — anything that bleeds past page 1 gets hidden */
     .desktop-view > :nth-child(n+7) { display: none !important; }
 
-    /* === PAGE 2 — grayscale clone (printer-friendly black-and-white version) === */
+    /* === PAGE 2 — pure black-and-white clone (printer-friendly, no colors) === */
     .print-bw-clone {
       display: flex !important;
       flex-direction: column;
@@ -1676,11 +1685,43 @@
       break-before: page;
       page-break-after: avoid;
       break-after: avoid;
-      filter: grayscale(1) contrast(1.05);
-      -webkit-filter: grayscale(1) contrast(1.05);
+      background: #fff !important;
     }
+    /* Strip every color + background — pure white sheet with black ink content */
+    .print-bw-clone,
+    .print-bw-clone * {
+      background-color: transparent !important;
+      background-image: none !important;
+      color: #000 !important;
+      border-color: #000 !important;
+      box-shadow: none !important;
+    }
+    /* Restore visible boundaries with hairline borders so the layout still reads */
+    .print-bw-clone .hero-stat,
+    .print-bw-clone .plat,
+    .print-bw-clone .plat--brand,
+    .print-bw-clone .aud-gender-d__bar,
+    .print-bw-clone .aud-chip-d,
+    .print-bw-clone .brand-tile,
+    .print-bw-clone .cat {
+      border: 1px solid #000 !important;
+    }
+    /* Gender bar — solid black F segment (78%), outlined white M segment (22%), so the split still reads */
+    .print-bw-clone .aud-gender-d__f {
+      background: #000 !important;
+    }
+    .print-bw-clone .aud-gender-d__f * { color: #fff !important; }
+    /* Photos render in grayscale */
+    .print-bw-clone img {
+      filter: grayscale(1) contrast(1.1) !important;
+      -webkit-filter: grayscale(1) contrast(1.1) !important;
+    }
+    /* SVG logos use currentColor so they pick up #000 automatically */
     .print-bw-clone > :nth-child(n+7) { display: none !important; }
     .print-bw-clone > * { page-break-inside: avoid; break-inside: avoid; }
+    /* Hide the meta line on the B&W page too (matches color page) */
+    .print-bw-clone .plat-meta { display: none !important; }
+
     /* Avoid the original color page bleeding to page 2 */
     .desktop-view { page-break-after: avoid; break-after: avoid; }
     .desktop-view > * { page-break-inside: avoid; break-inside: avoid; }
