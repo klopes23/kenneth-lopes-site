@@ -705,6 +705,14 @@
     font-size: 11px; font-weight: 600;
     letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--ms-ink, #1B2A1B);
+    margin: 0 0 8px;
+  }
+  /* v4: italic role byline below the availability eyebrow (mirrors desktop pattern) */
+  .hero-mobile-byline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-size: 16px; line-height: 1.3;
+    color: var(--ms-muted, #5B6A55);
     margin: 0 0 24px;
   }
   .hero-mobile-title {
