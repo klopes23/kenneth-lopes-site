@@ -195,7 +195,6 @@
     /* photo */
     .hero-photo-wrap {
       position: relative;
-      padding-right: 20px; padding-bottom: 20px;
       display: block; text-decoration: none; color: inherit;
       cursor: pointer;
     }
@@ -217,16 +216,20 @@
     .hero-photo-wrap:hover .hero-photo-li,
     .hero-photo-wrap:focus-visible .hero-photo-li { opacity: 1; transform: translateY(0); }
     .hero-photo-wrap:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    /* v4: shadow stays inside the wrap so its right edge aligns with the
+       hero-inner column edge (and therefore the stats grid right edge below). */
     .hero-photo-shadow {
       position: absolute;
-      inset: 20px -20px -20px 20px;
+      inset: 20px 0 0 20px;
       background: var(--accent);
       z-index: 0;
       transition: transform 0.35s ease;
     }
     .hero-photo {
       position: relative; z-index: 1;
-      width: 100%;
+      display: block;
+      width: calc(100% - 20px);
+      margin-bottom: 20px;
       aspect-ratio: 3/4;
       object-fit: cover;
       object-position: center 22%;
