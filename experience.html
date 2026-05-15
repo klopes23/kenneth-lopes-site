@@ -235,9 +235,31 @@
     }
     .summary-resume-btn:hover { background: var(--accent); }
 
-    /* ── ROLE ── */
-    .role { margin-bottom: 40px; }
-    .role:last-child { margin-bottom: 0; }
+    /* ── ROLE — v4: timeline rail + accent dot per role (mirrors mobile design) ── */
+    .role {
+      position: relative;
+      padding-left: 40px;
+      padding-bottom: 28px;
+      margin-bottom: 12px;
+    }
+    .role:last-child { margin-bottom: 0; padding-bottom: 0; }
+    .role::before {
+      content: ''; position: absolute;
+      left: 7px; top: 18px; bottom: 0;
+      width: 1px; background: var(--line);
+    }
+    .role:last-child::before { bottom: 50%; }
+    .role::after {
+      content: ''; position: absolute;
+      left: 0; top: 8px;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg, #F2EBDA);
+      box-shadow: 0 0 0 1px var(--line);
+    }
+    .role[data-accent="olive"]::after  { background: #5E7030; }
+    .role[data-accent="forest"]::after { background: #2D4A2B; }
+    .role[data-accent="muted"]::after  { background: #7A8A7A; }
     .role-head {
       display: flex; flex-wrap: wrap; justify-content: space-between;
       align-items: baseline; gap: 8px 24px;

@@ -158,14 +158,113 @@
     display: flex; align-items: center; gap: 10px;
   }
   .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-  /* v4: "Last updated" chip pinned to the right of the eyebrow row (desktop) */
-  .hero-eyebrow .hero-updated {
-    margin-left: auto;
-    padding: 4px 10px;
-    background: rgba(199,111,61,0.10);
+
+  /* v4: italic tagline below the wordmark */
+  .hero-tagline {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.3;
+    color: var(--ink-2);
+    margin: 18px 0 0;
+    max-width: 36ch;
+  }
+  /* v4: download CTA below tagline */
+  .hero-download {
+    display: inline-block; margin-top: 18px;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink); text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--ink);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .hero-download:hover { color: var(--accent); border-color: var(--accent); }
+  /* v4: pills row */
+  .hero-pills {
+    margin-top: 22px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .pill-tag {
+    padding: 9px 18px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink); white-space: nowrap;
+  }
+  .pill-tag.is-solid {
+    background: var(--bg-2);
+    border-color: var(--bg-2);
+    color: var(--ink);
+  }
+  /* v4: photo + 3 colored stat tile grid */
+  .hero-stats-grid {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+    min-height: 540px;
+  }
+  .hero-photo {
+    grid-row: 1 / 4; grid-column: 1;
+    position: relative; overflow: hidden;
+    background: var(--bg-2);
+    background-image: repeating-linear-gradient(135deg, var(--paper) 0 14px, var(--bg-2) 14px 28px);
     border: 1px solid var(--accent);
-    color: var(--accent);
-    font-size: 9px; letter-spacing: 0.18em;
+  }
+  .hero-photo img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 25%;
+    display: block;
+  }
+  .hero-photo .hero-stamp {
+    position: absolute; top: 14px; left: 14px; z-index: 2;
+    padding: 6px 10px; background: var(--paper);
+    font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+  }
+  .hero-stat {
+    padding: 22px 24px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .hero-stat--terracotta { background: var(--accent); color: #fff; }
+  .hero-stat--mustard    { background: var(--pop); color: var(--ink); }
+  .hero-stat--forest     { background: #5E7030; color: #fff; }
+  .hero-stat__lab {
+    font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .hero-stat--terracotta .hero-stat__lab,
+  .hero-stat--forest .hero-stat__lab { color: rgba(255,255,255,0.78); }
+  .hero-stat--mustard .hero-stat__lab { color: rgba(42,26,18,0.65); }
+  .hero-stat__num {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(48px, 5.5vw, 72px); line-height: 1;
+    letter-spacing: -0.035em;
+  }
+  .hero-stat__num em {
+    font-family: var(--font-italic); font-style: italic;
+    font-weight: 400; margin-left: 2px;
+  }
+  .hero-stat__sub {
+    font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .hero-stat--terracotta .hero-stat__sub,
+  .hero-stat--forest .hero-stat__sub { color: rgba(255,255,255,0.7); }
+  .hero-stat--mustard .hero-stat__sub { color: rgba(42,26,18,0.6); }
+  /* Stack on narrow screens */
+  @media (max-width: 720px) {
+    .hero-stats-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      min-height: 0;
+    }
+    .hero-photo { aspect-ratio: 4/5; grid-row: auto; }
   }
   .wordmark {
     font-family: var(--font-display);
@@ -431,6 +530,14 @@
     background: var(--brand);
     color: var(--fg);
   }
+  /* v4: platform logo top-right of each reach tile */
+  .plat-logo {
+    position: absolute; top: 16px; right: 18px;
+    width: 22px; height: 22px;
+    color: var(--fg); opacity: 0.78;
+    pointer-events: none;
+  }
+  a.plat.plat--brand:hover .plat-logo { opacity: 1; }
   a.plat.plat--brand .plat-name,
   a.plat.plat--brand .plat-name .rank,
   a.plat.plat--brand .plat-count,
@@ -480,8 +587,109 @@
     color: var(--bg); max-width: 22ch;
   }
 
+  /* v4: 4-up content pillars grid — full-bleed photo + bottom-left label */
+  .pillars-v2 {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  }
+  .pcard {
+    position: relative; display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1.5px solid var(--ink);
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .pcard:hover { transform: translateY(-2px); box-shadow: 4px 4px 0 var(--ink); }
+  .pcard img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    display: block;
+  }
+  .pcard__lab {
+    position: absolute; left: 12px; bottom: 12px;
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 7px 12px;
+    background: rgba(244,236,221,0.92);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink);
+  }
+  .pcard__lab .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  @media (max-width: 900px) {
+    .pillars-v2 { grid-template-columns: 1fr 1fr; gap: 8px; }
+  }
+
+  /* v4: shake-shack image is panned 10% down site-wide (shows more of dad+son) */
+  img[src*="brand-shake-shack"] { object-position: center 40% !important; }
+
   /* ── AUDIENCE ── */
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  /* v4: desktop split-bar + chip grid (mirrors mobile audience design) */
+  .audience-v2 { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .aud-gender-d__head {
+    display: flex; justify-content: space-between; margin-bottom: 10px;
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+  }
+  .aud-gender-d__bar {
+    display: flex; height: 56px;
+    border: 1.5px solid var(--ink);
+  }
+  .aud-gender-d__f,
+  .aud-gender-d__m {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 18px;
+  }
+  .aud-gender-d__f { width: 78%; background: var(--accent); color: #fff; }
+  .aud-gender-d__m { width: 22%; background: var(--bg-2); color: var(--ink); }
+  .aud-gender-d__bar .lab {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+  }
+  .aud-gender-d__bar .pct {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: 26px; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .aud-grid-d {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .aud-chip-d {
+    background: var(--bg-2); border: 1px solid var(--line);
+    padding: 22px 24px;
+  }
+  .aud-chip-d--dark { background: var(--ink); color: var(--bg); border: none; }
+  .aud-chip-d--wide { grid-column: 1 / 3; padding: 22px 24px; }
+  .aud-chip-d__lab {
+    font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .aud-chip-d--dark .aud-chip-d__lab { color: var(--pop); }
+  .aud-chip-d__val {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: 36px; letter-spacing: -0.025em; line-height: 1;
+  }
+  .aud-chip-d--dark .aud-chip-d__val { font-size: 28px; }
+  .aud-chip-d__sub {
+    margin-top: 6px; font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.06em; color: var(--muted);
+  }
+  .aud-chip-d--dark .aud-chip-d__sub { color: rgba(244,236,221,0.6); }
+  .aud-chip-d__pills {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+  }
+  .aud-chip-d__pills span {
+    padding: 8px 14px;
+    background: var(--paper); border: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; color: var(--ink);
+  }
+  @media (max-width: 720px) {
+    .aud-grid-d { grid-template-columns: 1fr; }
+    .aud-chip-d--wide { grid-column: 1; }
+  }
 
   .audience-card {
     background: var(--bg-2); border: 1px solid var(--line);
@@ -657,13 +865,16 @@
     color: var(--accent-2); white-space: nowrap;
   }
 
-  /* ── CATEGORIES ── */
-  .cat-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  /* ── CATEGORIES — v4: single row, 4 columns, words wrap onto 2 lines inside each pill ── */
+  .cat-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  }
   .cat {
-    display: flex; align-items: center; gap: 16px;
-    padding: 18px 24px 18px 20px;
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 18px;
     border: 2px solid var(--ink); border-radius: 999px;
     background: var(--bg-2);
+    min-width: 0;
   }
   .cat.solid { background: var(--accent); color: var(--bg); }
   .cat.gold   { background: var(--accent-2); }
@@ -671,13 +882,17 @@
   .cat .cnum {
     font-family: var(--font-mono); font-size: 10px;
     letter-spacing: 0.16em; color: var(--muted);
-    border-right: 1px solid var(--line); padding-right: 16px;
+    border-right: 1px solid var(--line); padding-right: 12px;
+    flex-shrink: 0;
   }
   .cat.solid .cnum { color: rgba(240,235,224,0.6); border-color: rgba(240,235,224,0.18); }
   .cat.pop .cnum   { color: rgba(240,235,224,0.6); border-color: rgba(240,235,224,0.18); }
   .cat .ct {
     font-family: var(--font-display);
-    font-size: 22px; letter-spacing: -0.01em;
+    font-size: 18px; line-height: 1.1; letter-spacing: -0.01em;
+  }
+  @media (max-width: 720px) {
+    .cat-row { grid-template-columns: 1fr 1fr; }
   }
 
   /* ── CONTACT ── */
@@ -749,31 +964,31 @@
   .social-btn {
     position: relative;
     display: grid; grid-template-columns: auto 1fr auto;
-    grid-template-rows: auto auto; column-gap: 12px; row-gap: 0;
+    grid-template-rows: auto auto; column-gap: 9px; row-gap: 0;
     align-items: center;
-    padding: 16px 18px;
+    padding: 11px 13px;
     border: 1px solid rgba(240,235,224,0.18);
     text-decoration: none;
     transition: transform 200ms ease, border-color 200ms ease;
     overflow: hidden;
   }
-  .social-btn:hover { transform: translateY(-3px); border-color: rgba(240,235,224,0.4); }
-  .social-logo { grid-row: 1 / 3; width: 26px; height: 26px; flex-shrink: 0; }
+  .social-btn:hover { transform: translateY(-2px); border-color: rgba(240,235,224,0.4); }
+  .social-logo { grid-row: 1 / 3; width: 18px; height: 18px; flex-shrink: 0; }
   .social-name {
     grid-column: 2; grid-row: 1; align-self: end;
     font-family: var(--font-mono);
-    font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase;
     line-height: 1; opacity: 0.75;
   }
   .social-count {
     grid-column: 2; grid-row: 2; align-self: start;
     font-family: var(--font-display);
-    font-size: 22px; line-height: 1.05; letter-spacing: -0.02em;
+    font-size: 15px; line-height: 1.05; letter-spacing: -0.02em;
     margin-top: 2px;
   }
   .social-arrow {
     grid-column: 3; grid-row: 1 / 3; align-self: center;
-    font-family: var(--font-mono); font-size: 16px; opacity: 0.6;
+    font-family: var(--font-mono); font-size: 12px; opacity: 0.6;
   }
 
   .social-btn--tiktok    { background: #000000;            color: #FFFFFF; }
@@ -791,15 +1006,27 @@
     .social-grid { grid-template-columns: 1fr; }
   }
 
-  /* ── FOOTER ── */
+  /* ── FOOTER — v4: mirrors portfolio.html footer pattern for cross-page consistency ── */
   .foot {
     background: var(--ink);
-    border-top: 1px solid rgba(240,235,224,0.12);
-    padding: 24px var(--gutter);
-    font-family: var(--font-mono);
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: rgba(240,235,224,0.45);
-    display: flex; justify-content: space-between;
+    border-top: 1px solid rgba(240,235,224,0.1);
+  }
+  .foot-inner {
+    max-width: 1280px; margin: 0 auto;
+    padding: 20px var(--gutter);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .foot span,
+  .foot a {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(240,235,224,0.3);
+    text-decoration: none;
+  }
+  .foot a:hover { color: rgba(240,235,224,0.65); }
+  .foot nav { display: flex; gap: 24px; align-items: center; }
+  @media (max-width: 720px) {
+    .foot-inner { flex-direction: column; gap: 12px; text-align: center; }
   }
 
   /* desktop-only mid-range responsive */
@@ -1238,6 +1465,59 @@
     .desktop-view { display: none !important; }
     .mview { display: none !important; }
   }
+
+  /* ════════════════════════════════════════════════
+     PRINT (Download media kit -> Save as PDF)
+     Outputs: hero (top heading) + 01 Reach + 04 Brands only.
+     Hides: navs, pillars, audience, offer, contact, footer.
+     ════════════════════════════════════════════════ */
+  @media print {
+    @page { margin: 0.5in; }
+    /* Force desktop view for a clean print (mobile creator-only block is hidden) */
+    body[data-creator="true"] { background: #fff !important; color: #000 !important; }
+    .creator-mobile-only,
+    .nav-stack,
+    .topnav,
+    .subnav,
+    .mview,
+    .hero-pills,
+    .hero-download,
+    .km-hero-download,
+    /* keep #hero, #reach, #brands; hide everything else */
+    #content,
+    #audience,
+    #offer,
+    #contact,
+    .contact { display: none !important; }
+
+    .desktop-view { display: block !important; }
+    .page { padding: 0 !important; max-width: 100% !important; }
+    .section { padding: 24px 0 !important; border-bottom: none !important; page-break-inside: avoid; }
+    .hero { padding: 0 !important; page-break-after: avoid; }
+    .hero-stats-grid {
+      grid-template-columns: 1fr 1fr 1fr !important;
+      grid-template-rows: auto !important;
+      min-height: 0 !important;
+      margin-top: 18px !important;
+    }
+    .hero-photo { display: none !important; }
+    .hero-stat { padding: 14px 16px !important; }
+    .hero-stat__num { font-size: 36px !important; }
+    /* exact-color print so brand tiles + stat tiles keep their hues */
+    .plat--brand,
+    .hero-stat,
+    .brand-tile figcaption {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    .platforms { grid-template-columns: repeat(5, 1fr) !important; }
+    .plat { min-height: 0 !important; padding: 16px 14px !important; }
+    .plat-count { font-size: 28px !important; }
+    .brand-grid { grid-template-columns: repeat(4, 1fr) !important; }
+    a { color: inherit !important; text-decoration: none !important; }
+    /* page-break hints */
+    #reach { page-break-after: always; }
+  }
 </style>
   <link rel="stylesheet" href="mobile.css" />
 </head>
@@ -1286,30 +1566,36 @@
       <em>Family.</em>
     </h1>
     <p class="km-hero-tagline">
-      A father–son creator brand — made to be watched together.
+      Father–son content — made to be watched together.
     </p>
+    <a class="km-hero-download" href="#" onclick="window.print();return false;" role="button">↓ Download media kit (PDF)</a>
     <div class="km-hero-pills">
       <span class="km-pill-tag is-solid">Food</span>
-      <span class="km-pill-tag">Family-friendly</span>
       <span class="km-pill-tag">Lifestyle</span>
       <span class="km-pill-tag">Entertainment</span>
+      <span class="km-pill-tag">Family-friendly</span>
       <span class="km-pill-tag">18–34 core</span>
     </div>
 
-    <!-- Hero stat composition: photo (no overlay) + 2 stacked right -->
+    <!-- Hero stat composition: photo (left, spans 3 rows) + 3 stacked right -->
     <div class="km-hero-stats">
       <div class="km-stat-big">
         <picture><img src="assets/IMG_4376.JPG" alt="Kenneth Lopes and son — Nesi Family" style="object-position: center 10%;" /></picture>
       </div>
       <div class="km-stat-mid">
+        <div class="km-stat-lab">Followers</div>
         <div class="km-stat-num">800K<em>+</em></div>
-        <div class="km-stat-sub">Followers</div>
-        <div class="km-stat-lab">Across platforms</div>
+        <div class="km-stat-sub">Across 5 platforms</div>
       </div>
       <div class="km-stat-pop">
         <div class="km-stat-lab">All-time</div>
         <div class="km-stat-num">100M<em>+</em></div>
         <div class="km-stat-sub">Total views</div>
+      </div>
+      <div class="km-stat-forest">
+        <div class="km-stat-lab">Last 90 days</div>
+        <div class="km-stat-num">70M<em>+</em></div>
+        <div class="km-stat-sub">Recency proof</div>
       </div>
     </div>
   </section>
@@ -1319,13 +1605,15 @@
     <div class="km-section-head"><span class="km-num">01 / Reach</span><div><div class="km-kicker">By platform</div></div></div>
     <div class="reach-tiles">
       <a class="reach-tile reach-tile--hero" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener" style="--brand:#000000;--fg:#fff;">
+        <svg class="reach-tile__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 14 2h-3.1v13.05a2.6 2.6 0 1 1-2.6-2.6c.27 0 .53.04.78.13V9.4A5.92 5.92 0 0 0 8.3 9.4a5.65 5.65 0 1 0 5.65 5.65V8.62a7.32 7.32 0 0 0 4.27 1.37V6.85a4.36 4.36 0 0 1-1.62-1.03z"/></svg>
         <div class="reach-tile__head">
           <span class="reach-tile__name">TikTok</span>
           <span class="reach-tile__count">650K</span>
         </div>
         <span class="reach-tile__meta">Biggest platform</span>
       </a>
-      <a class="reach-tile" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener" style="--brand:#E1306C;--fg:#fff;">
+      <a class="reach-tile reach-tile--ig" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener" style="--brand:linear-gradient(135deg,#feda75,#fa7e1e 25%,#d62976 55%,#962fbf 80%,#4f5bd5);--fg:#fff;">
+        <svg class="reach-tile__logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
         <div class="reach-tile__head">
           <span class="reach-tile__name">Instagram</span>
           <span class="reach-tile__count">65K</span>
@@ -1333,6 +1621,7 @@
         <span class="reach-tile__meta">9.9M views · last 90 days</span>
       </a>
       <a class="reach-tile" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener" style="--brand:#FFFC00;--fg:#2A1A12;">
+        <svg class="reach-tile__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c4.1 0 5.5 3.1 5.5 5.6 0 .9-.1 1.7-.2 2.5.4.1.8.4 1.2.5.5.2 1 .3 1.5.3.4 0 .7.3.7.7 0 1-2.6 1.4-3.1 1.6-.1 0-.1.1-.1.2.1.3.7 1.6 2 2.6.7.5 1.5.8 2.3 1 .3.1.5.3.5.6 0 .5-.9 1.1-3.6 1.5-.1.2-.2.6-.3 1-.1.3-.4.5-.7.5-.4 0-.9-.2-1.7-.2-1 0-1.4.1-2.3.8-.8.6-1.7 1.2-3.2 1.2s-2.5-.6-3.2-1.2c-.9-.7-1.3-.8-2.3-.8-.8 0-1.3.2-1.7.2-.4 0-.7-.3-.7-.6 0-.4-.2-.7-.3-1-2.7-.4-3.6-1-3.6-1.5 0-.3.2-.5.5-.6.8-.2 1.5-.5 2.3-1 1.3-1 1.9-2.3 2-2.6 0-.1 0-.2-.1-.2-.5-.2-3.1-.6-3.1-1.6 0-.4.3-.7.7-.7.5 0 1 .1 1.5-.3.4-.1.8-.4 1.2-.5-.1-.8-.2-1.6-.2-2.5C6.5 5.1 7.9 2 12 2z"/></svg>
         <div class="reach-tile__head">
           <span class="reach-tile__name">Snapchat</span>
           <span class="reach-tile__count">55K</span>
@@ -1340,6 +1629,7 @@
         <span class="reach-tile__meta">10.4M views · 27–42s watch</span>
       </a>
       <a class="reach-tile" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener" style="--brand:#FF0000;--fg:#fff;">
+        <svg class="reach-tile__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.4 2.4 0 0 0-1.7-1.7C18.3 5 12 5 12 5s-6.3 0-7.9.5A2.4 2.4 0 0 0 2.4 7.2 25 25 0 0 0 2 12a25 25 0 0 0 .4 4.8 2.4 2.4 0 0 0 1.7 1.7C5.7 19 12 19 12 19s6.3 0 7.9-.5a2.4 2.4 0 0 0 1.7-1.7A25 25 0 0 0 22 12a25 25 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>
         <div class="reach-tile__head">
           <span class="reach-tile__name">YouTube</span>
           <span class="reach-tile__count">32K</span>
@@ -1347,6 +1637,7 @@
         <span class="reach-tile__meta">Long-form + Shorts pipeline</span>
       </a>
       <a class="reach-tile" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener" style="--brand:#1877F2;--fg:#fff;">
+        <svg class="reach-tile__logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
         <div class="reach-tile__head">
           <span class="reach-tile__name">Facebook</span>
           <span class="reach-tile__count">20K</span>
@@ -1566,88 +1857,43 @@
 
   <div class="page">
 
-    <!-- HERO — image-led, mirrored (portrait left, content right) -->
+    <!-- HERO — wordmark, tagline, download, pills, then photo + 3 colored stat tiles -->
     <section class="hero" id="hero">
-      <div class="hero-grid">
-        <div class="hero-portrait-wrap">
+      <div class="hero-eyebrow"><span class="dot"></span>Last updated · 05/15/2026</div>
+      <h1 class="wordmark">Nesi <em>Family.</em></h1>
+      <p class="hero-tagline">Father–son content — made to be watched together.</p>
+      <a class="hero-download" href="#" onclick="window.print();return false;" role="button">↓ Download media kit (PDF)</a>
+      <div class="hero-pills">
+        <span class="pill-tag is-solid">Food</span>
+        <span class="pill-tag">Lifestyle</span>
+        <span class="pill-tag">Entertainment</span>
+        <span class="pill-tag">Family-friendly</span>
+        <span class="pill-tag">18–34 core</span>
+      </div>
+
+      <div class="hero-stats-grid">
+        <div class="hero-photo">
           <span class="hero-stamp">EST. 2025</span>
-          <img src="assets/IMG_4376.JPG" alt="Kenneth Lopes and son" style="object-position: center 30%;" />
+          <img src="assets/IMG_4376.JPG" alt="Kenneth Lopes and son" />
         </div>
-        <div class="hero-l">
-          <div class="hero-eyebrow"><span class="dot"></span>Last updated · 05/14/2026</div>
-          <h1 class="wordmark">Nesi<br/><em>Family.</em></h1>
-          <div class="hero-meta">
-            <span><strong>Food</strong> · Lifestyle · Family</span>
-            <span class="sep">·</span>
-            <span><strong>@nesimento</strong></span>
-          </div>
+        <div class="hero-stat hero-stat--terracotta">
+          <div class="hero-stat__lab">Followers</div>
+          <div class="hero-stat__num">800K<em>+</em></div>
+          <div class="hero-stat__sub">Across 5 platforms</div>
         </div>
-      </div>
-
-      <!-- FEATURE ROW — big-num + side stack -->
-      <div class="feature-row">
-        <div class="big-num">
-          <div class="lab">Followers</div>
-          <div class="v">800K<em>+</em></div>
-          <div class="sub">5 platforms · 70M+ views (90d) · 100M+ all-time</div>
+        <div class="hero-stat hero-stat--mustard">
+          <div class="hero-stat__lab">All-time</div>
+          <div class="hero-stat__num">100M<em>+</em></div>
+          <div class="hero-stat__sub">Total views</div>
         </div>
-        <div class="side-stack">
-          <a class="side-card accent" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer">
-            <div>
-              <div class="lab">TikTok</div>
-              <div class="v">650K</div>
-            </div>
-            <div class="side-card-end">
-              <span class="handle">@nesimento_</span>
-              <span class="arrow" aria-hidden>↗</span>
-            </div>
-          </a>
-          <a class="side-card pop" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
-            <div>
-              <div class="lab">Instagram</div>
-              <div class="v">65K</div>
-            </div>
-            <div class="side-card-end">
-              <span class="handle">@nesimento</span>
-              <span class="arrow" aria-hidden>↗</span>
-            </div>
-          </a>
+        <div class="hero-stat hero-stat--forest">
+          <div class="hero-stat__lab">Last 90 days</div>
+          <div class="hero-stat__num">70M<em>+</em></div>
+          <div class="hero-stat__sub">Recency proof</div>
         </div>
       </div>
 
-      <!-- CONTENT PILLAR RAIL -->
-      <section class="rail-section">
-        <div class="rail-head">
-          <span class="eyebrow"><span class="dot"></span>Content pillars</span>
-        </div>
-        <div class="rail">
-          <a class="tile" href="#brands">
-            <img src="assets/brand-shake-shack.jpg" alt="Brand collaborations"/>
-            <span class="tile-tag">Brands</span>
-          </a>
-          <a class="tile" href="#content">
-            <picture>
-              <source type="image/webp" srcset="assets/family.webp">
-              <img src="assets/family.jpg" alt="Father–son family content pillar" loading="lazy"/>
-            </picture>
-            <span class="tile-tag">Family</span>
-          </a>
-          <a class="tile" href="#content">
-            <picture>
-              <source type="image/webp" srcset="assets/food.webp">
-              <img src="assets/food.jpg" alt="Food content pillar" loading="lazy"/>
-            </picture>
-            <span class="tile-tag">Food</span>
-          </a>
-          <a class="tile" href="#content">
-            <picture>
-              <source type="image/webp" srcset="assets/lifestyle.webp">
-              <img src="assets/lifestyle.jpg" alt="Lifestyle content pillar" loading="lazy"/>
-            </picture>
-            <span class="tile-tag">Lifestyle</span>
-          </a>
-        </div>
-      </section>
+      <!-- v4: in-hero content pillar rail removed — pillars live in 02 / Pillars section below -->
     </section>
 
     <!-- 01 PLATFORMS -->
@@ -1661,31 +1907,36 @@
 
       <div class="platforms">
         <a class="plat plat--brand" style="--brand:#000000;--fg:#fff;" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer">
-          <div class="plat-name"><span>TikTok</span><span class="rank">01</span></div>
+          <svg class="plat-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 14 2h-3.1v13.05a2.6 2.6 0 1 1-2.6-2.6c.27 0 .53.04.78.13V9.4A5.92 5.92 0 0 0 8.3 9.4a5.65 5.65 0 1 0 5.65 5.65V8.62a7.32 7.32 0 0 0 4.27 1.37V6.85a4.36 4.36 0 0 1-1.62-1.03z"/></svg>
+          <div class="plat-name"><span>TikTok</span></div>
           <div class="plat-count">650K</div>
           <div class="plat-meta">Biggest platform</div>
           <div class="plat-bar"><i style="width:100%"></i></div>
         </a>
-        <a class="plat plat--brand" style="--brand:#E1306C;--fg:#fff;" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
-          <div class="plat-name"><span>Instagram</span><span class="rank">02</span></div>
+        <a class="plat plat--brand plat--ig" style="--brand:linear-gradient(135deg,#feda75,#fa7e1e 25%,#d62976 55%,#962fbf 80%,#4f5bd5);--fg:#fff;" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
+          <svg class="plat-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          <div class="plat-name"><span>Instagram</span></div>
           <div class="plat-count">65K</div>
           <div class="plat-meta">9.9M views · last 90 days</div>
           <div class="plat-bar"><i style="width:9.4%"></i></div>
         </a>
         <a class="plat plat--brand" style="--brand:#FFFC00;--fg:#2A1A12;" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer">
-          <div class="plat-name"><span>Snapchat</span><span class="rank">03</span></div>
+          <svg class="plat-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c4.1 0 5.5 3.1 5.5 5.6 0 .9-.1 1.7-.2 2.5.4.1.8.4 1.2.5.5.2 1 .3 1.5.3.4 0 .7.3.7.7 0 1-2.6 1.4-3.1 1.6-.1 0-.1.1-.1.2.1.3.7 1.6 2 2.6.7.5 1.5.8 2.3 1 .3.1.5.3.5.6 0 .5-.9 1.1-3.6 1.5-.1.2-.2.6-.3 1-.1.3-.4.5-.7.5-.4 0-.9-.2-1.7-.2-1 0-1.4.1-2.3.8-.8.6-1.7 1.2-3.2 1.2s-2.5-.6-3.2-1.2c-.9-.7-1.3-.8-2.3-.8-.8 0-1.3.2-1.7.2-.4 0-.7-.3-.7-.6 0-.4-.2-.7-.3-1-2.7-.4-3.6-1-3.6-1.5 0-.3.2-.5.5-.6.8-.2 1.5-.5 2.3-1 1.3-1 1.9-2.3 2-2.6 0-.1 0-.2-.1-.2-.5-.2-3.1-.6-3.1-1.6 0-.4.3-.7.7-.7.5 0 1 .1 1.5-.3.4-.1.8-.4 1.2-.5-.1-.8-.2-1.6-.2-2.5C6.5 5.1 7.9 2 12 2z"/></svg>
+          <div class="plat-name"><span>Snapchat</span></div>
           <div class="plat-count">55K</div>
           <div class="plat-meta">10.4M views · 27–42s avg watch</div>
           <div class="plat-bar"><i style="width:7.9%"></i></div>
         </a>
         <a class="plat plat--brand" style="--brand:#FF0000;--fg:#fff;" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer">
-          <div class="plat-name"><span>YouTube</span><span class="rank">04</span></div>
+          <svg class="plat-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.4 2.4 0 0 0-1.7-1.7C18.3 5 12 5 12 5s-6.3 0-7.9.5A2.4 2.4 0 0 0 2.4 7.2 25 25 0 0 0 2 12a25 25 0 0 0 .4 4.8 2.4 2.4 0 0 0 1.7 1.7C5.7 19 12 19 12 19s6.3 0 7.9-.5a2.4 2.4 0 0 0 1.7-1.7A25 25 0 0 0 22 12a25 25 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>
+          <div class="plat-name"><span>YouTube</span></div>
           <div class="plat-count">32K</div>
           <div class="plat-meta">Long-form &amp; Shorts pipeline</div>
           <div class="plat-bar"><i style="width:5.0%"></i></div>
         </a>
         <a class="plat plat--brand" style="--brand:#1877F2;--fg:#fff;" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer">
-          <div class="plat-name"><span>Facebook</span><span class="rank">05</span></div>
+          <svg class="plat-logo" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
+          <div class="plat-name"><span>Facebook</span></div>
           <div class="plat-count">20K</div>
           <div class="plat-meta">3.1M views · 785K+ 1-min views</div>
           <div class="plat-bar"><i style="width:2.4%"></i></div>
@@ -1694,99 +1945,65 @@
 
     </section>
 
-    <!-- 02 CONTENT PILLARS -->
+    <!-- 02 CONTENT PILLARS — v4: 4-up full-bleed photo grid with bottom-left labels (header row removed; tiles are self-labeled) -->
     <section class="section" id="content">
-      <div class="section-head">
-        <div class="section-num">02 / Pillars</div>
-        <div>
-          <div class="kicker"><span class="dot"></span>What we make</div>
-        </div>
-      </div>
-
-      <div class="pillars-grid">
-        <div class="pillar">
-          <div class="pillar-num">P/01 · Lifestyle</div>
-          <img class="pillar-img" src="assets/pillar-lifestyle.jpg" alt="Lifestyle" />
-          <div class="pillar-title">Lifestyle &amp; family POV</div>
-          <div class="pillar-desc">Travel, retail, and product moments inside a real father–son routine.</div>
-          <div class="pillar-stat">12M views · single post</div>
-        </div>
-        <div class="pillar dark">
-          <div class="pillar-num">P/02 · Food</div>
-          <img class="pillar-img" src="assets/pillar-food.jpg" alt="Food" />
-          <div class="pillar-title">Food reviews</div>
-          <div class="pillar-desc">QSR taste-tests, menu hacks, recurring formats.</div>
-          <div class="pillar-stat">11.3M views · single post</div>
-        </div>
-        <div class="pillar">
-          <div class="pillar-num">P/03 · Entertainment</div>
-          <img class="pillar-img" src="assets/pillar-entertainment.jpg" alt="Entertainment" />
-          <div class="pillar-title">Entertainment &amp; culture</div>
-          <div class="pillar-desc">POV bits, game-day moments, cultural touchpoints.</div>
-          <div class="pillar-stat">600K views · single post</div>
-        </div>
+      <div class="pillars-v2">
+        <a class="pcard" href="#brands">
+          <picture><img src="assets/brand-shake-shack.jpg" alt="Brand collaborations" loading="lazy"/></picture>
+          <span class="pcard__lab"><span class="dot"></span>Brands</span>
+        </a>
+        <a class="pcard" href="#content">
+          <picture><source type="image/webp" srcset="assets/family.webp"><img src="assets/family.jpg" alt="Father–son family content" loading="lazy"/></picture>
+          <span class="pcard__lab"><span class="dot"></span>Family</span>
+        </a>
+        <a class="pcard" href="#content">
+          <picture><source type="image/webp" srcset="assets/food.webp"><img src="assets/food.jpg" alt="Food content" loading="lazy"/></picture>
+          <span class="pcard__lab"><span class="dot"></span>Food</span>
+        </a>
+        <a class="pcard" href="#content">
+          <picture><source type="image/webp" srcset="assets/lifestyle.webp"><img src="assets/lifestyle.jpg" alt="Lifestyle content" loading="lazy"/></picture>
+          <span class="pcard__lab"><span class="dot"></span>Lifestyle</span>
+        </a>
       </div>
     </section>
 
-    <!-- 03 AUDIENCE -->
+    <!-- 03 AUDIENCE — v4: split-bar + chip grid (mirrors mobile design) -->
     <section class="section" id="audience">
       <div class="section-head">
         <div class="section-num">03 / Audience</div>
         <div>
           <div class="kicker"><span class="dot"></span>Who's watching</div>
-          <h2 class="section-title">Family-friendly, <em>18–34.</em></h2>
         </div>
       </div>
 
-      <div class="two-col">
-        <div class="audience-card">
-          <div class="kicker"><span class="dot"></span>Audience snapshot</div>
-          <div class="ac-row">
-            <div class="lab">Core age</div>
-            <div class="val">18–34 <small>primary cohort</small></div>
+      <div class="audience-v2">
+        <div class="aud-gender-d">
+          <div class="aud-gender-d__head">
+            <span>Gender</span>
+            <span>F · M · up to 78% F on Facebook</span>
           </div>
-          <div class="ac-row">
-            <div class="lab">Gender</div>
-            <div>
-              <div class="val" style="margin-bottom:8px">Female-skewed <small>up to 78% F on Facebook</small></div>
-              <div class="gender-bar">
-                <div class="f" style="flex:78">F · 78%</div>
-                <div class="m" style="flex:22">M · 22%</div>
-              </div>
-            </div>
+          <div class="aud-gender-d__bar">
+            <div class="aud-gender-d__f"><span class="lab">Female</span><span class="pct">78%</span></div>
+            <div class="aud-gender-d__m"><span class="pct">22%</span><span class="lab">Male</span></div>
           </div>
-          <div class="ac-row">
-            <div class="lab">Primary geo</div>
-            <div class="val">United States</div>
+        </div>
+        <div class="aud-grid-d">
+          <div class="aud-chip-d">
+            <div class="aud-chip-d__lab">Core age</div>
+            <div class="aud-chip-d__val">18–34</div>
+            <div class="aud-chip-d__sub">Primary cohort</div>
           </div>
-          <div class="ac-row">
-            <div class="lab">Global reach</div>
-            <div>
-              <div class="geo-list">
-                <span>South Africa</span><span>Philippines</span>
-                <span>Australia</span><span>United Kingdom</span>
-              </div>
+          <div class="aud-chip-d aud-chip-d--dark">
+            <div class="aud-chip-d__lab">Primary geo</div>
+            <div class="aud-chip-d__val">United States</div>
+          </div>
+          <div class="aud-chip-d aud-chip-d--wide">
+            <div class="aud-chip-d__lab">Global reach · top 4 outside US</div>
+            <div class="aud-chip-d__pills">
+              <span>South Africa</span><span>Philippines</span><span>Australia</span><span>United Kingdom</span>
             </div>
           </div>
         </div>
-
-        <ul class="reason-list">
-          <li>
-            <span class="rn">i</span>
-            <span class="rt">Father–son storytelling, safe for every brief.</span>
-            <span class="rd">PG · ad-friendly</span>
-          </li>
-          <li>
-            <span class="rn">ii</span>
-            <span class="rt">Above-benchmark watch times.</span>
-            <span class="rd">27–42s · Snap</span>
-          </li>
-          <li>
-            <span class="rn">iii</span>
-            <span class="rt">One shoot, five platforms.</span>
-            <span class="rd">5× distribution</span>
-          </li>
-        </ul>
       </div>
     </section>
 
@@ -1838,10 +2055,10 @@
       <div class="section-rule"><span>Ideal brand categories</span></div>
 
       <div class="cat-row">
-        <div class="cat solid"><span class="cnum">A</span><span class="ct">Food &amp; QSR</span></div>
-        <div class="cat gold"><span class="cnum">B</span><span class="ct">Family &amp; lifestyle</span></div>
-        <div class="cat"><span class="cnum">C</span><span class="ct">Entertainment &amp; experiences</span></div>
-        <div class="cat pop"><span class="cnum">D</span><span class="ct">Retail &amp; CPG</span></div>
+        <div class="cat solid"><span class="cnum">A</span><span class="ct">Food &amp;<br>QSR</span></div>
+        <div class="cat gold"><span class="cnum">B</span><span class="ct">Family &amp;<br>lifestyle</span></div>
+        <div class="cat"><span class="cnum">C</span><span class="ct">Entertainment &amp;<br>experiences</span></div>
+        <div class="cat pop"><span class="cnum">D</span><span class="ct">Retail &amp;<br>CPG</span></div>
       </div>
     </section>
 
@@ -1851,7 +2068,6 @@
         <div class="section-num">05 / Offer</div>
         <div>
           <div class="kicker"><span class="dot"></span>Partnership offerings</div>
-          <h2 class="section-title">Partnership <em>offerings.</em></h2>
         </div>
       </div>
 
@@ -1951,10 +2167,16 @@
   </section>
 
   <div class="foot">
-    <span>© 2026 Nesi Family</span>
-    <span>Media Kit · v1.0</span>
-    <span>thenesifamilybiz@gmail.com</span>
-    <a href="https://linkedin.com/in/kennethlopes" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;color:inherit;text-decoration:none;"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;display:inline-block;vertical-align:-1px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
+    <div class="foot-inner">
+      <span>© 2026 Kenneth Lopes</span>
+      <nav aria-label="Footer links">
+        <a href="index.html">Home</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="experience.html">Experience</a>
+        <a href="mailto:thenesifamilybiz@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/kennethlopes" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;display:inline-block;vertical-align:-1px;margin-right:5px;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn ↗</a>
+      </nav>
+    </div>
   </div>
 
 </div><!-- /.desktop-view -->
@@ -2022,23 +2244,23 @@
         </div>
         <div class="platforms">
           <a class="plat" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer">
-            <div class="plat-name"><span>TikTok</span><span class="rank">01</span></div>
+            <div class="plat-name"><span>TikTok</span></div>
             <div class="plat-count">650K</div>
           </a>
           <a class="plat" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
-            <div class="plat-name"><span>Instagram</span><span class="rank">02</span></div>
+            <div class="plat-name"><span>Instagram</span></div>
             <div class="plat-count">65K</div>
           </a>
           <a class="plat" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer">
-            <div class="plat-name"><span>Snapchat</span><span class="rank">03</span></div>
+            <div class="plat-name"><span>Snapchat</span></div>
             <div class="plat-count">55K</div>
           </a>
           <a class="plat" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer">
-            <div class="plat-name"><span>YouTube</span><span class="rank">04</span></div>
+            <div class="plat-name"><span>YouTube</span></div>
             <div class="plat-count">32K</div>
           </a>
           <a class="plat" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer">
-            <div class="plat-name"><span>Facebook</span><span class="rank">05</span></div>
+            <div class="plat-name"><span>Facebook</span></div>
             <div class="plat-count">20K</div>
           </a>
         </div>

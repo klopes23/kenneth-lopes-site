@@ -927,14 +927,25 @@
   }
   body[data-creator="true"] .km-pill-tag.is-solid { background: var(--kc-ink); color: var(--kc-bg); border-color: var(--kc-ink); }
 
-  /* hero stat composition */
+  /* v4: download CTA below tagline */
+  body[data-creator="true"] .km-hero-download {
+    display: inline-block; margin-top: 14px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--kc-ink); text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--kc-ink);
+  }
+  body[data-creator="true"] .km-hero-download:active { opacity: 0.7; }
+
+  /* hero stat composition — photo left, 3 colored stat tiles stacked right */
   body[data-creator="true"] .km-hero-stats {
     margin-top: 28px;
-    display: grid; grid-template-columns: 1.5fr 1fr; grid-template-rows: 1fr 1fr;
-    gap: 8px; min-height: 240px;
+    display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr 1fr;
+    gap: 8px; min-height: 360px;
   }
   body[data-creator="true"] .km-stat-big {
-    grid-row: 1 / 3; grid-column: 1 / 2;
+    grid-row: 1 / 4; grid-column: 1 / 2;
     position: relative; overflow: hidden;
     background: var(--kc-bg2);
   }
@@ -947,18 +958,21 @@
   }
   body[data-creator="true"] .km-stat-big::before { content: none; }
   body[data-creator="true"] .km-stat-mid,
-  body[data-creator="true"] .km-stat-pop {
+  body[data-creator="true"] .km-stat-pop,
+  body[data-creator="true"] .km-stat-forest {
     position: relative; padding: 14px;
     display: flex; flex-direction: column; justify-content: space-between;
   }
   body[data-creator="true"] .km-stat-mid { background: var(--kc-accent); color: #fff; }
   body[data-creator="true"] .km-stat-pop { background: var(--kc-pop); color: var(--kc-ink); }
+  body[data-creator="true"] .km-stat-forest { background: #5E7030; color: #fff; }
   body[data-creator="true"] .km-stat-lab {
     font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600;
     letter-spacing: 0.22em; text-transform: uppercase;
   }
   body[data-creator="true"] .km-stat-mid .km-stat-lab { color: rgba(255,255,255,0.78); }
   body[data-creator="true"] .km-stat-pop .km-stat-lab { color: rgba(42,26,18,0.65); }
+  body[data-creator="true"] .km-stat-forest .km-stat-lab { color: rgba(255,255,255,0.78); }
   body[data-creator="true"] .km-stat-num {
     font-family: 'Fraunces', Georgia, serif; font-weight: 600;
     font-size: clamp(30px, 9vw, 40px); line-height: 0.95;
@@ -970,12 +984,14 @@
   }
   body[data-creator="true"] .km-stat-mid .km-stat-num em { color: rgba(255,255,255,0.85); }
   body[data-creator="true"] .km-stat-pop .km-stat-num em { color: var(--kc-accent); }
+  body[data-creator="true"] .km-stat-forest .km-stat-num em { color: rgba(255,255,255,0.85); }
   body[data-creator="true"] .km-stat-sub {
     margin-top: 4px; font-family: 'JetBrains Mono', monospace; font-size: 8.5px;
     font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
   }
   body[data-creator="true"] .km-stat-mid .km-stat-sub { color: rgba(255,255,255,0.78); }
   body[data-creator="true"] .km-stat-pop .km-stat-sub { color: rgba(42,26,18,0.6); }
+  body[data-creator="true"] .km-stat-forest .km-stat-sub { color: rgba(255,255,255,0.6); }
 
   /* sections */
   body[data-creator="true"] .km-section {
@@ -1088,6 +1104,7 @@
     display: flex; flex-direction: column; gap: 6px;
   }
   body[data-creator="true"] .reach-tile {
+    position: relative;
     background: var(--brand);
     color: var(--fg);
     padding: 14px 16px;
@@ -1097,6 +1114,16 @@
     -webkit-tap-highlight-color: transparent;
   }
   body[data-creator="true"] .reach-tile--hero { padding: 20px 16px; }
+  /* v4: platform logo top-right of each reach tile */
+  body[data-creator="true"] .reach-tile__logo {
+    position: absolute; top: 14px; right: 14px;
+    width: 18px; height: 18px;
+    color: var(--fg); opacity: 0.78;
+    pointer-events: none;
+  }
+  body[data-creator="true"] .reach-tile--hero .reach-tile__logo {
+    width: 24px; height: 24px; top: 18px; right: 18px;
+  }
   body[data-creator="true"] .reach-tile:active { transform: scale(0.985); }
   body[data-creator="true"] .reach-tile__head {
     display: grid; grid-template-columns: 1fr auto;
