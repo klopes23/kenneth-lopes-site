@@ -416,6 +416,28 @@
   .plat-bar { height: 3px; background: var(--line); overflow: hidden; }
   .plat-bar i { display: block; height: 100%; background: var(--accent); }
 
+  /* v4: brand-colored desktop reach tiles (mirrors mobile .reach-tile palette) */
+  a.plat.plat--brand,
+  a.plat.plat--brand:nth-child(even) {
+    background: var(--brand);
+    color: var(--fg);
+  }
+  a.plat.plat--brand .plat-name,
+  a.plat.plat--brand .plat-name .rank,
+  a.plat.plat--brand .plat-count,
+  a.plat.plat--brand .plat-meta { color: var(--fg); }
+  a.plat.plat--brand .plat-name,
+  a.plat.plat--brand .plat-meta { opacity: 0.78; }
+  a.plat.plat--brand .plat-bar { background: rgba(255,255,255,0.22); }
+  a.plat.plat--brand[style*="2A1A12"] .plat-bar { background: rgba(42,26,18,0.18); }
+  a.plat.plat--brand .plat-bar i { background: var(--fg); opacity: 0.85; }
+  a.plat.plat--brand::after { color: var(--fg); }
+  a.plat.plat--brand:hover { background: var(--brand); transform: translateY(-2px); }
+  a.plat.plat--brand:hover::after { opacity: 1; transform: translate(2px, -2px); color: var(--fg); }
+  a.plat.plat--brand:hover .plat-name,
+  a.plat.plat--brand:hover .plat-meta { color: var(--fg); opacity: 1; }
+  a.plat.plat--brand:hover .plat-count { color: var(--fg); }
+
   /* perf strip */
   .perf {
     margin-top: 48px;
@@ -1235,8 +1257,8 @@
 
   <!-- Section pill bar -->
   <nav class="km-subnav" aria-label="Sections">
-    <a href="#km-pillars" class="km-pill is-active">Pillars</a>
-    <a href="#km-reach" class="km-pill">Reach</a>
+    <a href="#km-reach" class="km-pill is-active">Reach</a>
+    <a href="#km-pillars" class="km-pill">Pillars</a>
     <a href="#km-audience" class="km-pill">Audience</a>
     <a href="#km-brands" class="km-pill">Brands</a>
     <a href="#km-offer" class="km-pill">Offer</a>
@@ -1283,20 +1305,9 @@
     </div>
   </section>
 
-  <!-- 01 / PILLARS -->
-  <section class="km-section" id="km-pillars">
-    <div class="km-section-head"><span class="km-num">01 / Pillars</span><div><div class="km-kicker">Content pillars</div><h2 class="km-h">What we <em>make.</em></h2></div></div>
-    <div class="km-carousel">
-      <article class="km-pcard"><img src="assets/brand-shake-shack.jpg" alt="" loading="lazy"/><div class="km-pstat">12M+ views</div><div class="km-plabel"><div class="km-pnum">01</div><div class="km-pname">Brands</div></div></article>
-      <article class="km-pcard"><img src="assets/family.jpg" alt="" loading="lazy"/><div class="km-pstat">16M+ views</div><div class="km-plabel"><div class="km-pnum">02</div><div class="km-pname">Family</div></div></article>
-      <article class="km-pcard"><img src="assets/food.jpg" alt="" loading="lazy"/><div class="km-pstat">11.3M+ views</div><div class="km-plabel"><div class="km-pnum">03</div><div class="km-pname">Food</div></div></article>
-      <article class="km-pcard"><img src="assets/lifestyle.jpg" alt="" loading="lazy"/><div class="km-pstat">600K+ views</div><div class="km-plabel"><div class="km-pnum">04</div><div class="km-pname">Lifestyle</div></div></article>
-    </div>
-  </section>
-
-  <!-- 02 / REACH — v4: brand-color tile stack (TikTok hero + 4 compact below) -->
+  <!-- 01 / REACH — v4: brand-color tile stack (TikTok hero + 4 compact below) -->
   <section class="km-section" id="km-reach">
-    <div class="km-section-head"><span class="km-num">02 / Reach</span><div><div class="km-kicker">By platform</div></div></div>
+    <div class="km-section-head"><span class="km-num">01 / Reach</span><div><div class="km-kicker">By platform</div></div></div>
     <div class="reach-tiles">
       <a class="reach-tile reach-tile--hero" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener" style="--brand:#000000;--fg:#fff;">
         <div class="reach-tile__head">
@@ -1333,6 +1344,17 @@
         </div>
         <span class="reach-tile__meta">3.1M views · 785K 1-min views</span>
       </a>
+    </div>
+  </section>
+
+  <!-- 02 / PILLARS -->
+  <section class="km-section" id="km-pillars">
+    <div class="km-section-head"><span class="km-num">02 / Pillars</span><div><div class="km-kicker">Content pillars</div><h2 class="km-h">What we <em>make.</em></h2></div></div>
+    <div class="km-carousel">
+      <article class="km-pcard"><img src="assets/brand-shake-shack.jpg" alt="" loading="lazy"/><div class="km-pstat">12M+ views</div><div class="km-plabel"><div class="km-pnum">01</div><div class="km-pname">Brands</div></div></article>
+      <article class="km-pcard"><img src="assets/family.jpg" alt="" loading="lazy"/><div class="km-pstat">16M+ views</div><div class="km-plabel"><div class="km-pnum">02</div><div class="km-pname">Family</div></div></article>
+      <article class="km-pcard"><img src="assets/food.jpg" alt="" loading="lazy"/><div class="km-pstat">11.3M+ views</div><div class="km-plabel"><div class="km-pnum">03</div><div class="km-pname">Food</div></div></article>
+      <article class="km-pcard"><img src="assets/lifestyle.jpg" alt="" loading="lazy"/><div class="km-pstat">600K+ views</div><div class="km-plabel"><div class="km-pnum">04</div><div class="km-pname">Lifestyle</div></div></article>
     </div>
   </section>
 
@@ -1378,7 +1400,7 @@
 
   <!-- 04 / BRANDS -->
   <section class="km-section" id="km-brands">
-    <div class="km-section-head"><span class="km-num">04 / Brands</span><div><div class="km-kicker">Past brand collaborations</div><h2 class="km-h">Proven results, <em>real brands.</em></h2></div></div>
+    <div class="km-section-head"><span class="km-num">04 / Brands</span><div><div class="km-kicker">Past brand collaborations</div></div></div>
     <ol class="km-brand-grid">
       <li class="km-bcard">
         <img src="assets/brand-dominos.jpg" alt="Domino's collab" loading="lazy"/>
@@ -1629,31 +1651,31 @@
       </div>
 
       <div class="platforms">
-        <a class="plat" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer">
+        <a class="plat plat--brand" style="--brand:#000000;--fg:#fff;" href="https://www.tiktok.com/@nesimento_" target="_blank" rel="noopener noreferrer">
           <div class="plat-name"><span>TikTok</span><span class="rank">01</span></div>
           <div class="plat-count">650K</div>
           <div class="plat-meta">Biggest platform</div>
           <div class="plat-bar"><i style="width:100%"></i></div>
         </a>
-        <a class="plat" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
+        <a class="plat plat--brand" style="--brand:#E1306C;--fg:#fff;" href="https://www.instagram.com/nesimento" target="_blank" rel="noopener noreferrer">
           <div class="plat-name"><span>Instagram</span><span class="rank">02</span></div>
           <div class="plat-count">65K</div>
           <div class="plat-meta">9.9M views · last 90 days</div>
           <div class="plat-bar"><i style="width:9.4%"></i></div>
         </a>
-        <a class="plat" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer">
+        <a class="plat plat--brand" style="--brand:#FFFC00;--fg:#2A1A12;" href="https://www.snapchat.com/add/nesimento" target="_blank" rel="noopener noreferrer">
           <div class="plat-name"><span>Snapchat</span><span class="rank">03</span></div>
           <div class="plat-count">55K</div>
           <div class="plat-meta">10.4M views · 27–42s avg watch</div>
           <div class="plat-bar"><i style="width:7.9%"></i></div>
         </a>
-        <a class="plat" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer">
+        <a class="plat plat--brand" style="--brand:#FF0000;--fg:#fff;" href="https://www.youtube.com/@thenesifamily" target="_blank" rel="noopener noreferrer">
           <div class="plat-name"><span>YouTube</span><span class="rank">04</span></div>
           <div class="plat-count">32K</div>
           <div class="plat-meta">Long-form &amp; Shorts pipeline</div>
           <div class="plat-bar"><i style="width:5.0%"></i></div>
         </a>
-        <a class="plat" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer">
+        <a class="plat plat--brand" style="--brand:#1877F2;--fg:#fff;" href="https://www.facebook.com/nesimento" target="_blank" rel="noopener noreferrer">
           <div class="plat-name"><span>Facebook</span><span class="rank">05</span></div>
           <div class="plat-count">20K</div>
           <div class="plat-meta">3.1M views · 785K+ 1-min views</div>
@@ -1767,7 +1789,6 @@
         <div class="section-num">04 / Brands</div>
         <div>
           <div class="kicker"><span class="dot"></span>Past brand collaborations</div>
-          <h2 class="section-title">Proven results, <em>real brands.</em></h2>
         </div>
       </div>
 
