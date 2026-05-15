@@ -33,9 +33,163 @@
   ::-webkit-scrollbar-thumb { background: #7A8A7A; border-radius: 6px; }
   ::-webkit-scrollbar-thumb:hover { background: #3A4A3A; }
   .recharts-cartesian-axis-tick text { font-feature-settings: 'tnum'; }
+
+  /* ════════════════════════════════════════════════════════
+     v4: MOBILE DASHBOARD REDESIGN — replaces Recharts on phones.
+     7 mobile-optimized sections render from .db-mobile container.
+     Desktop continues to render the React/Recharts dashboard in #root.
+     ════════════════════════════════════════════════════════ */
+  .db-mobile { display: none; }
+  body[data-dashboard="true"] {
+    --bg:     #F2EBDA;
+    --bg-2:   #E8E0CC;
+    --cream:  #FAF6EA;
+    --paper:  #FBF5E8;
+    --ink:    #1B2A1B;
+    --ink-2:  #3A4A3A;
+    --muted:  #7A8A7A;
+    --line:   rgba(27,42,27,0.14);
+    --accent: #C76F3D;
+    --olive:  #5E7030;
+    --forest: #2D4A2B;
+    --pop:    #D9B65A;
+    --slate:  #4D5A6B;
+    --f-display: 'Fraunces', Georgia, serif;
+    --f-body:    'Inter Tight', system-ui, sans-serif;
+    --f-mono:    'JetBrains Mono', ui-monospace, monospace;
+    --f-italic:  'Instrument Serif', Georgia, serif;
+  }
+  @media (max-width: 768px) {
+    .db-mobile { display: block; }
+    body[data-dashboard="true"] #root { display: none !important; }
+    body[data-dashboard="true"] .recharts-wrapper,
+    body[data-dashboard="true"] .recharts-responsive-container { display: none; }
+
+    /* 01 · HERO + KPI RIBBON */
+    .db-hero { padding: 32px 22px 36px; background: var(--bg-2); }
+    .db-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--olive); margin-bottom: 14px; }
+    .db-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--olive); }
+    .db-title { font-family: var(--f-display); font-weight: 600; font-size: clamp(34px, 9.4vw, 44px); line-height: 0.96; letter-spacing: -0.035em; margin: 0; color: var(--ink); }
+    .db-sub { margin: 12px 0 0; font-family: var(--f-body); font-size: 13.5px; line-height: 1.4; color: var(--ink-2); }
+    .db-pill { margin-top: 10px; padding: 8px 12px; display: inline-block; background: rgba(199,111,61,0.10); border: 1px solid var(--accent); font-family: var(--f-mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+    .db-headline { margin-top: 24px; background: var(--ink); color: var(--bg); padding: 20px 18px; }
+    .db-headline__lab { font-family: var(--f-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+    .db-headline__num { font-family: var(--f-display); font-weight: 600; font-size: 54px; line-height: 0.92; letter-spacing: -0.035em; font-variant-numeric: tabular-nums; }
+    .db-headline__sub { margin-top: 6px; font-family: var(--f-body); font-size: 13px; color: rgba(242,235,218,0.75); }
+    .db-kpis { margin-top: 6px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 6px; }
+    .db-kpi { background: var(--cream); color: var(--ink); padding: 14px 12px; border: 1px solid var(--line); }
+    .db-kpi--dark { background: var(--forest); color: var(--bg); border: none; }
+    .db-kpi--olive { background: var(--olive); color: #fff; border: none; }
+    .db-kpi--accent { background: var(--accent); color: #fff; border: none; }
+    .db-kpi__lab { font-family: var(--f-mono); font-size: 8.5px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .db-kpi--dark .db-kpi__lab,
+    .db-kpi--olive .db-kpi__lab,
+    .db-kpi--accent .db-kpi__lab { color: rgba(255,255,255,0.78); }
+    .db-kpi--dark .db-kpi__lab { color: rgba(242,235,218,0.6); }
+    .db-kpi__val { font-family: var(--f-display); font-size: 24px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; font-variant-numeric: tabular-nums; }
+    .db-kpi--wide .db-kpi__val { font-size: 36px; letter-spacing: -0.03em; }
+    .db-kpi--dark .db-kpi__val { font-size: 30px; }
+    .db-kpi__sub { margin-top: 4px; font-family: var(--f-body); font-size: 11px; line-height: 1.3; color: var(--muted); }
+    .db-kpi--dark .db-kpi__sub,
+    .db-kpi--olive .db-kpi__sub,
+    .db-kpi--accent .db-kpi__sub { color: rgba(255,255,255,0.78); }
+    .db-kpi--dark .db-kpi__sub { color: rgba(242,235,218,0.6); }
+
+    /* SHARED · section frame */
+    .db-section { padding: 40px 22px 36px; border-top: 1px solid var(--line); }
+    .db-sechead { display: grid; grid-template-columns: 52px 1fr; gap: 14px; align-items: baseline; margin-bottom: 18px; }
+    .db-secnum { font-family: var(--f-mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .db-seckicker { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .db-sectitle { font-family: var(--f-display); font-weight: 400; font-size: clamp(26px, 7.2vw, 30px); line-height: 1.02; letter-spacing: -0.025em; margin: 0; color: var(--ink); }
+
+    /* 02 · ACTIVITY */
+    .db-activity { background: var(--ink); color: var(--bg); padding: 20px 18px; }
+    .db-activity__lab { font-family: var(--f-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .db-activity__row { display: flex; align-items: baseline; gap: 14px; }
+    .db-activity__num { font-family: var(--f-display); font-size: 52px; font-weight: 500; line-height: 1; letter-spacing: -0.035em; font-variant-numeric: tabular-nums; }
+    .db-activity__delta { font-family: var(--f-mono); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--pop); }
+    .db-activity__sub { margin-top: 4px; font-family: var(--f-body); font-size: 13px; color: rgba(242,235,218,0.7); }
+    .db-activity__spark { margin-top: 16px; width: 100%; height: 48px; display: block; }
+    .db-activity__axis { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--f-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,235,218,0.5); }
+    .db-activity__axis .is-accent { color: var(--accent); }
+    .db-activity__quote { margin: 12px 0 0; font-family: var(--f-italic); font-style: italic; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+    .db-activity__quote strong { color: var(--ink); font-weight: 600; }
+
+    /* 03 · BEFORE / AFTER */
+    .db-ba-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 18px; }
+    .db-ba-card { padding: 14px; background: var(--bg-2); }
+    .db-ba-card--after { background: rgba(199,111,61,0.12); border: 1px solid var(--accent); }
+    .db-ba-card__lab { font-family: var(--f-mono); font-size: 8.5px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .db-ba-card--after .db-ba-card__lab { color: var(--accent); }
+    .db-ba-card__val { font-family: var(--f-display); font-size: 30px; font-weight: 500; letter-spacing: -0.025em; line-height: 1; font-variant-numeric: tabular-nums; }
+    .db-ba-card--after .db-ba-card__val { color: var(--accent); }
+    .db-ba-card__sub { margin-top: 4px; font-family: var(--f-mono); font-size: 9px; color: var(--muted); letter-spacing: 0.06em; }
+    .db-ba-bars { display: flex; flex-direction: column; gap: 12px; }
+    .db-ba-row__head { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 6px; color: var(--ink); }
+    .db-ba-row__head .is-delta { color: var(--olive); }
+    .db-ba-row__bar { height: 24px; background: rgba(27,42,27,0.06); }
+    .db-ba-row__bar + .db-ba-row__bar { margin-top: 2px; }
+    .db-ba-row__bar > div { height: 100%; color: #fff; padding: 0 8px; display: flex; align-items: center; font-family: var(--f-mono); font-size: 10px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .db-ba-row__bar--before > div { background: var(--slate); }
+    .db-ba-row__bar--after > div { background: var(--accent); }
+
+    /* 04 · FUNNEL */
+    .db-funnel { display: flex; flex-direction: column; gap: 14px; }
+    .db-funnel__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .db-funnel__head > span:first-child { font-family: var(--f-body); font-size: 12px; color: var(--muted); letter-spacing: 0.06em; }
+    .db-funnel__head > span:first-child b { font-family: var(--f-display); font-size: 16px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; margin-right: 2px; }
+    .db-funnel__head > span:last-child i { font-style: normal; font-family: var(--f-display); font-size: 20px; font-weight: 500; color: var(--ink); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; margin-right: 4px; }
+    .db-funnel__head > span:last-child { font-family: var(--f-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.04em; }
+    .db-funnel__bar { height: 10px; background: var(--bg-2); }
+    .db-funnel__bar > div { height: 100%; background: var(--c); }
+    .db-funnel__strip { margin-top: 18px; padding: 14px 16px; background: var(--ink); color: var(--bg); display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .db-funnel__strip > div { text-align: center; }
+    .db-funnel__strip span { display: block; font-family: var(--f-mono); font-size: 8.5px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(242,235,218,0.55); }
+    .db-funnel__strip b { display: block; margin-top: 4px; font-family: var(--f-display); font-size: 20px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+
+    /* 05 · DEPARTMENTS ranked */
+    .db-depts { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .db-depts__row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
+    .db-depts__rank { font-family: var(--f-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.15em; color: var(--muted); width: 16px; flex-shrink: 0; }
+    .db-depts__name { font-family: var(--f-display); font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .db-depts__users { font-family: var(--f-mono); font-size: 9px; color: var(--muted); letter-spacing: 0.06em; flex-shrink: 0; }
+    .db-depts__count { margin-left: auto; font-family: var(--f-display); font-size: 18px; font-weight: 500; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+    .db-depts__bar { height: 5px; background: var(--bg-2); margin-left: 24px; }
+    .db-depts__bar > div { height: 100%; background: var(--olive); }
+
+    /* 06 · WEEKLY MIX */
+    .db-mix { display: flex; flex-direction: column; gap: 10px; }
+    .db-mix__head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; font-family: var(--f-mono); font-size: 9.5px; font-weight: 600; letter-spacing: 0.12em; color: var(--muted); }
+    .db-mix__head b { color: var(--ink); font-variant-numeric: tabular-nums; margin-right: 4px; }
+    .db-mix__head > span:last-child { font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; }
+    .db-mix__bar { height: 12px; display: flex; gap: 1px; min-width: 8px; }
+    .db-mix__bar i { display: block; height: 100%; }
+    .db-mix__legend { margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+    .db-mix__legend li { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+    .db-mix__legend i { display: block; width: 8px; height: 8px; }
+
+    /* 07 · HEATMAP */
+    .db-heat__axis { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .db-heat__axis .rule { flex: 1; height: 1px; background: var(--line); }
+    .db-heat { display: flex; flex-direction: column; gap: 6px; }
+    .db-heat__row { display: grid; grid-template-columns: 78px 1fr; gap: 8px; align-items: center; }
+    .db-heat__row > span { font-family: var(--f-body); font-size: 12px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .db-heat__cells { display: grid; grid-template-columns: repeat(17, 1fr); gap: 2px; }
+    .db-heat__cells i,
+    .db-heat__legend i { display: block; aspect-ratio: 1 / 1; }
+    .db-heat__cells i[data-i="0"] { background: transparent; border: 1px solid rgba(27,42,27,0.06); }
+    .db-heat__cells i[data-i="1"] { background: rgba(199,111,61,0.32); }
+    .db-heat__cells i[data-i="2"] { background: rgba(94,112,48,0.55); }
+    .db-heat__cells i[data-i="3"] { background: var(--forest); }
+    .db-heat__legend i[data-i="1"] { background: rgba(199,111,61,0.32); width: 14px; height: 14px; }
+    .db-heat__legend i[data-i="2"] { background: rgba(94,112,48,0.55); width: 14px; height: 14px; }
+    .db-heat__legend i[data-i="3"] { background: var(--forest); width: 14px; height: 14px; }
+    .db-heat__tail { margin-top: 14px; padding: 12px 14px; background: var(--cream); border: 1px dashed var(--line); display: flex; justify-content: space-between; align-items: center; font-family: var(--f-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .db-heat__legend { margin-top: 14px; display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: 9px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  }
 </style>
 </head>
-<body>
+<body data-dashboard="true">
 
 <div class="nav-stack">
 <nav class="topnav" aria-label="Main navigation">
@@ -66,6 +220,220 @@
 </nav>
 </div>
 <div id="root"></div>
+
+<!-- ═══════════════════════════════════════════════════════
+     v4: MOBILE DASHBOARD (≤768px) — replaces Recharts on phones.
+     Hidden on desktop via .db-mobile { display: none } in <style>.
+     ═══════════════════════════════════════════════════════ -->
+<div class="db-mobile">
+  <!-- 01 · HERO + KPI RIBBON -->
+  <section class="db-hero">
+    <div class="db-eyebrow"><span class="dot"></span>Canoga Perkins · Internal AI</div>
+    <h1 class="db-title">Corporate Memory Copilot</h1>
+    <p class="db-sub">24-week usage report · Sep 2025 — Feb 2026</p>
+    <div class="db-pill">● 8-week adoption program · Jan 5 – Feb 23</div>
+    <div class="db-headline">
+      <div class="db-headline__lab">Headline · 8-week lift</div>
+      <div class="db-headline__num">+193%</div>
+      <div class="db-headline__sub">Weekly active users · 2.6 → 7.5 / wk</div>
+    </div>
+    <div class="db-kpis">
+      <div class="db-kpi db-kpi--wide"><div class="db-kpi__lab">Total users</div><div class="db-kpi__val">41</div><div class="db-kpi__sub">13 departments</div></div>
+      <div class="db-kpi db-kpi--dark"><div class="db-kpi__lab">Questions</div><div class="db-kpi__val">435</div><div class="db-kpi__sub">24 weeks</div></div>
+      <div class="db-kpi db-kpi--olive"><div class="db-kpi__lab">CSAT</div><div class="db-kpi__val">84%</div><div class="db-kpi__sub">Liked the RAG response</div></div>
+      <div class="db-kpi"><div class="db-kpi__lab">Sessions</div><div class="db-kpi__val">73</div><div class="db-kpi__sub">Conversation threads</div></div>
+      <div class="db-kpi"><div class="db-kpi__lab">Answer rate</div><div class="db-kpi__val">100%</div><div class="db-kpi__sub">Every question answered</div></div>
+      <div class="db-kpi db-kpi--accent"><div class="db-kpi__lab">Adoption peak</div><div class="db-kpi__val">12</div><div class="db-kpi__sub">Weekly users · 50% lift</div></div>
+    </div>
+  </section>
+
+  <!-- 02 · WEEKLY ACTIVITY -->
+  <section class="db-section">
+    <header class="db-sechead">
+      <span class="db-secnum">01 / Activity</span>
+      <div>
+        <span class="db-seckicker">● Weekly active users</span>
+        <h2 class="db-sectitle">+193% during adoption push.</h2>
+      </div>
+    </header>
+    <div class="db-activity">
+      <div class="db-activity__lab">Weekly active users</div>
+      <div class="db-activity__row">
+        <span class="db-activity__num">7.5</span>
+        <span class="db-activity__delta">+193%</span>
+      </div>
+      <div class="db-activity__sub">Avg during 8-wk adoption · vs 2.6 pre</div>
+      <svg class="db-activity__spark" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 0,40 L 15.4,36 L 30.8,40 L 46.2,36 L 61.5,32 L 76.9,36 L 92.3,28 L 107.7,32 L 123.1,16 L 138.5,4 L 153.8,24 L 169.2,24 L 184.6,4 L 200,40" fill="none" stroke="#C76F3D" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" />
+        <circle cx="200" cy="40" r="3" fill="#C76F3D" />
+      </svg>
+      <div class="db-activity__axis">
+        <span>Pre · Sep '25</span>
+        <span class="is-accent">Adoption · Feb '26</span>
+      </div>
+    </div>
+    <p class="db-activity__quote">Weekly active users <strong>nearly tripled</strong> during the 8-week adoption push.</p>
+  </section>
+
+  <!-- 03 · BEFORE / AFTER -->
+  <section class="db-section">
+    <header class="db-sechead">
+      <span class="db-secnum">02 / Before · After</span>
+      <div>
+        <span class="db-seckicker">● Pre vs adoption window</span>
+        <h2 class="db-sectitle">Every metric, side-by-side.</h2>
+      </div>
+    </header>
+    <div class="db-ba-cards">
+      <div class="db-ba-card"><div class="db-ba-card__lab">Pre-adoption</div><div class="db-ba-card__val">246</div><div class="db-ba-card__sub">questions · 16 wks</div></div>
+      <div class="db-ba-card db-ba-card--after"><div class="db-ba-card__lab">Adoption program</div><div class="db-ba-card__val">190</div><div class="db-ba-card__sub">questions · 8 wks</div></div>
+    </div>
+    <div class="db-ba-bars">
+      <div class="db-ba-row">
+        <div class="db-ba-row__head"><span>Weekly users</span><span class="is-delta">+193%</span></div>
+        <div class="db-ba-row__bar db-ba-row__bar--before"><div style="width:4%">2.6</div></div>
+        <div class="db-ba-row__bar db-ba-row__bar--after"><div style="width:12%">7.5</div></div>
+      </div>
+      <div class="db-ba-row">
+        <div class="db-ba-row__head"><span>Weekly questions</span><span class="is-delta">+54%</span></div>
+        <div class="db-ba-row__bar db-ba-row__bar--before"><div style="width:24%">15.4</div></div>
+        <div class="db-ba-row__bar db-ba-row__bar--after"><div style="width:37%">23.8</div></div>
+      </div>
+      <div class="db-ba-row">
+        <div class="db-ba-row__head"><span>Peak users</span><span class="is-delta">+50%</span></div>
+        <div class="db-ba-row__bar db-ba-row__bar--before"><div style="width:13%">8</div></div>
+        <div class="db-ba-row__bar db-ba-row__bar--after"><div style="width:19%">12</div></div>
+      </div>
+      <div class="db-ba-row">
+        <div class="db-ba-row__head"><span>Total sessions</span><span class="is-delta">+75%</span></div>
+        <div class="db-ba-row__bar db-ba-row__bar--before"><div style="width:56%">36</div></div>
+        <div class="db-ba-row__bar db-ba-row__bar--after"><div style="width:98%">63</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · USER FUNNEL -->
+  <section class="db-section">
+    <header class="db-sechead">
+      <span class="db-secnum">03 / Funnel</span>
+      <div>
+        <span class="db-seckicker">● From signed-in to power</span>
+        <h2 class="db-sectitle">Signed → Power = 32%.</h2>
+      </div>
+    </header>
+    <div class="db-funnel">
+      <div class="db-funnel__step" style="--c:#2D4A2B;">
+        <div class="db-funnel__head"><span><b>Total users</b> · all signed in</span><span><i>41</i> 100%</span></div>
+        <div class="db-funnel__bar"><div style="width:100%"></div></div>
+      </div>
+      <div class="db-funnel__step" style="--c:#5E7030;">
+        <div class="db-funnel__head"><span><b>Active</b> · ≥ 2 questions</span><span><i>31</i> 76%</span></div>
+        <div class="db-funnel__bar"><div style="width:76%"></div></div>
+      </div>
+      <div class="db-funnel__step" style="--c:#9C7AA8;">
+        <div class="db-funnel__head"><span><b>Repeat</b> · ≥ 2 weeks active</span><span><i>17</i> 55%</span></div>
+        <div class="db-funnel__bar"><div style="width:55%"></div></div>
+      </div>
+      <div class="db-funnel__step" style="--c:#C76F3D;">
+        <div class="db-funnel__head"><span><b>Power users</b> · ≥ 10 questions</span><span><i>13</i> 32%</span></div>
+        <div class="db-funnel__bar"><div style="width:32%"></div></div>
+      </div>
+    </div>
+    <div class="db-funnel__strip">
+      <div><span>Signed → Power</span><b>32%</b></div>
+      <div><span>Power users</span><b>13</b></div>
+      <div><span>Top user</span><b>27%</b></div>
+    </div>
+  </section>
+
+  <!-- 05 · DEPARTMENTS -->
+  <section class="db-section">
+    <header class="db-sechead">
+      <span class="db-secnum">04 / Departments</span>
+      <div>
+        <span class="db-seckicker">● Users × questions</span>
+        <h2 class="db-sectitle">Engineering carries the load.</h2>
+      </div>
+    </header>
+    <ol class="db-depts">
+      <li><div class="db-depts__row"><span class="db-depts__rank">01</span><span class="db-depts__name">Engineering</span><span class="db-depts__users">· 16u</span><span class="db-depts__count">213</span></div><div class="db-depts__bar"><div style="width:100%;background:#2D4A2B"></div></div></li>
+      <li><div class="db-depts__row"><span class="db-depts__rank">02</span><span class="db-depts__name">Manufacturing</span><span class="db-depts__users">· 6u</span><span class="db-depts__count">70</span></div><div class="db-depts__bar"><div style="width:33%"></div></div></li>
+      <li><div class="db-depts__row"><span class="db-depts__rank">03</span><span class="db-depts__name">Product</span><span class="db-depts__users">· 2u</span><span class="db-depts__count">52</span></div><div class="db-depts__bar"><div style="width:24%"></div></div></li>
+      <li><div class="db-depts__row"><span class="db-depts__rank">04</span><span class="db-depts__name">Operations</span><span class="db-depts__users">· 3u</span><span class="db-depts__count">34</span></div><div class="db-depts__bar"><div style="width:16%"></div></div></li>
+      <li><div class="db-depts__row"><span class="db-depts__rank">05</span><span class="db-depts__name">People &amp; Culture</span><span class="db-depts__users">· 3u</span><span class="db-depts__count">23</span></div><div class="db-depts__bar"><div style="width:11%"></div></div></li>
+      <li><div class="db-depts__row"><span class="db-depts__rank">06</span><span class="db-depts__name">Marketing</span><span class="db-depts__users">· 2u</span><span class="db-depts__count">12</span></div><div class="db-depts__bar"><div style="width:6%"></div></div></li>
+      <li><div class="db-depts__row"><span class="db-depts__rank">07</span><span class="db-depts__name">Sales</span><span class="db-depts__users">· 1u</span><span class="db-depts__count">12</span></div><div class="db-depts__bar"><div style="width:6%"></div></div></li>
+      <li><div class="db-depts__row"><span class="db-depts__rank">08</span><span class="db-depts__name">Other</span><span class="db-depts__users">· 7u</span><span class="db-depts__count">19</span></div><div class="db-depts__bar"><div style="width:9%"></div></div></li>
+    </ol>
+  </section>
+
+  <!-- 06 · WEEKLY MIX -->
+  <section class="db-section">
+    <header class="db-sechead">
+      <span class="db-secnum">05 / Weekly mix</span>
+      <div>
+        <span class="db-seckicker">● Adoption · departments by week</span>
+        <h2 class="db-sectitle">Engineering carried Feb 16.</h2>
+      </div>
+    </header>
+    <div class="db-mix">
+      <div class="db-mix__row"><div class="db-mix__head"><span>Jan 05</span><span><b>3</b> users</span></div><div class="db-mix__bar" style="width:25%"><i style="flex:1;background:#2D4A2B"></i><i style="flex:1;background:#5E7030"></i><i style="flex:1;background:#7A8A7A"></i></div></div>
+      <div class="db-mix__row"><div class="db-mix__head"><span>Jan 12</span><span><b>5</b> users</span></div><div class="db-mix__bar" style="width:42%"><i style="flex:1;background:#2D4A2B"></i><i style="flex:1;background:#5E7030"></i><i style="flex:3;background:#7A8A7A"></i></div></div>
+      <div class="db-mix__row"><div class="db-mix__head"><span>Jan 19</span><span><b>12</b> users</span></div><div class="db-mix__bar" style="width:100%"><i style="flex:4;background:#2D4A2B"></i><i style="flex:1;background:#C76F3D"></i><i style="flex:7;background:#7A8A7A"></i></div></div>
+      <div class="db-mix__row"><div class="db-mix__head"><span>Jan 26</span><span><b>11</b> users</span></div><div class="db-mix__bar" style="width:92%"><i style="flex:2;background:#2D4A2B"></i><i style="flex:1;background:#5E7030"></i><i style="flex:1;background:#C76F3D"></i><i style="flex:1;background:#4A6675"></i><i style="flex:6;background:#7A8A7A"></i></div></div>
+      <div class="db-mix__row"><div class="db-mix__head"><span>Feb 02</span><span><b>7</b> users</span></div><div class="db-mix__bar" style="width:58%"><i style="flex:2;background:#2D4A2B"></i><i style="flex:2;background:#5E7030"></i><i style="flex:3;background:#7A8A7A"></i></div></div>
+      <div class="db-mix__row"><div class="db-mix__head"><span>Feb 09</span><span><b>7</b> users</span></div><div class="db-mix__bar" style="width:58%"><i style="flex:2;background:#2D4A2B"></i><i style="flex:1;background:#9C7AA8"></i><i style="flex:4;background:#7A8A7A"></i></div></div>
+      <div class="db-mix__row"><div class="db-mix__head"><span>Feb 16</span><span><b>12</b> users</span></div><div class="db-mix__bar" style="width:100%"><i style="flex:8;background:#2D4A2B"></i><i style="flex:4;background:#7A8A7A"></i></div></div>
+      <div class="db-mix__row"><div class="db-mix__head"><span>Feb 23</span><span><b>3</b> users</span></div><div class="db-mix__bar" style="width:25%"><i style="flex:1;background:#5E7030"></i><i style="flex:2;background:#7A8A7A"></i></div></div>
+    </div>
+    <ul class="db-mix__legend">
+      <li><i style="background:#2D4A2B"></i>Eng</li>
+      <li><i style="background:#5E7030"></i>Mfg</li>
+      <li><i style="background:#C76F3D"></i>Ops</li>
+      <li><i style="background:#9C7AA8"></i>P&amp;C</li>
+      <li><i style="background:#4A6675"></i>Product</li>
+      <li><i style="background:#7A8A7A"></i>Other</li>
+    </ul>
+  </section>
+
+  <!-- 07 · ACTIVITY HEATMAP -->
+  <section class="db-section">
+    <header class="db-sechead">
+      <span class="db-secnum">06 / Activity heatmap</span>
+      <div>
+        <span class="db-seckicker">● Top 10 + 31 in the tail</span>
+        <h2 class="db-sectitle">Who showed up, week by week.</h2>
+      </div>
+    </header>
+    <div class="db-heat__axis">
+      <span>Sep '25</span>
+      <span class="rule"></span>
+      <span>Feb '26</span>
+    </div>
+    <div class="db-heat">
+      <div class="db-heat__row"><span>Eric B.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="1"></i><i data-i="3"></i><i data-i="3"></i><i data-i="0"></i><i data-i="3"></i><i data-i="3"></i><i data-i="0"></i><i data-i="3"></i><i data-i="0"></i><i data-i="0"></i><i data-i="3"></i><i data-i="3"></i><i data-i="3"></i></div></div>
+      <div class="db-heat__row"><span>Kenneth L.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="0"></i><i data-i="2"></i><i data-i="2"></i><i data-i="0"></i><i data-i="2"></i><i data-i="2"></i><i data-i="2"></i><i data-i="0"></i><i data-i="2"></i><i data-i="2"></i><i data-i="0"></i><i data-i="2"></i><i data-i="2"></i><i data-i="2"></i><i data-i="2"></i><i data-i="0"></i></div></div>
+      <div class="db-heat__row"><span>Digna N.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="0"></i><i data-i="2"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="2"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i></div></div>
+      <div class="db-heat__row"><span>Elisa P.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="2"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="2"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i></div></div>
+      <div class="db-heat__row"><span>Keith O.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="1"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="1"></i><i data-i="0"></i><i data-i="0"></i><i data-i="1"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="1"></i><i data-i="0"></i></div></div>
+      <div class="db-heat__row"><span>Jay S.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="2"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i></div></div>
+      <div class="db-heat__row"><span>Brian K.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="1"></i><i data-i="1"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i></div></div>
+      <div class="db-heat__row"><span>Hieu N.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="1"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i></div></div>
+      <div class="db-heat__row"><span>Amber F.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="1"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i></div></div>
+      <div class="db-heat__row"><span>Anil P.</span><div class="db-heat__cells"><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="1"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i><i data-i="0"></i></div></div>
+    </div>
+    <div class="db-heat__tail">
+      <span>+ 31 others</span>
+      <span>Long tail</span>
+    </div>
+    <div class="db-heat__legend">
+      <span>Less</span>
+      <i data-i="1"></i><i data-i="2"></i><i data-i="3"></i>
+      <span>More</span>
+    </div>
+  </section>
+</div>
+
 <script type="text/babel" data-presets="react,env">
 /* global React, ReactDOM, Recharts */
 const { useState, useEffect, useRef, useMemo } = React;
