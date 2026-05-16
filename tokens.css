@@ -65,50 +65,55 @@ body[data-palette="creator"] {
    FIX 1 · Type system
    Use these classes (or copy the rules) instead of bespoke font-size on each page.
    ════════════════════════════════════════════════════════════════ */
+/* v4: !important on properties so helper classes WIN over page-level
+   styles. Without this they're no-ops on pages with their own h1/h2/h3
+   declarations (which is every page). Trade-off is a small maintenance
+   cost (utility classes always shout), but the consistency win is the
+   whole point of the layer. */
 .t-hero {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--display-hero);
-  line-height: var(--lh-hero);
-  letter-spacing: var(--ls-hero);
+  font-family: var(--font-display) !important;
+  font-weight: 600 !important;
+  font-size: var(--display-hero) !important;
+  line-height: var(--lh-hero) !important;
+  letter-spacing: var(--ls-hero) !important;
   color: var(--ink);
   margin: 0;
 }
 .t-hero em {
-  font-family: var(--font-italic);
-  font-style: italic;
-  font-weight: 400;
+  font-family: var(--font-italic) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
   color: var(--accent);
 }
 .t-section {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--display-section);
-  line-height: var(--lh-section);
-  letter-spacing: var(--ls-section);
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  font-size: var(--display-section) !important;
+  line-height: var(--lh-section) !important;
+  letter-spacing: var(--ls-section) !important;
   color: var(--ink);
   margin: 0;
 }
 .t-section em {
-  font-family: var(--font-italic);
-  font-style: italic;
+  font-family: var(--font-italic) !important;
+  font-style: italic !important;
   color: var(--accent);
 }
 .t-card {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: var(--display-card);
-  line-height: var(--lh-card);
-  letter-spacing: var(--ls-card);
+  font-family: var(--font-display) !important;
+  font-weight: 500 !important;
+  font-size: var(--display-card) !important;
+  line-height: var(--lh-card) !important;
+  letter-spacing: var(--ls-card) !important;
   color: var(--ink);
   margin: 0;
 }
 .t-kicker {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: var(--mono-kicker-size);
-  letter-spacing: var(--mono-kicker-track);
-  text-transform: uppercase;
+  font-family: var(--font-mono) !important;
+  font-weight: 600 !important;
+  font-size: var(--mono-kicker-size) !important;
+  letter-spacing: var(--mono-kicker-track) !important;
+  text-transform: uppercase !important;
   color: var(--muted);
 }
 .t-tagline {

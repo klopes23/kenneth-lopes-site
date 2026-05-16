@@ -1790,7 +1790,14 @@ function DeckMobile() {
             fontFamily: MS_FONT.mono, fontSize: 11, fontWeight: 600,
             letterSpacing: '0.22em', textTransform: 'uppercase',
             color: MS_C.ink, textDecoration: 'none',
-          }}>K · L</a>
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+          }}>K · L
+            <span style={{
+              padding: '3px 7px',
+              background: 'rgba(45,74,43,0.08)', color: '#2D4A2B',
+              fontSize: 8.5, letterSpacing: '0.16em',
+            }}>A / Work</span>
+          </a>
           <nav aria-label="Site" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14,
           }}>
@@ -1937,7 +1944,9 @@ window.DeckSlideStatic = DeckSlideStatic;
       return (
         <nav className="sticky top-0 z-50 bg-[#F2EBDA]/92 backdrop-blur-md border-b border-[rgba(27,42,27,0.14)] w-full" aria-label="Main navigation">
           <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-6">
-            <a href="../index.html" className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#1B2A1B] justify-self-start">K · L</a>
+            <a href="../index.html" className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#1B2A1B] justify-self-start inline-flex items-center gap-2">K · L
+              <span className="px-1.5 py-0.5 bg-[rgba(45,74,43,0.08)] text-[#2D4A2B] text-[8.5px] tracking-[0.16em]">A / Work</span>
+            </a>
             <div className="flex gap-8 justify-center">
               <a href="../index.html"     className="font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-[#7A8A7A] hover:text-[#1B2A1B]">Home</a>
               <a href="../portfolio.html#work" className="font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-[#1B2A1B]">Portfolio</a>
