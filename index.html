@@ -232,8 +232,12 @@
     /* ── FOOTER ── */
     .site-footer {
       background: var(--accent);
-      padding: 18px var(--pad);
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px var(--pad) 16px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-rows: auto auto;
+      align-items: center;
+      row-gap: 6px;
     }
     .footer-copy {
       font-family: var(--font-mono); font-size: 10px;
@@ -250,6 +254,14 @@
       letter-spacing: 0.18em; text-transform: uppercase;
       color: rgba(242,235,218,0.55); text-align: right;
     }
+    /* v4: LinkedIn pinned on its own row, centered under email */
+    .footer-linkedin {
+      grid-column: 1 / -1; grid-row: 2;
+      justify-self: center;
+      color: rgba(242,235,218,0.7) !important;
+      transition: color 0.15s;
+    }
+    .footer-linkedin:hover { color: var(--bg) !important; }
 
     /* ── MOBILE ── */
     @media (max-width: 680px) {
@@ -317,7 +329,7 @@
 
   <!-- NAV -->
   <nav class="topnav">
-    <a class="topnav-brand" href="index.html">K · L<span class="nav-pill">A / Work</span></a>
+    <a class="topnav-brand" href="index.html">K · L</a>
     <div class="topnav-links">
       <a class="topnav-link is-active" href="index.html">Home</a>
       <a class="topnav-link" href="portfolio.html">Portfolio</a>
