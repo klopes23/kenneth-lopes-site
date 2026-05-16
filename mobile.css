@@ -861,13 +861,11 @@
     display: inline-flex; align-items: center; gap: 10px;
     font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
     letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--kc-ink); font-weight: 600; text-decoration: none;
+    color: var(--kc-ink); font-weight: 500; text-decoration: none;
   }
   body[data-creator="true"] .km-brand-soft { color: var(--kc-muted); }
-  body[data-creator="true"] .km-dot {
-    width: 6px; height: 6px; border-radius: 50%; background: var(--kc-accent);
-    flex-shrink: 0; display: inline-block;
-  }
+  /* km-dot intentionally hidden — user removed the accent dot next to N · F */
+  body[data-creator="true"] .km-dot { display: none !important; }
   body[data-creator="true"] .km-topbar-right { display: inline-flex; align-items: center; gap: 8px; }
   body[data-creator="true"] .km-inquire {
     padding: 8px 14px; background: var(--kc-ink); color: var(--kc-bg);

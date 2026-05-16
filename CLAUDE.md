@@ -33,6 +33,17 @@ Brand marks:
 - Creator side (media-kit, desktop AND mobile km-topbar): `N · F`
 - No `nav-pill` chips on any brand mark.
 
+## Media-kit PDF print
+
+The "Download media kit (PDF)" flow uses CSS `zoom: var(--print-zoom)` (default 0.82) on `.desktop-view` and `.print-bw-clone` to scale-to-fit one Letter page each. This is the robust mechanism — do NOT replace it with a brittle `max-height: Xin; overflow: hidden` cap, which silently chops content when sections grow.
+
+When adding new top-level sections to media-kit:
+- If the page now overflows one Letter sheet after the zoom, lower `--print-zoom` (e.g., 0.78). It lives near line 1565 in the `@media print` block.
+- The `:nth-child(n+7)` cap on `.desktop-view > *` is a safety net (caps at 6 direct children).
+- Keep brand-tier labels hidden in print (`.brand-tier__lab { display: none }`) — the colored caption strips already differentiate tiers.
+
+Always download the PDF on phone + desktop after any media-kit section change to confirm one-page-color + one-page-grayscale still ships.
+
 ## Design system
 
 - `tokens.css` is the source of truth for colors, typography, stat cards, image frames, and cross-page CTAs. Don't redefine these per-page.
