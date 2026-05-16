@@ -845,7 +845,7 @@
     box-shadow: 12px 12px 0 var(--accent);
   }
   .brand-tile img {
-    width: 100%; aspect-ratio: 1/1;
+    width: 100%; aspect-ratio: 16/10;
     object-fit: cover; display: block;
   }
   .brand-tile figcaption {
@@ -882,9 +882,12 @@
   .brand-tier__lab--national::before { background: var(--accent); }
   .brand-tier__lab--local::before    { background: var(--accent-2); }
 
-  /* Tier grids are 2-up at all widths (since each tier has 2 tiles) */
+  /* Tier grids hold 2 tiles each — cap tile width so the brand photos
+     read at the same compact scale as the other case-study card images
+     instead of sprawling to half the section width. */
   .brand-grid--tier {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 17rem));
+    gap: 18px;
   }
 
   /* Colored caption strip per tier — image stays untouched */
@@ -1553,28 +1556,37 @@
        - 04 Brands: 4 collab proof tiles with view counts
      ════════════════════════════════════════════════ */
   @media print {
-    /* Generous page margins so the kit reads like a printed sheet, not a poster */
-    @page { size: Letter; margin: 0.7in 0.75in; }
+    /* Tighter page margins + CSS zoom = robust scale-to-fit. As content
+       grows over time the whole sheet shrinks proportionally instead of
+       overflowing onto a phantom page 2. Tune --print-zoom if a future
+       redesign needs more breathing room. */
+    @page { size: Letter; margin: 0.4in 0.45in; }
     html, body { height: auto !important; }
+    :root { --print-zoom: 0.82; }
     body[data-creator="true"] {
       background: var(--bg) !important;
       color: var(--ink) !important;
       font-size: 8pt;
     }
-    /* Constrain content + flex-stack so everything packs onto one page.
-       `html body[data-creator]` specificity (0,0,2,2) beats mobile.css's
-       `body[data-creator]` rule (0,0,2,1) so .desktop-view shows even
-       when printing from a phone where mobile.css hides it. */
+    /* Stack the content normally and let CSS zoom shrink it to one
+       Letter page. No more max-height/overflow:hidden cap to chop off
+       content silently. `html body[data-creator]` specificity (0,0,2,2)
+       beats mobile.css's hide rule. */
     html body[data-creator="true"] .desktop-view,
     .desktop-view {
       display: flex !important;
       flex-direction: column !important;
       gap: 4px;
-      max-width: 6.5in;
-      max-height: 9.4in;
-      overflow: hidden;
+      max-width: 7.7in;
       margin: 0 auto;
+      zoom: var(--print-zoom);
     }
+    /* Drop the brand-tier label rows in print — the tiles still read
+       Domino's/Shake Shack vs Storm/Baqba via their colored caption
+       strips, no need for the extra label height on a printed sheet. */
+    html body[data-creator="true"] .brand-tier__lab { display: none !important; }
+    html body[data-creator="true"] .brand-tier { margin: 0 !important; }
+    html body[data-creator="true"] .brand-tier + .brand-tier { margin-top: 4px !important; }
     /* exact colors so brand tiles + chips print as designed */
     body[data-creator="true"] *,
     body[data-creator="true"] *::before,
@@ -1754,22 +1766,24 @@
       letter-spacing: -0.005em !important;
     }
 
-    /* hard stop — anything that bleeds past page 1 gets hidden */
+    /* Hide direct-children past the 6th (hero + 5 sections fit on one
+       page). Belt + suspenders alongside zoom in case a future redesign
+       adds extra top-level sections. */
     .desktop-view > :nth-child(n+7) { display: none !important; }
 
     /* === PAGE 2 — pure black-and-white clone (printer-friendly, no colors)
        `html body[data-creator]` specificity (0,0,2,2) reliably wins over
-       mobile.css's hide rule on .desktop-view (the clone has both classes). */
+       mobile.css's hide rule on .desktop-view (the clone has both classes).
+       Same zoom-based scale-to-fit treatment as page 1. */
     html body[data-creator="true"] .print-bw-clone,
     html body [data-print-clone="1"],
     .print-bw-clone {
       display: flex !important;
       flex-direction: column !important;
       gap: 4px;
-      max-width: 6.5in;
-      max-height: 9.4in;
-      overflow: hidden;
+      max-width: 7.7in;
       margin: 0 auto;
+      zoom: var(--print-zoom);
       page-break-before: always;
       break-before: page;
       page-break-after: avoid;
@@ -1869,7 +1883,7 @@
   <!-- Section pill bar -->
   <nav class="km-subnav" aria-label="Sections">
     <a href="#km-reach" class="km-pill is-active">Reach</a>
-    <a href="#km-pillars" class="km-pill">Pillars</a>
+    <a href="#km-pillars" class="km-pill">Content</a>
     <a href="#km-audience" class="km-pill">Audience</a>
     <a href="#km-brands" class="km-pill">Brands</a>
     <a href="#km-offer" class="km-pill">Offer</a>
@@ -1971,7 +1985,7 @@
 
   <!-- 02 / PILLARS -->
   <section class="km-section" id="km-pillars">
-    <div class="km-section-head"><span class="km-num">02 / Pillars</span><div><div class="km-kicker">What we make</div></div></div>
+    <div class="km-section-head"><span class="km-num">02 / Content</span><div><div class="km-kicker">What we make</div></div></div>
     <div class="km-carousel" data-carousel-dots>
       <article class="km-pcard"><img src="assets/brand-shake-shack.jpg" alt="" loading="lazy"/><div class="km-pstat">12M+ views</div><div class="km-plabel"><div class="km-pnum">01</div><div class="km-pname">Brands</div></div></article>
       <article class="km-pcard"><img src="assets/family.jpg" alt="" loading="lazy"/><div class="km-pstat">16M+ views</div><div class="km-plabel"><div class="km-pnum">02</div><div class="km-pname">Family</div></div></article>
@@ -2151,7 +2165,7 @@
       </a>
       <a class="cta-card cta-card--creator" href="cases/deck.html#/0">
         <span class="lab">↗ Open the deck</span>
-        <span class="title"><em>Case Study Deck.</em></span>
+        <span class="title"><em>Case Studies.</em></span>
       </a>
     </div>
 
@@ -2161,6 +2175,7 @@
         <span class="km-foot-year">© 2026</span>
       </div>
       <div class="km-foot-email">thenesifamilybiz@gmail.com</div>
+      <div class="km-foot-loc">Los Angeles · CA</div>
     </footer>
   </section>
 
@@ -2527,7 +2542,7 @@
         </a>
         <a class="cta-card cta-card--creator" href="cases/deck.html#/0">
           <span class="lab">↗ Open the deck</span>
-          <span class="title"><em>Case Study Deck.</em></span>
+          <span class="title"><em>Case Studies.</em></span>
         </a>
       </div>
     </div>
@@ -2535,7 +2550,7 @@
 
   <div class="foot">
     <div class="foot-inner">
-      <span>© 2026 Kenneth Lopes</span>
+      <span>© 2026 Kenneth Lopes · Los Angeles, CA</span>
       <nav aria-label="Footer links">
         <a href="index.html">Home</a>
         <a href="portfolio.html">Portfolio</a>
