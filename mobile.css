@@ -168,14 +168,14 @@
      pill are HTML overlays so they stay aligned. Adoption label sits
      above the pill, both inside the shaded region. */
   .cs03-peak-callout {
-    top: 22px !important;
+    top: 8px !important;
     right: 6% !important;
     font-size: 7.5px !important;
     padding: 3px 6px !important;
     letter-spacing: 0.16em !important;
   }
   .cs03-adopt-label {
-    top: 4px !important;
+    top: -10px !important;
     left: 64% !important;
     font-size: 8px !important;
     letter-spacing: 0.16em !important;
