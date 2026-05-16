@@ -6,6 +6,7 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Case Study Deck — Kenneth Lopes</title>
+  <link rel="stylesheet" href="/tokens.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#F2EBDA" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -305,7 +306,7 @@
     }
   </style>
 </head>
-<body data-deck="true">
+<body data-palette="pro" data-deck="true">
   <div id="root"></div>
   <!-- v4 mobile branch — canonical handoff inlined (deck-mobile-shared.jsx + deck-mobile.jsx)
        Wrapped in IIFE so internal SLIDE_COMPONENTS / DECK_SLIDES don't collide with the desktop deck.
@@ -1710,6 +1711,39 @@ function S7_Creator({ slide, total }) {
         ))}
       </div>
       <CarouselDots trackRef={platTrackRef} count={platforms.length} />
+
+      {/* v4 (site-consistency-v1): cross-page CTA pair at terminal slide */}
+      <div style={{
+        marginTop: 28,
+        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12,
+      }}>
+        <a href="../portfolio.html#work" style={{
+          padding: '20px 22px', background: '#2D4A2B', color: '#F2EBDA',
+          textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 6,
+        }}>
+          <span style={{
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+            letterSpacing: '0.22em', textTransform: 'uppercase', color: '#D9B65A',
+          }}>← Back to work</span>
+          <span style={{
+            fontFamily: MS_FONT.display, fontWeight: 400, fontSize: 22,
+            letterSpacing: '-0.02em', lineHeight: 1.05,
+          }}><em style={{ fontFamily: MS_FONT.italic, fontStyle: 'italic', color: '#D9B65A' }}>Portfolio.</em></span>
+        </a>
+        <a href="../media-kit.html" style={{
+          padding: '20px 22px', background: '#2A1A12', color: '#FBF5E8',
+          textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 6,
+        }}>
+          <span style={{
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+            letterSpacing: '0.22em', textTransform: 'uppercase', color: '#E8985A',
+          }}>↗ See the brand</span>
+          <span style={{
+            fontFamily: MS_FONT.display, fontWeight: 400, fontSize: 22,
+            letterSpacing: '-0.02em', lineHeight: 1.05,
+          }}><em style={{ fontFamily: MS_FONT.italic, fontStyle: 'italic', color: '#E8985A' }}>Media Kit.</em></span>
+        </a>
+      </div>
     </SlideShell>
   );
 }
@@ -1756,7 +1790,14 @@ function DeckMobile() {
             fontFamily: MS_FONT.mono, fontSize: 11, fontWeight: 600,
             letterSpacing: '0.22em', textTransform: 'uppercase',
             color: MS_C.ink, textDecoration: 'none',
-          }}>K · L</a>
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+          }}>K · L
+            <span style={{
+              padding: '3px 7px',
+              background: 'rgba(45,74,43,0.08)', color: '#2D4A2B',
+              fontSize: 8.5, letterSpacing: '0.16em',
+            }}>A / Work</span>
+          </a>
           <nav aria-label="Site" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14,
           }}>
@@ -1903,7 +1944,9 @@ window.DeckSlideStatic = DeckSlideStatic;
       return (
         <nav className="sticky top-0 z-50 bg-[#F2EBDA]/92 backdrop-blur-md border-b border-[rgba(27,42,27,0.14)] w-full" aria-label="Main navigation">
           <div className="max-w-[1280px] mx-auto px-6 lg:px-10 py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-6">
-            <a href="../index.html" className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#1B2A1B] justify-self-start">K · L</a>
+            <a href="../index.html" className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#1B2A1B] justify-self-start inline-flex items-center gap-2">K · L
+              <span className="px-1.5 py-0.5 bg-[rgba(45,74,43,0.08)] text-[#2D4A2B] text-[8.5px] tracking-[0.16em]">A / Work</span>
+            </a>
             <div className="flex gap-8 justify-center">
               <a href="../index.html"     className="font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-[#7A8A7A] hover:text-[#1B2A1B]">Home</a>
               <a href="../portfolio.html#work" className="font-mono text-[10px] font-bold tracking-[0.18em] uppercase text-[#1B2A1B]">Portfolio</a>

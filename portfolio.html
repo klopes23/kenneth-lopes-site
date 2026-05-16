@@ -11,6 +11,7 @@
   <link rel="apple-touch-icon" href="/assets/headshot.jpg" />
   <link rel="manifest" href="/manifest.json" />
   <title>Kenneth Lopes — Program Manager, AI Enablement</title>
+  <link rel="stylesheet" href="/tokens.css" />
   <meta name="description" content="Kenneth Lopes — cross-functional Program Manager at Canoga Perkins. TPM, AI enablement, GenAI tooling, multi-site governance, GTM execution." />
   <!-- Link preview: solo headshot (used on portfolio hero), compact size -->
   <meta property="og:title" content="Kenneth Lopes — Sr. Program Manager" />
@@ -237,11 +238,12 @@
       aspect-ratio: 3/4;
       object-fit: cover;
       object-position: center 22%;
-      border: 3px solid var(--accent);
-      transform: rotate(-0.8deg);
+      /* v4 (site-consistency-v1): unrotated photo to match the .img-frame
+         standard (the bespoke offset shadow + 1.5px border match the spec) */
+      border: 1.5px solid var(--ink);
       transition: transform 0.35s ease;
     }
-    .hero-photo-wrap:hover .hero-photo { transform: rotate(-0.8deg) translate(-4px, -4px); }
+    .hero-photo-wrap:hover .hero-photo { transform: translate(-4px, -4px); }
     .hero-photo-wrap:hover .hero-photo-shadow { transform: translate(6px, 6px); }
     .hero-badge {
       position: absolute; top: 8px; right: 4px; z-index: 2;
@@ -884,13 +886,13 @@
   }
   </script>
 </head>
-<body>
+<body data-palette="pro">
 
 <!-- NAV -->
 <div class="nav-stack">
 <nav class="topnav" aria-label="Main navigation">
   <div class="topnav-inner">
-    <a class="topnav-brand" href="index.html">K · L</a>
+    <a class="topnav-brand" href="index.html">K · L<span class="nav-pill">A / Work</span></a>
     <div class="topnav-links">
       <a class="topnav-link" href="index.html">Home</a>
       <a class="topnav-link is-active" href="portfolio.html">Portfolio</a>
@@ -921,7 +923,7 @@
       <div class="hero-desktop-only">
         <div class="hero-availability">Available · Q3 2026</div>
         <p class="hero-byline">Sr. TPM · Product &amp; Strategy</p>
-        <h1>
+        <h1 class="t-hero">
           <span class="hero-name">Kenneth</span>
           <em class="hero-name-italic">Lopes.</em>
         </h1>
@@ -940,7 +942,7 @@
       <div class="hero-mobile-only">
         <div class="hero-mobile-eyebrow">Available · Q3 2026</div>
         <p class="hero-mobile-byline">Sr. TPM · Product &amp; Strategy</p>
-        <h1 class="hero-mobile-title">
+        <h1 class="hero-mobile-title t-hero">
           Kenneth<br><em>Lopes.</em>
         </h1>
         <p class="hero-mobile-sub">Cross-functional Sr. Program Manager turning ambiguity into hardware, software, and AI products that go to market.</p>
@@ -998,7 +1000,7 @@
   <div class="wrap">
     <div class="section-header-row">
       <span class="section-eyebrow">01 / Work</span>
-      <h2 class="section-heading">Selected <em>case studies.</em></h2>
+      <h2 class="section-heading t-section">Selected <em>case studies.</em></h2>
       <span class="section-meta">5 Projects · 2023 — 2026</span>
     </div>
 
@@ -1250,7 +1252,7 @@
   <div class="wrap">
     <div class="section-header-row">
       <span class="section-eyebrow">02 / Credentials</span>
-      <h2 class="section-heading">Education &amp; <em>certs.</em></h2>
+      <h2 class="section-heading t-section">Education &amp; <em>certs.</em></h2>
       <span class="section-meta">5 of 6 Earned</span>
     </div>
 
@@ -1312,7 +1314,7 @@
   <div class="wrap">
     <div class="section-header-row">
       <span class="section-eyebrow">03 / Operating practice</span>
-      <h2 class="section-heading">The same system, <em>at scale.</em></h2>
+      <h2 class="section-heading t-section">The same system, <em>at scale.</em></h2>
       <span class="section-meta">Mar 2025 → Mar 2026</span>
     </div>
 

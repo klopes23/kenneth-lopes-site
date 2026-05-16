@@ -11,6 +11,7 @@
   <link rel="apple-touch-icon" href="/assets/headshot.jpg" />
   <link rel="manifest" href="/manifest.json" />
   <title>Kenneth Lopes</title>
+  <link rel="stylesheet" href="/tokens.css" />
   <meta name="description" content="Kenneth Lopes — Program Manager, AI Enablement & Creator. Two worlds: professional portfolio and Nesi Family creator brand." />
   <meta property="og:title" content="Kenneth Lopes" />
   <meta property="og:description" content="Program Manager, AI Enablement & Creator. Two worlds, one person." />
@@ -231,8 +232,12 @@
     /* ── FOOTER ── */
     .site-footer {
       background: var(--accent);
-      padding: 18px var(--pad);
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+      padding: 14px var(--pad) 16px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      grid-template-rows: auto auto;
+      align-items: center;
+      row-gap: 6px;
     }
     .footer-copy {
       font-family: var(--font-mono); font-size: 10px;
@@ -249,6 +254,14 @@
       letter-spacing: 0.18em; text-transform: uppercase;
       color: rgba(242,235,218,0.55); text-align: right;
     }
+    /* v4: LinkedIn pinned on its own row, centered under email */
+    .footer-linkedin {
+      grid-column: 1 / -1; grid-row: 2;
+      justify-self: center;
+      color: rgba(242,235,218,0.7) !important;
+      transition: color 0.15s;
+    }
+    .footer-linkedin:hover { color: var(--bg) !important; }
 
     /* ── MOBILE ── */
     @media (max-width: 680px) {
@@ -311,7 +324,7 @@
   }
   </script>
 </head>
-<body>
+<body data-palette="pro">
 <div class="page">
 
   <!-- NAV -->

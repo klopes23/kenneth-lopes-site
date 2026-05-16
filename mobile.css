@@ -1077,6 +1077,16 @@
   }
   body[data-creator="true"] .km-pcard:nth-child(odd) { box-shadow: 5px 5px 0 var(--kc-accent); }
   body[data-creator="true"] .km-pcard:nth-child(even) { box-shadow: 5px 5px 0 var(--kc-accent2); }
+  /* v4 (site-consistency-v1): tap/hover border animation — lift + grow shadow */
+  body[data-creator="true"] .km-pcard {
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+  body[data-creator="true"] .km-pcard:active,
+  body[data-creator="true"] .km-pcard:hover { transform: translate(-4px, -4px); }
+  body[data-creator="true"] .km-pcard:nth-child(odd):active,
+  body[data-creator="true"] .km-pcard:nth-child(odd):hover  { box-shadow: 9px 9px 0 var(--kc-accent); }
+  body[data-creator="true"] .km-pcard:nth-child(even):active,
+  body[data-creator="true"] .km-pcard:nth-child(even):hover { box-shadow: 9px 9px 0 var(--kc-accent2); }
   body[data-creator="true"] .km-pcard img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   }
@@ -1171,7 +1181,17 @@
   }
   body[data-creator="true"] .reach-tile__head { grid-column: 2; grid-row: 1; }
   body[data-creator="true"] .reach-tile__meta { grid-column: 2; grid-row: 2; }
-  body[data-creator="true"] .reach-tile:active { transform: scale(0.985); }
+  /* v4 (site-consistency-v1): tap/hover border animation — translate + offset
+     ink block reveal (mirrors hero photo + stat tile pattern). Replaces the
+     old scale(0.985) press feedback. */
+  body[data-creator="true"] .reach-tile {
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+  body[data-creator="true"] .reach-tile:active,
+  body[data-creator="true"] .reach-tile:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--kc-ink);
+  }
   body[data-creator="true"] .reach-tile__head {
     display: grid; grid-template-columns: 1fr auto;
     align-items: center; gap: 10px;
@@ -1324,6 +1344,14 @@
   body[data-creator="true"] .km-bcard {
     position: relative; aspect-ratio: 4/5; overflow: hidden;
     background: var(--kc-ink);
+    /* v4 (site-consistency-v1): tap/hover border animation */
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body[data-creator="true"] .km-bcard:active,
+  body[data-creator="true"] .km-bcard:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--kc-accent);
   }
   body[data-creator="true"] .km-bcard img {
     position: absolute; inset: 0; width: 100%; height: 100%;
@@ -1392,6 +1420,22 @@
     padding: 40px 22px 0;
     border-top: 1px solid var(--kc-line);
   }
+  /* v4 (site-consistency-v1): cross-page CTA pair inside dark km-contact —
+     add hairline cream borders so the dark CTA cards stand out from the
+     dark parent background. */
+  body[data-creator="true"] .km-cta-pair {
+    margin-top: 28px;
+    grid-template-columns: 1fr;  /* stack vertically on phones */
+  }
+  body[data-creator="true"] .km-cta-pair .cta-card {
+    border: 1px solid rgba(244,236,221,0.18);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+  body[data-creator="true"] .km-cta-pair .cta-card:active,
+  body[data-creator="true"] .km-cta-pair .cta-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--kc-accent);
+  }
   body[data-creator="true"] .km-contact-eyebrow,
   body[data-creator="true"] .km-socials-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
@@ -1454,6 +1498,13 @@
     padding: 18px 16px;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
+    /* v4 (site-consistency-v1): tap/hover border animation */
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+  body[data-creator="true"] .km-social:active,
+  body[data-creator="true"] .km-social:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--kc-ink);
   }
   /* v4: platform logo on the LEFT side of each grid tile */
   body[data-creator="true"] .km-soc-logo {
