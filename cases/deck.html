@@ -1494,8 +1494,8 @@ function S6_Mexico({ slide, total }) {
       </div>
 
       <div style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
-        <MetricRow eyebrow="Registrations" v="75" sub="Localized acquisition flow" />
-        <MetricRow eyebrow="Attendees" v="~90" sub="20% walk-up over registration" />
+        <MetricRow eyebrow="Registrations" v="175" sub="Localized acquisition flow" />
+        <MetricRow eyebrow="Attendees" v="~90" sub="~51% attendance rate" />
         <MetricRow eyebrow="Sales conversion" v="11%" sub="Attendees → next-step meetings" highlight />
       </div>
       <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
@@ -2603,7 +2603,7 @@ window.DeckSlideStatic = DeckSlideStatic;
        ────────────────────────────────────────────────────────────────── */
     function Slide5() {
       const stats = [
-        { l:'Registrations',    v:'75',   highlight:false },
+        { l:'Registrations',    v:'175',  highlight:false },
         { l:'Attendees',        v:'~90',  highlight:false },
         { l:'Sales Conversion', v:'11%',  highlight:true  },
       ];
