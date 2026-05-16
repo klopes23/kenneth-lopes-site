@@ -845,7 +845,7 @@
     box-shadow: 12px 12px 0 var(--accent);
   }
   .brand-tile img {
-    width: 100%; aspect-ratio: 1/1;
+    width: 100%; aspect-ratio: 16/10;
     object-fit: cover; display: block;
   }
   .brand-tile figcaption {
@@ -882,9 +882,12 @@
   .brand-tier__lab--national::before { background: var(--accent); }
   .brand-tier__lab--local::before    { background: var(--accent-2); }
 
-  /* Tier grids are 2-up at all widths (since each tier has 2 tiles) */
+  /* Tier grids hold 2 tiles each — cap tile width so the brand photos
+     read at the same compact scale as the other case-study card images
+     instead of sprawling to half the section width. */
   .brand-grid--tier {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 17rem));
+    gap: 18px;
   }
 
   /* Colored caption strip per tier — image stays untouched */
