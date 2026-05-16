@@ -663,6 +663,34 @@
       background: var(--bg); color: var(--muted);
     }
 
+    /* CS / 03 v2 — single mono header row + inline shaded label + peak callout (handoff §12) */
+    .cs03-card--v2 { padding: 24px; display: flex; flex-direction: column; }
+    /* v2 hides the old chrome (boxed badge + right-side cluster + bottom badge) */
+    .cs03-card--v2 .cs03-tag,
+    .cs03-card--v2 .cs03-meta,
+    .cs03-card--v2 .cs03-num-badge { display: none !important; }
+    .cs03-card--v2 .line-chart-title {
+      position: static !important;
+      margin: 14px 0 4px;
+      max-width: none !important;
+    }
+    .cs03-head {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 12px;
+      font-family: var(--font-mono); font-weight: 600;
+      font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .cs03-head strong { font-weight: 600; color: var(--ink); }
+    .cs03-peak-callout {
+      position: absolute; top: 8px; right: 6%;
+      z-index: 3;
+      padding: 4px 9px;
+      background: var(--forest, #2D4A2B); color: var(--bg);
+      font-family: var(--font-mono); font-weight: 600;
+      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    }
+
     /* ── CREATOR ── */
     .creator { padding: 56px 0 0; }
     .creator-contact-break { height: clamp(80px, 10vw, 140px); background: var(--bg); }
@@ -1151,14 +1179,14 @@
 
       <!-- CS 03 — GenAI Enablement (line chart) -->
       <a class="cs-link" href="cases/deck.html#/3" aria-label="Read case study: GenAI enablement">
-        <div class="cs03-card">
-          <span class="cs03-tag">AI Adoption</span>
-          <div class="cs03-meta">
-            <div class="line-chart-meta">Sep '25 — Feb '26 · 24W</div>
-            <div class="cs03-adopt">Adoption Phase ↓</div>
+        <div class="cs03-card cs03-card--v2">
+          <div class="cs03-head">
+            <span><strong>CS / 03</strong> · GenAI Enablement</span>
+            <span>Sep '25 — Feb '26</span>
           </div>
           <h4 class="line-chart-title">Weekly active <em>users.</em></h4>
           <div class="cs03-chart-area">
+            <div class="cs03-peak-callout">+193% WAU</div>
             <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;">
               <defs>
                 <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
@@ -1169,6 +1197,8 @@
 
               <!-- Adoption phase highlight: starts at x=215 -->
               <rect x="215" y="20" width="97" height="150" fill="rgba(45,74,43,0.12)"/>
+              <!-- Inline shaded-region label replaces the old right-side cluster -->
+              <text x="221" y="32" font-family="'JetBrains Mono',monospace" font-size="7.5" font-weight="600" letter-spacing="1.2" fill="#2D4A2B" opacity="0.62">↓ ADOPTION PHASE</text>
 
               <!-- dotted gridlines (skip leftmost column for axis labels) -->
               <line x1="32" y1="170" x2="312" y2="170" stroke="rgba(27,42,27,0.18)" stroke-width="0.6"/>
@@ -1197,7 +1227,6 @@
               <text x="244" y="190" font-family="'JetBrains Mono',monospace" font-size="9" fill="#7A8A7A">JAN</text>
             </svg>
           </div>
-          <span class="cs03-num-badge">CS / 03</span>
         </div>
         <div class="cs-caption-row">
           <h3 class="cs-title">GenAI <em>enablement.</em></h3>

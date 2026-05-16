@@ -865,6 +865,42 @@
     letter-spacing: 0.04em; color: var(--muted); margin-top: 2px;
   }
 
+  /* Tier differentiation — national vs local brand collabs (handoff §11) */
+  .brand-tier { margin-top: 32px; }
+  .brand-tier:first-of-type { margin-top: 0; }
+  .brand-tier__lab {
+    font-family: var(--font-mono);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .brand-tier__lab::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+  }
+  .brand-tier__lab--national::before { background: var(--accent); }
+  .brand-tier__lab--local::before    { background: var(--accent-2); }
+
+  /* Tier grids are 2-up at all widths (since each tier has 2 tiles) */
+  .brand-grid--tier {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Colored caption strip per tier — image stays untouched */
+  .brand-tile--national figcaption,
+  .brand-tile--local    figcaption {
+    color: #fff;
+  }
+  .brand-tile--national figcaption { background: var(--accent); }
+  .brand-tile--local    figcaption { background: var(--accent-2); }
+  .brand-tile--national .brand-num,
+  .brand-tile--local    .brand-num { color: rgba(255,255,255,0.78); }
+  .brand-tile--national .brand-name,
+  .brand-tile--local    .brand-name { color: #fff; }
+  .brand-tile--national .brand-stat,
+  .brand-tile--local    .brand-stat { color: rgba(255,255,255,0.85); }
+
   /* ── SECTION DIVIDER RULE ── */
   .section-rule {
     display: flex; align-items: center; gap: 14px;
@@ -1798,7 +1834,7 @@
      ═══════════════════════════════════════════════════ -->
 <script>
   (function () {
-    var LAST_DATA_UPDATE = '05/15/2026';
+    var LAST_DATA_UPDATE = '05/16/2026';
     function stamp() {
       document.querySelectorAll('[data-last-updated]').forEach(function (n) {
         n.textContent = LAST_DATA_UPDATE;
@@ -1827,9 +1863,6 @@
     </a>
     <div class="km-topbar-right">
       <a class="km-inquire" href="mailto:thenesifamilybiz@gmail.com?subject=Collab%20Inquiry">Email</a>
-      <a class="km-back" href="portfolio.html" aria-label="Back to portfolio">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </a>
     </div>
   </header>
 
@@ -1990,26 +2023,30 @@
   <!-- 04 / BRANDS -->
   <section class="km-section" id="km-brands">
     <div class="km-section-head"><span class="km-num">04 / Brands</span><div><div class="km-kicker">Past brand collaborations</div></div></div>
+    <p class="km-brand-tier-lab km-brand-tier-lab--national">National · awareness at scale</p>
     <ol class="km-brand-grid">
-      <li class="km-bcard">
+      <li class="km-bcard km-bcard--national">
         <img src="assets/brand-dominos.jpg" alt="Domino's collab" loading="lazy"/>
         <div class="km-bcard-overlay"></div>
-        <div class="km-bcard-text"><span class="km-bcard-num">01</span><span class="km-bcard-name">Domino's</span><span class="km-bcard-stat">200K+ views</span></div>
+        <div class="km-bcard-text"><span class="km-bcard-num">01 · ↗</span><span class="km-bcard-name">Domino's</span><span class="km-bcard-stat">200K+ views</span></div>
       </li>
-      <li class="km-bcard">
+      <li class="km-bcard km-bcard--national">
         <img src="assets/brand-shake-shack.jpg" alt="Shake Shack collab" loading="lazy"/>
         <div class="km-bcard-overlay"></div>
-        <div class="km-bcard-text"><span class="km-bcard-num">02</span><span class="km-bcard-name">Shake Shack</span><span class="km-bcard-stat">300K+ views</span></div>
+        <div class="km-bcard-text"><span class="km-bcard-num">02 · ↗</span><span class="km-bcard-name">Shake Shack</span><span class="km-bcard-stat">300K+ views</span></div>
       </li>
-      <li class="km-bcard">
+    </ol>
+    <p class="km-brand-tier-lab km-brand-tier-lab--local">Local · awareness + foot traffic</p>
+    <ol class="km-brand-grid">
+      <li class="km-bcard km-bcard--local">
         <img src="assets/brand-storm-burger.jpg" alt="Storm Burger collab" loading="lazy"/>
         <div class="km-bcard-overlay"></div>
-        <div class="km-bcard-text"><span class="km-bcard-num">03</span><span class="km-bcard-name">Storm Burger</span><span class="km-bcard-stat">420K+ views</span></div>
+        <div class="km-bcard-text"><span class="km-bcard-num">03 · ◉</span><span class="km-bcard-name">Storm Burger</span><span class="km-bcard-stat">420K+ views</span></div>
       </li>
-      <li class="km-bcard">
+      <li class="km-bcard km-bcard--local">
         <img src="assets/brand-baqba.jpg" alt="Baqba Mexican collab" loading="lazy"/>
         <div class="km-bcard-overlay"></div>
-        <div class="km-bcard-text"><span class="km-bcard-num">04</span><span class="km-bcard-name">Baqba Mexican</span><span class="km-bcard-stat">52K+ views</span></div>
+        <div class="km-bcard-text"><span class="km-bcard-num">04 · ◉</span><span class="km-bcard-name">Baqba Mexican</span><span class="km-bcard-stat">100K+ views</span></div>
       </li>
     </ol>
   </section>
@@ -2323,39 +2360,47 @@
         </div>
       </div>
 
-      <div class="brand-grid">
-        <figure class="brand-tile">
-          <img src="assets/brand-dominos.jpg" alt="Domino's collaboration" />
-          <figcaption>
-            <span class="brand-num">01</span>
-            <span class="brand-name">Domino's</span>
-            <span class="brand-stat">200K views</span>
-          </figcaption>
-        </figure>
-        <figure class="brand-tile">
-          <img src="assets/brand-shake-shack.jpg" alt="Shake Shack collaboration" />
-          <figcaption>
-            <span class="brand-num">02</span>
-            <span class="brand-name">Shake Shack</span>
-            <span class="brand-stat">300K views</span>
-          </figcaption>
-        </figure>
-        <figure class="brand-tile">
-          <img src="assets/brand-storm-burger.jpg" alt="Storm Burger collaboration" />
-          <figcaption>
-            <span class="brand-num">03</span>
-            <span class="brand-name">Storm Burger</span>
-            <span class="brand-stat">420K views</span>
-          </figcaption>
-        </figure>
-        <figure class="brand-tile">
-          <img src="assets/brand-baqba.jpg" alt="Baqba Mexican Grill collaboration" />
-          <figcaption>
-            <span class="brand-num">04</span>
-            <span class="brand-name">Baqba Mexican Grill</span>
-            <span class="brand-stat">52K views</span>
-          </figcaption>
-        </figure>
+      <div class="brand-tier brand-tier--national">
+        <p class="brand-tier__lab brand-tier__lab--national">National · awareness at scale</p>
+        <div class="brand-grid brand-grid--tier">
+          <figure class="brand-tile brand-tile--national">
+            <img src="assets/brand-dominos.jpg" alt="Domino's collaboration" />
+            <figcaption>
+              <span class="brand-num">01 · ↗ National</span>
+              <span class="brand-name">Domino's</span>
+              <span class="brand-stat">200K+ views</span>
+            </figcaption>
+          </figure>
+          <figure class="brand-tile brand-tile--national">
+            <img src="assets/brand-shake-shack.jpg" alt="Shake Shack collaboration" />
+            <figcaption>
+              <span class="brand-num">02 · ↗ National</span>
+              <span class="brand-name">Shake Shack</span>
+              <span class="brand-stat">300K+ views</span>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="brand-tier brand-tier--local">
+        <p class="brand-tier__lab brand-tier__lab--local">Local · awareness + foot traffic</p>
+        <div class="brand-grid brand-grid--tier">
+          <figure class="brand-tile brand-tile--local">
+            <img src="assets/brand-storm-burger.jpg" alt="Storm Burger collaboration" />
+            <figcaption>
+              <span class="brand-num">03 · ◉ Local</span>
+              <span class="brand-name">Storm Burger</span>
+              <span class="brand-stat">420K+ views</span>
+            </figcaption>
+          </figure>
+          <figure class="brand-tile brand-tile--local">
+            <img src="assets/brand-baqba.jpg" alt="Baqba Mexican Grill collaboration" />
+            <figcaption>
+              <span class="brand-num">04 · ◉ Local</span>
+              <span class="brand-name">Baqba Mexican Grill</span>
+              <span class="brand-stat">100K+ views</span>
+            </figcaption>
+          </figure>
+        </div>
       </div>
 
       <div class="section-rule"><span>Ideal brand categories</span></div>
@@ -2714,7 +2759,7 @@
           <figcaption>
             <span class="brand-num">04</span>
             <span class="brand-name">Baqba Mexican</span>
-            <span class="brand-stat">52K views</span>
+            <span class="brand-stat">100K+ views</span>
           </figcaption>
         </figure>
       </div>

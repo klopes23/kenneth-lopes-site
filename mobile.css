@@ -164,10 +164,17 @@
   .cs-link { -webkit-tap-highlight-color: transparent; }
   .cs-link:active { transform: scale(0.985); transition: transform 0.08s; }
 
-  /* CS03 line chart: pull "Adoption Phase ↓" down so it sits near the
-     graph peaks instead of floating up by the date label. Peaks render
-     around the upper third of the chart area on mobile. */
-  .cs03-meta .cs03-adopt { margin-top: 90px !important; }
+  /* CS03 v2 redesign (handoff §12) hides .cs03-meta entirely — old
+     'Adoption Phase' margin nudge is obsolete. The inline SVG label
+     inside the shaded region is positioned in viewBox coordinates so it
+     scales with the chart on mobile automatically. */
+  .cs03-peak-callout {
+    top: 6px !important;
+    right: 6% !important;
+    font-size: 8px !important;
+    padding: 3px 7px !important;
+    letter-spacing: 0.16em !important;
+  }
 
   /* CS05 GTM funnel: on desktop the rows use margin-top:auto + translateY
      to anchor at card bottom. On mobile the card grows tall and that
@@ -683,6 +690,9 @@
   }
   /* 5 tiles → make the 5th span both columns so the row isn't lopsided */
   .credentials .cert-tile:nth-child(5):nth-last-child(1) { grid-column: 1 / -1; }
+  /* 3 tiles (after credentials reorg) → 3rd tile spans full width as a
+     bottom rectangular row instead of sitting alone in column 1. */
+  .credentials .cert-grid--primary .cert-tile:nth-child(3):nth-last-child(1) { grid-column: 1 / -1; }
   .credentials .cert-icon {
     width: 32px !important; height: 32px !important;
     border-radius: 50% !important;
@@ -1397,6 +1407,30 @@
     font-family: 'JetBrains Mono', monospace; font-size: 10px;
     letter-spacing: 0.06em; color: rgba(255,255,255,0.78);
   }
+
+  /* Tier labels above each brand grid block (handoff §11) */
+  body[data-creator="true"] .km-brand-tier-lab {
+    font-family: 'JetBrains Mono', monospace; font-weight: 600;
+    font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--kc-muted);
+    margin: 18px 0 10px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  body[data-creator="true"] .km-brand-tier-lab:first-of-type { margin-top: 0; }
+  body[data-creator="true"] .km-brand-tier-lab::before {
+    content: ''; width: 7px; height: 7px; border-radius: 50%;
+  }
+  body[data-creator="true"] .km-brand-tier-lab--national::before { background: var(--kc-accent); }
+  body[data-creator="true"] .km-brand-tier-lab--local::before    { background: var(--kc-accent2); }
+
+  /* Tier-tinted bottom border so the tile carries the tier signal even
+     with the dark photo overlay */
+  body[data-creator="true"] .km-bcard--national { border-bottom: 4px solid var(--kc-accent); }
+  body[data-creator="true"] .km-bcard--local    { border-bottom: 4px solid var(--kc-accent2); }
+  body[data-creator="true"] .km-bcard--national:active,
+  body[data-creator="true"] .km-bcard--national:hover { box-shadow: 8px 8px 0 var(--kc-accent); }
+  body[data-creator="true"] .km-bcard--local:active,
+  body[data-creator="true"] .km-bcard--local:hover    { box-shadow: 8px 8px 0 var(--kc-accent2); }
 
   /* ── 05 · OFFER — clean numbered list with right-aligned tag ── */
   body[data-creator="true"] .km-offer-list {
