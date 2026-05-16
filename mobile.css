@@ -164,15 +164,20 @@
   .cs-link { -webkit-tap-highlight-color: transparent; }
   .cs-link:active { transform: scale(0.985); transition: transform 0.08s; }
 
-  /* CS03 v2 redesign (handoff §12) hides .cs03-meta entirely — old
-     'Adoption Phase' margin nudge is obsolete. The inline SVG label
-     inside the shaded region is positioned in viewBox coordinates so it
-     scales with the chart on mobile automatically. */
+  /* CS03 v2 redesign (handoff §12): both adoption label and +193% WAU
+     pill are HTML overlays so they stay aligned. Adoption label sits
+     above the pill, both inside the shaded region. */
   .cs03-peak-callout {
-    top: 6px !important;
+    top: 22px !important;
     right: 6% !important;
+    font-size: 7.5px !important;
+    padding: 3px 6px !important;
+    letter-spacing: 0.16em !important;
+  }
+  .cs03-adopt-label {
+    top: 4px !important;
+    left: 64% !important;
     font-size: 8px !important;
-    padding: 3px 7px !important;
     letter-spacing: 0.16em !important;
   }
 
