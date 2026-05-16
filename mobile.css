@@ -1362,14 +1362,16 @@
     text-transform: none;
   }
 
-  /* ── 04 · BRANDS — 2×2 portrait image cards w/ overlay text ── */
+  /* ── 04 · BRANDS — V3: photo on top + colored caption strip below
+     (matches desktop design + design reference in CS03+Brands V3 mockup) */
   body[data-creator="true"] .km-brand-grid {
     list-style: none; margin: 0; padding: 0;
     display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
   }
   body[data-creator="true"] .km-bcard {
-    position: relative; aspect-ratio: 4/5; overflow: hidden;
-    background: var(--kc-ink);
+    position: relative; overflow: hidden;
+    background: var(--kc-bg-2);
+    display: flex; flex-direction: column;
     /* v4 (site-consistency-v1): tap/hover border animation */
     transition: transform 0.28s ease, box-shadow 0.28s ease;
     -webkit-tap-highlight-color: transparent;
@@ -1380,31 +1382,34 @@
     box-shadow: 8px 8px 0 var(--kc-accent);
   }
   body[data-creator="true"] .km-bcard img {
-    position: absolute; inset: 0; width: 100%; height: 100%;
+    width: 100%; aspect-ratio: 1/1;
     object-fit: cover; object-position: center;
+    display: block;
   }
-  body[data-creator="true"] .km-bcard-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(20,12,8,0.86) 0%, rgba(20,12,8,0.10) 50%, transparent 100%);
-    pointer-events: none;
-  }
+  /* Overlay is intentionally removed in the V3 design — caption strip
+     carries the brand info, photo stays untouched. */
+  body[data-creator="true"] .km-bcard-overlay { display: none !important; }
   body[data-creator="true"] .km-bcard-text {
-    position: absolute; left: 14px; right: 14px; bottom: 14px;
-    color: #fff; display: flex; flex-direction: column; gap: 2px;
+    padding: 12px 14px 14px;
+    display: flex; flex-direction: column; gap: 2px;
   }
   body[data-creator="true"] .km-bcard-num {
     font-family: 'JetBrains Mono', monospace; font-size: 9px;
-    font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
     color: rgba(255,255,255,0.78);
   }
   body[data-creator="true"] .km-bcard-name {
-    font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 500;
-    letter-spacing: -0.015em; color: #fff; line-height: 1.1;
+    font-family: 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 500;
+    letter-spacing: -0.015em; color: #fff; line-height: 1.15;
   }
   body[data-creator="true"] .km-bcard-stat {
     font-family: 'JetBrains Mono', monospace; font-size: 10px;
-    letter-spacing: 0.06em; color: rgba(255,255,255,0.78);
+    letter-spacing: 0.04em; color: rgba(255,255,255,0.78);
+    margin-top: 2px;
   }
+  /* Tier-tinted caption strips — terracotta for national, peach for local */
+  body[data-creator="true"] .km-bcard--national .km-bcard-text { background: var(--kc-accent); }
+  body[data-creator="true"] .km-bcard--local    .km-bcard-text { background: var(--kc-accent2); }
 
   /* Tier labels above each brand grid block (handoff §11) */
   body[data-creator="true"] .km-brand-tier-lab {
@@ -1421,12 +1426,7 @@
   body[data-creator="true"] .km-brand-tier-lab--national::before { background: var(--kc-accent); }
   body[data-creator="true"] .km-brand-tier-lab--local::before    { background: var(--kc-accent2); }
 
-  /* Tier-tinted bottom border so the tile carries the tier signal even
-     with the dark photo overlay */
-  body[data-creator="true"] .km-bcard--national { border-bottom: 4px solid var(--kc-accent); }
-  body[data-creator="true"] .km-bcard--local    { border-bottom: 4px solid var(--kc-accent2); }
-  body[data-creator="true"] .km-bcard--national:active,
-  body[data-creator="true"] .km-bcard--national:hover { box-shadow: 8px 8px 0 var(--kc-accent); }
+  /* Local tier hover keeps peach shadow (matches the local caption strip color) */
   body[data-creator="true"] .km-bcard--local:active,
   body[data-creator="true"] .km-bcard--local:hover    { box-shadow: 8px 8px 0 var(--kc-accent2); }
 
