@@ -53,6 +53,10 @@
     gap: 12px !important;
   }
   .topnav-brand { font-size: 11px !important; grid-row: 1; grid-column: 1; }
+  /* v4: nav-pill (A/Work, B/Creator) hidden on mobile — palette signal is a
+     desktop affordance; on mobile the tight topnav doesn't have room and
+     the pill adds clutter without payoff. */
+  .topnav-brand .nav-pill { display: none !important; }
   /* Hamburger (injected by mobile.js) sits inline at the right */
   .m-menu-btn { grid-row: 1; grid-column: 3; }
   /* Nav links sit inline between brand and hamburger */
