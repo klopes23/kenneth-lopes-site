@@ -1,0 +1,330 @@
+/* tokens.css — shared design tokens for kennethlopes.com
+   Drop into every page (link before page-specific styles). One source of truth
+   for type scale, stat-card variants, image standards, palette pills.
+
+   Two palettes coexist (pro + creator). Pages declare which one they're on
+   via <body data-palette="pro"> or <body data-palette="creator">. Defaults to pro. */
+
+:root {
+  /* ────────── Type ────────── */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-italic:  'Instrument Serif', Georgia, serif;
+  --font-body:    'Inter Tight', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  /* Three display tiers — used EVERYWHERE on every page */
+  --display-hero:    clamp(60px, 8.5vw, 110px);   /* page H1: portfolio, media kit, experience */
+  --display-section: clamp(36px, 4.5vw, 56px);    /* section H2: "Selected work", "Where the audience lives" */
+  --display-card:    clamp(22px, 2.2vw, 28px);    /* card H3: case study titles, pillar titles, role titles */
+
+  /* Letter spacing per tier */
+  --ls-hero: -0.04em;
+  --ls-section: -0.03em;
+  --ls-card: -0.02em;
+
+  /* Line height per tier */
+  --lh-hero: 0.92;
+  --lh-section: 1;
+  --lh-card: 1.05;
+
+  /* Mono kicker — stays the same everywhere */
+  --mono-kicker-size: 10px;
+  --mono-kicker-track: 0.22em;
+
+  /* ────────── Palette · Pro (default) ────────── */
+  --bg:       #F2EBDA;
+  --bg-2:     #E8E0CC;
+  --cream:    #FAF6EA;
+  --ink:      #1B2A1B;
+  --ink-2:    #3A4A3A;
+  --muted:    #7A8A7A;
+  --line:     rgba(27,42,27,0.14);
+  --accent:   #C76F3D;   /* terracotta */
+  --accent-2: #5E7030;   /* olive — shadow color */
+  --forest:   #2D4A2B;
+  --pop:      #D9B65A;   /* mustard */
+  --on-ink:   #F2EBDA;
+}
+
+body[data-palette="creator"] {
+  --bg:       #F4ECDD;
+  --bg-2:     #EAD9BD;
+  --cream:    #FBF5E8;
+  --ink:      #2A1A12;
+  --ink-2:    #4A2E20;
+  --muted:    #6B5648;
+  --line:     rgba(42,26,18,0.16);
+  --accent:   #C25A2E;   /* terracotta-creator */
+  --accent-2: #E8985A;   /* peach — shadow color */
+  --forest:   #4A5F2E;   /* used sparingly on creator side */
+  --pop:      #D9B65A;
+  --on-ink:   #FBF5E8;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FIX 1 · Type system
+   Use these classes (or copy the rules) instead of bespoke font-size on each page.
+   ════════════════════════════════════════════════════════════════ */
+.t-hero {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+  color: var(--ink);
+  margin: 0;
+}
+.t-hero em {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.t-section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--display-section);
+  line-height: var(--lh-section);
+  letter-spacing: var(--ls-section);
+  color: var(--ink);
+  margin: 0;
+}
+.t-section em {
+  font-family: var(--font-italic);
+  font-style: italic;
+  color: var(--accent);
+}
+.t-card {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--display-card);
+  line-height: var(--lh-card);
+  letter-spacing: var(--ls-card);
+  color: var(--ink);
+  margin: 0;
+}
+.t-kicker {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: var(--mono-kicker-size);
+  letter-spacing: var(--mono-kicker-track);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.t-tagline {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: clamp(16px, 1.6vw, 22px);
+  line-height: 1.4;
+  color: var(--ink-2);
+  text-wrap: balance;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FIX 2 · Stat card system — hero / card / chip
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Hero (1 per page) ── */
+.stat-hero {
+  background: var(--ink);
+  color: var(--on-ink);
+  padding: 22px 20px;
+}
+.stat-hero .lab {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.stat-hero .num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(48px, 6vw, 64px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+.stat-hero .num em {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--pop);
+  margin-left: 2px;
+}
+.stat-hero .sub {
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ── Card (3–8 per row) ── */
+.stat-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  padding: 16px 14px;
+}
+.stat-card .lab {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.stat-card .num {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.stat-card .sub {
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Variants of stat-card */
+.stat-card--accent  { background: var(--accent);  color: #fff; border: none; }
+.stat-card--olive   { background: var(--accent-2); color: #fff; border: none; }
+.stat-card--ink     { background: var(--ink);     color: var(--on-ink); border: none; }
+.stat-card--accent .lab,
+.stat-card--olive  .lab,
+.stat-card--ink    .lab { color: rgba(255,255,255,0.78); }
+.stat-card--ink    .lab { color: var(--pop); }
+.stat-card--accent .num,
+.stat-card--olive  .num,
+.stat-card--ink    .num { color: inherit; }
+
+/* ── Chip (tightest density) ── */
+.stat-chip {
+  background: var(--bg-2);
+  padding: 12px 10px;
+  text-align: center;
+}
+.stat-chip .num {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.stat-chip .lab {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FIX 3 · Image standard — palette-stepped border + shadow block
+   ════════════════════════════════════════════════════════════════ */
+.img-frame {
+  position: relative;
+  display: block;
+}
+.img-frame::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--accent-2);   /* shadow color = palette accent-2 */
+  transform: translate(6px, 6px);
+  z-index: 0;
+  transition: transform 0.35s ease;
+}
+.img-frame__inner {
+  position: relative; z-index: 1;
+  border: 1.5px solid var(--ink); /* border = palette ink */
+  background: var(--bg-2);
+  overflow: hidden;
+}
+.img-frame__inner img,
+.img-frame__inner picture {
+  width: 100%; height: 100%; display: block; object-fit: cover;
+}
+.img-frame:hover::before { transform: translate(10px, 10px); }
+
+/* ════════════════════════════════════════════════════════════════
+   FIX 4 · Topnav palette signal
+   ════════════════════════════════════════════════════════════════ */
+body[data-palette="pro"] .topnav { background: var(--bg); }
+body[data-palette="creator"] .topnav {
+  background: var(--cream);
+  border-bottom-color: var(--line);
+}
+
+.nav-pill {
+  display: inline-block; margin-left: 10px;
+  padding: 4px 9px;
+  font-family: var(--font-mono); font-weight: 600;
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  border-radius: 0;
+}
+body[data-palette="pro"] .nav-pill     { background: rgba(45,74,43,0.08);  color: var(--forest); }
+body[data-palette="creator"] .nav-pill { background: rgba(194,90,46,0.12); color: var(--accent); }
+
+/* Active link picks up palette accent */
+body[data-palette="pro"]     .topnav-link.is-active { color: var(--forest); }
+body[data-palette="creator"] .topnav-link.is-active { color: var(--accent); }
+
+/* CTA on creator pages becomes brown-on-cream */
+body[data-palette="creator"] .topnav-cta {
+  border-color: var(--ink); color: var(--ink);
+}
+body[data-palette="creator"] .topnav-cta:hover {
+  background: var(--ink); color: var(--cream);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FIX 5 · Cross-page CTA pair
+   Use at every terminal page (deck slide 7, media kit footer, last case study).
+   ════════════════════════════════════════════════════════════════ */
+.cta-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 32px;
+}
+.cta-card {
+  padding: 22px 24px;
+  display: flex; flex-direction: column; gap: 6px;
+  text-decoration: none;
+}
+.cta-card .lab {
+  font-family: var(--font-mono); font-weight: 600;
+  font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+}
+.cta-card .title {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(20px, 2.2vw, 26px);
+  letter-spacing: -0.02em; line-height: 1.05;
+}
+.cta-card .title em {
+  font-family: var(--font-italic); font-style: italic;
+}
+.cta-card--pro {
+  background: #2D4A2B; color: #F2EBDA;
+}
+.cta-card--pro .lab { color: #D9B65A; }
+.cta-card--pro .title em { color: #D9B65A; }
+.cta-card--creator {
+  background: #2A1A12; color: #FBF5E8;
+}
+.cta-card--creator .lab { color: #E8985A; }
+.cta-card--creator .title em { color: #E8985A; }
+
+@media (max-width: 768px) {
+  .cta-pair { grid-template-columns: 1fr; }
+}

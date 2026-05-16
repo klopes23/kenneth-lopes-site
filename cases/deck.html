@@ -6,6 +6,7 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <title>Case Study Deck — Kenneth Lopes</title>
+  <link rel="stylesheet" href="/tokens.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#F2EBDA" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -305,7 +306,7 @@
     }
   </style>
 </head>
-<body data-deck="true">
+<body data-palette="pro" data-deck="true">
   <div id="root"></div>
   <!-- v4 mobile branch — canonical handoff inlined (deck-mobile-shared.jsx + deck-mobile.jsx)
        Wrapped in IIFE so internal SLIDE_COMPONENTS / DECK_SLIDES don't collide with the desktop deck.
@@ -1710,6 +1711,39 @@ function S7_Creator({ slide, total }) {
         ))}
       </div>
       <CarouselDots trackRef={platTrackRef} count={platforms.length} />
+
+      {/* v4 (site-consistency-v1): cross-page CTA pair at terminal slide */}
+      <div style={{
+        marginTop: 28,
+        display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12,
+      }}>
+        <a href="../portfolio.html#work" style={{
+          padding: '20px 22px', background: '#2D4A2B', color: '#F2EBDA',
+          textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 6,
+        }}>
+          <span style={{
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+            letterSpacing: '0.22em', textTransform: 'uppercase', color: '#D9B65A',
+          }}>← Back to work</span>
+          <span style={{
+            fontFamily: MS_FONT.display, fontWeight: 400, fontSize: 22,
+            letterSpacing: '-0.02em', lineHeight: 1.05,
+          }}><em style={{ fontFamily: MS_FONT.italic, fontStyle: 'italic', color: '#D9B65A' }}>Portfolio.</em></span>
+        </a>
+        <a href="../media-kit.html" style={{
+          padding: '20px 22px', background: '#2A1A12', color: '#FBF5E8',
+          textDecoration: 'none', display: 'flex', flexDirection: 'column', gap: 6,
+        }}>
+          <span style={{
+            fontFamily: MS_FONT.mono, fontWeight: 600, fontSize: 9.5,
+            letterSpacing: '0.22em', textTransform: 'uppercase', color: '#E8985A',
+          }}>↗ See the brand</span>
+          <span style={{
+            fontFamily: MS_FONT.display, fontWeight: 400, fontSize: 22,
+            letterSpacing: '-0.02em', lineHeight: 1.05,
+          }}><em style={{ fontFamily: MS_FONT.italic, fontStyle: 'italic', color: '#E8985A' }}>Media Kit.</em></span>
+        </a>
+      </div>
     </SlideShell>
   );
 }
