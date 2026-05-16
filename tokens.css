@@ -284,12 +284,18 @@ body[data-palette="creator"] .nav-pill { background: rgba(194,90,46,0.12); color
 body[data-palette="pro"]     .topnav-link.is-active { color: var(--forest); }
 body[data-palette="creator"] .topnav-link.is-active { color: var(--accent); }
 
-/* CTA on creator pages becomes brown-on-cream */
+/* CTA on creator pages becomes brown-on-cream (inverse of pro: dark-on-cream).
+   Need to override background too — page-level .topnav-cta sets background:
+   var(--ink) which makes text invisible without this. */
 body[data-palette="creator"] .topnav-cta {
-  border-color: var(--ink); color: var(--ink);
+  background: var(--cream) !important;
+  color: var(--ink) !important;
+  border: 1.5px solid var(--ink) !important;
 }
 body[data-palette="creator"] .topnav-cta:hover {
-  background: var(--ink); color: var(--cream);
+  background: var(--ink) !important;
+  color: var(--cream) !important;
+  border-color: var(--ink) !important;
 }
 
 /* ════════════════════════════════════════════════════════════════
