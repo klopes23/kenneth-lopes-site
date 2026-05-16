@@ -837,6 +837,12 @@
     margin: 0; background: var(--bg-2);
     border: 1px solid var(--line);
     overflow: hidden; display: flex; flex-direction: column;
+    /* v4: hover border animation (mirrors hero photo + stat tile pattern) */
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .brand-tile:hover {
+    transform: translate(-6px, -6px);
+    box-shadow: 12px 12px 0 var(--accent);
   }
   .brand-tile img {
     width: 100%; aspect-ratio: 1/1;
@@ -1558,6 +1564,8 @@
     .hero-download,
     .km-hero-download,
     .hero-photo,
+    .cta-pair,
+    .km-cta-pair,
     #content,
     #contact,
     .contact,
