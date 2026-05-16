@@ -865,9 +865,19 @@
     letter-spacing: 0.04em; color: var(--muted); margin-top: 2px;
   }
 
-  /* Tier differentiation — national vs local brand collabs (handoff §11) */
-  .brand-tier { margin-top: 32px; }
-  .brand-tier:first-of-type { margin-top: 0; }
+  /* Tier differentiation — national vs local brand collabs (handoff §11)
+     Two tiers sit side-by-side on desktop so all 4 tiles read as one
+     row, with the tier label above each pair. */
+  .brand-tier-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .brand-tier { margin: 0; }
+  /* Tablet: stack the two tiers vertically so tiles don't get cramped */
+  @media (max-width: 900px) and (min-width: 769px) {
+    .brand-tier-row { grid-template-columns: 1fr; gap: 28px; }
+  }
   .brand-tier__lab {
     font-family: var(--font-mono);
     font-size: 10px; font-weight: 600;
@@ -882,12 +892,12 @@
   .brand-tier__lab--national::before { background: var(--accent); }
   .brand-tier__lab--local::before    { background: var(--accent-2); }
 
-  /* Tier grids hold 2 tiles each — cap tile width so the brand photos
-     read at the same compact scale as the other case-study card images
-     instead of sprawling to half the section width. */
+  /* Tier grids hold 2 tiles each inside their half of the brand-tier-row.
+     1fr columns means tiles fill each tier's half evenly → 4 tiles in
+     one row across the full section. */
   .brand-grid--tier {
-    grid-template-columns: repeat(2, minmax(0, 17rem));
-    gap: 18px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
 
   /* Colored caption strip per tier — image stays untouched */
@@ -2375,46 +2385,48 @@
         </div>
       </div>
 
-      <div class="brand-tier brand-tier--national">
-        <p class="brand-tier__lab brand-tier__lab--national">National · awareness at scale</p>
-        <div class="brand-grid brand-grid--tier">
-          <figure class="brand-tile brand-tile--national">
-            <img src="assets/brand-dominos.jpg" alt="Domino's collaboration" />
-            <figcaption>
-              <span class="brand-num">01 · ↗ National</span>
-              <span class="brand-name">Domino's</span>
-              <span class="brand-stat">200K+ views</span>
-            </figcaption>
-          </figure>
-          <figure class="brand-tile brand-tile--national">
-            <img src="assets/brand-shake-shack.jpg" alt="Shake Shack collaboration" />
-            <figcaption>
-              <span class="brand-num">02 · ↗ National</span>
-              <span class="brand-name">Shake Shack</span>
-              <span class="brand-stat">300K+ views</span>
-            </figcaption>
-          </figure>
+      <div class="brand-tier-row">
+        <div class="brand-tier brand-tier--national">
+          <p class="brand-tier__lab brand-tier__lab--national">National · awareness at scale</p>
+          <div class="brand-grid brand-grid--tier">
+            <figure class="brand-tile brand-tile--national">
+              <img src="assets/brand-dominos.jpg" alt="Domino's collaboration" />
+              <figcaption>
+                <span class="brand-num">01 · ↗ National</span>
+                <span class="brand-name">Domino's</span>
+                <span class="brand-stat">200K+ views</span>
+              </figcaption>
+            </figure>
+            <figure class="brand-tile brand-tile--national">
+              <img src="assets/brand-shake-shack.jpg" alt="Shake Shack collaboration" />
+              <figcaption>
+                <span class="brand-num">02 · ↗ National</span>
+                <span class="brand-name">Shake Shack</span>
+                <span class="brand-stat">300K+ views</span>
+              </figcaption>
+            </figure>
+          </div>
         </div>
-      </div>
-      <div class="brand-tier brand-tier--local">
-        <p class="brand-tier__lab brand-tier__lab--local">Local · awareness + foot traffic</p>
-        <div class="brand-grid brand-grid--tier">
-          <figure class="brand-tile brand-tile--local">
-            <img src="assets/brand-storm-burger.jpg" alt="Storm Burger collaboration" />
-            <figcaption>
-              <span class="brand-num">03 · ◉ Local</span>
-              <span class="brand-name">Storm Burger</span>
-              <span class="brand-stat">420K+ views</span>
-            </figcaption>
-          </figure>
-          <figure class="brand-tile brand-tile--local">
-            <img src="assets/brand-baqba.jpg" alt="Baqba Mexican Grill collaboration" />
-            <figcaption>
-              <span class="brand-num">04 · ◉ Local</span>
-              <span class="brand-name">Baqba Mexican Grill</span>
-              <span class="brand-stat">100K+ views</span>
-            </figcaption>
-          </figure>
+        <div class="brand-tier brand-tier--local">
+          <p class="brand-tier__lab brand-tier__lab--local">Local · awareness + foot traffic</p>
+          <div class="brand-grid brand-grid--tier">
+            <figure class="brand-tile brand-tile--local">
+              <img src="assets/brand-storm-burger.jpg" alt="Storm Burger collaboration" />
+              <figcaption>
+                <span class="brand-num">03 · ◉ Local</span>
+                <span class="brand-name">Storm Burger</span>
+                <span class="brand-stat">420K+ views</span>
+              </figcaption>
+            </figure>
+            <figure class="brand-tile brand-tile--local">
+              <img src="assets/brand-baqba.jpg" alt="Baqba Mexican Grill collaboration" />
+              <figcaption>
+                <span class="brand-num">04 · ◉ Local</span>
+                <span class="brand-name">Baqba Mexican Grill</span>
+                <span class="brand-stat">100K+ views</span>
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </div>
 
