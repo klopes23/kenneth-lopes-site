@@ -1483,6 +1483,12 @@
     border: 1px solid rgba(244,236,221,0.18);
     transition: transform 0.28s ease, box-shadow 0.28s ease;
   }
+  /* Second CTA (Open the deck / Case Studies) reads right-aligned on
+     mobile so the visual rhythm goes Back ← / → Forward */
+  body[data-creator="true"] .km-cta-pair .cta-card--creator {
+    text-align: right;
+    align-items: flex-end;
+  }
   body[data-creator="true"] .km-cta-pair .cta-card:active,
   body[data-creator="true"] .km-cta-pair .cta-card:hover {
     transform: translate(-4px, -4px);
@@ -1657,6 +1663,12 @@
     font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
     letter-spacing: 0.06em; color: rgba(244,236,221,0.55);
     text-transform: lowercase;
+    margin-top: 4px;
+  }
+  body[data-creator="true"] .km-foot-loc {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(244,236,221,0.45);
     margin-top: 4px;
   }
 
