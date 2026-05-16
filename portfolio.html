@@ -654,7 +654,7 @@
       color: var(--ink);
     }
     .line-chart-title em { font-family: var(--font-italic); font-style: italic; }
-    .cs03-chart-area { flex: 1; margin-top: 12px; position: relative; }
+    .cs03-chart-area { flex: 1; margin-top: 12px; position: relative; overflow: visible; }
     .cs03-num-badge {
       position: absolute; bottom: 24px; right: 24px; z-index: 2;
       font-family: var(--font-mono); font-size: 10px;
@@ -683,7 +683,7 @@
     }
     .cs03-head strong { font-weight: 600; color: var(--ink); }
     .cs03-peak-callout {
-      position: absolute; top: 28px; right: 6%;
+      position: absolute; top: 8px; right: 6%;
       z-index: 3;
       padding: 4px 9px;
       background: var(--forest, #2D4A2B); color: var(--bg);
@@ -692,9 +692,11 @@
     }
     /* Adoption-phase label sits a hair above the +193% WAU pill, both
        inside the shaded region. HTML overlay so it stays in sync with
-       the callout via CSS instead of fighting SVG viewBox coords. */
+       the callout via CSS instead of fighting SVG viewBox coords.
+       Negative top overflows upward into the title gutter — kept
+       intentionally so labels read higher in the chart. */
     .cs03-adopt-label {
-      position: absolute; top: 6px; left: 67%;
+      position: absolute; top: -14px; left: 67%;
       z-index: 3;
       font-family: var(--font-mono); font-weight: 600;
       font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
