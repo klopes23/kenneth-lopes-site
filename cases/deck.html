@@ -1569,11 +1569,11 @@ function S7_Creator({ slide, total }) {
   const platTrackRef = dUseRef(null);
   const platforms = [
     // v4: per-platform caption box uses fg (text/border) + tint (fill) for an opaque branded card
-    { name:'TikTok',    count:'650K', accent:'#FF0050', fg:'#FFFFFF', tint:'#FF0050', img:'../assets/TT.jpg' },
-    { name:'Instagram', count:'65K',  accent:'#E1306C', fg:'#FFFFFF', tint:'#E1306C', img:'../assets/IG.jpg' },
-    { name:'Snapchat',  count:'60K',  accent:'#FFFC00', fg:'#1B2A1B', tint:'#FFFC00', img:'../assets/Snap.jpg' },
-    { name:'YouTube',   count:'32K',  accent:'#FF0000', fg:'#FFFFFF', tint:'#FF0000', img:'../assets/YT.jpg' },
-    { name:'Facebook',  count:'30K',  accent:'#1877F2', fg:'#FFFFFF', tint:'#1877F2', img:'../assets/Facebook.jpg' },
+    { name:'TikTok',    count:'650K', accent:'#FF0050', fg:'#FFFFFF', tint:'#FF0050', img:'../assets/TT.jpg',       href:'https://www.tiktok.com/@nesimento_' },
+    { name:'Instagram', count:'65K',  accent:'#E1306C', fg:'#FFFFFF', tint:'#E1306C', img:'../assets/IG.jpg',       href:'https://www.instagram.com/nesimento' },
+    { name:'Snapchat',  count:'60K',  accent:'#FFFC00', fg:'#1B2A1B', tint:'#FFFC00', img:'../assets/Snap.jpg',     href:'https://www.snapchat.com/add/nesimento' },
+    { name:'YouTube',   count:'32K',  accent:'#FF0000', fg:'#FFFFFF', tint:'#FF0000', img:'../assets/YT.jpg',       href:'https://www.youtube.com/@thenesifamily' },
+    { name:'Facebook',  count:'30K',  accent:'#1877F2', fg:'#FFFFFF', tint:'#1877F2', img:'../assets/Facebook.jpg', href:'https://www.facebook.com/nesimento' },
   ];
   return (
     <SlideShell slide={slide} total={total}>
@@ -1654,9 +1654,12 @@ function S7_Creator({ slide, total }) {
         marginLeft: -22, marginRight: -22, padding: '8px 22px 4px',
       }}>
         {platforms.map((p) => (
-          <div key={p.name} style={{
+          <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer"
+             aria-label={`${p.name} — ${p.count} followers`} style={{
             scrollSnapAlign: 'start', flex: '0 0 auto',
             display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+            textDecoration: 'none', color: 'inherit',
+            WebkitTapHighlightColor: 'transparent',
           }}>
             {/* iPhone frame */}
             <div style={{
@@ -1707,7 +1710,7 @@ function S7_Creator({ slide, total }) {
                 color: p.fg, lineHeight: 1,
               }}>{p.count}</div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
       <CarouselDots trackRef={platTrackRef} count={platforms.length} />
@@ -2402,11 +2405,11 @@ window.DeckSlideStatic = DeckSlideStatic;
 
     function Slide3() {
       const platforms = [
-        { name:'TikTok',    handle:'650K Followers', img:'../assets/TT.jpg?v=4',       accent:'#1B2A1B', tint:'rgba(27,42,27,0.06)',   stats:[['Views','44M'],['Likes','2.3M'],['Shares','42K']] },
-        { name:'Instagram', handle:'65K Followers',  img:'../assets/IG.jpg?v=4',       accent:'#C76F3D', tint:'rgba(199,111,61,0.10)', stats:[['Views','9.3M'],['Engag','585K'],['Saves','42K']] },
-        { name:'Snapchat',  handle:'60K Followers',  img:'../assets/Snap.jpg?v=4',     accent:'#B8932F', tint:'rgba(217,182,90,0.18)', stats:[['Views','9.1M'],['Faves','33.6K'],['Shares','2.7K']] },
-        { name:'YouTube',   handle:'32K Subs',       img:'../assets/YT.jpg?v=4',       accent:'#C25A2E', tint:'rgba(194,90,46,0.10)',  stats:[['Views','397K'],['Watch','54%'],['New Aud','89%']] },
-        { name:'Facebook',  handle:'30K Followers',  img:'../assets/Facebook.jpg?v=4', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',   stats:[['Views','3.1M'],['1-min','785K'],['Reach','1.4M']] },
+        { name:'TikTok',    handle:'650K Followers', img:'../assets/TT.jpg?v=4',       accent:'#1B2A1B', tint:'rgba(27,42,27,0.06)',   stats:[['Views','44M'],['Likes','2.3M'],['Shares','42K']],  href:'https://www.tiktok.com/@nesimento_' },
+        { name:'Instagram', handle:'65K Followers',  img:'../assets/IG.jpg?v=4',       accent:'#C76F3D', tint:'rgba(199,111,61,0.10)', stats:[['Views','9.3M'],['Engag','585K'],['Saves','42K']], href:'https://www.instagram.com/nesimento' },
+        { name:'Snapchat',  handle:'60K Followers',  img:'../assets/Snap.jpg?v=4',     accent:'#B8932F', tint:'rgba(217,182,90,0.18)', stats:[['Views','9.1M'],['Faves','33.6K'],['Shares','2.7K']], href:'https://www.snapchat.com/add/nesimento' },
+        { name:'YouTube',   handle:'32K Subs',       img:'../assets/YT.jpg?v=4',       accent:'#C25A2E', tint:'rgba(194,90,46,0.10)',  stats:[['Views','397K'],['Watch','54%'],['New Aud','89%']], href:'https://www.youtube.com/@thenesifamily' },
+        { name:'Facebook',  handle:'30K Followers',  img:'../assets/Facebook.jpg?v=4', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',   stats:[['Views','3.1M'],['1-min','785K'],['Reach','1.4M']], href:'https://www.facebook.com/nesimento' },
       ];
       const strategies = [
         { title:'Engagement Loops', body:'Active commenting, replies, participation rituals to build community', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',
@@ -2451,7 +2454,9 @@ window.DeckSlideStatic = DeckSlideStatic;
             {/* Phone row */}
             <div className="grid grid-cols-5 gap-3 flex-1 min-h-0">
               {platforms.map((p,i) => (
-                <div key={p.name} className="flex flex-col items-center min-h-0">
+                <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer"
+                   aria-label={`${p.name} — ${p.handle}`}
+                   className="flex flex-col items-center min-h-0 no-underline text-inherit transition-transform hover:-translate-y-1">
                   {/* Phone frame */}
                   <div className="relative bg-[#1B2A1B] rounded-[1.8rem] p-1.5 shadow-xl flex-1 min-h-0 max-h-full flex items-center">
                     <div className="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-3 bg-[#1B2A1B] rounded-b-2xl z-10"/>
@@ -2473,7 +2478,7 @@ window.DeckSlideStatic = DeckSlideStatic;
                       </div>
                     ))}
                   </div>
-                </div>
+                </a>
               ))}
             </div>
 
