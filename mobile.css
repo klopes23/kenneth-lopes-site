@@ -164,6 +164,20 @@
   .cs-link { -webkit-tap-highlight-color: transparent; }
   .cs-link:active { transform: scale(0.985); transition: transform 0.08s; }
 
+  /* CS03 line chart: pull "Adoption Phase ↓" down so it sits near the
+     graph peaks instead of floating up by the date label. Peaks render
+     around the upper third of the chart area on mobile. */
+  .cs03-meta .cs03-adopt { margin-top: 90px !important; }
+
+  /* CS05 GTM funnel: on desktop the rows use margin-top:auto + translateY
+     to anchor at card bottom. On mobile the card grows tall and that
+     pushes the funnel into a sea of empty space. Anchor it up under the
+     tag instead. */
+  .cs05-rows {
+    margin-top: 24px !important;
+    transform: none !important;
+  }
+
   /* Stat bars — full-width single column reads as iOS list */
   .stats-inner { border-radius: var(--m-radius); overflow: hidden; }
 

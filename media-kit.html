@@ -1533,8 +1533,10 @@
     .desktop-view {
       display: flex !important;
       flex-direction: column !important;
-      gap: 6px;
+      gap: 4px;
       max-width: 6.5in;
+      max-height: 9.4in;
+      overflow: hidden;
       margin: 0 auto;
     }
     /* exact colors so brand tiles + chips print as designed */
@@ -1673,7 +1675,7 @@
     /* keep images short so the row fits */
     .brand-tile img {
       aspect-ratio: 4 / 3 !important;
-      max-height: 1.05in !important;
+      max-height: 0.9in !important;
       object-fit: cover !important;
     }
     .brand-tile figcaption { padding: 6px 8px !important; }
@@ -1723,11 +1725,14 @@
        `html body[data-creator]` specificity (0,0,2,2) reliably wins over
        mobile.css's hide rule on .desktop-view (the clone has both classes). */
     html body[data-creator="true"] .print-bw-clone,
+    html body [data-print-clone="1"],
     .print-bw-clone {
       display: flex !important;
-      flex-direction: column;
-      gap: 6px;
+      flex-direction: column !important;
+      gap: 4px;
       max-width: 6.5in;
+      max-height: 9.4in;
+      overflow: hidden;
       margin: 0 auto;
       page-break-before: always;
       break-before: page;
@@ -1775,7 +1780,8 @@
     .desktop-view > * { page-break-inside: avoid; break-inside: avoid; }
   }
   /* Hide the clone everywhere on screen */
-  .print-bw-clone { display: none; }
+  .print-bw-clone,
+  [data-print-clone="1"] { display: none !important; }
 </style>
   <link rel="stylesheet" href="mobile.css" />
 </head>
@@ -2889,6 +2895,14 @@
       document.querySelectorAll('.print-bw-clone').forEach(function (n) { n.remove(); });
       var clone = src.cloneNode(true);
       clone.classList.add('print-bw-clone');
+      // Strip the .desktop-view class from the clone so mobile.css's
+      // `body[data-creator] .desktop-view { display: none }` rule doesn't fight
+      // our print rule on iOS. The print stylesheet targets .print-bw-clone
+      // directly for layout, so we don't lose anything by dropping it.
+      clone.classList.remove('desktop-view');
+      // Belt-and-suspenders: inline-style display:flex forces visibility in print
+      // regardless of any external CSS specificity quirks on iOS Safari.
+      clone.setAttribute('data-print-clone', '1');
       // Keep the IDs intact so the print stylesheet's #content / #contact /
       // #offer hide rules apply to the clone too. Browsers tolerate brief
       // duplicate IDs for visual rendering; the clone is GC'd on next click.
