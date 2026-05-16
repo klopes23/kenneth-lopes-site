@@ -18,14 +18,14 @@
 <meta property="og:url" content="https://kennethlopes.com/media-kit" />
 <meta property="og:title" content="Nesi Family — Media Kit" />
 <meta property="og:description" content="Father–son creator brand. 800K+ followers, 100M+ views across 5 platforms." />
-<meta property="og:image" content="https://kennethlopes.com/assets/IMG_4376.JPG" />
-<meta property="og:image:width" content="1800" />
-<meta property="og:image:height" content="2700" />
+<meta property="og:image" content="https://kennethlopes.com/assets/og-mediakit.jpg" />
+<meta property="og:image:width" content="592" />
+<meta property="og:image:height" content="666" />
 <meta property="og:image:alt" content="Kenneth Lopes and son — Nesi Family" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Nesi Family — Media Kit" />
 <meta name="twitter:description" content="Father–son creator brand. 800K+ followers, 100M+ views across 5 platforms." />
-<meta name="twitter:image" content="https://kennethlopes.com/assets/IMG_4376.JPG" />
+<meta name="twitter:image" content="https://kennethlopes.com/assets/og-mediakit.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -2846,20 +2846,29 @@
     function downloadMediaKitPDF() {
       var src = document.querySelector('.desktop-view');
       if (!src) { window.print(); return; }
-      // Remove any stale clone from a previous click that didn't get GC'd
+      // Wipe any stale clone from a previous click (safety net since we no
+      // longer auto-remove via setTimeout — iOS print preview can take 10+
+      // seconds to render and the old 8s cleanup was nuking page 2 mid-render).
       document.querySelectorAll('.print-bw-clone').forEach(function (n) { n.remove(); });
       var clone = src.cloneNode(true);
       clone.classList.add('print-bw-clone');
       // Keep the IDs intact so the print stylesheet's #content / #contact /
-      // #offer hide rules apply to the clone too (otherwise the B/W page
-      // overflows because pillars / contact / offer-table become visible).
-      // Browsers tolerate duplicate IDs for visual rendering, and the clone
-      // is removed after print.
+      // #offer hide rules apply to the clone too. Browsers tolerate brief
+      // duplicate IDs for visual rendering; the clone is GC'd on next click.
       src.parentNode.insertBefore(clone, src.nextSibling);
-      var cleanup = function () { if (clone.parentNode) clone.parentNode.removeChild(clone); window.removeEventListener('afterprint', cleanup); };
+      // afterprint fires when the user closes/dismisses the print dialog.
+      // On iOS it may not always fire reliably, but the next click cleans up.
+      var cleanup = function () {
+        if (clone.parentNode) clone.parentNode.removeChild(clone);
+        window.removeEventListener('afterprint', cleanup);
+      };
       window.addEventListener('afterprint', cleanup);
-      setTimeout(cleanup, 8000);
-      window.print();
+      // Use rAF so the DOM mutation commits to the rendering pipeline before
+      // window.print() snapshots the layout — fixes iOS edge case where the
+      // print preview captured the page before the clone was painted.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { window.print(); });
+      });
     }
   </script>
 </body>
