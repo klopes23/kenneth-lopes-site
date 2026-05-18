@@ -1570,9 +1570,13 @@
        grows over time the whole sheet shrinks proportionally instead of
        overflowing onto a phantom page 2. Tune --print-zoom if a future
        redesign needs more breathing room. */
-    @page { size: Letter; margin: 0.4in 0.45in; }
+    /* Page margins ~0.75in to match the desktop site's gutter feel
+       (clamp(20px, 5vw, 80px) ≈ 0.83in at wide viewports). Lower
+       --print-zoom in tandem so the same content still fits one sheet
+       with the tighter usable area. */
+    @page { size: Letter; margin: 0.75in 0.8in; }
     html, body { height: auto !important; }
-    :root { --print-zoom: 0.82; }
+    :root { --print-zoom: 0.76; }
     body[data-creator="true"] {
       background: var(--bg) !important;
       color: var(--ink) !important;
