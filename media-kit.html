@@ -1639,9 +1639,77 @@
     .cta-pair,
     .km-cta-pair,
     #content,
-    #contact,
-    .contact,
     .foot { display: none !important; }
+    /* Inside the contact section: keep the headline + 4 contact rows
+       (Creator / TikTok / Everywhere else / Inquiries), drop the social
+       grid and any decorative chrome — that block belongs on screen, not
+       on a printed sheet. */
+    #contact .social-grid-wrap,
+    #contact .km-cta-pair { display: none !important; }
+    /* Compact print styling for the contact block — dark card sitting
+       at the bottom of the printed sheet. */
+    html body[data-creator="true"] #contact,
+    html body[data-creator="true"] .contact {
+      display: block !important;
+      background: var(--ink) !important;
+      color: var(--cream) !important;
+      padding: 14px 16px !important;
+      margin-top: 6px !important;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+    .contact-inner {
+      display: grid !important;
+      grid-template-columns: 1fr 1.4fr !important;
+      gap: 14px !important;
+      align-items: start !important;
+    }
+    .contact-eyebrow {
+      font-family: var(--font-mono) !important;
+      font-size: 7pt !important; letter-spacing: 0.22em !important;
+      text-transform: uppercase !important;
+      color: var(--accent) !important;
+      margin-bottom: 4px !important;
+    }
+    .contact h2 {
+      font-family: var(--font-display) !important;
+      font-size: 18pt !important; line-height: 0.95 !important;
+      letter-spacing: -0.03em !important;
+      color: var(--cream) !important;
+      margin: 0 !important;
+    }
+    .contact h2 em {
+      font-family: var(--font-italic) !important;
+      font-style: italic !important;
+      color: var(--accent) !important;
+    }
+    .contact-rows {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 4px 14px !important;
+    }
+    .contact-row {
+      display: flex !important; flex-direction: column !important;
+      gap: 1px !important;
+      padding: 4px 0 !important;
+      border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+    }
+    .contact-row .lab {
+      font-family: var(--font-mono) !important;
+      font-size: 6.5pt !important; letter-spacing: 0.16em !important;
+      text-transform: uppercase !important;
+      color: rgba(255,255,255,0.55) !important;
+    }
+    .contact-row .val {
+      font-family: var(--font-display) !important;
+      font-size: 9pt !important; font-weight: 500 !important;
+      color: var(--cream) !important;
+    }
+    .contact-row .val.mono {
+      font-family: var(--font-mono) !important;
+      font-size: 8.5pt !important;
+      letter-spacing: 0.04em !important;
+    }
 
     /* Inside #offer: hide the offer table + section-head; only show the
        brand-categories pills row at the bottom. */
