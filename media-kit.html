@@ -2624,9 +2624,11 @@
     </div>
   </section>
 
-  <!-- v4 (site-consistency-v1): cross-page CTA pair before footer -->
-  <div style="background: var(--ink); padding: 32px var(--gutter) 0;">
-    <div style="max-width:1280px; margin: 0 auto;">
+  <!-- v4 (site-consistency-v1): cross-page CTA pair before footer.
+       Inner 1280px container has the gutter padding inside so the CTAs
+       align flush with .page content above instead of spanning wider. -->
+  <div style="background: var(--ink); padding: 32px 0 0;">
+    <div style="max-width:1280px; margin: 0 auto; padding: 0 var(--gutter);">
       <div class="cta-pair">
         <a class="cta-card cta-card--pro" href="portfolio.html#work">
           <span class="lab">← Back to work</span>

@@ -330,11 +330,15 @@ body[data-palette="creator"] .topnav-cta:hover {
 }
 .cta-card--pro .lab { color: #D9B65A; }
 .cta-card--pro .title em { color: #D9B65A; }
+/* Creator card flipped to a warm cream surface with dark ink text so
+   the pair reads as two visually contrasting tiles (forest vs cream)
+   instead of two near-identical dark cards. */
 .cta-card--creator {
-  background: #2A1A12; color: #FBF5E8;
+  background: #FBF5E8; color: #2A1A12;
+  border: 1.5px solid #2A1A12;
 }
-.cta-card--creator .lab { color: #E8985A; }
-.cta-card--creator .title em { color: #E8985A; }
+.cta-card--creator .lab { color: #C25A2E; }
+.cta-card--creator .title em { color: #C25A2E; }
 
 @media (max-width: 768px) {
   .cta-pair { grid-template-columns: 1fr; }
