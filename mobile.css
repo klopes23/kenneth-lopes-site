@@ -1218,10 +1218,15 @@
   body[data-creator="true"] .reach-tile {
     transition: transform 0.28s ease, box-shadow 0.28s ease;
   }
+  /* Each .reach-tile carries its own --shadow inline (mustard for
+     TikTok/YouTube, cream for IG, ink for Snap, terracotta for FB)
+     so the hover shadow contrasts with the brand color of the tile
+     instead of getting absorbed by it. Falls back to ink if --shadow
+     is missing. */
   body[data-creator="true"] .reach-tile:active,
   body[data-creator="true"] .reach-tile:hover {
     transform: translate(-4px, -4px);
-    box-shadow: 8px 8px 0 var(--kc-ink);
+    box-shadow: 8px 8px 0 var(--shadow, var(--kc-ink));
   }
   body[data-creator="true"] .reach-tile__head {
     display: grid; grid-template-columns: 1fr auto;
