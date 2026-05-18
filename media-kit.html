@@ -844,6 +844,14 @@
     transform: translate(-6px, -6px);
     box-shadow: 12px 12px 0 var(--accent);
   }
+  /* National tier caption is already terracotta — give Dominos/Shake
+     Shack a forest-green shadow so the hover animation actually pops
+     against the strip instead of disappearing into it. Local tier
+     keeps the default terracotta shadow which contrasts with its peach
+     strip. */
+  .brand-tile--national:hover {
+    box-shadow: 12px 12px 0 var(--forest);
+  }
   .brand-tile img {
     width: 100%; aspect-ratio: 16/10;
     object-fit: cover; display: block;
