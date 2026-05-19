@@ -241,9 +241,9 @@
   .hero-photo img {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    /* object-position shifted from 25% → 35% (10% lower) to bring the
-       son's face further into frame on the desktop hero. */
-    object-fit: cover; object-position: center 35%;
+    /* object-position 35% → 22% to bring the son's head back into
+       frame (was getting clipped at the top with the lower focal). */
+    object-fit: cover; object-position: center 22%;
     display: block;
   }
   .hero-photo .hero-stamp {
@@ -1820,13 +1820,18 @@
     /* === 04 BRANDS (4 collab tiles in one row, matching website desktop)
        Outer .brand-tier-row puts National + Local side-by-side; each
        tier's .brand-grid--tier holds 2 tiles in 2 columns → 4 tiles
-       in one line across the sheet. */
-    .brand-tier-row {
+       in one line across the sheet. Use html-prefixed specificity so
+       the override beats any descendant rules in mobile.css. */
+    html body[data-creator="true"] .brand-tier-row {
       display: grid !important;
       grid-template-columns: 1fr 1fr !important;
       gap: 8px !important;
     }
-    .brand-grid--tier {
+    html body[data-creator="true"] .brand-tier {
+      width: auto !important; margin: 0 !important;
+    }
+    html body[data-creator="true"] .brand-grid--tier,
+    html body[data-creator="true"] .brand-grid {
       display: grid !important;
       grid-template-columns: repeat(2, 1fr) !important;
       gap: 6px !important;
