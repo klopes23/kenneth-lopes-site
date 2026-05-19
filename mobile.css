@@ -1106,8 +1106,10 @@
     overflow: hidden; border: 2px solid var(--kc-ink);
     background: var(--kc-bg2);
   }
+  /* Alternating shadow tones — terracotta vs olive — give each card a
+     distinct contrasting pop instead of two warm-on-warm options. */
   body[data-creator="true"] .km-pcard:nth-child(odd) { box-shadow: 5px 5px 0 var(--kc-accent); }
-  body[data-creator="true"] .km-pcard:nth-child(even) { box-shadow: 5px 5px 0 var(--kc-accent2); }
+  body[data-creator="true"] .km-pcard:nth-child(even) { box-shadow: 5px 5px 0 #5E7030; }
   /* v4 (site-consistency-v1): tap/hover border animation — lift + grow shadow */
   body[data-creator="true"] .km-pcard {
     transition: transform 0.28s ease, box-shadow 0.28s ease;
@@ -1117,7 +1119,7 @@
   body[data-creator="true"] .km-pcard:nth-child(odd):active,
   body[data-creator="true"] .km-pcard:nth-child(odd):hover  { box-shadow: 9px 9px 0 var(--kc-accent); }
   body[data-creator="true"] .km-pcard:nth-child(even):active,
-  body[data-creator="true"] .km-pcard:nth-child(even):hover { box-shadow: 9px 9px 0 var(--kc-accent2); }
+  body[data-creator="true"] .km-pcard:nth-child(even):hover { box-shadow: 9px 9px 0 #5E7030; }
   body[data-creator="true"] .km-pcard img {
     position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
   }
@@ -1386,10 +1388,13 @@
     transition: transform 0.28s ease, box-shadow 0.28s ease;
     -webkit-tap-highlight-color: transparent;
   }
+  /* Default (national) bcard hover: olive shadow contrasts with the
+     terracotta caption strip instead of matching it. Forest green flows
+     with the creator palette. */
   body[data-creator="true"] .km-bcard:active,
   body[data-creator="true"] .km-bcard:hover {
     transform: translate(-4px, -4px);
-    box-shadow: 8px 8px 0 var(--kc-accent);
+    box-shadow: 8px 8px 0 #5E7030;
   }
   body[data-creator="true"] .km-bcard img {
     width: 100%; aspect-ratio: 1/1;
@@ -1436,9 +1441,10 @@
   body[data-creator="true"] .km-brand-tier-lab--national::before { background: var(--kc-accent); }
   body[data-creator="true"] .km-brand-tier-lab--local::before    { background: var(--kc-accent2); }
 
-  /* Local tier hover keeps peach shadow (matches the local caption strip color) */
+  /* Local bcard hover: ink-brown shadow contrasts with the peach caption
+     strip and reads as deeper/grounding next to the warm tile. */
   body[data-creator="true"] .km-bcard--local:active,
-  body[data-creator="true"] .km-bcard--local:hover    { box-shadow: 8px 8px 0 var(--kc-accent2); }
+  body[data-creator="true"] .km-bcard--local:hover    { box-shadow: 8px 8px 0 var(--kc-ink); }
 
   /* ── 05 · OFFER — clean numbered list with right-aligned tag ── */
   body[data-creator="true"] .km-offer-list {
@@ -1497,8 +1503,15 @@
     text-align: right;
     align-items: flex-end;
   }
-  body[data-creator="true"] .km-cta-pair .cta-card:active,
-  body[data-creator="true"] .km-cta-pair .cta-card:hover {
+  /* Pro card (forest bg) gets a mustard shadow (warm pop on dark green);
+     creator card (cream bg) gets a terracotta shadow (warm pop on light). */
+  body[data-creator="true"] .km-cta-pair .cta-card--pro:active,
+  body[data-creator="true"] .km-cta-pair .cta-card--pro:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 8px 8px 0 var(--kc-pop);
+  }
+  body[data-creator="true"] .km-cta-pair .cta-card--creator:active,
+  body[data-creator="true"] .km-cta-pair .cta-card--creator:hover {
     transform: translate(-4px, -4px);
     box-shadow: 8px 8px 0 var(--kc-accent);
   }
