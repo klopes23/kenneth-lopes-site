@@ -180,6 +180,8 @@
     font-size: 8px !important;
     letter-spacing: 0.16em !important;
   }
+  /* Mobile-only break in the cs03 head row */
+  .cs03-mb-br { display: inline !important; }
 
   /* CS05 GTM funnel: on desktop the rows use margin-top:auto + translateY
      to anchor at card bottom. On mobile the card grows tall and that
