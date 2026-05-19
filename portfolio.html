@@ -682,6 +682,9 @@
       color: var(--muted);
     }
     .cs03-head strong { font-weight: 600; color: var(--ink); }
+    /* Mobile-only break inside cs03-head spans — keeps 'GenAI Enablement'
+       and 'Feb 26' bonded on their own second line when the card narrows. */
+    .cs03-mb-br { display: none; }
     .cs03-peak-callout {
       position: absolute; top: -12px; right: 6%;
       z-index: 3;
@@ -1193,13 +1196,13 @@
       <a class="cs-link" href="cases/deck.html#/3" aria-label="Read case study: GenAI enablement">
         <div class="cs03-card cs03-card--v2">
           <div class="cs03-head">
-            <span><strong>CS / 03</strong> · GenAI Enablement</span>
-            <span>Sep '25 — Feb '26</span>
+            <span><strong>CS / 03</strong> ·<br class="cs03-mb-br" /> GenAI Enablement</span>
+            <span>Sep '25 —<br class="cs03-mb-br" /> Feb '26</span>
           </div>
           <h4 class="line-chart-title">Weekly active <em>users.</em></h4>
           <div class="cs03-chart-area">
             <!-- Adoption phase label as HTML overlay (was SVG text) so it can be positioned with CSS relative to the +193% WAU pill — sits a hair above the pill, both inside the shaded region. -->
-            <div class="cs03-adopt-label">↓ ADOPTION PHASE</div>
+            <div class="cs03-adopt-label">ADOPTION PHASE ↓</div>
             <div class="cs03-peak-callout">+193% WAU</div>
             <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;">
               <defs>

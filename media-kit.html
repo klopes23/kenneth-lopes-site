@@ -998,7 +998,6 @@
   .contact {
     background: var(--ink); color: var(--bg);
     padding: 64px 0;
-    overflow-x: clip;  /* contains the full-bleed socials divider below */
   }
   .contact-inner {
     max-width: 1280px; margin: 0 auto;
@@ -1043,19 +1042,19 @@
     font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.04em;
   }
 
-  /* ── SOCIAL GRID — same outer rhythm as .contact-inner (max 1280 + gutter inside) ── */
+  /* ── SOCIAL GRID — same outer rhythm as .contact-inner (max 1280 + gutter inside)
+     Divider spans the content width (matches the rest of the page) instead
+     of extending edge-to-edge across the dark band. */
   .social-grid-wrap {
     max-width: 1280px; margin: 48px auto 0;
     padding: 32px var(--gutter) 0;
     position: relative;
   }
-  /* Divider extends edge-to-edge across the dark contact band instead
-     of stopping at the 1280px content width. */
   .social-grid-wrap::before {
     content: '';
-    position: absolute; top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 100vw; height: 1px;
+    position: absolute; top: 0;
+    left: var(--gutter); right: var(--gutter);
+    height: 1px;
     background: rgba(240,235,224,0.14);
   }
   .social-grid-eyebrow {
@@ -1666,16 +1665,18 @@
     #contact .km-cta-pair { display: none !important; }
     /* Compact print styling for the contact block — dark card sitting
        at the bottom of the printed sheet. */
-    /* Contact block sits within the same content width as the other
-       sections on the sheet (no negative side margins — the dark band
-       no longer extends beyond the page content gutters). */
+    /* Contact band visually aligns with the content above it — same
+       max-width and gutter inset as .page, not flush to .desktop-view
+       edges. */
     html body[data-creator="true"] #contact,
     html body[data-creator="true"] .contact {
       display: block !important;
       background: var(--ink) !important;
       color: var(--cream) !important;
-      padding: 12px 16px !important;
-      margin: 6px 0 0 !important;
+      padding: 14px 18px !important;
+      margin: 8px auto 0 !important;
+      max-width: calc(100% - 2 * var(--gutter)) !important;
+      box-sizing: border-box !important;
       page-break-inside: avoid;
       break-inside: avoid;
     }
@@ -1683,6 +1684,9 @@
        width of the band instead of cramping side-by-side. */
     .contact-inner {
       display: block !important;
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
     }
     .contact-eyebrow {
       font-family: var(--font-mono) !important;
