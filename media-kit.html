@@ -998,6 +998,7 @@
   .contact {
     background: var(--ink); color: var(--bg);
     padding: 64px 0;
+    overflow-x: clip;  /* contains the full-bleed socials divider below */
   }
   .contact-inner {
     max-width: 1280px; margin: 0 auto;
@@ -1046,7 +1047,16 @@
   .social-grid-wrap {
     max-width: 1280px; margin: 48px auto 0;
     padding: 32px var(--gutter) 0;
-    border-top: 1px solid rgba(240,235,224,0.14);
+    position: relative;
+  }
+  /* Divider extends edge-to-edge across the dark contact band instead
+     of stopping at the 1280px content width. */
+  .social-grid-wrap::before {
+    content: '';
+    position: absolute; top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100vw; height: 1px;
+    background: rgba(240,235,224,0.14);
   }
   .social-grid-eyebrow {
     font-family: var(--font-mono);
