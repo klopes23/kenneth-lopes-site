@@ -1609,45 +1609,17 @@
     .desktop-view {
       display: flex !important;
       flex-direction: column !important;
-      gap: 6px;
+      gap: 10px;
       max-width: 7.7in;
       margin: 0 auto;
       zoom: var(--print-zoom);
-      /* min-height (pre-zoom) chosen so that min-height × zoom ≈ usable
-         page height (9.5in). .page grows to fill remaining space so the
-         #contact band anchors flush to the bottom of the sheet — no
-         empty band below. */
-      min-height: 11in;
+      /* Stretch to full page height so content fills the sheet instead
+         of leaving a tall whitespace gap below. */
+      min-height: 9.5in;
     }
-    .desktop-view > .page    { flex: 1 1 auto; }
-    .desktop-view > #contact { flex: 0 0 auto; }
-    /* Two-column print layout — puts the #audience section side-by-side
-       with the Ideal Brand Categories pills (2×2) to claw back vertical
-       space so 'Work with us' fits on the same page. Uses display:contents
-       on #brands so its inner children become direct grid items of .page
-       and can be placed individually via grid-template-areas. */
-    .desktop-view .page {
-      display: grid !important;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 14px;
-      row-gap: 6px;
-      align-items: start;
-      grid-template-areas:
-        "hero hero"
-        "reach reach"
-        "audience catrule"
-        "audience catpills"
-        "brandhead brandhead"
-        "brandtiles brandtiles";
-    }
-    .desktop-view .page > .hero        { grid-area: hero; }
-    .desktop-view .page > #reach       { grid-area: reach; }
-    .desktop-view .page > #audience    { grid-area: audience; }
-    .desktop-view .page > #brands      { display: contents !important; }
-    .desktop-view .page > #brands > .section-head    { grid-area: brandhead; }
-    .desktop-view .page > #brands > .brand-tier-row  { grid-area: brandtiles; }
-    .desktop-view .page > #brands > .section-rule    { grid-area: catrule; margin: 4px 0 !important; }
-    .desktop-view .page > #brands > .cat-row         { grid-area: catpills; grid-template-columns: 1fr 1fr !important; }
+    /* Let the .page block flex-grow so sections breathe vertically and
+       the contact band lands at the bottom of the sheet. */
+    .desktop-view .page { flex: 1; display: flex; flex-direction: column; gap: 10px; }
     /* Drop the brand-tier label rows in print — the tiles still read
        Domino's/Shake Shack vs Storm/Baqba via their colored caption
        strips, no need for the extra label height on a printed sheet. */
@@ -1785,12 +1757,12 @@
     .page { padding: 0 !important; max-width: 100% !important; }
     .section,
     .hero {
-      padding: 2px 0 !important;
+      padding: 4px 0 !important;
       border-bottom: none !important;
       page-break-inside: avoid;
       break-inside: avoid;
     }
-    .hero { padding: 0 !important; }
+    .hero { padding: 0 0 3px !important; }
     .section-head {
       grid-template-columns: 50px 1fr !important;
       margin-bottom: 4px !important;
@@ -1947,42 +1919,18 @@
     .print-bw-clone {
       display: flex !important;
       flex-direction: column !important;
-      gap: 6px;
+      gap: 10px;
       max-width: 7.7in;
       margin: 0 auto;
       zoom: var(--print-zoom);
-      min-height: 11in;
+      min-height: 9.5in;
       page-break-before: always;
       break-before: page;
       page-break-after: avoid;
       break-after: avoid;
       background: #fff !important;
     }
-    .print-bw-clone > .page    { flex: 1 1 auto; }
-    .print-bw-clone > #contact { flex: 0 0 auto; }
-    /* Mirror the same 2-column grid layout on the grayscale clone */
-    .print-bw-clone .page {
-      display: grid !important;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 14px;
-      row-gap: 6px;
-      align-items: start;
-      grid-template-areas:
-        "hero hero"
-        "reach reach"
-        "audience catrule"
-        "audience catpills"
-        "brandhead brandhead"
-        "brandtiles brandtiles";
-    }
-    .print-bw-clone .page > .hero        { grid-area: hero; }
-    .print-bw-clone .page > #reach       { grid-area: reach; }
-    .print-bw-clone .page > #audience    { grid-area: audience; }
-    .print-bw-clone .page > #brands      { display: contents !important; }
-    .print-bw-clone .page > #brands > .section-head    { grid-area: brandhead; }
-    .print-bw-clone .page > #brands > .brand-tier-row  { grid-area: brandtiles; }
-    .print-bw-clone .page > #brands > .section-rule    { grid-area: catrule; margin: 4px 0 !important; }
-    .print-bw-clone .page > #brands > .cat-row         { grid-area: catpills; grid-template-columns: 1fr 1fr !important; }
+    .print-bw-clone .page { flex: 1; display: flex; flex-direction: column; gap: 10px; }
     /* Strip every color + background — pure white sheet with black ink content */
     .print-bw-clone,
     .print-bw-clone * {
