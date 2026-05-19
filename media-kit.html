@@ -1596,7 +1596,7 @@
        with the tighter usable area. */
     @page { size: Letter; margin: 0.75in 0.8in; }
     html, body { height: auto !important; }
-    :root { --print-zoom: 0.70; }
+    :root { --print-zoom: 0.85; }
     body[data-creator="true"] {
       background: var(--bg) !important;
       color: var(--ink) !important;
@@ -1610,11 +1610,17 @@
     .desktop-view {
       display: flex !important;
       flex-direction: column !important;
-      gap: 4px;
+      gap: 10px;
       max-width: 7.7in;
       margin: 0 auto;
       zoom: var(--print-zoom);
+      /* Stretch to full page height so content fills the sheet instead
+         of leaving a tall whitespace gap below. */
+      min-height: 9.5in;
     }
+    /* Let the .page block flex-grow so sections breathe vertically and
+       the contact band lands at the bottom of the sheet. */
+    .desktop-view .page { flex: 1; display: flex; flex-direction: column; gap: 10px; }
     /* Drop the brand-tier label rows in print — the tiles still read
        Domino's/Shake Shack vs Storm/Baqba via their colored caption
        strips, no need for the extra label height on a printed sheet. */
@@ -1660,17 +1666,16 @@
     #contact .km-cta-pair { display: none !important; }
     /* Compact print styling for the contact block — dark card sitting
        at the bottom of the printed sheet. */
-    /* Contact block spans the full sheet width via negative side margins
-       that match the .desktop-view max-width gap — visually extends the
-       dark band edge-to-edge across the printable area, similar to the
-       full-bleed band on the live site. */
+    /* Contact block sits within the same content width as the other
+       sections on the sheet (no negative side margins — the dark band
+       no longer extends beyond the page content gutters). */
     html body[data-creator="true"] #contact,
     html body[data-creator="true"] .contact {
       display: block !important;
       background: var(--ink) !important;
       color: var(--cream) !important;
       padding: 12px 16px !important;
-      margin: 6px -1in 0 !important;
+      margin: 6px 0 0 !important;
       page-break-inside: avoid;
       break-inside: avoid;
     }
@@ -1910,16 +1915,18 @@
     .print-bw-clone {
       display: flex !important;
       flex-direction: column !important;
-      gap: 4px;
+      gap: 10px;
       max-width: 7.7in;
       margin: 0 auto;
       zoom: var(--print-zoom);
+      min-height: 9.5in;
       page-break-before: always;
       break-before: page;
       page-break-after: avoid;
       break-after: avoid;
       background: #fff !important;
     }
+    .print-bw-clone .page { flex: 1; display: flex; flex-direction: column; gap: 10px; }
     /* Strip every color + background — pure white sheet with black ink content */
     .print-bw-clone,
     .print-bw-clone * {
