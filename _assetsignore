@@ -1,0 +1,39 @@
+# Files in this list are excluded from the Cloudflare Workers static
+# assets upload. Use it to keep the deploy size down for files we keep
+# in the repo for archive/source reasons but never serve.
+
+# Source / archive originals (large unreferenced PNGs and JPGs)
+assets/media_photo-img6336.png
+assets/media_photo-img6337.png
+assets/media_photo-img6338.png
+assets/media_photo-img6339.png
+assets/media_photo-img6340.png
+assets/media_photo-img6343.png
+assets/media_photo-1769122738993.jpeg
+assets/Snap.PNG
+assets/IG.PNG
+assets/TT.PNG
+assets/Facebook.PNG
+assets/P1000856.JPG
+assets/P1012074.JPG
+# Source PNG; we ship the optimized .webp + .jpg variants
+assets/cs04-experience-center.png
+
+# Bundle backups
+assets/*.bundle.bak
+
+# OS + editor cruft
+.DS_Store
+**/.DS_Store
+
+# Git / build internals
+.git/
+.gitignore
+.claude/
+*.md
+node_modules/
+
+# Source notebooks / data files we keep but don't serve
+*.psd
+*.ai
+*.sketch

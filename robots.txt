@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
 Disallow: /assets/*.bak
+Disallow: /assets/*.bundle.bak
+
+# Explicit allow for the most important pages — speeds up discovery
+Allow: /index.html
+Allow: /portfolio.html
+Allow: /experience.html
+Allow: /media-kit.html
+Allow: /cases/
 
 Sitemap: https://kennethlopes.com/sitemap.xml
