@@ -1031,16 +1031,6 @@
   body[data-creator="true"] .km-stat-mid .km-stat-lab { color: rgba(255,255,255,0.78); }
   body[data-creator="true"] .km-stat-pop .km-stat-lab { color: rgba(42,26,18,0.65); }
   body[data-creator="true"] .km-stat-forest .km-stat-lab { color: rgba(255,255,255,0.78); }
-  /* Recency-proof cite under the 3 hero stats on mobile */
-  body[data-creator="true"] .km-recency-cite {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px; letter-spacing: 0.03em;
-    color: var(--kc-muted); line-height: 1.55;
-    margin: 12px 0 0;
-  }
-  body[data-creator="true"] .km-recency-cite strong {
-    color: var(--kc-ink); font-weight: 600;
-  }
   /* IG engagement-rate callout under the mobile reach tiles */
   body[data-creator="true"] .km-eng-callout {
     display: flex; flex-direction: column; gap: 2px;
