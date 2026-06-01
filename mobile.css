@@ -1031,6 +1031,40 @@
   body[data-creator="true"] .km-stat-mid .km-stat-lab { color: rgba(255,255,255,0.78); }
   body[data-creator="true"] .km-stat-pop .km-stat-lab { color: rgba(42,26,18,0.65); }
   body[data-creator="true"] .km-stat-forest .km-stat-lab { color: rgba(255,255,255,0.78); }
+  /* Recency-proof cite under the 3 hero stats on mobile */
+  body[data-creator="true"] .km-recency-cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: 0.03em;
+    color: var(--kc-muted); line-height: 1.55;
+    margin: 12px 0 0;
+  }
+  body[data-creator="true"] .km-recency-cite strong {
+    color: var(--kc-ink); font-weight: 600;
+  }
+  /* IG engagement-rate callout under the mobile reach tiles */
+  body[data-creator="true"] .km-eng-callout {
+    display: flex; flex-direction: column; gap: 2px;
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: var(--kc-paper);
+    border: 1px solid var(--kc-line);
+    border-left: 3px solid var(--kc-accent);
+  }
+  body[data-creator="true"] .km-eng-callout__lab {
+    font-family: 'JetBrains Mono', monospace; font-weight: 600;
+    font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--kc-accent);
+  }
+  body[data-creator="true"] .km-eng-callout__num {
+    font-family: 'Fraunces', Georgia, serif; font-weight: 500;
+    font-size: 24px; letter-spacing: -0.02em; color: var(--kc-ink);
+    line-height: 1;
+  }
+  body[data-creator="true"] .km-eng-callout__desc {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.03em; color: var(--kc-muted);
+    margin-top: 2px;
+  }
   body[data-creator="true"] .km-stat-num {
     font-family: 'Fraunces', Georgia, serif; font-weight: 600;
     font-size: clamp(30px, 9vw, 40px); line-height: 0.95;

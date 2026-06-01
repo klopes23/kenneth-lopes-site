@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Facebook + Instagram metrics refresh — preview</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="/tokens.css">
+<style>
+  :root {
+    --bg: #F4ECDD; --paper: #FBF5E8; --ink: #2A1A12; --muted: #6B5648;
+    --line: rgba(42,26,18,0.16); --accent: #C25A2E; --pop: #D9B65A;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-italic: 'Instrument Serif', Georgia, serif;
+    --font-body: 'Inter Tight', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); padding: 40px 24px 80px; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.03em; margin-bottom: 6px; }
+  h1 em { font-family: var(--font-italic); font-style: italic; color: var(--accent); font-weight: 400; }
+  .sub { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 36px; }
+  .change { margin: 44px 0; border: 1px solid var(--line); background: var(--paper); padding: 28px; position: relative; }
+  .change-badge {
+    position: absolute; top: -14px; left: 24px;
+    background: var(--accent); color: var(--paper);
+    font-family: var(--font-mono); font-weight: 700; font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 8px 14px;
+  }
+  .change h2 { font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: -0.02em; margin-bottom: 6px; margin-top: 4px; }
+  .change .where { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 18px; }
+  .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; }
+  @media (max-width: 768px) { .ba { grid-template-columns: 1fr; } }
+  .ba > div { background: var(--bg); border: 1px solid var(--line); padding: 16px; }
+  .ba .tag { display: inline-block; font-family: var(--font-mono); font-weight: 600; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; padding: 4px 9px; margin-bottom: 12px; }
+  .ba .tag.before { background: rgba(155,80,40,0.10); color: #7a3a1f; }
+  .ba .tag.after  { background: rgba(94,112,48,0.12); color: #2d4a2b; }
+
+  /* === Sample renderings (visual mockups, not real components) === */
+
+  /* Change 1: reach-tile (mobile-ish layout) */
+  .demo-tile {
+    display: grid; grid-template-columns: 1fr auto; gap: 4px 12px;
+    align-items: center; padding: 14px 16px;
+    background: linear-gradient(135deg,#feda75,#fa7e1e 25%,#d62976 55%,#962fbf 80%,#4f5bd5);
+    color: #fff;
+  }
+  .demo-tile.fb { background: #1877F2; }
+  .demo-tile__name { font-family: var(--font-mono); font-weight: 600; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; }
+  .demo-tile__count { font-family: var(--font-display); font-weight: 500; font-size: 28px; line-height: 1; justify-self: end; }
+  .demo-tile__meta { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; opacity: 0.85; }
+
+  /* Change 2: deck slide social card */
+  .demo-deck {
+    background: rgba(199,111,61,0.10);
+    border: 1px solid var(--line);
+    padding: 18px 20px;
+  }
+  .demo-deck.fb { background: rgba(45,74,43,0.10); }
+  .demo-deck__head { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--font-mono); font-weight: 600; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .demo-deck__stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .demo-deck__stat-lab { font-family: var(--font-mono); font-size: 8.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .demo-deck__stat-val { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: var(--ink); margin-top: 2px; }
+
+  /* Change 3: recency cite under hero */
+  .demo-hero {
+    background: var(--paper); border: 1px solid var(--line);
+    padding: 22px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+  }
+  .demo-hero__stat { padding: 14px; background: var(--bg); border: 1px solid var(--line); }
+  .demo-hero__stat:nth-child(1) { background: var(--accent); color: #fff; }
+  .demo-hero__stat:nth-child(2) { background: var(--pop); color: var(--ink); }
+  .demo-hero__stat:nth-child(3) { background: #5E7030; color: #fff; }
+  .demo-hero__lab { font-family: var(--font-mono); font-weight: 600; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.78; }
+  .demo-hero__num { font-family: var(--font-display); font-weight: 600; font-size: 28px; letter-spacing: -0.035em; margin-top: 2px; }
+  .demo-hero__sub { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.65; margin-top: 2px; }
+  .demo-recency-cite { grid-column: 1 / -1; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+  .demo-recency-cite strong { color: var(--ink); font-weight: 600; }
+
+  /* Change 4: portfolio creator-desc */
+  .demo-portfolio {
+    background: #F2EBDA; border: 1px solid rgba(27,42,27,0.14);
+    padding: 22px; color: #1B2A1B;
+  }
+  .demo-portfolio p { font-family: var(--font-italic); font-style: italic; font-size: 17px; line-height: 1.55; }
+  .demo-portfolio strong { font-style: normal; font-family: var(--font-body); font-weight: 600; }
+
+  /* Change 5: engagement-rate callout */
+  .demo-eng {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    padding: 10px 16px;
+    background: var(--paper); border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+  }
+  .demo-eng__lab { font-family: var(--font-mono); font-weight: 600; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .demo-eng__num { font-family: var(--font-display); font-weight: 500; font-size: 22px; color: var(--ink); }
+  .demo-eng__desc { font-family: var(--font-mono); font-size: 10.5px; color: var(--muted); }
+
+  .footer { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Facebook + Instagram <em>metrics refresh.</em></h1>
+  <p class="sub">Annotated preview · 5 changes · branch <code>fb-ig-metrics-refresh</code></p>
+
+  <!-- ──────────────────────────────────────── CHANGE 1 -->
+  <section class="change">
+    <span class="change-badge">Change 1</span>
+    <h2>Fresh per-platform meta lines</h2>
+    <p class="where">Where: media-kit.html · 4 spots — mobile <code>.reach-tile__meta</code> + desktop <code>.plat-meta</code> for Instagram and Facebook</p>
+    <div class="ba">
+      <div>
+        <span class="tag before">Before — Instagram</span>
+        <div class="demo-tile">
+          <span class="demo-tile__name">Instagram</span>
+          <span class="demo-tile__count">75K</span>
+          <span class="demo-tile__meta">9.9M views · last 90 days</span>
+        </div>
+      </div>
+      <div>
+        <span class="tag after">After — Instagram</span>
+        <div class="demo-tile">
+          <span class="demo-tile__name">Instagram</span>
+          <span class="demo-tile__count">75K</span>
+          <span class="demo-tile__meta">13M views · 745K likes · 90d</span>
+        </div>
+      </div>
+      <div>
+        <span class="tag before">Before — Facebook</span>
+        <div class="demo-tile fb">
+          <span class="demo-tile__name">Facebook</span>
+          <span class="demo-tile__count">40K</span>
+          <span class="demo-tile__meta">3.1M views · 785K 1-min views</span>
+        </div>
+      </div>
+      <div>
+        <span class="tag after">After — Facebook</span>
+        <div class="demo-tile fb">
+          <span class="demo-tile__name">Facebook</span>
+          <span class="demo-tile__count">40K</span>
+          <span class="demo-tile__meta">5.9M views · last 30 days</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── CHANGE 2 -->
+  <section class="change">
+    <span class="change-badge">Change 2</span>
+    <h2>Deck Slide 5 — social-platform card stats</h2>
+    <p class="where">Where: cases/deck.html line ~2403–2405 (Slide 5 socials array)</p>
+    <div class="ba">
+      <div>
+        <span class="tag before">Before — Instagram</span>
+        <div class="demo-deck">
+          <div class="demo-deck__head"><span>Instagram</span><span>75K Followers</span></div>
+          <div class="demo-deck__stats">
+            <div><div class="demo-deck__stat-lab">Views</div><div class="demo-deck__stat-val">9.3M</div></div>
+            <div><div class="demo-deck__stat-lab">Engag</div><div class="demo-deck__stat-val">585K</div></div>
+            <div><div class="demo-deck__stat-lab">Saves</div><div class="demo-deck__stat-val">42K</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="tag after">After — Instagram</span>
+        <div class="demo-deck">
+          <div class="demo-deck__head"><span>Instagram</span><span>75K Followers</span></div>
+          <div class="demo-deck__stats">
+            <div><div class="demo-deck__stat-lab">Views</div><div class="demo-deck__stat-val">13M</div></div>
+            <div><div class="demo-deck__stat-lab">Likes</div><div class="demo-deck__stat-val">745K</div></div>
+            <div><div class="demo-deck__stat-lab">Saves</div><div class="demo-deck__stat-val">26K</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="tag before">Before — Facebook</span>
+        <div class="demo-deck fb">
+          <div class="demo-deck__head"><span>Facebook</span><span>40K Followers</span></div>
+          <div class="demo-deck__stats">
+            <div><div class="demo-deck__stat-lab">Views</div><div class="demo-deck__stat-val">3.1M</div></div>
+            <div><div class="demo-deck__stat-lab">1-min</div><div class="demo-deck__stat-val">785K</div></div>
+            <div><div class="demo-deck__stat-lab">Reach</div><div class="demo-deck__stat-val">1.4M</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="tag after">After — Facebook</span>
+        <div class="demo-deck fb">
+          <div class="demo-deck__head"><span>Facebook</span><span>40K Followers</span></div>
+          <div class="demo-deck__stats">
+            <div><div class="demo-deck__stat-lab">Views</div><div class="demo-deck__stat-val">9.4M</div></div>
+            <div><div class="demo-deck__stat-lab">30d</div><div class="demo-deck__stat-val">5.9M</div></div>
+            <div><div class="demo-deck__stat-lab">Follows</div><div class="demo-deck__stat-val">+38K</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── CHANGE 3 -->
+  <section class="change">
+    <span class="change-badge">Change 3</span>
+    <h2>Hero recency-proof cite line</h2>
+    <p class="where">Where: media-kit.html — new <code>.recency-cite</code> / <code>.km-recency-cite</code> right below the 3 hero stats (mobile + desktop)</p>
+    <div class="ba" style="grid-template-columns: 1fr;">
+      <div>
+        <span class="tag before">Before</span>
+        <div class="demo-hero">
+          <div class="demo-hero__stat"><div class="demo-hero__lab">Followers</div><div class="demo-hero__num">870K+</div><div class="demo-hero__sub">Across 5 platforms</div></div>
+          <div class="demo-hero__stat"><div class="demo-hero__lab">All-time</div><div class="demo-hero__num">100M+</div><div class="demo-hero__sub">Total views</div></div>
+          <div class="demo-hero__stat"><div class="demo-hero__lab">Last 90 days</div><div class="demo-hero__num">70M+</div><div class="demo-hero__sub">Recency proof</div></div>
+        </div>
+      </div>
+      <div>
+        <span class="tag after">After</span>
+        <div class="demo-hero">
+          <div class="demo-hero__stat"><div class="demo-hero__lab">Followers</div><div class="demo-hero__num">870K+</div><div class="demo-hero__sub">Across 5 platforms</div></div>
+          <div class="demo-hero__stat"><div class="demo-hero__lab">All-time</div><div class="demo-hero__num">100M+</div><div class="demo-hero__sub">Total views</div></div>
+          <div class="demo-hero__stat"><div class="demo-hero__lab">Last 90 days</div><div class="demo-hero__num">70M+</div><div class="demo-hero__sub">Recency proof</div></div>
+          <p class="demo-recency-cite">
+            <strong>13M</strong> Instagram reel views (90d) · <strong>~20%</strong> engagement rate · <strong>5.9M</strong> Facebook views (30d) · <strong>0 → 40K</strong> Facebook in 5 months
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── CHANGE 4 -->
+  <section class="change">
+    <span class="change-badge">Change 4</span>
+    <h2>Portfolio creator-section narrative — velocity append</h2>
+    <p class="where">Where: portfolio.html line 1412 — <code>p.creator-desc</code></p>
+    <div class="ba" style="grid-template-columns: 1fr;">
+      <div>
+        <span class="tag before">Before</span>
+        <div class="demo-portfolio">
+          <p>Built a father–son creator brand to <strong>870K+ followers · 100M+ views</strong> with no team, $0 paid, every post a controlled experiment — same intake → execution → measurement loop I run at work, applied to a different surface.</p>
+        </div>
+      </div>
+      <div>
+        <span class="tag after">After</span>
+        <div class="demo-portfolio">
+          <p>Built a father–son creator brand to <strong>870K+ followers · 100M+ views</strong> with no team, $0 paid, every post a controlled experiment — same intake → execution → measurement loop I run at work, applied to a different surface. Recent velocity: <strong>13M Instagram reel views + 5.9M Facebook views (90d)</strong> · <strong>0 → 40K Facebook in 5 months</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────────────────────────────── CHANGE 5 -->
+  <section class="change">
+    <span class="change-badge">Change 5</span>
+    <h2>Instagram engagement-rate callout</h2>
+    <p class="where">Where: media-kit.html — new <code>.eng-callout</code> / <code>.km-eng-callout</code> directly under the 01 / Reach tiles (mobile + desktop)</p>
+    <div class="ba" style="grid-template-columns: 1fr;">
+      <div>
+        <span class="tag after">After</span>
+        <div class="demo-eng">
+          <span class="demo-eng__lab">Instagram</span>
+          <span class="demo-eng__num">~20%</span>
+          <span class="demo-eng__desc">engagement rate · 745K likes on 4.1M viewers (last 90d)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="footer">
+    Preview-only page · branch <code>fb-ig-metrics-refresh</code> · <code>LAST_DATA_UPDATE</code> bumped to 05/31/2026.
+    To remove from the live site after merge, delete <code>preview-fb-ig-refresh.html</code>.
+  </p>
+</div>
+</body>
+</html>
