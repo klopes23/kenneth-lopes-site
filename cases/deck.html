@@ -882,7 +882,7 @@ function S1_Profile({ slide, total }) {
         {[
           ['4,700+', 'issues governed'],
           ['$15M+', 'shipped'],
-          ['870K+', 'creator audience'],
+          ['890K+', 'creator audience'],
           ['$1M+', 'RAG savings'],
         ].map(([n, l]) => (
           <div key={l} style={{
@@ -1546,7 +1546,7 @@ const CREATOR_ANGLES = {
     kicker: '— Platform + algorithm fluency',
     h: <>Learned every platform's <Em>algorithm + creator stack</Em> first-hand.</>,
     bullets: [
-      'TikTok 660K · IG 75K · Snap 65K · FB 40K · YT 32K',
+      'TikTok 670K · IG 75K · Snap 70K · FB 45K · YT 32K',
       'Format A/B testing across 5 platforms simultaneously',
       'Built creator-tooling instincts no product team can fake',
     ],
@@ -1569,10 +1569,10 @@ function S7_Creator({ slide, total }) {
   const platTrackRef = dUseRef(null);
   const platforms = [
     // v4: per-platform caption box uses fg (text/border) + tint (fill) for an opaque branded card
-    { name:'TikTok',    count:'660K', accent:'#FF0050', fg:'#FFFFFF', tint:'#FF0050', img:'../assets/TT.jpg',       href:'https://www.tiktok.com/@nesimento_' },
+    { name:'TikTok',    count:'670K', accent:'#FF0050', fg:'#FFFFFF', tint:'#FF0050', img:'../assets/TT.jpg',       href:'https://www.tiktok.com/@nesimento_' },
     { name:'Instagram', count:'75K',  accent:'#E1306C', fg:'#FFFFFF', tint:'#E1306C', img:'../assets/IG.jpg',       href:'https://www.instagram.com/nesimento' },
-    { name:'Snapchat',  count:'65K',  accent:'#FFFC00', fg:'#1B2A1B', tint:'#FFFC00', img:'../assets/Snap.jpg',     href:'https://www.snapchat.com/add/nesimento' },
-    { name:'Facebook',  count:'40K',  accent:'#1877F2', fg:'#FFFFFF', tint:'#1877F2', img:'../assets/Facebook.jpg', href:'https://www.facebook.com/nesimento' },
+    { name:'Snapchat',  count:'70K',  accent:'#FFFC00', fg:'#1B2A1B', tint:'#FFFC00', img:'../assets/Snap.jpg',     href:'https://www.snapchat.com/add/nesimento' },
+    { name:'Facebook',  count:'45K',  accent:'#1877F2', fg:'#FFFFFF', tint:'#1877F2', img:'../assets/Facebook.jpg', href:'https://www.facebook.com/nesimento' },
     { name:'YouTube',   count:'32K',  accent:'#FF0000', fg:'#FFFFFF', tint:'#FF0000', img:'../assets/YT.jpg',       href:'https://www.youtube.com/@thenesifamily' },
   ];
   return (
@@ -1619,7 +1619,7 @@ function S7_Creator({ slide, total }) {
         <div style={{
           fontFamily: MS_FONT.display, fontWeight: 500, fontSize: 64,
           lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.035em',
-        }}>870K+</div>
+        }}>890K+</div>
         <div style={{ marginTop: 4, fontFamily: MS_FONT.body, fontSize: 13, color: 'rgba(242,235,218,0.7)' }}>
           100M+ views · 3M+ engagements · 100% organic
         </div>
@@ -2399,10 +2399,10 @@ window.DeckSlideStatic = DeckSlideStatic;
 
     function Slide3() {
       const platforms = [
-        { name:'TikTok',    handle:'660K Followers', img:'../assets/TT.jpg?v=4',       accent:'#1B2A1B', tint:'rgba(27,42,27,0.06)',   stats:[['Views','44M'],['Likes','2.3M'],['Shares','42K']],  href:'https://www.tiktok.com/@nesimento_' },
+        { name:'TikTok',    handle:'670K Followers', img:'../assets/TT.jpg?v=4',       accent:'#1B2A1B', tint:'rgba(27,42,27,0.06)',   stats:[['Views','44M'],['Likes','2.3M'],['Shares','42K']],  href:'https://www.tiktok.com/@nesimento_' },
         { name:'Instagram', handle:'75K Followers',  img:'../assets/IG.jpg?v=4',       accent:'#C76F3D', tint:'rgba(199,111,61,0.10)', stats:[['Views','13M'],['Likes','745K'],['Saves','26K']], href:'https://www.instagram.com/nesimento' },
-        { name:'Snapchat',  handle:'65K Followers',  img:'../assets/Snap.jpg?v=4',     accent:'#B8932F', tint:'rgba(217,182,90,0.18)', stats:[['Views','9.1M'],['Faves','33.6K'],['Shares','2.7K']], href:'https://www.snapchat.com/add/nesimento' },
-        { name:'Facebook',  handle:'40K Followers',  img:'../assets/Facebook.jpg?v=4', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',   stats:[['Views','9.4M'],['30d','5.9M'],['Follows','+38K']], href:'https://www.facebook.com/nesimento' },
+        { name:'Snapchat',  handle:'70K Followers',  img:'../assets/Snap.jpg?v=4',     accent:'#B8932F', tint:'rgba(217,182,90,0.18)', stats:[['Views','9.1M'],['Faves','33.6K'],['Shares','2.7K']], href:'https://www.snapchat.com/add/nesimento' },
+        { name:'Facebook',  handle:'45K Followers',  img:'../assets/Facebook.jpg?v=4', accent:'#2D4A2B', tint:'rgba(45,74,43,0.10)',   stats:[['Views','9.4M'],['30d','5.9M'],['Follows','+45K']], href:'https://www.facebook.com/nesimento' },
         { name:'YouTube',   handle:'32K Subs',       img:'../assets/YT.jpg?v=4',       accent:'#C25A2E', tint:'rgba(194,90,46,0.10)',  stats:[['Views','397K'],['Watch','54%'],['New Aud','89%']], href:'https://www.youtube.com/@thenesifamily' },
       ];
       const strategies = [
@@ -2414,7 +2414,7 @@ window.DeckSlideStatic = DeckSlideStatic;
           icon:(<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#B8932F" strokeWidth="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>) },
       ];
       const hero = [
-        { l:'Followers',  v:'870K+',  bg:'linear-gradient(135deg,#2D4A2B,#1B2A1B)',          textTint:'#FAF6EA', glyph:(<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FAF6EA" strokeWidth="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/><circle cx="17" cy="7" r="2.5"/><path d="M22 18c0-2.5-2.1-4.5-5-4.5"/></svg>) },
+        { l:'Followers',  v:'890K+',  bg:'linear-gradient(135deg,#2D4A2B,#1B2A1B)',          textTint:'#FAF6EA', glyph:(<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FAF6EA" strokeWidth="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3.1-6 7-6s7 2.5 7 6"/><circle cx="17" cy="7" r="2.5"/><path d="M22 18c0-2.5-2.1-4.5-5-4.5"/></svg>) },
         { l:'Views',      v:'100M+',   bg:'linear-gradient(135deg,#C76F3D,#A8523A)',          textTint:'#FAF6EA', glyph:(<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#FAF6EA" strokeWidth="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>) },
         { l:'Engagement', v:'3M+',    bg:'linear-gradient(135deg,#D9B65A,#B8932F)',          textTint:'#1B2A1B', glyph:(<svg viewBox="0 0 24 24" width="18" height="18" fill="#1B2A1B" stroke="none"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg>) },
       ];
@@ -2426,7 +2426,7 @@ window.DeckSlideStatic = DeckSlideStatic;
               <div>
                 <h1 className="font-display text-[clamp(26px,3.2vw,38px)] font-semibold tracking-tight text-[#1B2A1B] leading-[1.05]">Creator Community Metrics</h1>
                 <div className="mt-1 flex items-center gap-3">
-                  <span className="text-[12.5px] text-[#7A8A7A]">Built <span className="font-italic italic text-[#2D4A2B]">0 → 870K+</span> following via data-driven experimentation</span>
+                  <span className="text-[12.5px] text-[#7A8A7A]">Built <span className="font-italic italic text-[#2D4A2B]">0 → 890K+</span> following via data-driven experimentation</span>
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-white ring-1 ring-[rgba(27,42,27,0.14)] px-2.5 py-1 text-[10.5px] font-mono tracking-[0.06em] text-[#3A4A3A]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#C76F3D]"/>Mar '25 — Mar '26
                   </span>
