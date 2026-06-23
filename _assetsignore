@@ -18,6 +18,8 @@ assets/P1000856.JPG
 assets/P1012074.JPG
 # Source PNG; we ship the optimized .webp + .jpg variants
 assets/cs04-experience-center.png
+# Replaced by brand-pf-changs.jpg as of 2026-06-23 — no live ref
+assets/brand-shake-shack.jpg
 
 # Bundle backups
 assets/*.bundle.bak
