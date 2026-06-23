@@ -420,7 +420,7 @@ function S5_CEC({ slide, total }) {
     { src: '../assets/cs04-vr-demo.jpg', label: 'VR demo · field engineer training' },
     { src: '../assets/cs04-racing-sim.png', label: 'Latency racing rig · 5G PoC' },
     { src: '../assets/cs04-syncmetra.png', label: 'SyncMetra live data wall' },
-    { src: '../assets/brand-shake-shack.jpg', label: 'Brand activation · CEC visit' },
+    { src: '../assets/brand-pf-changs.jpg', label: "Brand activation · P.F. Chang's" },
   ];
   return (
     <SlideShell slide={slide} total={total} contentPad="90px 0 110px">
