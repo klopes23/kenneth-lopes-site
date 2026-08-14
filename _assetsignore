@@ -39,3 +39,5 @@ node_modules/
 *.psd
 *.ai
 *.sketch
+# Replaced by brand-bjs.jpg as of 2026-08-13 — no live ref
+assets/brand-dominos.jpg
