@@ -90,7 +90,7 @@ function S1_Profile({ slide, total }) {
         {[
           ['4,700+', 'issues governed'],
           ['$15M+', 'shipped'],
-          ['985K+', 'creator audience'],
+          ['1M+', 'creator audience'],
           ['$1M+', 'RAG savings'],
         ].map(([n, l]) => (
           <div key={l} style={{
@@ -613,8 +613,8 @@ function MetricRow({ eyebrow, v, sub, highlight }) {
 const CREATOR_ANGLES = {
   pm: {
     label: 'PM lens',
-    kicker: '— Shipping to 985K real users',
-    h: <>Shipping to <Em>985K real users</Em> every week.</>,
+    kicker: '— Shipping to 1M real users',
+    h: <>Shipping to <Em>1M real users</Em> every week.</>,
     bullets: [
       'Weekly release cadence · post → measure → iterate',
       '250M+ views, 3M+ engagements (Mar \'25 → Mar \'26)',
@@ -626,7 +626,7 @@ const CREATOR_ANGLES = {
     kicker: '— Platform + algorithm fluency',
     h: <>Learned every platform's <Em>algorithm + creator stack</Em> first-hand.</>,
     bullets: [
-      'TikTok 700K · IG 95K · Snap 85K · FB 60K · YT 32K',
+      'TikTok 710K · IG 100K · Snap 90K · FB 65K · YT 32K',
       'Format A/B testing across 5 platforms simultaneously',
       'Built creator-tooling instincts no product team can fake',
     ],
@@ -647,11 +647,11 @@ function S7_Creator({ slide, total }) {
   const [angle, setAngle] = dUseState('pm');
   const A = CREATOR_ANGLES[angle];
   const platforms = [
-    ['TikTok', '700K', '#000'],
-    ['Instagram', '95K', '#962fbf'],
-    ['Snapchat', '85K', '#FFFC00'],
+    ['TikTok', '710K', '#000'],
+    ['Instagram', '100K', '#962fbf'],
+    ['Snapchat', '90K', '#FFFC00'],
     ['YouTube', '32K', '#FF0000'],
-    ['Facebook', '60K', '#1877F2'],
+    ['Facebook', '65K', '#1877F2'],
   ];
   return (
     <SlideShell slide={slide} total={total}>
@@ -697,7 +697,7 @@ function S7_Creator({ slide, total }) {
         <div style={{
           fontFamily: MS_FONT.display, fontWeight: 500, fontSize: 64,
           lineHeight: 1, fontVariantNumeric: 'tabular-nums', letterSpacing: '-0.035em',
-        }}>985K+</div>
+        }}>1M+</div>
         <div style={{ marginTop: 4, fontFamily: MS_FONT.body, fontSize: 13, color: 'rgba(242,235,218,0.7)' }}>
           250M+ views · 3M+ engagements · 100% organic
         </div>
