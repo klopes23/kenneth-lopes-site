@@ -626,7 +626,7 @@ const CREATOR_ANGLES = {
     kicker: '— Platform + algorithm fluency',
     h: <>Learned every platform's <Em>algorithm + creator stack</Em> first-hand.</>,
     bullets: [
-      'TikTok 710K · IG 100K · Snap 90K · FB 65K · YT 34K',
+      'TikTok 710K · IG 110K · Snap 95K · FB 70K · YT 34K',
       'Format A/B testing across 5 platforms simultaneously',
       'Built creator-tooling instincts no product team can fake',
     ],
@@ -648,10 +648,10 @@ function S7_Creator({ slide, total }) {
   const A = CREATOR_ANGLES[angle];
   const platforms = [
     ['TikTok', '710K', '#000'],
-    ['Instagram', '100K', '#962fbf'],
-    ['Snapchat', '90K', '#FFFC00'],
+    ['Instagram', '110K', '#962fbf'],
+    ['Snapchat', '95K', '#FFFC00'],
     ['YouTube', '34K', '#FF0000'],
-    ['Facebook', '65K', '#1877F2'],
+    ['Facebook', '70K', '#1877F2'],
   ];
   return (
     <SlideShell slide={slide} total={total}>
